@@ -13,7 +13,7 @@ import java.sql.Statement;
 import java.sql.ResultSet;
 
 class DB {
-    private static final String DB_URL = "jdbc:sqlite:test.db";
+    private static final String DB_URL = "jdbc:sqlite::resource:test.db";
 
     void insertGame(String name, List<SaveState.State> game) {
         createNewTable();
