@@ -17,19 +17,19 @@ public class Board implements Iterable<Square> {
 
     private final Map<Square, Piece> boardMap = new HashMap<>();
 
-    Board() {
+    public Board() {
         for (Square square : squares) {
             boardMap.put(square, new Piece(square.getInitialPieceType()));
         }
     }
 
-    Board(Map<Integer, PieceType> gameState) {
+    public Board(Map<Integer, PieceType> gameState) {
         for (Square square : squares) {
             boardMap.put(square, new Piece(gameState.get(square.hashCode())));
         }
     }
 
-    Board(SnapShot snapShot) {
+    public Board(SnapShot snapShot) {
         for (SnapShot.SquareState squareState : snapShot){
             boardMap.put(squareState.getSquare(), new Piece(squareState.getPieceType()));
         }

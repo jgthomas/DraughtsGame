@@ -11,7 +11,7 @@ public class ComputerPlayer implements Player {
     private final PieceType pieceType;
     private final MoveRater moveRater;
 
-    ComputerPlayer(PieceType pieceType, Board board, LegalMoves legalMoves) {
+    public ComputerPlayer(PieceType pieceType, Board board, LegalMoves legalMoves) {
         this.legalMoves = legalMoves;
         this.pieceType = pieceType;
         moveRater = new RateMoves(board, pieceType);

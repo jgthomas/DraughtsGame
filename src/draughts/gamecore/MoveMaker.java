@@ -3,7 +3,7 @@ package draughts.gamecore;
 public class MoveMaker {
     private final Board board;
 
-    MoveMaker(Board board) {
+    public MoveMaker(Board board) {
         this.board = board;
     }
 

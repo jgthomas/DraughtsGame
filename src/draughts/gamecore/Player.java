@@ -1,6 +1,6 @@
 package draughts.gamecore;
 
-interface Player {
+public interface Player {
 
     Move getMove();
 

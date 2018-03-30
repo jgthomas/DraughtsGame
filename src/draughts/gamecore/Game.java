@@ -23,7 +23,7 @@ public class Game {
     private boolean blackWin;
     private int move = 0;
 
-    Game(Board board,
+    public Game(Board board,
          LegalMoves legalMoves,
          Player player1,
          Player player2,

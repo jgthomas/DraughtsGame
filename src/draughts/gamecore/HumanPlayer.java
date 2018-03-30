@@ -5,7 +5,7 @@ import draughts.ui.tui.Printer;
 import java.util.List;
 import java.util.Scanner;
 
-class HumanPlayer implements Player {
+public class HumanPlayer implements Player {
     private static final char BASE_CHAR = 'a';
     private static final String ILLEGAL_MOVE_MSG = "Illegal move!";
     private static final String MUST_TAKE_MSG = "You must take if you can";
@@ -16,7 +16,7 @@ class HumanPlayer implements Player {
     private final Board board;
     private final LegalMoves legalMoves;
 
-    HumanPlayer(PieceType pieceType, Board board, LegalMoves legalMoves) {
+    public HumanPlayer(PieceType pieceType, Board board, LegalMoves legalMoves) {
         this.pieceType = pieceType;
         this.board = board;
         this.legalMoves = legalMoves;
