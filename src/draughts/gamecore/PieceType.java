@@ -19,7 +19,6 @@ public enum PieceType {
         }
     }
 
-
     private final int code;
 
     PieceType(int code) {
