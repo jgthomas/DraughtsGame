@@ -1,6 +1,5 @@
 package draughts.gamecore;
 
-
 import java.util.Objects;
 
 public final class Square {
@@ -9,15 +8,17 @@ public final class Square {
     private final int rowNum;
     private final int colNum;
     private final PieceType initialPieceType;
+    private final SquareColor squareColor;
 
     public Square(int row, int col) {
-        this(row, col, PieceType.NONE);
+        this(row, col, PieceType.NONE, SquareColor.NONE);
     }
 
-    Square(int row, int col, PieceType initialPieceType) {
+    Square(int row, int col, PieceType initialPieceType, SquareColor squareColor) {
         rowNum = row;
         colNum = col;
         this.initialPieceType = initialPieceType;
+        this.squareColor = squareColor;
     }
 
     public int row() {
@@ -52,6 +53,10 @@ public final class Square {
 
     boolean isWithinRange(Square end) {
         return isLegalMoveDistance(end) || isLegalTakeDistance(end);
+    }
+
+    SquareColor getSquareColor() {
+        return squareColor;
     }
 
     @Override
