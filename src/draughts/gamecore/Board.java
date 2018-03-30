@@ -29,6 +29,12 @@ public class Board implements Iterable<Square> {
         }
     }
 
+    Board(SnapShot snapShot) {
+        for (SnapShot.SquareState squareState : snapShot){
+            boardMap.put(squareState.getSquare(), new Piece(squareState.getPieceType()));
+        }
+    }
+
     public Piece getPiece(Square square) {
         return boardMap.get(square);
     }
