@@ -1,18 +1,17 @@
 package draughts;
 
-import draughts.gamecore.*;
+import java.util.List;
+import java.util.Map;
 import javafx.application.Application;
 
-import draughts.ui.gui.DraughtsGUI;
-
+import draughts.gamecore.*;
 import draughts.database.LoadState;
 import draughts.database.SaveState;
+import draughts.ui.gui.DraughtsGUI;
 import draughts.ui.UserInput;
 import draughts.ui.tui.textUiInput;
 import draughts.ui.tui.Printer;
 
-import java.util.List;
-import java.util.Map;
 
 public class Draughts {
     private static final String FIRST_PLAYER_MESSAGE = "Pick first player";
