@@ -55,7 +55,7 @@ public final class Square {
         return isLegalMoveDistance(end) || isLegalTakeDistance(end);
     }
 
-    SquareColor getSquareColor() {
+    public SquareColor getSquareColor() {
         return squareColor;
     }
 

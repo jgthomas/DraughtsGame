@@ -5,7 +5,7 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 
-class Piece {
+public class Piece {
     private PieceType pieceType;
     private final BooleanProperty isKing;
     private final ObjectProperty<PieceColor> color;
