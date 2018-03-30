@@ -1,15 +1,12 @@
 package draughts.gamecore;
 
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
 
-/*
-Create the board
- */
+
 public class Board implements Iterable<Square> {
     private static final int MAX = 8;
     private static final List <Square> squares = new ArrayList<>();
@@ -18,26 +15,30 @@ public class Board implements Iterable<Square> {
         new Squares();
     }
 
-    private final Map<Square, PieceType> boardMap = new HashMap<>();
+    private final Map<Square, Piece> boardMap = new HashMap<>();
 
     Board() {
         for (Square square : squares) {
-            boardMap.put(square, square.getInitialPieceType());
+            boardMap.put(square, new Piece(square.getInitialPieceType()));
         }
     }
 
     Board(Map<Integer, PieceType> gameState) {
         for (Square square : squares) {
-            boardMap.put(square, gameState.get(square.hashCode()));
+            boardMap.put(square, new Piece(gameState.get(square.hashCode())));
         }
     }
 
-    public PieceType getPieceType(Square square) {
+    public Piece getPiece(Square square) {
         return boardMap.get(square);
     }
 
+    public PieceType getPieceType(Square square) {
+        return boardMap.get(square).getPieceType();
+    }
+
     public void setPieceType(Square square, PieceType pieceType) {
-        boardMap.put(square, pieceType);
+        boardMap.get(square).setPieceType(pieceType);
     }
 
     public int max() {
@@ -46,9 +47,9 @@ public class Board implements Iterable<Square> {
 
     public int totalPieces(PieceType pieceType) {
         int pieceCount = 0;
-        if (pieceType == PieceType.WHITE_PIECE) {
+        if (pieceType.isWhite()) {
             pieceCount = countOf(PieceType.WHITE_PIECE) + countOf(PieceType.WHITE_KING);
-        } else if (pieceType == PieceType.BLACK_PIECE) {
+        } else if (pieceType.isBlack()) {
             pieceCount = countOf(PieceType.BLACK_PIECE) + countOf(PieceType.BLACK_KING);
         }
         return pieceCount;
@@ -77,6 +78,10 @@ public class Board implements Iterable<Square> {
             for (int row = 0; row < MAX; row++) {
                 for (int col = 0; col < MAX; col++) {
                     PieceType pieceType = PieceType.NONE;
+                    SquareColor squareColor = SquareColor.BLACK;
+                    if (isWhiteSquare(row, col)) {
+                        squareColor = SquareColor.WHITE;
+                    }
                     if (bothEven(row, col) || bothOdd(row, col)) {
                         if (isWhiteRow(row)) {
                             pieceType = PieceType.WHITE_PIECE;
@@ -84,7 +89,7 @@ public class Board implements Iterable<Square> {
                             pieceType = PieceType.BLACK_PIECE;
                         }
                     }
-                    squares.add(new Square(row, col, pieceType));
+                    squares.add(new Square(row, col, pieceType, squareColor));
                 }
             }
         }
@@ -103,6 +108,13 @@ public class Board implements Iterable<Square> {
 
         private static boolean isBlackRow(int row) {
             return row >= FIRST_BLACK_ROW;
+        }
+
+        private static boolean isWhiteSquare(int row, int col) {
+            if (row % 2 == 0) {
+                return col % 2 == 0;
+            }
+            return col % 2 != 0;
         }
     }
 }
