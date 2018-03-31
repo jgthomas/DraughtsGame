@@ -7,7 +7,6 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.shape.StrokeType;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
@@ -22,9 +21,11 @@ public class BoardView {
     private static final int WIDTH = 150;
     private static final int HEIGHT = 150;
     private Board board;
+    private GuiController guiController;
 
-    BoardView(Board board) {
+    BoardView(Board board, GuiController guiController) {
         this.board = board;
+        this.guiController = guiController;
     }
 
     public GridPane makeBoardView() {
@@ -54,15 +55,7 @@ public class BoardView {
             squareView.setFill(Color.BLACK);
         }
 
-        squareView.setOnMouseClicked(mouseEvent -> {
-            if (squareView.getStroke() == null) {
-                squareView.setStroke(Color.GREEN);
-                squareView.setStrokeWidth(10);
-                squareView.setStrokeType(StrokeType.INSIDE);
-            } else {
-                squareView.setStroke(null);
-            }
-        });
+        squareView.setOnMouseClicked(guiController.onSquareClick);
 
         return squareView;
     }

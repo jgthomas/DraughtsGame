@@ -12,7 +12,7 @@ import javafx.scene.shape.StrokeType;
 public class GuiController {
     private final Board board = new Board();
     private final LegalMoves legalMoves = new LegalMoves(board);
-    private final BoardView boardView = new BoardView(board);
+    private final BoardView boardView = new BoardView(board, this);
 
     EventHandler<MouseEvent> onSquareClick = new EventHandler<MouseEvent>() {
         @Override
