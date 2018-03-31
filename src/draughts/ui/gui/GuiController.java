@@ -23,12 +23,15 @@ public class GuiController {
             Rectangle clickedSquare = ((Rectangle) eventSource);
             Square square = buildSquare(clickedSquare);
             if (clickedSquare.getStroke() == null) {
-                if (validStartingSquare(square)) {
+                if (validSquare(square)) {
                     clickedSquare.setStroke(Color.GREEN);
                     squareCache.add(square);
                     executeMove();
                 } else {
                     clickedSquare.setStroke(Color.RED);
+                    if (squareCache.size() > 0) {
+                        squareCache.remove(squareCache.size()-1);
+                    }
                 }
 
             } else {
@@ -54,22 +57,36 @@ public class GuiController {
         return new Move(start, end);
     }
 
-    private boolean validStartingSquare(Square square) {
-        List<Square> starts = legalStarts();
-        for (Square s : starts) {
-            if (s.equals(square)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     private List<Square> legalStarts() {
         List<Square> legalStarts = new ArrayList<>();
         for (Move move : legalMoves.legal(PieceType.WHITE_PIECE)) {
             legalStarts.add(move.startOfMove());
         }
         return legalStarts;
+    }
+
+    private List<Square> legalEnds() {
+        List<Square> legalEnds = new ArrayList<>();
+        for (Move move : legalMoves.legal(PieceType.WHITE_PIECE)) {
+            legalEnds.add(move.endOfMove());
+        }
+        return legalEnds;
+    }
+
+    private boolean validSquare(Square square) {
+        if (squareCache.size() == 0) {
+            return squareInList(square, legalStarts());
+        }
+        return squareInList(square, legalEnds());
+    }
+
+    private boolean squareInList(Square square, List<Square> squareList) {
+        for (Square s : squareList) {
+            if (s.equals(square)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private void executeMove() {
