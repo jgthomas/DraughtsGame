@@ -36,7 +36,9 @@ public class GuiController {
 
             } else {
                 clickedSquare.setStroke(null);
-                squareCache.clear();
+                if (squareCache.size() > 0) {
+                    squareCache.remove(squareCache.size()-1);
+                }
             }
         }
     };
