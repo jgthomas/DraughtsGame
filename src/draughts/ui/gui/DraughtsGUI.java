@@ -24,12 +24,7 @@ public class DraughtsGUI extends Application {
     @Override
     public void start(Stage primaryStage) {
 
-        GridPane boardDisplay = new GridPane();
-        BoardView boardView = new BoardView(board);
-
-        for (Square square : board) {
-            boardView.addToGridPane(boardDisplay, square);
-        }
+        GridPane boardView = new BoardView(board).makeBoardView();
 
 
         Button update = new Button("Make King");
@@ -38,7 +33,7 @@ public class DraughtsGUI extends Application {
             System.out.println(board.getPieceType(new Square(0, 0)));
         };
         update.setOnAction(handler);
-        boardDisplay.addColumn(9, update);
+        boardView.addColumn(9, update);
 
 
         Button update2 = new Button("Remove");
@@ -47,10 +42,10 @@ public class DraughtsGUI extends Application {
             System.out.println(board.getPieceType(new Square(0, 0)));
         };
         update2.setOnAction(handler2);
-        boardDisplay.addColumn(10, update2);
+        boardView.addColumn(10, update2);
 
 
-        Scene scene = new Scene(boardDisplay, 1500, 1200);
+        Scene scene = new Scene(boardView, 1500, 1200);
 
         primaryStage.setResizable(false);
         primaryStage.setTitle("Draughts");

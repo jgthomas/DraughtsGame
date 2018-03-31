@@ -26,7 +26,15 @@ public class BoardView {
         this.board = board;
     }
 
-    public void addToGridPane(GridPane boardDisplay, Square square) {
+    public GridPane makeBoardView() {
+        GridPane boardView = new GridPane();
+        for (Square square : board) {
+            addToBoardView(boardView, square);
+        }
+        return boardView;
+    }
+
+    private void addToBoardView(GridPane boardDisplay, Square square) {
         StackPane squareViewHolder = makeSquareView(square);
         boardDisplay.add(squareViewHolder, square.col(), square.row());
     }
