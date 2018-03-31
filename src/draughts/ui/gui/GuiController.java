@@ -14,19 +14,16 @@ public class GuiController {
     private final LegalMoves legalMoves = new LegalMoves(board);
     private final BoardView boardView = new BoardView(board, this);
 
-    EventHandler<MouseEvent> onSquareClick = new EventHandler<MouseEvent>() {
-        @Override
-        public void handle(MouseEvent event) {
-            Object eventSource = event.getSource();
-            if (eventSource instanceof Rectangle) {
-                Rectangle clickedSquare = ((Rectangle) eventSource);
-                if (clickedSquare.getStroke() == null) {
-                    clickedSquare.setStroke(Color.GREEN);
-                    clickedSquare.setStrokeWidth(10);
-                    clickedSquare.setStrokeType(StrokeType.INSIDE);
-                } else {
-                    clickedSquare.setStroke(null);
-                }
+    EventHandler<MouseEvent> onSquareClick = (event) -> {
+        Object eventSource = event.getSource();
+        if (eventSource instanceof Rectangle) {
+            Rectangle clickedSquare = ((Rectangle) eventSource);
+            if (clickedSquare.getStroke() == null) {
+                clickedSquare.setStroke(Color.GREEN);
+                clickedSquare.setStrokeWidth(10);
+                clickedSquare.setStrokeType(StrokeType.INSIDE);
+            } else {
+                clickedSquare.setStroke(null);
             }
         }
     };
