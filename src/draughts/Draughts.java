@@ -28,7 +28,6 @@ public class Draughts {
             UserInput userInput = new textUiInput();
             Board board = makeBoard(userInput);
             LegalMoves legalMoves = new LegalMoves(board);
-            MoveMaker moveMaker = new MoveMaker(board);
             SaveState saveState = new SaveState(board);
 
             Player playerOne = makePlayer(
@@ -50,7 +49,6 @@ public class Draughts {
                     legalMoves,
                     playerOne,
                     playerTwo,
-                    moveMaker,
                     saveState,
                     userInput);
 

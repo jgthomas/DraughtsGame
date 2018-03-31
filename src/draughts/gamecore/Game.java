@@ -12,7 +12,6 @@ public class Game {
     private final LegalMoves legalMoves;
     private final Player player1;
     private final Player player2;
-    private final MoveMaker moveMaker;
     private final SaveState saveState;
     private final UserInput userInput;
     private List<Move> allMovesWhite;
@@ -27,7 +26,6 @@ public class Game {
          LegalMoves legalMoves,
          Player player1,
          Player player2,
-         MoveMaker moveMaker,
          SaveState saveState,
          UserInput userInput) {
         whiteWin = false;
@@ -36,7 +34,6 @@ public class Game {
         this.legalMoves = legalMoves;
         this.player1 = player1;
         this.player2 = player2;
-        this.moveMaker = moveMaker;
         this.saveState = saveState;
         this.userInput = userInput;
         allMovesWhite = legalMoves.legal(PieceType.WHITE_PIECE);
@@ -51,7 +48,7 @@ public class Game {
 
             if (!blackWin) {
                 Printer.print(board, "White's Move");
-                moveMaker.makeMove(player1.getMove());
+                board.makeMove(player1.getMove());
                 allMovesBlack = legalMoves.legal(PieceType.BLACK_PIECE);
                 totalBlackPieces = board.totalPieces(PieceType.BLACK_PIECE);
                 if (totalBlackPieces == 0 || allMovesBlack.size() == 0) {
@@ -65,7 +62,7 @@ public class Game {
 
             if (!whiteWin) {
                 Printer.print(board,"Black's Move");
-                moveMaker.makeMove(player2.getMove());
+                board.makeMove(player2.getMove());
                 allMovesWhite = legalMoves.legal(PieceType.WHITE_PIECE);
                 totalWhitePieces = board.totalPieces(PieceType.WHITE_PIECE);
                 if (totalWhitePieces == 0 || allMovesWhite.size() == 0) {
