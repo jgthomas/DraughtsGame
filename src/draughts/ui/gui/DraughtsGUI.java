@@ -15,11 +15,9 @@ import draughts.gamecore.PieceType;
 
 public class DraughtsGUI extends Application {
 
-    private Board board = new Board();
-
     @Override
     public void start(Stage primaryStage) {
-
+        Board board = new Board();
         GridPane boardView = new BoardView(board).makeBoardView();
 
 
