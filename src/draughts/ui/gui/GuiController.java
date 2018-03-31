@@ -8,10 +8,10 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.shape.StrokeType;
 
 import java.util.ArrayList;
 import java.util.List;
+
 
 public class GuiController {
     private List<Square> squareCache = new ArrayList<>();
@@ -24,8 +24,6 @@ public class GuiController {
             Rectangle clickedSquare = ((Rectangle) eventSource);
             if (clickedSquare.getStroke() == null) {
                 clickedSquare.setStroke(Color.GREEN);
-                clickedSquare.setStrokeWidth(10);
-                clickedSquare.setStrokeType(StrokeType.INSIDE);
 
                 squareCache.add(buildSquare(clickedSquare));
 

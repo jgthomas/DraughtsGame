@@ -7,6 +7,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.StrokeType;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
@@ -55,6 +56,8 @@ public class BoardView {
             squareView.setFill(Color.BLACK);
         }
 
+        squareView.setStrokeWidth(10);
+        squareView.setStrokeType(StrokeType.INSIDE);
         squareView.setOnMouseClicked(guiController.onSquareClick);
 
         return squareView;
