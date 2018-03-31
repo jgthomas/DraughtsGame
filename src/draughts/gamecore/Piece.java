@@ -28,6 +28,14 @@ public class Piece {
             case BLACK_KING:
                 setIsKing(true);
                 break;
+            case WHITE_PIECE:
+                setColor(PieceColor.WHITE);
+                setIsKing(false);
+                break;
+            case BLACK_PIECE:
+                setColor(PieceColor.BLACK);
+                setIsKing(false);
+                break;
             case NONE:
                 setColor(PieceColor.NONE);
                 setIsKing(false);
