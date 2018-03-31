@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GuiController {
-    private List<Square> moveCache = new ArrayList<>();
+    private List<Square> squareCache = new ArrayList<>();
     private final Stage primaryStage;
     private final Board board = new Board();
     private final LegalMoves legalMoves = new LegalMoves(board);
@@ -35,16 +35,16 @@ public class GuiController {
                 clickedSquare.setStrokeWidth(10);
                 clickedSquare.setStrokeType(StrokeType.INSIDE);
 
-                moveCache.add(buildSquare(clickedSquare));
+                squareCache.add(buildSquare(clickedSquare));
 
-                if (moveCache.size() == 2) {
-                    System.out.println(buildMove(moveCache.get(0), moveCache.get(1)));
-                    moveCache.clear();
+                if (squareCache.size() == 2) {
+                    System.out.println(buildMove(squareCache.get(0), squareCache.get(1)));
+                    squareCache.clear();
                 }
 
             } else {
                 clickedSquare.setStroke(null);
-                moveCache.clear();
+                squareCache.clear();
             }
         }
     };
