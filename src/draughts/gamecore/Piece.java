@@ -47,10 +47,6 @@ public class Piece {
         return isKing;
     }
 
-    public boolean getIsKing() {
-        return isKing.get();
-    }
-
     private void setIsKing(boolean b) {
         isKing.set(b);
     }
