@@ -35,12 +35,14 @@ public class BoardView {
     }
 
     private void addToBoardView(GridPane boardDisplay, Square square) {
-        StackPane squareViewHolder = makeSquareView(square);
+        StackPane squareViewHolder = new StackPane();
+        squareViewHolder.getChildren().add(makeSquareView(square));
+        squareViewHolder.getChildren().add(makePieceView(board.getPiece(square)));
+        squareViewHolder.getChildren().add(makeKingView(board.getPiece(square)));
         boardDisplay.add(squareViewHolder, square.col(), square.row());
     }
 
-    private StackPane makeSquareView(Square square) {
-        StackPane squareViewHolder = new StackPane();
+    private Rectangle makeSquareView(Square square) {
         Rectangle squareView = new Rectangle();
         squareView.setWidth(WIDTH);
         squareView.setHeight(HEIGHT);
@@ -51,13 +53,7 @@ public class BoardView {
             squareView.setFill(Color.BLACK);
         }
 
-        Piece piece = board.getPiece(square);
-
-        squareViewHolder.getChildren().add(squareView);
-        squareViewHolder.getChildren().add(makePieceView(piece));
-        squareViewHolder.getChildren().add(makeKingView(piece));
-
-        return squareViewHolder;
+        return squareView;
     }
 
     private Circle makePieceView(Piece piece) {
