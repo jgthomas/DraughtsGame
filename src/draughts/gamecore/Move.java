@@ -18,8 +18,7 @@ public class Move implements Comparable<Move>, Iterable<Move> {
     private int priority;
 
     public Move(Square start, Square end) {
-        this.start = start;
-        this.end = end;
+        this(start, end, PieceType.NONE, MoveType.MOVE, 0);
     }
 
     Move(Square start,
