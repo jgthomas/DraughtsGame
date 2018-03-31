@@ -25,8 +25,16 @@ public class GuiController {
             Square square = buildSquare(clickedSquare);
             if (clickedSquare.getStroke() == null) {
                 if (validSquare(square)) {
+
+                    if (squareCache.size() == 0) {
+                        clearBorders();
+                    }
+
                     clickedSquare.setStroke(Color.GREEN);
                     squareCache.add(square);
+
+                    clickedSquares.add(clickedSquare);
+
                     if (squareCache.size() == 2) {
                         executeMove(buildMove(squareCache.get(0), squareCache.get(1)));
                         squareCache.clear();
@@ -34,11 +42,13 @@ public class GuiController {
                     }
                 } else {
                     clickedSquare.setStroke(Color.RED);
+                    clickedSquares.add(clickedSquare);
                 }
 
-                clickedSquares.add(clickedSquare);
-
             } else {
+                if (squareCache.size() > 0 && clickedSquare.getStroke() == Color.GREEN) {
+                    squareCache.remove(squareCache.size()-1);
+                }
                 clickedSquare.setStroke(null);
             }
         }
@@ -104,6 +114,7 @@ public class GuiController {
         for (Rectangle r : clickedSquares) {
             r.setStroke(null);
         }
+        clickedSquares.clear();
     }
 
 }
