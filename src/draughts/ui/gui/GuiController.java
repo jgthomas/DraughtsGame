@@ -1,7 +1,6 @@
 package draughts.ui.gui;
 
 import draughts.gamecore.Board;
-import draughts.gamecore.LegalMoves;
 import draughts.gamecore.Move;
 import draughts.gamecore.Square;
 import javafx.event.EventHandler;
@@ -10,21 +9,14 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.StrokeType;
-import javafx.stage.Stage;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class GuiController {
     private List<Square> squareCache = new ArrayList<>();
-    private final Stage primaryStage;
     private final Board board = new Board();
-    private final LegalMoves legalMoves = new LegalMoves(board);
     private final BoardView boardView = new BoardView(board, this);
-
-    GuiController(Stage primaryStage) {
-        this.primaryStage = primaryStage;
-    }
 
     EventHandler<MouseEvent> onSquareClick = (event) -> {
         Object eventSource = event.getSource();

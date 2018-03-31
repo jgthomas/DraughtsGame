@@ -13,7 +13,7 @@ public class GuiDraughts extends Application {
         final int SCENE_WIDTH = 1500;
         final int SCENE_HEIGHT = 1200;
 
-        Scene scene = new Scene(new GuiController(primaryStage).getBoardView(), SCENE_WIDTH, SCENE_HEIGHT, Color.LIGHTSLATEGREY);
+        Scene scene = new Scene(new GuiController().getBoardView(), SCENE_WIDTH, SCENE_HEIGHT, Color.LIGHTSLATEGREY);
         primaryStage.setResizable(false);
         primaryStage.setTitle("Draughts");
         primaryStage.setScene(scene);
