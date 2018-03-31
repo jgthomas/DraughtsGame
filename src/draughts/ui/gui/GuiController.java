@@ -26,7 +26,10 @@ public class GuiController {
                 if (validSquare(square)) {
                     clickedSquare.setStroke(Color.GREEN);
                     squareCache.add(square);
-                    executeMove();
+                    if (squareCache.size() == 2) {
+                        executeMove(buildMove(squareCache.get(0), squareCache.get(1)));
+                        squareCache.clear();
+                    }
                 } else {
                     clickedSquare.setStroke(Color.RED);
                 }
@@ -83,10 +86,16 @@ public class GuiController {
         return false;
     }
 
-    private void executeMove() {
-        if (squareCache.size() == 2) {
-            System.out.println(buildMove(squareCache.get(0), squareCache.get(1)));
-            squareCache.clear();
+    private void executeMove(Move move) {
+        List<Move> legal = legalMoves.legal(PieceType.WHITE_PIECE);
+        System.out.println(move);
+        for (Move m : legal) {
+            if (m.equals(move)) {
+                System.out.println(m);
+                board.makeMove(m);
+                return;
+            }
         }
     }
+
 }
