@@ -29,16 +29,10 @@ public class GuiController {
                     executeMove();
                 } else {
                     clickedSquare.setStroke(Color.RED);
-                    if (squareCache.size() > 0) {
-                        squareCache.remove(squareCache.size()-1);
-                    }
                 }
 
             } else {
                 clickedSquare.setStroke(null);
-                if (squareCache.size() > 0) {
-                    squareCache.remove(squareCache.size()-1);
-                }
             }
         }
     };
