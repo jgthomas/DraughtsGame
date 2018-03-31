@@ -68,11 +68,11 @@ public class BoardView {
     }
 
     private Circle makePieceView(Piece piece) {
-        Circle circle = new Circle();
-        circle.setCenterX(100.0f);
-        circle.setCenterY(100.0f);
-        circle.setRadius(50.0f);
-        circle.fillProperty().bind(Bindings.createObjectBinding( () -> {
+        Circle pieceView = new Circle();
+        pieceView.setCenterX(100.0f);
+        pieceView.setCenterY(100.0f);
+        pieceView.setRadius(50.0f);
+        pieceView.fillProperty().bind(Bindings.createObjectBinding( () -> {
                     switch (piece.getColor()) {
                         case WHITE:
                             return Color.RED;
@@ -83,10 +83,8 @@ public class BoardView {
                     }
                 }, piece.colorProperty()
         ));
-
-        circle.setMouseTransparent(true);
-
-        return circle;
+        pieceView.setMouseTransparent(true);
+        return pieceView;
     }
 
     private Text makeKingView(Piece piece) {
