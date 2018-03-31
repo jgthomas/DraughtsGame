@@ -1,6 +1,6 @@
 package draughts;
 
-import draughts.ui.gui.DraughtsGUI;
+import draughts.ui.gui.GuiView;
 import draughts.ui.tui.DraughtsTUI;
 import javafx.application.Application;
 
@@ -12,7 +12,7 @@ public class Draughts {
     public static void main(String[] args) {
 
         if (args.length > 0 && args[0].equalsIgnoreCase(GUI)) {
-            Application.launch(DraughtsGUI.class);
+            Application.launch(GuiView.class);
 
         } else {
             new DraughtsTUI().run();

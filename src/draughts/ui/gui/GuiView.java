@@ -5,7 +5,7 @@ import javafx.stage.Stage;
 import javafx.scene.Scene;
 
 
-public class DraughtsGUI extends Application {
+public class GuiView extends Application {
 
     @Override
     public void start(Stage primaryStage) {
