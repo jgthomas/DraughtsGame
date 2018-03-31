@@ -33,11 +33,11 @@ public class Move implements Comparable<Move>, Iterable<Move> {
         this.priority = priority;
     }
 
-    Square startOfMove() {
+    public Square startOfMove() {
         return start;
     }
 
-    Square endOfMove() {
+    public Square endOfMove() {
         return end;
     }
 
