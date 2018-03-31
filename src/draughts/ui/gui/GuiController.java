@@ -8,11 +8,17 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.StrokeType;
+import javafx.stage.Stage;
 
 public class GuiController {
+    private final Stage primaryStage;
     private final Board board = new Board();
     private final LegalMoves legalMoves = new LegalMoves(board);
     private final BoardView boardView = new BoardView(board, this);
+
+    GuiController(Stage primaryStage) {
+        this.primaryStage = primaryStage;
+    }
 
     EventHandler<MouseEvent> onSquareClick = (event) -> {
         Object eventSource = event.getSource();
