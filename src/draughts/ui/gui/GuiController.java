@@ -68,27 +68,23 @@ public class GuiController {
         return new Move(start, end);
     }
 
-    private List<Square> legalStarts() {
+    private boolean validSquare(Square square) {
+        List<Move> allMoves = legalMoves.legal(PieceType.WHITE_PIECE);
+        List<Square> starts = legalStarts(allMoves);
+
+        if (squareCache.size() == 0) {
+            return squareInList(square, starts);
+        } else {
+            return squareInList(squareCache.get(0), possibleStarts(square, allMoves));
+        }
+    }
+
+    private List<Square> legalStarts(List<Move> moves) {
         List<Square> legalStarts = new ArrayList<>();
-        for (Move move : legalMoves.legal(PieceType.WHITE_PIECE)) {
+        for (Move move : moves) {
             legalStarts.add(move.startOfMove());
         }
         return legalStarts;
-    }
-
-    private List<Square> legalEnds() {
-        List<Square> legalEnds = new ArrayList<>();
-        for (Move move : legalMoves.legal(PieceType.WHITE_PIECE)) {
-            legalEnds.add(move.endOfMove());
-        }
-        return legalEnds;
-    }
-
-    private boolean validSquare(Square square) {
-        if (squareCache.size() == 0) {
-            return squareInList(square, legalStarts());
-        }
-        return squareInList(square, legalEnds());
     }
 
     private boolean squareInList(Square square, List<Square> squareList) {
@@ -98,6 +94,16 @@ public class GuiController {
             }
         }
         return false;
+    }
+
+    private List<Square> possibleStarts(Square end, List<Move> allMoves) {
+        List<Square> posStarts = new ArrayList<>();
+        for (Move move : allMoves) {
+            if (move.endOfMove().equals(end)) {
+                posStarts.add(move.startOfMove());
+            }
+        }
+        return posStarts;
     }
 
     private void executeMove(Move move) {
