@@ -7,6 +7,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.StrokeType;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
@@ -53,6 +54,16 @@ public class BoardView {
             squareView.setFill(Color.BLACK);
         }
 
+        squareView.setOnMouseClicked(mouseEvent -> {
+            if (squareView.getStroke() == null) {
+                squareView.setStroke(Color.GREEN);
+                squareView.setStrokeWidth(10);
+                squareView.setStrokeType(StrokeType.INSIDE);
+            } else {
+                squareView.setStroke(null);
+            }
+        });
+
         return squareView;
     }
 
@@ -73,6 +84,8 @@ public class BoardView {
                 }, piece.colorProperty()
         ));
 
+        circle.setMouseTransparent(true);
+
         return circle;
     }
 
@@ -83,6 +96,7 @@ public class BoardView {
         kingView.fillProperty().bind(Bindings.when(piece.isKingProperty())
                 .then(Color.WHITE)
                 .otherwise(Color.TRANSPARENT));
+        kingView.setMouseTransparent(true);
         return kingView;
     }
 }
