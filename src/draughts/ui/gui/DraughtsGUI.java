@@ -17,10 +17,6 @@ public class DraughtsGUI extends Application {
 
     private Board board = new Board();
 
-    public static void main(String[] args) {
-        launch(args);
-    }
-
     @Override
     public void start(Stage primaryStage) {
 
