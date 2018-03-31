@@ -47,6 +47,24 @@ public class Board implements Iterable<Square> {
         boardMap.get(square).setPieceType(pieceType);
     }
 
+    public void makeMove(Move move) {
+        setPieceType(move.startOfMove(), PieceType.NONE);
+
+        if (move.type() == MoveType.TAKE) {
+            setPieceType(move.takenSquare(), PieceType.NONE);
+        }
+
+        setPieceType(move.endOfMove(), move.getPieceType());
+
+        if (move.getNextTake() != null) {
+            makeMove(move.getNextTake());
+        }
+
+        if (move.makesKing()) {
+            setPieceType(move.endOfMove(), move.getPieceType().getKing());
+        }
+    }
+
     public int max() {
         return MAX;
     }
