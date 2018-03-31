@@ -14,7 +14,7 @@ public class DraughtsTUI {
     private static final String SECOND_PLAYER_MESSAGE = "Pick second player";
 
     public void run() {
-        UserInput userInput = new textUiInput();
+        UserInput userInput = new TextInput();
         Board board = makeBoard(userInput);
         LegalMoves legalMoves = new LegalMoves(board);
         SaveState saveState = new SaveState(board);
