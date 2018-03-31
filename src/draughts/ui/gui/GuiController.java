@@ -13,6 +13,7 @@ import java.util.List;
 
 public class GuiController {
     private List<Square> squareCache = new ArrayList<>();
+    private List<Rectangle> clickedSquares = new ArrayList<>();
     private final Board board = new Board();
     private final LegalMoves legalMoves = new LegalMoves(board);
     private final BoardView boardView = new BoardView(board, this);
@@ -29,10 +30,13 @@ public class GuiController {
                     if (squareCache.size() == 2) {
                         executeMove(buildMove(squareCache.get(0), squareCache.get(1)));
                         squareCache.clear();
+                        clearBorders();
                     }
                 } else {
                     clickedSquare.setStroke(Color.RED);
                 }
+
+                clickedSquares.add(clickedSquare);
 
             } else {
                 clickedSquare.setStroke(null);
@@ -88,13 +92,17 @@ public class GuiController {
 
     private void executeMove(Move move) {
         List<Move> legal = legalMoves.legal(PieceType.WHITE_PIECE);
-        System.out.println(move);
         for (Move m : legal) {
             if (m.equals(move)) {
-                System.out.println(m);
                 board.makeMove(m);
                 return;
             }
+        }
+    }
+
+    private void clearBorders() {
+        for (Rectangle r : clickedSquares) {
+            r.setStroke(null);
         }
     }
 
