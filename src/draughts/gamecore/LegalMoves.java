@@ -87,8 +87,7 @@ public class LegalMoves {
 
     private void addFurtherTakes(Board board, Move move) {
         Board testBoard = new Board(new SnapShot(board));
-        MoveMaker testMoveMaker = new MoveMaker(testBoard);
-        testMoveMaker.makeMove(move);
+        testBoard.makeMove(move);
         List<Move> furtherMoves = new LegalMoves(testBoard).movesFrom(move.endOfMove());
 
         if (!move.makesKing()) {
