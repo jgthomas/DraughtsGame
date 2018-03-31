@@ -97,7 +97,7 @@ public class Move implements Comparable<Move>, Iterable<Move> {
         return max;
     }
 
-    public Square takenSquare() {
+    Square takenSquare() {
         int takenRow;
         int takenCol;
         switch (pieceType) {
