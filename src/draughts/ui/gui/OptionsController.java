@@ -1,12 +1,12 @@
 package draughts.ui.gui;
 
-import javafx.event.Event;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
-public class OptionsController implements EventHandler {
+public class OptionsController implements EventHandler<ActionEvent> {
     private final Stage primaryStage;
     private final OptionsView view = new OptionsView(this);
 
@@ -15,7 +15,7 @@ public class OptionsController implements EventHandler {
     }
 
     @Override
-    public void handle(final Event event) {
+    public void handle(final ActionEvent event) {
         final int SCENE_WIDTH = 1500;
         final int SCENE_HEIGHT = 1200;
         final Object source = event.getSource();
