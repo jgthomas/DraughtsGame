@@ -27,16 +27,14 @@ public class GuiController {
             if (clickedSquareView.getStroke() == null) {
                 if (validSquare(square)) {
 
-                    if (squaresForMove.size() == 0) {
-                        clearBorders();
-                    }
+                    if (squaresForMove.size() == 0) { clearBorders(); }
 
                     clickedSquareView.setStroke(Color.GREEN);
                     squaresForMove.add(square);
                     clickedSquareViews.add(clickedSquareView);
 
                     if (squaresForMove.size() == 2) {
-                        executeMove(buildMove(squaresForMove.get(0), squaresForMove.get(1)));
+                        executeMove(new Move(squaresForMove.get(0), squaresForMove.get(1)));
                         squaresForMove.clear();
                         clearBorders();
                     }
@@ -62,10 +60,6 @@ public class GuiController {
         int row = GridPane.getRowIndex(square.getParent());
         int col = GridPane.getColumnIndex(square.getParent());
         return new Square(row, col);
-    }
-
-    private Move buildMove(Square start, Square end) {
-        return new Move(start, end);
     }
 
     private boolean validSquare(Square square) {
