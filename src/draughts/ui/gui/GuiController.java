@@ -17,6 +17,7 @@ public class GuiController {
     private final Board board = new Board();
     private final LegalMoves legalMoves = new LegalMoves(board);
     private final BoardView boardView = new BoardView(board, this);
+    private PieceType pieceType = PieceType.WHITE_PIECE;
 
     EventHandler<MouseEvent> onSquareClick = (event) -> {
         Object eventSource = event.getSource();
@@ -69,7 +70,7 @@ public class GuiController {
     }
 
     private boolean validSquare(Square square) {
-        List<Move> allMoves = legalMoves.legal(PieceType.WHITE_PIECE);
+        List<Move> allMoves = legalMoves.legal(pieceType);
         List<Square> starts = legalStarts(allMoves);
 
         if (squareCache.size() == 0) {
@@ -107,10 +108,11 @@ public class GuiController {
     }
 
     private void executeMove(Move move) {
-        List<Move> legal = legalMoves.legal(PieceType.WHITE_PIECE);
+        List<Move> legal = legalMoves.legal(pieceType);
         for (Move m : legal) {
             if (m.equals(move)) {
                 board.makeMove(m);
+                pieceType = (pieceType == PieceType.WHITE_PIECE) ? PieceType.BLACK_PIECE : PieceType.WHITE_PIECE;
                 return;
             }
         }
