@@ -59,9 +59,9 @@ public class GuiController {
         return new BoardView(board, this).makeBoardView();
     }
 
-    private Square buildSquare(Rectangle square) {
-        int row = GridPane.getRowIndex(square.getParent());
-        int col = GridPane.getColumnIndex(square.getParent());
+    private Square buildSquare(Rectangle squareView) {
+        int row = GridPane.getRowIndex(squareView.getParent());
+        int col = GridPane.getColumnIndex(squareView.getParent());
         return new Square(row, col);
     }
 
