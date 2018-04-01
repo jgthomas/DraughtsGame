@@ -33,7 +33,6 @@ public class GuiController {
 
                     clickedSquare.setStroke(Color.GREEN);
                     squareCache.add(square);
-
                     clickedSquares.add(clickedSquare);
 
                     if (squareCache.size() == 2) {
