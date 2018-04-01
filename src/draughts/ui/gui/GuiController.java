@@ -28,7 +28,7 @@ public class GuiController {
                 if (validSquare(square)) {
 
                     if (squaresForMove.size() == 0) {
-                        clearHighlightedSquareViews();
+                        clearClickedSquareViews();
                     }
 
                     clickedSquareView.setStroke(Color.GREEN);
@@ -38,7 +38,7 @@ public class GuiController {
 
                     if (squaresForMove.size() == 2) {
                         executeMove(new Move(squaresForMove.get(0), squaresForMove.get(1)));
-                        clearHighlightedSquareViews();
+                        clearClickedSquareViews();
                         squaresForMove.clear();
                     }
                 } else {
@@ -120,7 +120,7 @@ public class GuiController {
                 : PieceType.WHITE_PIECE;
     }
 
-    private void clearHighlightedSquareViews() {
+    private void clearClickedSquareViews() {
         for (Rectangle r : clickedSquareViews) {
             r.setStroke(null);
         }
