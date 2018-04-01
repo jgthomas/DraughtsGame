@@ -16,40 +16,40 @@ public class GuiController {
     private final LegalMoves legalMoves = new LegalMoves(board);
 
     private PieceType activePieceType = PieceType.WHITE_PIECE;
-    private List<Square> squareCache = new ArrayList<>();
-    private List<Rectangle> clickedSquares = new ArrayList<>();
+    private List<Square> squaresForMove = new ArrayList<>();
+    private List<Rectangle> clickedSquareViews = new ArrayList<>();
 
     EventHandler<MouseEvent> onSquareClick = (event) -> {
         Object eventSource = event.getSource();
         if (eventSource instanceof Rectangle) {
-            Rectangle clickedSquare = ((Rectangle) eventSource);
-            Square square = buildSquare(clickedSquare);
-            if (clickedSquare.getStroke() == null) {
+            Rectangle clickedSquareView = ((Rectangle) eventSource);
+            Square square = buildSquare(clickedSquareView);
+            if (clickedSquareView.getStroke() == null) {
                 if (validSquare(square)) {
 
-                    if (squareCache.size() == 0) {
+                    if (squaresForMove.size() == 0) {
                         clearBorders();
                     }
 
-                    clickedSquare.setStroke(Color.GREEN);
-                    squareCache.add(square);
-                    clickedSquares.add(clickedSquare);
+                    clickedSquareView.setStroke(Color.GREEN);
+                    squaresForMove.add(square);
+                    clickedSquareViews.add(clickedSquareView);
 
-                    if (squareCache.size() == 2) {
-                        executeMove(buildMove(squareCache.get(0), squareCache.get(1)));
-                        squareCache.clear();
+                    if (squaresForMove.size() == 2) {
+                        executeMove(buildMove(squaresForMove.get(0), squaresForMove.get(1)));
+                        squaresForMove.clear();
                         clearBorders();
                     }
                 } else {
-                    clickedSquare.setStroke(Color.RED);
-                    clickedSquares.add(clickedSquare);
+                    clickedSquareView.setStroke(Color.RED);
+                    clickedSquareViews.add(clickedSquareView);
                 }
 
             } else {
-                if (squareCache.size() > 0 && clickedSquare.getStroke() == Color.GREEN) {
-                    squareCache.remove(squareCache.size()-1);
+                if (squaresForMove.size() > 0 && clickedSquareView.getStroke() == Color.GREEN) {
+                    squaresForMove.remove(squaresForMove.size()-1);
                 }
-                clickedSquare.setStroke(null);
+                clickedSquareView.setStroke(null);
             }
         }
     };
@@ -72,10 +72,10 @@ public class GuiController {
         List<Move> allMoves = legalMoves.legal(activePieceType);
         List<Square> starts = legalStarts(allMoves);
 
-        if (squareCache.size() == 0) {
+        if (squaresForMove.size() == 0) {
             return squareInList(square, starts);
         } else {
-            return squareInList(squareCache.get(0), possibleStartsGivenEnd(square, allMoves));
+            return squareInList(squaresForMove.get(0), possibleStartsGivenEnd(square, allMoves));
         }
     }
 
@@ -124,10 +124,10 @@ public class GuiController {
     }
 
     private void clearBorders() {
-        for (Rectangle r : clickedSquares) {
+        for (Rectangle r : clickedSquareViews) {
             r.setStroke(null);
         }
-        clickedSquares.clear();
+        clickedSquareViews.clear();
     }
 
 }
