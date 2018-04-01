@@ -25,7 +25,11 @@ public class Piece {
 
         switch (pieceType) {
             case WHITE_KING:
+                setColor(PieceColor.WHITE);
+                setIsKing(true);
+                break;
             case BLACK_KING:
+                setColor(PieceColor.BLACK);
                 setIsKing(true);
                 break;
             case WHITE_PIECE:
