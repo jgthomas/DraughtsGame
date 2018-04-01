@@ -40,6 +40,7 @@ public class GuiController {
                         executeMove(new Move(squaresForMove.get(0), squaresForMove.get(1)));
                         clearClickedSquareViews();
                         squaresForMove.clear();
+                        switchPlayers();
                     }
                 } else {
                     clickedSquareView.setStroke(Color.RED);
@@ -108,7 +109,6 @@ public class GuiController {
         for (Move m : legal) {
             if (m.equals(move)) {
                 board.makeMove(m);
-                switchPlayers();
                 return;
             }
         }
