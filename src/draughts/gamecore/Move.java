@@ -8,8 +8,6 @@ import java.util.Objects;
 import java.util.Iterator;
 
 public class Move implements Comparable<Move>, Iterable<Move> {
-    private static final int WHITE_KING_LINE = 7;
-    private static final int BLACK_KING_LINE = 0;
     private final Square start;
     private final Square end;
     private final List<Move> nextTakes = new ArrayList<>();
