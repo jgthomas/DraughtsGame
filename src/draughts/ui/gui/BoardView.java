@@ -22,11 +22,11 @@ public class BoardView {
     private static final int WIDTH = 150;
     private static final int HEIGHT = 150;
     private Board board;
-    private GuiController guiController;
+    private BoardController boardController;
 
-    BoardView(Board board, GuiController guiController) {
+    BoardView(Board board, BoardController boardController) {
         this.board = board;
-        this.guiController = guiController;
+        this.boardController = boardController;
     }
 
     public GridPane makeBoardView() {
@@ -58,7 +58,7 @@ public class BoardView {
 
         squareView.setStrokeWidth(10);
         squareView.setStrokeType(StrokeType.INSIDE);
-        squareView.setOnMouseClicked(guiController.onSquareClick);
+        squareView.setOnMouseClicked(boardController.onSquareClick);
 
         return squareView;
     }

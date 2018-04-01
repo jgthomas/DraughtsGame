@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class GuiController {
+public class BoardController {
     private final Board board = new Board();
     private final LegalMoves legalMoves = new LegalMoves(board);
 
@@ -23,7 +23,7 @@ public class GuiController {
     private List<Square> squaresForMove = new ArrayList<>();
     private List<Rectangle> clickedSquareViews = new ArrayList<>();
 
-    GuiController() {
+    BoardController() {
         playerOne = PlayerType.HUMAN;
         playerTwo = PlayerType.COMPUTER;
         aiPlayer = new ComputerPlayer(PieceType.BLACK_PIECE, board, legalMoves);

@@ -14,7 +14,7 @@ public class GuiDraughts extends Application {
         final int SCENE_WIDTH = 1500;
         final int SCENE_HEIGHT = 1200;
 
-        GridPane boardView = new GuiController().getBoardView();
+        GridPane boardView = new BoardController().getBoardView();
 
         Scene scene = new Scene(boardView, SCENE_WIDTH, SCENE_HEIGHT, Color.LIGHTSLATEGREY);
 
