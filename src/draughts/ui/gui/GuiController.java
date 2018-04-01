@@ -112,12 +112,16 @@ public class GuiController {
         for (Move m : legal) {
             if (m.equals(move)) {
                 board.makeMove(m);
-                activePieceType = (activePieceType == PieceType.WHITE_PIECE)
-                        ? PieceType.BLACK_PIECE
-                        : PieceType.WHITE_PIECE;
+                switchPlayers();
                 return;
             }
         }
+    }
+
+    private void switchPlayers() {
+        activePieceType = (activePieceType == PieceType.WHITE_PIECE)
+                ? PieceType.BLACK_PIECE
+                : PieceType.WHITE_PIECE;
     }
 
     private void clearBorders() {
