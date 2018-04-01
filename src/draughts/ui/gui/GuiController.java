@@ -15,9 +15,20 @@ public class GuiController {
     private final Board board = new Board();
     private final LegalMoves legalMoves = new LegalMoves(board);
 
+    private final PlayerType playerOne;
+    private final PlayerType playerTwo;
+    private PlayerType activePlayer;
+    private ComputerPlayer aiPlayer;
     private PieceType activePieceType = PieceType.WHITE_PIECE;
     private List<Square> squaresForMove = new ArrayList<>();
     private List<Rectangle> clickedSquareViews = new ArrayList<>();
+
+    GuiController() {
+        playerOne = PlayerType.HUMAN;
+        playerTwo = PlayerType.COMPUTER;
+        aiPlayer = new ComputerPlayer(PieceType.BLACK_PIECE, board, legalMoves);
+        activePlayer = playerOne;
+    }
 
     EventHandler<MouseEvent> onSquareClick = (event) -> {
         Object eventSource = event.getSource();
@@ -40,7 +51,16 @@ public class GuiController {
                         executeMove(new Move(squaresForMove.get(0), squaresForMove.get(1)));
                         clearClickedSquareViews();
                         squaresForMove.clear();
-                        switchPlayers();
+
+                        switchActivePlayer();
+
+                        if (activePlayer == PlayerType.COMPUTER) {
+                            switchActivePieceType();
+                            board.makeMove(aiPlayer.getMove());
+                            switchActivePlayer();
+                        }
+
+                        switchActivePieceType();
                     }
                 } else {
                     clickedSquareView.setStroke(Color.RED);
@@ -114,10 +134,14 @@ public class GuiController {
         }
     }
 
-    private void switchPlayers() {
+    private void switchActivePieceType() {
         activePieceType = (activePieceType == PieceType.WHITE_PIECE)
                 ? PieceType.BLACK_PIECE
                 : PieceType.WHITE_PIECE;
+    }
+
+    private void switchActivePlayer() {
+        activePlayer = (activePlayer == playerOne) ? playerTwo : playerOne;
     }
 
     private void clearClickedSquareViews() {
