@@ -75,7 +75,7 @@ public class GuiController {
         if (squareCache.size() == 0) {
             return squareInList(square, starts);
         } else {
-            return squareInList(squareCache.get(0), possibleStarts(square, allMoves));
+            return squareInList(squareCache.get(0), possibleStartsGivenEnd(square, allMoves));
         }
     }
 
@@ -96,7 +96,7 @@ public class GuiController {
         return false;
     }
 
-    private List<Square> possibleStarts(Square end, List<Move> allMoves) {
+    private List<Square> possibleStartsGivenEnd(Square end, List<Move> allMoves) {
         List<Square> posStarts = new ArrayList<>();
         for (Move move : allMoves) {
             if (move.endOfMove().equals(end)) {
