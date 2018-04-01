@@ -27,16 +27,19 @@ public class GuiController {
             if (clickedSquareView.getStroke() == null) {
                 if (validSquare(square)) {
 
-                    if (squaresForMove.size() == 0) { clearBorders(); }
+                    if (squaresForMove.size() == 0) {
+                        clearHighlightedSquareViews();
+                    }
 
                     clickedSquareView.setStroke(Color.GREEN);
-                    squaresForMove.add(square);
                     clickedSquareViews.add(clickedSquareView);
+
+                    squaresForMove.add(square);
 
                     if (squaresForMove.size() == 2) {
                         executeMove(new Move(squaresForMove.get(0), squaresForMove.get(1)));
+                        clearHighlightedSquareViews();
                         squaresForMove.clear();
-                        clearBorders();
                     }
                 } else {
                     clickedSquareView.setStroke(Color.RED);
@@ -117,7 +120,7 @@ public class GuiController {
                 : PieceType.WHITE_PIECE;
     }
 
-    private void clearBorders() {
+    private void clearHighlightedSquareViews() {
         for (Rectangle r : clickedSquareViews) {
             r.setStroke(null);
         }
