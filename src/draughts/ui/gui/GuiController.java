@@ -12,12 +12,12 @@ import java.util.List;
 
 
 public class GuiController {
-    private List<Square> squareCache = new ArrayList<>();
-    private List<Rectangle> clickedSquares = new ArrayList<>();
     private final Board board = new Board();
     private final LegalMoves legalMoves = new LegalMoves(board);
-    private final BoardView boardView = new BoardView(board, this);
+
     private PieceType activePieceType = PieceType.WHITE_PIECE;
+    private List<Square> squareCache = new ArrayList<>();
+    private List<Rectangle> clickedSquares = new ArrayList<>();
 
     EventHandler<MouseEvent> onSquareClick = (event) -> {
         Object eventSource = event.getSource();
@@ -56,7 +56,7 @@ public class GuiController {
     };
 
     public GridPane getBoardView() {
-        return boardView.makeBoardView();
+        return new BoardView(board, this).makeBoardView();
     }
 
     private Square buildSquare(Rectangle square) {
