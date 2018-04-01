@@ -1,5 +1,6 @@
 package draughts.ui.gui;
 
+import draughts.gamecore.PlayerType;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -19,12 +20,17 @@ public class OptionsController implements EventHandler<ActionEvent> {
         final int SCENE_WIDTH = 1500;
         final int SCENE_HEIGHT = 1200;
         final Object source = event.getSource();
+        BoardController boardController;
 
         if (source.equals(view.getButton())) {
-            BoardController boardController = new BoardController();
-            Scene scene = new Scene(boardController.getBoardView(), SCENE_WIDTH, SCENE_HEIGHT, Color.LIGHTSLATEGREY);
-            primaryStage.setScene(scene);
+            boardController = new BoardController(PlayerType.HUMAN, PlayerType.HUMAN);
+        } else if (source.equals(view.getButton1())) {
+            boardController = new BoardController(PlayerType.HUMAN, PlayerType.COMPUTER);
+        } else {
+            boardController = new BoardController(PlayerType.COMPUTER, PlayerType.HUMAN);
         }
+        Scene scene = new Scene(boardController.getBoardView(), SCENE_WIDTH, SCENE_HEIGHT, Color.LIGHTSLATEGREY);
+        primaryStage.setScene(scene);
     }
 
     public OptionsView getOptionsView() {

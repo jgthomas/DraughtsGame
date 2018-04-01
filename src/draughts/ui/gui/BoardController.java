@@ -15,19 +15,37 @@ public class BoardController {
     private final Board board = new Board();
     private final LegalMoves legalMoves = new LegalMoves(board);
 
+    private final BoardView boardView;
+
     private final PlayerType playerOne;
     private final PlayerType playerTwo;
-    private PlayerType activePlayer;
     private ComputerPlayer aiPlayer;
-    private PieceType activePieceType = PieceType.WHITE_PIECE;
+
+    private PlayerType activePlayer;
+    private PieceType activePieceType;
+
     private List<Square> squaresForMove = new ArrayList<>();
     private List<Rectangle> clickedSquareViews = new ArrayList<>();
 
-    BoardController() {
-        playerOne = PlayerType.HUMAN;
-        playerTwo = PlayerType.COMPUTER;
-        aiPlayer = new ComputerPlayer(PieceType.BLACK_PIECE, board, legalMoves);
-        activePlayer = playerOne;
+    BoardController(PlayerType playerOne, PlayerType playerTwo) {
+        this.playerOne = playerOne;
+        this.playerTwo = playerTwo;
+
+        if (playerOne == PlayerType.COMPUTER) {
+            aiPlayer = new ComputerPlayer(PieceType.WHITE_PIECE, board, legalMoves);
+            board.makeMove(aiPlayer.getMove());
+            activePieceType = PieceType.BLACK_PIECE;
+            activePlayer = playerTwo;
+        } else if (playerTwo == PlayerType.COMPUTER) {
+            aiPlayer = new ComputerPlayer(PieceType.BLACK_PIECE, board, legalMoves);
+            activePieceType = PieceType.WHITE_PIECE;
+            activePlayer = playerOne;
+        } else {
+            activePlayer = playerOne;
+            activePieceType = PieceType.WHITE_PIECE;
+        }
+
+        boardView = new BoardView(board, this);
     }
 
     EventHandler<MouseEvent> onSquareClick = (event) -> {
@@ -77,7 +95,7 @@ public class BoardController {
     };
 
     public GridPane getBoardView() {
-        return new BoardView(board, this).makeBoardView();
+        return boardView.makeBoardView();
     }
 
     private Square buildSquare(Rectangle squareView) {
