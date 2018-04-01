@@ -27,10 +27,6 @@ public class OptionsController implements EventHandler {
         }
     }
 
-    public Stage getPrimaryStage() {
-        return primaryStage;
-    }
-
     public OptionsView getOptionsView() {
         return view;
     }
