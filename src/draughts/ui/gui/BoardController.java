@@ -23,6 +23,7 @@ public class BoardController {
 
     private PlayerType activePlayer;
     private PieceType activePieceType;
+    private boolean gameWon = false;
 
     private List<Square> squaresForMove = new ArrayList<>();
     private List<Rectangle> clickedSquareViews = new ArrayList<>();
@@ -50,7 +51,7 @@ public class BoardController {
 
     EventHandler<MouseEvent> onSquareClick = (event) -> {
         Object eventSource = event.getSource();
-        if (eventSource instanceof Rectangle) {
+        if (!gameWon && eventSource instanceof Rectangle) {
             Rectangle clickedSquareView = ((Rectangle) eventSource);
             Square square = buildSquare(clickedSquareView);
             if (clickedSquareView.getStroke() == null) {
@@ -67,6 +68,7 @@ public class BoardController {
 
                     if (squaresForMove.size() == 2) {
                         executeMove(new Move(squaresForMove.get(0), squaresForMove.get(1)));
+                        if (moveWinsGame()) { gameWon = true; return; }
                         clearClickedSquareViews();
                         squaresForMove.clear();
 
@@ -75,6 +77,7 @@ public class BoardController {
                         if (activePlayer == PlayerType.COMPUTER) {
                             switchActivePieceType();
                             board.makeMove(aiPlayer.getMove());
+                            if (moveWinsGame()) { gameWon = true; return; }
                             switchActivePlayer();
                         }
 
