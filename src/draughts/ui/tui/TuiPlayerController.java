@@ -1,9 +1,11 @@
-package draughts.gamecore;
+package draughts.ui.tui;
+
+import draughts.gamecore.*;
 
 import java.util.List;
 import java.util.Scanner;
 
-public class HumanPlayer implements Player {
+public class TuiPlayerController implements Player {
     private static final char BASE_CHAR = 'a';
     private static final String ILLEGAL_MOVE_MSG = "Illegal move!";
     private static final String MUST_TAKE_MSG = "You must take if you can";
@@ -14,7 +16,7 @@ public class HumanPlayer implements Player {
     private final Board board;
     private final LegalMoves legalMoves;
 
-    public HumanPlayer(PieceType pieceType, Board board, LegalMoves legalMoves) {
+    TuiPlayerController(PieceType pieceType, Board board, LegalMoves legalMoves) {
         this.pieceType = pieceType;
         this.board = board;
         this.legalMoves = legalMoves;

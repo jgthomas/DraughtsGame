@@ -98,7 +98,7 @@ public class TuiDraughts {
         if (PlayerType.valueOf(playerCode) == PlayerType.COMPUTER) {
             player = new ComputerPlayer(pieceType, board, legalMoves);
         } else {
-            player = new HumanPlayer(pieceType, board, legalMoves);
+            player = new TuiPlayerController(pieceType, board, legalMoves);
         }
 
         return player;
