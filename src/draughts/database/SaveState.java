@@ -29,6 +29,10 @@ public class SaveState {
         allMoves.add(state);
     }
 
+    public Map<Integer, Integer> getCachedState(int moveNumber) {
+        return allMoves.get(moveNumber).getState();
+    }
+
     private Map<Integer, Integer> captureState() {
         Map<Integer, Integer> boardState = new HashMap<>();
 
@@ -46,6 +50,10 @@ public class SaveState {
         State(int moveNumber, Map<Integer, Integer> state) {
             this.moveNumber = moveNumber;
             this.state = state;
+        }
+
+        private Map<Integer, Integer> getState() {
+            return state;
         }
     }
 }
