@@ -1,5 +1,6 @@
 package draughts.ui.tui;
 
+import draughts.ai.ComputerPlayer;
 import draughts.database.LoadState;
 import draughts.database.SaveState;
 import draughts.gamecore.*;

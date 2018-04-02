@@ -1,8 +1,9 @@
-package draughts.gamecore;
+package draughts.ai;
 
 import java.util.List;
 import java.util.Random;
 
+import draughts.gamecore.*;
 import draughts.ui.tui.TextGameView;
 
 public class ComputerPlayer implements Player {

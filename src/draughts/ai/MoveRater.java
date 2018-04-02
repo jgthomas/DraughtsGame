@@ -1,4 +1,6 @@
-package draughts.gamecore;
+package draughts.ai;
+
+import draughts.gamecore.Move;
 
 import java.util.List;
 

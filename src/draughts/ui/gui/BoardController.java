@@ -1,5 +1,6 @@
 package draughts.ui.gui;
 
+import draughts.ai.ComputerPlayer;
 import draughts.database.SaveState;
 import draughts.gamecore.*;
 import javafx.event.EventHandler;

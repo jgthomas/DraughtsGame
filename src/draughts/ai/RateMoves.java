@@ -1,4 +1,6 @@
-package draughts.gamecore;
+package draughts.ai;
+
+import draughts.gamecore.*;
 
 import java.util.ArrayList;
 import java.util.List;
