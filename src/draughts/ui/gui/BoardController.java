@@ -114,6 +114,10 @@ public class BoardController {
         return boardView;
     }
 
+    public int getMoveNumber() {
+        return moveNumber;
+    }
+
     private boolean moveWinsGame() {
         List<Move> allMoves = legalMoves.legal(opponentsPieceType());
         int piecesLeft = board.totalPieces(opponentsPieceType());
