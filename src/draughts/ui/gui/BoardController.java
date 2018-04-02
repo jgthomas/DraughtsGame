@@ -110,7 +110,7 @@ public class BoardController {
     }
 
     public void undoBoard() {
-        if (moveNumber > 0) {
+        if (moveNumber > 0 && !gameWon) {
             board.undoBoard(saveState.getCachedState(moveNumber - 1));
             moveNumber -= 1;
             if (moveNumber % 2 == 0) {
