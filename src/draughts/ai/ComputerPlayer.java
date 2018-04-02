@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Random;
 
 import draughts.gamecore.*;
-import draughts.ui.tui.TextGameView;
 
 public class ComputerPlayer implements Player {
     private static Random rand = new Random();
@@ -23,12 +22,10 @@ public class ComputerPlayer implements Player {
         List<Move> moveList = legalMoves.legal(pieceType);
 
         if (moveList.size() == 1) {
-            TextGameView.printMoves(moveList);
             return moveList.get(0);
         }
 
         List<Move> priorityMoves = moveRater.ratedMoves(moveList);
-        TextGameView.printMoves(priorityMoves);
 
         if (priorityMoves.size() == 1) {
             return priorityMoves.get(0);
