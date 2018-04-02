@@ -99,9 +99,13 @@ public class BoardController {
     }
 
     private boolean hasWon(PieceType pieceType) {
-        List<Move> allMoves = legalMoves.legal(pieceType);
-        int piecesLeft = board.totalPieces(pieceType);
+        List<Move> allMoves = legalMoves.legal(opponentsPieceType(pieceType));
+        int piecesLeft = board.totalPieces(opponentsPieceType(pieceType));
         return piecesLeft == 0 || allMoves.size() == 0;
+    }
+
+    private PieceType opponentsPieceType(PieceType pieceType) {
+        return (pieceType == PieceType.WHITE_PIECE) ? PieceType.BLACK_PIECE : PieceType.WHITE_PIECE;
     }
 
     private Square buildSquare(Rectangle squareView) {
