@@ -47,7 +47,7 @@ public class Game {
         while (!whiteWin && !blackWin) {
 
             if (!blackWin) {
-                Printer.print(board, "White's Move");
+                TuiGamePlayView.print(board, "White's Move");
                 board.makeMove(player1.getMove());
                 allMovesBlack = legalMoves.legal(PieceType.BLACK_PIECE);
                 totalBlackPieces = board.totalPieces(PieceType.BLACK_PIECE);
@@ -58,10 +58,10 @@ public class Game {
             }
 
             saveState.cacheState(moveNumber);
-            Printer.clearBoard();
+            TuiGamePlayView.clearBoard();
 
             if (!whiteWin) {
-                Printer.print(board,"Black's Move");
+                TuiGamePlayView.print(board,"Black's Move");
                 board.makeMove(player2.getMove());
                 allMovesWhite = legalMoves.legal(PieceType.WHITE_PIECE);
                 totalWhitePieces = board.totalPieces(PieceType.WHITE_PIECE);

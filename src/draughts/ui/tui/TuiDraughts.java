@@ -50,7 +50,7 @@ public class TuiDraughts {
 
         if (userInput.playSavedGame()) {
             List<String> gameNames = loadState.getAllGameNames();
-            Printer.printGameNames(gameNames);
+            TuiGamePlayView.printGameNames(gameNames);
 
             int gameNumber = userInput.selectSavedGame();
 
@@ -61,7 +61,7 @@ public class TuiDraughts {
                 boolean nextMove;
 
                 do {
-                    Printer.print(new Board(gameState), "Move " + moveNumber);
+                    TuiGamePlayView.print(new Board(gameState), "Move " + moveNumber);
                     nextMove = userInput.seeNextMove();
 
                     if (nextMove) {

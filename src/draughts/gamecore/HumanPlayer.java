@@ -1,7 +1,5 @@
 package draughts.gamecore;
 
-import draughts.ui.tui.Printer;
-
 import java.util.List;
 import java.util.Scanner;
 
@@ -25,7 +23,7 @@ public class HumanPlayer implements Player {
     @Override
     public Move getMove() {
         List<Move> moveList = legalMoves.legal(pieceType);
-        //Printer.printMoves(moveList);
+        //TuiGamePlayView.printMoves(moveList);
         while (true) {
             Move candidate = getInput();
             for (Move move : moveList) {

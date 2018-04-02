@@ -3,7 +3,7 @@ package draughts.gamecore;
 import java.util.List;
 import java.util.Random;
 
-import draughts.ui.tui.Printer;
+import draughts.ui.tui.TuiGamePlayView;
 
 public class ComputerPlayer implements Player {
     private static Random rand = new Random();
@@ -22,12 +22,12 @@ public class ComputerPlayer implements Player {
         List<Move> moveList = legalMoves.legal(pieceType);
 
         if (moveList.size() == 1) {
-            Printer.printMoves(moveList);
+            TuiGamePlayView.printMoves(moveList);
             return moveList.get(0);
         }
 
         List<Move> priorityMoves = moveRater.ratedMoves(moveList);
-        Printer.printMoves(priorityMoves);
+        TuiGamePlayView.printMoves(priorityMoves);
 
         if (priorityMoves.size() == 1) {
             return priorityMoves.get(0);
