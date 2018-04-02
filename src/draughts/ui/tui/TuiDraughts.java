@@ -33,7 +33,7 @@ public class TuiDraughts {
                 SECOND_PLAYER_MESSAGE,
                 userInput);
 
-        Game game = new Game(
+        TuiGameController tuiGameController = new TuiGameController(
                 board,
                 legalMoves,
                 playerOne,
@@ -41,7 +41,7 @@ public class TuiDraughts {
                 saveState,
                 userInput);
 
-        game.playGame();
+        tuiGameController.playGame();
     }
 
     private static Board makeBoard(UserInput userInput) {

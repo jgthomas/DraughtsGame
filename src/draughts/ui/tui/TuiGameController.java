@@ -7,7 +7,7 @@ import draughts.database.SaveState;
 import draughts.gamecore.*;
 import draughts.ui.UserInput;
 
-public class Game {
+public class TuiGameController {
     private final Board board;
     private final LegalMoves legalMoves;
     private final Player player1;
@@ -22,12 +22,12 @@ public class Game {
     private boolean blackWin;
     private int moveNumber = 0;
 
-    Game(Board board,
-         LegalMoves legalMoves,
-         Player player1,
-         Player player2,
-         SaveState saveState,
-         UserInput userInput) {
+    TuiGameController(Board board,
+                      LegalMoves legalMoves,
+                      Player player1,
+                      Player player2,
+                      SaveState saveState,
+                      UserInput userInput) {
         whiteWin = false;
         blackWin = false;
         this.board = board;
