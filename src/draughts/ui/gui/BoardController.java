@@ -123,6 +123,14 @@ public class BoardController {
         }
     }
 
+    public void aiResume() {
+        if (activePlayer == PlayerType.COMPUTER) {
+            makeAiMove();
+            switchActivePlayer();
+            switchActivePieceType();
+        }
+    }
+
     private void makeAiMove() {
         board.makeMove(aiPlayer.getMove());
         moveNumber += 1;

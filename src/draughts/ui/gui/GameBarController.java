@@ -19,6 +19,8 @@ public class GameBarController implements EventHandler<ActionEvent> {
             System.exit(0);
         } else if (eventSource.equals(gameBarView.getUndoButton())) {
             boardController.undoBoard();
+        } else if (eventSource.equals(gameBarView.getResumeButton())) {
+            boardController.aiResume();
         }
     }
 
