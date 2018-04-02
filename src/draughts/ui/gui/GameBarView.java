@@ -6,6 +6,7 @@ import javafx.scene.layout.HBox;
 
 class GameBarView extends HBox {
     private final Button quitButton = new Button("Quit");
+    private final Button undoButton = new Button("Undo");
 
     GameBarView(GameBarController gameBarController) {
         this.setPrefHeight(100);
@@ -15,9 +16,15 @@ class GameBarView extends HBox {
 
         quitButton.setOnAction(gameBarController);
         this.getChildren().add(quitButton);
+        undoButton.setOnAction(gameBarController);
+        this.getChildren().add(undoButton);
     }
 
     public Button getQuitButton() {
         return quitButton;
+    }
+
+    public Button getUndoButton() {
+        return undoButton;
     }
 }

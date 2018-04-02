@@ -5,6 +5,11 @@ import javafx.event.EventHandler;
 
 public class GameBarController implements EventHandler<ActionEvent> {
     private final GameBarView gameBarView = new GameBarView(this);
+    private final BoardController boardController;
+
+    GameBarController(BoardController boardController) {
+        this.boardController = boardController;
+    }
 
     @Override
     public void handle(ActionEvent event) {
@@ -12,6 +17,8 @@ public class GameBarController implements EventHandler<ActionEvent> {
 
         if (eventSource.equals(gameBarView.getQuitButton())) {
             System.exit(0);
+        } else if (eventSource.equals(gameBarView.getUndoButton())) {
+            boardController.undoBoard();
         }
     }
 

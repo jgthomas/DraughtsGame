@@ -36,20 +36,19 @@ public class BoardController {
         this.playerTwo = playerTwo;
         this.moveNumber = 0;
 
-        saveState.cacheState(moveNumber);
-        moveNumber += 1;
+        saveState.saveCachedState(moveNumber);
 
         if (playerOne == PlayerType.COMPUTER) {
             aiPlayer = new ComputerPlayer(PieceType.WHITE_PIECE, board, legalMoves);
             board.makeMove(aiPlayer.getMove());
+            saveState.saveCachedState(moveNumber);
+            moveNumber += 1;
             activePieceType = PieceType.BLACK_PIECE;
             activePlayer = playerTwo;
         } else if (playerTwo == PlayerType.COMPUTER) {
             aiPlayer = new ComputerPlayer(PieceType.BLACK_PIECE, board, legalMoves);
             activePieceType = PieceType.WHITE_PIECE;
             activePlayer = playerOne;
-            saveState.cacheState(moveNumber);
-            moveNumber += 1;
         } else {
             activePlayer = playerOne;
             activePieceType = PieceType.WHITE_PIECE;
@@ -77,8 +76,8 @@ public class BoardController {
 
                     if (squaresForMove.size() == 2) {
                         executeMove(new Move(squaresForMove.get(0), squaresForMove.get(1)));
-                        saveState.cacheState(moveNumber);
                         moveNumber += 1;
+                        saveState.saveCachedState(moveNumber);
                         if (moveWinsGame()) { gameWon = true; return; }
                         clearClickedSquareViews();
                         squaresForMove.clear();
@@ -88,8 +87,8 @@ public class BoardController {
                         if (activePlayer == PlayerType.COMPUTER) {
                             switchActivePieceType();
                             board.makeMove(aiPlayer.getMove());
-                            saveState.cacheState(moveNumber);
                             moveNumber += 1;
+                            saveState.saveCachedState(moveNumber);
                             if (moveWinsGame()) { gameWon = true; return; }
                             switchActivePlayer();
                         }
@@ -114,8 +113,18 @@ public class BoardController {
         return boardView;
     }
 
-    public int getMoveNumber() {
-        return moveNumber;
+    public void undoBoard() {
+        if (moveNumber > 0) {
+            board.undoBoard(saveState.getCachedState(moveNumber - 1));
+            moveNumber -= 1;
+            if (moveNumber % 2 == 0) {
+                activePlayer = playerOne;
+                activePieceType = PieceType.WHITE_PIECE;
+            } else {
+                activePlayer = playerTwo;
+                activePieceType = PieceType.BLACK_PIECE;
+            }
+        }
     }
 
     private boolean moveWinsGame() {

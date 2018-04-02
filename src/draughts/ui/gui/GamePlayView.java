@@ -20,7 +20,7 @@ public class GamePlayView {
         final int SCENE_HEIGHT = 1300;
 
         BoardView boardView = boardController.getBoardView();
-        GameBarView gameBarView = new GameBarController().getGameBarView();
+        GameBarView gameBarView = new GameBarController(boardController).getGameBarView();
 
         boardView.add(gameBarView, 0, 10);
 
