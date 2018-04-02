@@ -18,16 +18,16 @@ public class SaveState {
         db = new DB();
     }
 
-    public void saveGame(String name) {
-       db.insertGame(name, cachedState);
-    }
-
     public void cacheState(int moveNumber) {
         cachedState.put(moveNumber, captureState());
     }
 
     public Map<Integer, Integer> getCachedState(int moveNumber) {
         return cachedState.get(moveNumber);
+    }
+
+    public void saveGame(String name) {
+        db.insertGame(name, cachedState);
     }
 
     private Map<Integer, Integer> captureState() {
