@@ -1,9 +1,7 @@
 package draughts.database;
 
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import draughts.gamecore.Board;
@@ -13,7 +11,6 @@ public class SaveState {
 
     private final Board board;
     private final DB db;
-    private final List<State> allMoves = new ArrayList<>();
     private final Map<Integer, Map<Integer, Integer>> cachedState = new HashMap<>();
 
     public SaveState(Board board) {
@@ -22,15 +19,10 @@ public class SaveState {
     }
 
     public void saveGame(String name) {
-        db.insertGame(name, allMoves);
+       db.insertGame(name, cachedState);
     }
 
     public void cacheState(int moveNumber) {
-        State state = new State(moveNumber, captureState());
-        allMoves.add(state);
-    }
-
-    public void saveCachedState(int moveNumber) {
         cachedState.put(moveNumber, captureState());
     }
 
@@ -46,15 +38,5 @@ public class SaveState {
         }
 
         return boardState;
-    }
-
-    final class State {
-        final int moveNumber;
-        final Map<Integer, Integer> state;
-
-        State(int moveNumber, Map<Integer, Integer> state) {
-            this.moveNumber = moveNumber;
-            this.state = state;
-        }
     }
 }

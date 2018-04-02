@@ -36,13 +36,13 @@ public class BoardController {
         this.playerTwo = playerTwo;
         this.moveNumber = 0;
 
-        saveState.saveCachedState(moveNumber);
+        saveState.cacheState(moveNumber);
 
         if (playerOne == PlayerType.COMPUTER) {
             aiPlayer = new ComputerPlayer(PieceType.WHITE_PIECE, board, legalMoves);
             board.makeMove(aiPlayer.getMove());
             moveNumber += 1;
-            saveState.saveCachedState(moveNumber);
+            saveState.cacheState(moveNumber);
             activePieceType = PieceType.BLACK_PIECE;
             activePlayer = playerTwo;
         } else if (playerTwo == PlayerType.COMPUTER) {
@@ -134,13 +134,13 @@ public class BoardController {
     private void makeAiMove() {
         board.makeMove(aiPlayer.getMove());
         moveNumber += 1;
-        saveState.saveCachedState(moveNumber);
+        saveState.cacheState(moveNumber);
     }
 
     private void makeHumanMove() {
         executeMove(new Move(squaresForMove.get(0), squaresForMove.get(1)));
         moveNumber += 1;
-        saveState.saveCachedState(moveNumber);
+        saveState.cacheState(moveNumber);
     }
 
     private boolean moveWinsGame() {

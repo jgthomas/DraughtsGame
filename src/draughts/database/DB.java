@@ -15,28 +15,7 @@ import java.sql.ResultSet;
 class DB {
     private static final String DB_URL = "jdbc:sqlite::resource:test.db";
 
-    void insertGame(String name, List<SaveState.State> game) {
-        createNewTable();
-        try (Connection conn = this.connect();
-             PreparedStatement ps = conn.prepareStatement(SQL.INSERT_STATE)) {
-            conn.setAutoCommit(false);
-            for (SaveState.State state : game) {
-                for (Integer squareKey : state.state.keySet()) {
-                    ps.setString(1, name);
-                    ps.setInt(2, state.moveNumber);
-                    ps.setInt(3, squareKey);
-                    ps.setInt(4, state.state.get(squareKey));
-                    ps.addBatch();
-                }
-            }
-            ps.executeBatch();
-            conn.commit();
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
-    void insertGameState(String name, Map<Integer, Map<Integer, Integer>> game) {
+    void insertGame(String name, Map<Integer, Map<Integer, Integer>> game) {
         createNewTable();
         try (Connection conn = this.connect();
              PreparedStatement ps = conn.prepareStatement(SQL.INSERT_STATE)) {
@@ -47,6 +26,7 @@ class DB {
                     ps.setInt(2, moveNum);
                     ps.setInt(3, squareKey);
                     ps.setInt(4, game.get(moveNum).get(squareKey));
+                    ps.addBatch();
                 }
             }
             ps.executeBatch();
