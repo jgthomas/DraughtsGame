@@ -4,9 +4,9 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 
 public class OptionsView extends HBox {
-    private final Button button = new Button("H vs H");
-    private final Button button1 = new Button("H vs C");
-    private final Button button2 = new Button("C vs H");
+    private final Button button = new Button("Human vs Human");
+    private final Button button1 = new Button("Human vs Computer");
+    private final Button button2 = new Button("Computer vs Human");
 
     OptionsView(OptionsController optionsController) {
         button.setOnAction(optionsController);
