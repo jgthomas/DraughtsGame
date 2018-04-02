@@ -1,5 +1,6 @@
 package draughts.ui.gui;
 
+import draughts.database.SaveState;
 import draughts.gamecore.*;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
@@ -14,6 +15,7 @@ import java.util.List;
 public class BoardController {
     private final Board board = new Board();
     private final LegalMoves legalMoves = new LegalMoves(board);
+    private final SaveState saveState = new SaveState(board);
 
     private final BoardView boardView;
 
@@ -24,6 +26,7 @@ public class BoardController {
     private PlayerType activePlayer;
     private PieceType activePieceType;
     private boolean gameWon = false;
+    private int moveNumber;
 
     private List<Square> squaresForMove = new ArrayList<>();
     private List<Rectangle> clickedSquareViews = new ArrayList<>();
@@ -31,6 +34,10 @@ public class BoardController {
     BoardController(PlayerType playerOne, PlayerType playerTwo) {
         this.playerOne = playerOne;
         this.playerTwo = playerTwo;
+        this.moveNumber = 0;
+
+        saveState.cacheState(moveNumber);
+        moveNumber += 1;
 
         if (playerOne == PlayerType.COMPUTER) {
             aiPlayer = new ComputerPlayer(PieceType.WHITE_PIECE, board, legalMoves);
@@ -41,6 +48,8 @@ public class BoardController {
             aiPlayer = new ComputerPlayer(PieceType.BLACK_PIECE, board, legalMoves);
             activePieceType = PieceType.WHITE_PIECE;
             activePlayer = playerOne;
+            saveState.cacheState(moveNumber);
+            moveNumber += 1;
         } else {
             activePlayer = playerOne;
             activePieceType = PieceType.WHITE_PIECE;
@@ -68,6 +77,8 @@ public class BoardController {
 
                     if (squaresForMove.size() == 2) {
                         executeMove(new Move(squaresForMove.get(0), squaresForMove.get(1)));
+                        saveState.cacheState(moveNumber);
+                        moveNumber += 1;
                         if (moveWinsGame()) { gameWon = true; return; }
                         clearClickedSquareViews();
                         squaresForMove.clear();
@@ -77,6 +88,8 @@ public class BoardController {
                         if (activePlayer == PlayerType.COMPUTER) {
                             switchActivePieceType();
                             board.makeMove(aiPlayer.getMove());
+                            saveState.cacheState(moveNumber);
+                            moveNumber += 1;
                             if (moveWinsGame()) { gameWon = true; return; }
                             switchActivePlayer();
                         }
