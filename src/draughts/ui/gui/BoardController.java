@@ -98,6 +98,12 @@ public class BoardController {
         return boardView;
     }
 
+    private boolean hasWon(PieceType pieceType) {
+        List<Move> allMoves = legalMoves.legal(pieceType);
+        int piecesLeft = board.totalPieces(pieceType);
+        return piecesLeft == 0 || allMoves.size() == 0;
+    }
+
     private Square buildSquare(Rectangle squareView) {
         int row = GridPane.getRowIndex(squareView.getParent());
         int col = GridPane.getColumnIndex(squareView.getParent());
