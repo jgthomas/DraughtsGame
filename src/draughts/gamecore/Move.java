@@ -39,11 +39,11 @@ public class Move implements Comparable<Move>, Iterable<Move> {
         return end;
     }
 
-    int getPriority() {
+    public int getPriority() {
         return priority;
     }
 
-    void raisePriority(int raiseAmount) {
+    public void raisePriority(int raiseAmount) {
         priority += raiseAmount;
     }
 
@@ -79,7 +79,7 @@ public class Move implements Comparable<Move>, Iterable<Move> {
         priority += maxPriorityOfNextMove();
     }
 
-    boolean makesKing() {
+    public boolean makesKing() {
         return pieceType.in(PieceType.WHITE_PIECE, PieceType.BLACK_PIECE)
                 && end.row() == pieceType.kingLine();
     }
