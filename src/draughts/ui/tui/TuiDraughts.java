@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 
-public class DraughtsTUI {
+public class TuiDraughts {
     private static final String FIRST_PLAYER_MESSAGE = "Pick first player";
     private static final String SECOND_PLAYER_MESSAGE = "Pick second player";
 
