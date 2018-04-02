@@ -1,6 +1,6 @@
 package draughts.ui.gui;
 
-import draughts.ai.ComputerPlayer;
+import draughts.ai.AiPlayer;
 import draughts.database.SaveState;
 import draughts.gamecore.*;
 import javafx.event.EventHandler;
@@ -22,7 +22,7 @@ public class BoardController {
 
     private final PlayerType playerOne;
     private final PlayerType playerTwo;
-    private ComputerPlayer aiPlayer;
+    private AiPlayer aiPlayer;
 
     private PlayerType activePlayer;
     private PieceType activePieceType;
@@ -40,14 +40,14 @@ public class BoardController {
         saveState.cacheState(moveNumber);
 
         if (playerOne == PlayerType.COMPUTER) {
-            aiPlayer = new ComputerPlayer(PieceType.WHITE_PIECE, board, legalMoves);
+            aiPlayer = new AiPlayer(PieceType.WHITE_PIECE, board, legalMoves);
             board.makeMove(aiPlayer.getMove());
             moveNumber += 1;
             saveState.cacheState(moveNumber);
             activePieceType = PieceType.BLACK_PIECE;
             activePlayer = playerTwo;
         } else if (playerTwo == PlayerType.COMPUTER) {
-            aiPlayer = new ComputerPlayer(PieceType.BLACK_PIECE, board, legalMoves);
+            aiPlayer = new AiPlayer(PieceType.BLACK_PIECE, board, legalMoves);
             activePieceType = PieceType.WHITE_PIECE;
             activePlayer = playerOne;
         } else {

@@ -1,6 +1,6 @@
 package draughts.ui.tui;
 
-import draughts.ai.ComputerPlayer;
+import draughts.ai.AiPlayer;
 import draughts.database.LoadState;
 import draughts.database.SaveState;
 import draughts.gamecore.*;
@@ -97,7 +97,7 @@ public class TextDraughts {
         } while (playerCode != PlayerType.HUMAN.pick() && playerCode != PlayerType.COMPUTER.pick());
 
         if (PlayerType.valueOf(playerCode) == PlayerType.COMPUTER) {
-            player = new ComputerPlayer(pieceType, board, legalMoves);
+            player = new AiPlayer(pieceType, board, legalMoves);
         } else {
             player = new TextPlayerController(pieceType, board, legalMoves);
         }

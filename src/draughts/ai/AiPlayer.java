@@ -5,13 +5,13 @@ import java.util.Random;
 
 import draughts.gamecore.*;
 
-public class ComputerPlayer implements Player {
+public class AiPlayer implements Player {
     private static Random rand = new Random();
     private final LegalMoves legalMoves;
     private final PieceType pieceType;
     private final MoveRater moveRater;
 
-    public ComputerPlayer(PieceType pieceType, Board board, LegalMoves legalMoves) {
+    public AiPlayer(PieceType pieceType, Board board, LegalMoves legalMoves) {
         this.legalMoves = legalMoves;
         this.pieceType = pieceType;
         moveRater = new RateMoves(board, pieceType);
