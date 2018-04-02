@@ -41,8 +41,8 @@ public class BoardController {
         if (playerOne == PlayerType.COMPUTER) {
             aiPlayer = new ComputerPlayer(PieceType.WHITE_PIECE, board, legalMoves);
             board.makeMove(aiPlayer.getMove());
-            saveState.saveCachedState(moveNumber);
             moveNumber += 1;
+            saveState.saveCachedState(moveNumber);
             activePieceType = PieceType.BLACK_PIECE;
             activePlayer = playerTwo;
         } else if (playerTwo == PlayerType.COMPUTER) {
