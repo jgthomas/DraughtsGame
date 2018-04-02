@@ -1,10 +1,10 @@
-package draughts.gamecore;
+package draughts.ui.tui;
 
 
 import java.util.List;
 
 import draughts.database.SaveState;
-import draughts.ui.tui.Printer;
+import draughts.gamecore.*;
 import draughts.ui.UserInput;
 
 public class Game {
@@ -22,7 +22,7 @@ public class Game {
     private boolean blackWin;
     private int move = 0;
 
-    public Game(Board board,
+    Game(Board board,
          LegalMoves legalMoves,
          Player player1,
          Player player2,
