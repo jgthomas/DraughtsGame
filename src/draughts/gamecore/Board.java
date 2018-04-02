@@ -65,6 +65,12 @@ public class Board implements Iterable<Square> {
         }
     }
 
+    public void undoBoard(Map<Integer, Integer> gameState) {
+        for (Square square : squares) {
+            setPieceType(square, PieceType.valueOf(gameState.get(square.hashCode())));
+        }
+    }
+
     public int max() {
         return MAX;
     }
