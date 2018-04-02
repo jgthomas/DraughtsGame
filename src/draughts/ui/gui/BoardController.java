@@ -75,14 +75,12 @@ public class BoardController {
                     squaresForMove.add(square);
 
                     if (squaresForMove.size() == 2) {
-                        executeMove(new Move(squaresForMove.get(0), squaresForMove.get(1)));
-                        moveNumber += 1;
-                        saveState.saveCachedState(moveNumber);
+                        makeHumanMove();
                         if (moveWinsGame()) { gameWon = true; return; }
+                        switchActivePlayer();
+
                         clearClickedSquareViews();
                         squaresForMove.clear();
-
-                        switchActivePlayer();
 
                         if (activePlayer == PlayerType.COMPUTER) {
                             makeAiMove();
@@ -127,6 +125,12 @@ public class BoardController {
 
     private void makeAiMove() {
         board.makeMove(aiPlayer.getMove());
+        moveNumber += 1;
+        saveState.saveCachedState(moveNumber);
+    }
+
+    private void makeHumanMove() {
+        executeMove(new Move(squaresForMove.get(0), squaresForMove.get(1)));
         moveNumber += 1;
         saveState.saveCachedState(moveNumber);
     }
