@@ -9,12 +9,12 @@ import java.util.List;
 import java.util.Map;
 
 
-public class TuiDraughts {
+public class TextDraughts {
     private static final String FIRST_PLAYER_MESSAGE = "Pick first player";
     private static final String SECOND_PLAYER_MESSAGE = "Pick second player";
 
     public void run() {
-        UserInput userInput = new TuiUserInput();
+        UserInput userInput = new TextUserInput();
         Board board = makeBoard(userInput);
         LegalMoves legalMoves = new LegalMoves(board);
         SaveState saveState = new SaveState(board);
@@ -33,7 +33,7 @@ public class TuiDraughts {
                 SECOND_PLAYER_MESSAGE,
                 userInput);
 
-        TuiGameController tuiGameController = new TuiGameController(
+        TextGameController textGameController = new TextGameController(
                 board,
                 legalMoves,
                 playerOne,
@@ -41,7 +41,7 @@ public class TuiDraughts {
                 saveState,
                 userInput);
 
-        tuiGameController.playGame();
+        textGameController.playGame();
     }
 
     private static Board makeBoard(UserInput userInput) {
@@ -50,7 +50,7 @@ public class TuiDraughts {
 
         if (userInput.playSavedGame()) {
             List<String> gameNames = loadState.getAllGameNames();
-            TuiGamePlayView.printGameNames(gameNames);
+            TextGameView.printGameNames(gameNames);
 
             int gameNumber = userInput.selectSavedGame();
 
@@ -61,7 +61,7 @@ public class TuiDraughts {
                 boolean nextMove;
 
                 do {
-                    TuiGamePlayView.print(new Board(gameState), "Move " + moveNumber);
+                    TextGameView.print(new Board(gameState), "Move " + moveNumber);
                     nextMove = userInput.seeNextMove();
 
                     if (nextMove) {
@@ -98,7 +98,7 @@ public class TuiDraughts {
         if (PlayerType.valueOf(playerCode) == PlayerType.COMPUTER) {
             player = new ComputerPlayer(pieceType, board, legalMoves);
         } else {
-            player = new TuiPlayerController(pieceType, board, legalMoves);
+            player = new TextPlayerController(pieceType, board, legalMoves);
         }
 
         return player;

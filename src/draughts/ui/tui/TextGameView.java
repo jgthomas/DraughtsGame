@@ -7,7 +7,7 @@ import draughts.gamecore.Move;
 import draughts.gamecore.PieceType;
 import draughts.gamecore.Square;
 
-public final class TuiGamePlayView {
+public final class TextGameView {
     private static final String whitePieceSymbol = "W";
     private static final String blackPieceSymbol = "B";
     private static final String whiteKingSymbol = "W!W";

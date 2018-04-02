@@ -1,7 +1,7 @@
 package draughts;
 
 import draughts.ui.gui.GuiDraughts;
-import draughts.ui.tui.TuiDraughts;
+import draughts.ui.tui.TextDraughts;
 import javafx.application.Application;
 
 
@@ -15,7 +15,7 @@ public class Draughts {
             Application.launch(GuiDraughts.class);
 
         } else {
-            new TuiDraughts().run();
+            new TextDraughts().run();
         }
     }
 }

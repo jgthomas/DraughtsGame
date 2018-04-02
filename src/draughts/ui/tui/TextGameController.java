@@ -7,7 +7,7 @@ import draughts.database.SaveState;
 import draughts.gamecore.*;
 import draughts.ui.UserInput;
 
-public class TuiGameController {
+public class TextGameController {
     private final Board board;
     private final LegalMoves legalMoves;
     private final Player player1;
@@ -22,12 +22,12 @@ public class TuiGameController {
     private boolean blackWin;
     private int moveNumber = 0;
 
-    TuiGameController(Board board,
-                      LegalMoves legalMoves,
-                      Player player1,
-                      Player player2,
-                      SaveState saveState,
-                      UserInput userInput) {
+    TextGameController(Board board,
+                       LegalMoves legalMoves,
+                       Player player1,
+                       Player player2,
+                       SaveState saveState,
+                       UserInput userInput) {
         whiteWin = false;
         blackWin = false;
         this.board = board;
@@ -47,7 +47,7 @@ public class TuiGameController {
         while (!whiteWin && !blackWin) {
 
             if (!blackWin) {
-                TuiGamePlayView.print(board, "White's Move");
+                TextGameView.print(board, "White's Move");
                 board.makeMove(player1.getMove());
                 allMovesBlack = legalMoves.legal(PieceType.BLACK_PIECE);
                 totalBlackPieces = board.totalPieces(PieceType.BLACK_PIECE);
@@ -58,10 +58,10 @@ public class TuiGameController {
             }
 
             saveState.cacheState(moveNumber);
-            TuiGamePlayView.clearBoard();
+            TextGameView.clearBoard();
 
             if (!whiteWin) {
-                TuiGamePlayView.print(board,"Black's Move");
+                TextGameView.print(board,"Black's Move");
                 board.makeMove(player2.getMove());
                 allMovesWhite = legalMoves.legal(PieceType.WHITE_PIECE);
                 totalWhitePieces = board.totalPieces(PieceType.WHITE_PIECE);

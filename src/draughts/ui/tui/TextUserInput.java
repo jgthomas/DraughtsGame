@@ -4,7 +4,7 @@ import java.util.Scanner;
 import draughts.ui.UserInput;
 
 
-public final class TuiUserInput implements UserInput {
+public final class TextUserInput implements UserInput {
 
     private static final String PLAYER_PICK_MESSAGE = String.join(System.getProperty("line.separator"),
             "(1) Human",
