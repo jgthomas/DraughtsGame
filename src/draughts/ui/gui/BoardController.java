@@ -98,14 +98,14 @@ public class BoardController {
         return boardView;
     }
 
-    private boolean hasWon(PieceType pieceType) {
-        List<Move> allMoves = legalMoves.legal(opponentsPieceType(pieceType));
-        int piecesLeft = board.totalPieces(opponentsPieceType(pieceType));
+    private boolean moveWinsGame() {
+        List<Move> allMoves = legalMoves.legal(opponentsPieceType());
+        int piecesLeft = board.totalPieces(opponentsPieceType());
         return piecesLeft == 0 || allMoves.size() == 0;
     }
 
-    private PieceType opponentsPieceType(PieceType pieceType) {
-        return (pieceType == PieceType.WHITE_PIECE) ? PieceType.BLACK_PIECE : PieceType.WHITE_PIECE;
+    private PieceType opponentsPieceType() {
+        return (activePieceType == PieceType.WHITE_PIECE) ? PieceType.BLACK_PIECE : PieceType.WHITE_PIECE;
     }
 
     private Square buildSquare(Rectangle squareView) {
