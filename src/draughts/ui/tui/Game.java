@@ -20,7 +20,7 @@ public class Game {
     private int totalBlackPieces;
     private boolean whiteWin;
     private boolean blackWin;
-    private int move = 0;
+    private int moveNumber = 0;
 
     Game(Board board,
          LegalMoves legalMoves,
@@ -43,7 +43,7 @@ public class Game {
     }
 
     public void playGame() {
-        saveState.cacheState(move);
+        saveState.cacheState(moveNumber);
         while (!whiteWin && !blackWin) {
 
             if (!blackWin) {
@@ -54,10 +54,10 @@ public class Game {
                 if (totalBlackPieces == 0 || allMovesBlack.size() == 0) {
                     whiteWin = true;
                 }
-                move += 1;
+                moveNumber += 1;
             }
 
-            saveState.cacheState(move);
+            saveState.cacheState(moveNumber);
             Printer.clearBoard();
 
             if (!whiteWin) {
@@ -68,10 +68,10 @@ public class Game {
                 if (totalWhitePieces == 0 || allMovesWhite.size() == 0) {
                     blackWin = true;
                 }
-                move += 1;
+                moveNumber += 1;
             }
 
-            saveState.cacheState(move);
+            saveState.cacheState(moveNumber);
         }
 
         if (whiteWin) {
