@@ -36,6 +36,26 @@ class DB {
         }
     }
 
+    void insertGameState(String name, Map<Integer, Map<Integer, Integer>> game) {
+        createNewTable();
+        try (Connection conn = this.connect();
+             PreparedStatement ps = conn.prepareStatement(SQL.INSERT_STATE)) {
+            conn.setAutoCommit(false);
+            for (Integer moveNum : game.keySet()) {
+                for (Integer squareKey : game.get(moveNum).keySet()) {
+                    ps.setString(1, name);
+                    ps.setInt(2, moveNum);
+                    ps.setInt(3, squareKey);
+                    ps.setInt(4, game.get(moveNum).get(squareKey));
+                }
+            }
+            ps.executeBatch();
+            conn.commit();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
     Map<Integer, Integer> selectGame(String gameName, int moveNumber) {
         Map<Integer, Integer> state = new HashMap<>();
         try (Connection conn = this.connect();
