@@ -1,7 +1,6 @@
 package draughts.ui.gui;
 
 import javafx.scene.Scene;
-import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
@@ -20,7 +19,7 @@ public class GamePlayView {
         final int SCENE_WIDTH = 1200;
         final int SCENE_HEIGHT = 1300;
 
-        GridPane boardView = boardController.getBoardView();
+        BoardView boardView = boardController.getBoardView();
         GameBarView gameBarView = new GameBarController().getGameBarView();
 
         boardView.add(gameBarView, 0, 10);

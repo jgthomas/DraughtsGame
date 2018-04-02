@@ -94,8 +94,8 @@ public class BoardController {
         }
     };
 
-    public GridPane getBoardView() {
-        return boardView.makeBoardView();
+    public BoardView getBoardView() {
+        return boardView;
     }
 
     private Square buildSquare(Rectangle squareView) {
