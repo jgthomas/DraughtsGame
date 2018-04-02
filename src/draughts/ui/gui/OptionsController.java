@@ -3,8 +3,6 @@ package draughts.ui.gui;
 import draughts.gamecore.PlayerType;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.Scene;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class OptionsController implements EventHandler<ActionEvent> {
@@ -17,8 +15,6 @@ public class OptionsController implements EventHandler<ActionEvent> {
 
     @Override
     public void handle(final ActionEvent event) {
-        final int SCENE_WIDTH = 1500;
-        final int SCENE_HEIGHT = 1200;
         final Object source = event.getSource();
         BoardController boardController;
 
@@ -29,8 +25,8 @@ public class OptionsController implements EventHandler<ActionEvent> {
         } else {
             boardController = new BoardController(PlayerType.COMPUTER, PlayerType.HUMAN);
         }
-        Scene scene = new Scene(boardController.getBoardView(), SCENE_WIDTH, SCENE_HEIGHT, Color.LIGHTSLATEGREY);
-        primaryStage.setScene(scene);
+        GamePlayView gamePlayView = new GamePlayView(primaryStage, boardController);
+        gamePlayView.getGamePlayView();
     }
 
     public OptionsView getOptionsView() {
