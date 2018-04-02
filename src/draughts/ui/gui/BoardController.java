@@ -85,15 +85,13 @@ public class BoardController {
                         switchActivePlayer();
 
                         if (activePlayer == PlayerType.COMPUTER) {
-                            switchActivePieceType();
-                            board.makeMove(aiPlayer.getMove());
-                            moveNumber += 1;
-                            saveState.saveCachedState(moveNumber);
+                            makeAiMove();
                             if (moveWinsGame()) { gameWon = true; return; }
                             switchActivePlayer();
+                        } else {
+                            switchActivePieceType();
                         }
 
-                        switchActivePieceType();
                     }
                 } else {
                     clickedSquareView.setStroke(Color.RED);
@@ -125,6 +123,12 @@ public class BoardController {
                 activePieceType = PieceType.BLACK_PIECE;
             }
         }
+    }
+
+    private void makeAiMove() {
+        board.makeMove(aiPlayer.getMove());
+        moveNumber += 1;
+        saveState.saveCachedState(moveNumber);
     }
 
     private boolean moveWinsGame() {
