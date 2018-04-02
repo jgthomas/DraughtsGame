@@ -23,7 +23,6 @@ public class HumanPlayer implements Player {
     @Override
     public Move getMove() {
         List<Move> moveList = legalMoves.legal(pieceType);
-        //TuiGamePlayView.printMoves(moveList);
         while (true) {
             Move candidate = getInput();
             for (Move move : moveList) {
