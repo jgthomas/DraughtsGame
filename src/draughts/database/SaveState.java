@@ -14,6 +14,7 @@ public class SaveState {
     private final Board board;
     private final DB db;
     private final List<State> allMoves = new ArrayList<>();
+    private final Map<Integer, Map<Integer, Integer>> cachedState = new HashMap<>();
 
     public SaveState(Board board) {
         this.board = board;
@@ -29,8 +30,12 @@ public class SaveState {
         allMoves.add(state);
     }
 
+    public void saveCachedState(int moveNumber) {
+        cachedState.put(moveNumber, captureState());
+    }
+
     public Map<Integer, Integer> getCachedState(int moveNumber) {
-        return allMoves.get(moveNumber).getState();
+        return cachedState.get(moveNumber);
     }
 
     private Map<Integer, Integer> captureState() {
@@ -50,10 +55,6 @@ public class SaveState {
         State(int moveNumber, Map<Integer, Integer> state) {
             this.moveNumber = moveNumber;
             this.state = state;
-        }
-
-        private Map<Integer, Integer> getState() {
-            return state;
         }
     }
 }
