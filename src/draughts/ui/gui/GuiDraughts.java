@@ -9,8 +9,8 @@ public class GuiDraughts extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        final int SCENE_WIDTH = 800;
-        final int SCENE_HEIGHT = 800;
+        final int SCENE_WIDTH = 600;
+        final int SCENE_HEIGHT = 200;
 
         Scene scene = new Scene(new OptionsController(primaryStage).getOptionsView(), SCENE_WIDTH, SCENE_HEIGHT);
 
