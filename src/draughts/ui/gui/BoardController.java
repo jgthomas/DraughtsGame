@@ -108,7 +108,9 @@ public class BoardController {
     }
 
     private PieceType opponentsPieceType() {
-        return (activePieceType == PieceType.WHITE_PIECE) ? PieceType.BLACK_PIECE : PieceType.WHITE_PIECE;
+        return (activePieceType == PieceType.WHITE_PIECE)
+                ? PieceType.BLACK_PIECE
+                : PieceType.WHITE_PIECE;
     }
 
     private Square buildSquare(Rectangle squareView) {
