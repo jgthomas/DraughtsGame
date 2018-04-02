@@ -2,7 +2,6 @@ package draughts.ui.gui;
 
 
 import javafx.beans.binding.Bindings;
-import javafx.geometry.Pos;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
