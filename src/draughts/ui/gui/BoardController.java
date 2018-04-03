@@ -84,9 +84,11 @@ public class BoardController {
                         squaresForMove.clear();
 
                         if (activePlayer == PlayerType.COMPUTER) {
+                            switchActivePieceType();
                             makeAiMove();
                             if (moveWinsGame()) { gameWon = true; return; }
                             switchActivePlayer();
+                            switchActivePieceType();
                         } else {
                             switchActivePieceType();
                         }
@@ -125,7 +127,7 @@ public class BoardController {
     }
 
     public void aiResume() {
-        if (activePlayer == PlayerType.COMPUTER) {
+        if (!gameWon && activePlayer == PlayerType.COMPUTER) {
             makeAiMove();
             switchActivePlayer();
             switchActivePieceType();
@@ -145,15 +147,12 @@ public class BoardController {
     }
 
     private boolean moveWinsGame() {
-        List<Move> allMoves = legalMoves.legal(opponentsPieceType());
-        int piecesLeft = board.totalPieces(opponentsPieceType());
-        return piecesLeft == 0 || allMoves.size() == 0;
-    }
-
-    private PieceType opponentsPieceType() {
-        return (activePieceType == PieceType.WHITE_PIECE)
+        PieceType opponentPieceType = (activePieceType == PieceType.WHITE_PIECE)
                 ? PieceType.BLACK_PIECE
                 : PieceType.WHITE_PIECE;
+        List<Move> allMoves = legalMoves.legal(opponentPieceType);
+        int piecesLeft = board.totalPieces(opponentPieceType);
+        return piecesLeft == 0 || allMoves.size() == 0;
     }
 
     private Square buildSquare(Rectangle squareView) {
