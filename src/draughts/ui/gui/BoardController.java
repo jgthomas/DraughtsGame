@@ -123,12 +123,15 @@ public class BoardController {
 
     private void makeAiMove() {
         board.makeMove(aiPlayer.getMove());
-        moveNumber += 1;
-        saveState.cacheState(moveNumber);
+        cacheBoardState();
     }
 
     private void makeHumanMove() {
         executeMove(new Move(squaresForMove.get(0), squaresForMove.get(1)));
+        cacheBoardState();
+    }
+
+    private void cacheBoardState() {
         moveNumber += 1;
         saveState.cacheState(moveNumber);
     }
