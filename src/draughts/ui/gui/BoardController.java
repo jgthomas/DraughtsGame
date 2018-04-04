@@ -65,26 +65,28 @@ public class BoardController {
             if (clickedSquareView.getStroke() == null) {
                 if (validSquare(square)) {
 
-                    if (squaresForMove.size() == 0) { clearClickedSquareViews(); }
+                    if (squaresForMove.size() == 0) {
+                        clearClickedSquareViews();
+                    }
 
                     clickedSquareView.setStroke(Color.GREEN);
                     clickedSquareViews.add(clickedSquareView);
-
                     squaresForMove.add(square);
 
                     if (squaresForMove.size() == 2) {
                         makeHumanMove();
                         if (moveWinsGame()) { gameWon = true; return; }
-                        switchActivePlayer();
 
                         clearClickedSquareViews();
                         squaresForMove.clear();
 
-                        if (activePlayer.isAiPlayer()) {
-                            makeAiMove();
-                            if (moveWinsGame()) { gameWon = true; return; }
-                            switchActivePlayer();
-                        }
+                        switchActivePlayer();
+                    }
+
+                    if (activePlayer.isAiPlayer()) {
+                        makeAiMove();
+                        if (moveWinsGame()) { gameWon = true; return; }
+                        switchActivePlayer();
                     }
                 } else {
                     clickedSquareView.setStroke(Color.RED);
