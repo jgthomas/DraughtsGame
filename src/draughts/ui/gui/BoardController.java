@@ -134,11 +134,9 @@ public class BoardController {
     }
 
     private boolean moveWinsGame() {
-        PieceType opponentPieceType = (activePlayer.getPieceType() == PieceType.WHITE_PIECE)
-                ? PieceType.BLACK_PIECE
-                : PieceType.WHITE_PIECE;
-        List<Move> allMoves = legalMoves.legal(opponentPieceType);
-        int piecesLeft = board.totalPieces(opponentPieceType);
+        PieceType toCheck = (activePlayer == playerOne) ? playerTwo.getPieceType() : playerOne.getPieceType();
+        List<Move> allMoves = legalMoves.legal(toCheck);
+        int piecesLeft = board.totalPieces(toCheck);
         return piecesLeft == 0 || allMoves.size() == 0;
     }
 
