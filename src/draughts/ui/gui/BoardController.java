@@ -26,7 +26,7 @@ public class BoardController {
     private AiPlayer aiPlayer;
 
     private boolean gameWon = false;
-    private int moveNumber;
+    private int currentMoveNumber;
 
     private List<Square> squaresForMove = new ArrayList<>();
     private List<Rectangle> clickedSquareViews = new ArrayList<>();
@@ -35,13 +35,13 @@ public class BoardController {
         this.playerOne = playerOne;
         this.playerTwo = playerTwo;
 
-        saveState.cacheState(moveNumber);
+        saveState.cacheState(currentMoveNumber);
 
         if (playerOne.isAiPlayer()) {
             aiPlayer = new AiPlayer(PieceType.WHITE_PIECE, board, legalMoves);
             board.makeMove(aiPlayer.getMove());
-            moveNumber += 1;
-            saveState.cacheState(moveNumber);
+            currentMoveNumber += 1;
+            saveState.cacheState(currentMoveNumber);
             activePlayer = playerTwo;
         } else if (playerTwo.isAiPlayer()) {
             aiPlayer = new AiPlayer(PieceType.BLACK_PIECE, board, legalMoves);
@@ -103,10 +103,10 @@ public class BoardController {
     }
 
     public void undoBoard() {
-        if (moveNumber > 0 && !gameWon) {
-            board.undoBoard(saveState.getCachedState(moveNumber - 1));
-            moveNumber -= 1;
-            if (moveNumber % 2 == 0) {
+        if (currentMoveNumber > 0 && !gameWon) {
+            board.undoBoard(saveState.getCachedState(currentMoveNumber - 1));
+            currentMoveNumber -= 1;
+            if (currentMoveNumber % 2 == 0) {
                 activePlayer = playerOne;
             } else {
                 activePlayer = playerTwo;
@@ -132,8 +132,8 @@ public class BoardController {
     }
 
     private void cacheBoardState() {
-        moveNumber += 1;
-        saveState.cacheState(moveNumber);
+        currentMoveNumber += 1;
+        saveState.cacheState(currentMoveNumber);
     }
 
     private boolean moveWinsGame() {
