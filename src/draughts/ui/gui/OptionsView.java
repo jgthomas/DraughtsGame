@@ -4,28 +4,28 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 
 public class OptionsView extends HBox {
-    private final Button button = new Button("Human vs Human");
-    private final Button button1 = new Button("Human vs Computer");
-    private final Button button2 = new Button("Computer vs Human");
+    private final Button humanHumanButton = new Button("Human vs Human");
+    private final Button humanAiButton = new Button("Human vs Computer");
+    private final Button aiHumanButton = new Button("Computer vs Human");
 
     OptionsView(OptionsController optionsController) {
-        button.setOnAction(optionsController);
-        this.getChildren().addAll(button);
-        button1.setOnAction(optionsController);
-        this.getChildren().addAll(button1);
-        button2.setOnAction(optionsController);
-        this.getChildren().addAll(button2);
+        humanHumanButton.setOnAction(optionsController);
+        this.getChildren().addAll(humanHumanButton);
+        humanAiButton.setOnAction(optionsController);
+        this.getChildren().addAll(humanAiButton);
+        aiHumanButton.setOnAction(optionsController);
+        this.getChildren().addAll(aiHumanButton);
     }
 
-    public Button getButton() {
-        return button;
+    public Button getHumanHumanButton() {
+        return humanHumanButton;
     }
 
-    public Button getButton1() {
-        return button1;
+    public Button getHumanAiButton() {
+        return humanAiButton;
     }
 
-    public Button getButton2() {
-        return button2;
+    public Button getAiHumanButton() {
+        return aiHumanButton;
     }
 }

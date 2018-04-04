@@ -23,10 +23,10 @@ public class OptionsController implements EventHandler<ActionEvent> {
 
         final Object source = event.getSource();
 
-        if (source.equals(view.getButton())) {
+        if (source.equals(view.getHumanHumanButton())) {
             playerOne = new PlayerConfig(PlayerType.HUMAN, PieceType.WHITE_PIECE);
             playerTwo = new PlayerConfig(PlayerType.HUMAN, PieceType.BLACK_PIECE);
-        } else if (source.equals(view.getButton1())) {
+        } else if (source.equals(view.getHumanAiButton())) {
             playerOne = new PlayerConfig(PlayerType.HUMAN, PieceType.WHITE_PIECE);
             playerTwo = new PlayerConfig(PlayerType.COMPUTER, PieceType.BLACK_PIECE);
         } else {
