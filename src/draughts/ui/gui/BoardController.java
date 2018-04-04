@@ -104,11 +104,7 @@ public class BoardController {
         if (currentMoveNumber > 0 && !gameWon) {
             board.undoBoard(saveState.getCachedState(currentMoveNumber - 1));
             currentMoveNumber -= 1;
-            if (currentMoveNumber % 2 == 0) {
-                activePlayer = playerOne;
-            } else {
-                activePlayer = playerTwo;
-            }
+            resetActivePlayerByTurn();
         }
     }
 
@@ -132,6 +128,14 @@ public class BoardController {
     private void cacheBoardState() {
         currentMoveNumber += 1;
         saveState.cacheState(currentMoveNumber);
+    }
+
+    private void resetActivePlayerByTurn() {
+        if (currentMoveNumber % 2 == 0) {
+            activePlayer = playerOne;
+        } else {
+            activePlayer = playerTwo;
+        }
     }
 
     private boolean moveWinsGame() {
