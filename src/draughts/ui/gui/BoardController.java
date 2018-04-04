@@ -119,6 +119,15 @@ public class BoardController {
         }
     }
 
+    public void newGame() {
+        board.setBoardState(saveState.getCachedState(0));
+        saveState.clearCachedMoves();
+        currentMoveNumber = 0;
+        resetActivePlayerByTurn();
+        gameWon = false;
+        aiResume();
+    }
+
     public void aiResume() {
         if (!gameWon && activePlayer.isAiPlayer()) {
             makeAiMove();
