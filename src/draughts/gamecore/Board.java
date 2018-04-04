@@ -43,7 +43,7 @@ public class Board implements Iterable<Square> {
         return boardMap.get(square).getPieceType();
     }
 
-    public void setPieceType(Square square, PieceType pieceType) {
+    private void setPieceType(Square square, PieceType pieceType) {
         boardMap.get(square).setPieceType(pieceType);
     }
 
