@@ -5,12 +5,13 @@ import draughts.database.SaveState;
 import draughts.gamecore.*;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 import java.util.ArrayList;
+import java.util.EnumMap;
 import java.util.List;
+import java.util.Map;
 
 
 public class BoardController {
@@ -27,8 +28,8 @@ public class BoardController {
     private boolean gameWon = false;
     private int currentMoveNumber;
 
-    private List<Square> squaresForMove = new ArrayList<>();
     private List<Rectangle> clickedSquareViews = new ArrayList<>();
+    private Map<MoveSquare, Square> buildMove = new EnumMap<>(MoveSquare.class);
 
     BoardController(Board board,
                     PlayerConfig playerOne,
@@ -63,24 +64,20 @@ public class BoardController {
             Rectangle clickedSquareView = ((Rectangle) eventSource);
             Square square = buildSquare(clickedSquareView);
             if (clickedSquareView.getStroke() == null) {
-                if (validSquare(square)) {
+                if (valid(square)) {
 
-                    if (squaresForMove.size() == 0) {
+                    if (buildMove.containsKey(MoveSquare.START)) {
+                        executeMove(new Move(buildMove.get(MoveSquare.START), square));
+                        cacheBoardState();
+                        if (moveWinsGame()) { gameWon = true;return; }
                         clearClickedSquareViews();
-                    }
-
-                    clickedSquareView.setStroke(Color.GREEN);
-                    clickedSquareViews.add(clickedSquareView);
-                    squaresForMove.add(square);
-
-                    if (squaresForMove.size() == 2) {
-                        makeHumanMove();
-                        if (moveWinsGame()) { gameWon = true; return; }
-
-                        clearClickedSquareViews();
-                        squaresForMove.clear();
-
+                        buildMove.clear();
                         switchActivePlayer();
+                    } else {
+                        clearClickedSquareViews();
+                        clickedSquareView.setStroke(Color.GREEN);
+                        clickedSquareViews.add(clickedSquareView);
+                        buildMove.put(MoveSquare.START, square);
                     }
 
                     if (activePlayer.isAiPlayer()) {
@@ -94,8 +91,8 @@ public class BoardController {
                 }
 
             } else {
-                if (squaresForMove.size() > 0 && clickedSquareView.getStroke() == Color.GREEN) {
-                    squaresForMove.remove(squaresForMove.size()-1);
+                if (buildMove.size() > 0 && buildMove.get(MoveSquare.START).equals(square)) {
+                    buildMove.remove(MoveSquare.START);
                 }
                 clickedSquareView.setStroke(null);
             }
@@ -126,11 +123,6 @@ public class BoardController {
         cacheBoardState();
     }
 
-    private void makeHumanMove() {
-        executeMove(new Move(squaresForMove.get(0), squaresForMove.get(1)));
-        cacheBoardState();
-    }
-
     private void cacheBoardState() {
         currentMoveNumber += 1;
         saveState.cacheState(currentMoveNumber);
@@ -157,15 +149,14 @@ public class BoardController {
         return new Square(row, col);
     }
 
-    private boolean validSquare(Square square) {
+    private boolean valid(Square square) {
         List<Move> allMoves = legalMoves.legal(activePlayer.getPieceType());
-        List<Square> starts = legalStarts(allMoves);
 
-        if (squaresForMove.size() == 0) {
-            return squareInList(square, starts);
-        } else {
-            return squareInList(squaresForMove.get(0), possibleStartsGivenEnd(square, allMoves));
+        if (buildMove.containsKey(MoveSquare.START)) {
+            return squareInList(buildMove.get(MoveSquare.START),
+                    possibleStartsGivenEnd(square, allMoves));
         }
+        return squareInList(square, legalStarts(allMoves));
     }
 
     private List<Square> legalStarts(List<Move> moves) {
@@ -213,6 +204,10 @@ public class BoardController {
             r.setStroke(null);
         }
         clickedSquareViews.clear();
+    }
+
+    private enum MoveSquare {
+        START
     }
 
 }
