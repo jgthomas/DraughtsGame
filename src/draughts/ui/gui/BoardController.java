@@ -103,7 +103,7 @@ public class BoardController {
         return boardView;
     }
 
-    public void undoBoard() {
+    public void backOneMove() {
         if (currentMoveNumber > 0 && !gameWon) {
             board.undoBoard(saveState.getCachedState(currentMoveNumber - 1));
             currentMoveNumber -= 1;
