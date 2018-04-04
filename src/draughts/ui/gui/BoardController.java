@@ -152,8 +152,8 @@ public class BoardController {
     }
 
     private Square buildSquare(Rectangle squareView) {
-        int row = GridPane.getRowIndex(squareView.getParent());
-        int col = GridPane.getColumnIndex(squareView.getParent());
+        int row = BoardView.getRowIndex(squareView.getParent());
+        int col = BoardView.getColumnIndex(squareView.getParent());
         return new Square(row, col);
     }
 
