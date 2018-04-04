@@ -20,39 +20,34 @@ public class BoardController {
 
     private final BoardView boardView;
 
-    private final PlayerType playerOne;
-    private final PlayerType playerTwo;
+    private final PlayerConfig playerOne;
+    private final PlayerConfig playerTwo;
+    private PlayerConfig activePlayer;
     private AiPlayer aiPlayer;
 
-    private PlayerType activePlayer;
-    private PieceType activePieceType;
     private boolean gameWon = false;
     private int moveNumber;
 
     private List<Square> squaresForMove = new ArrayList<>();
     private List<Rectangle> clickedSquareViews = new ArrayList<>();
 
-    BoardController(PlayerType playerOne, PlayerType playerTwo) {
+    BoardController(PlayerConfig playerOne, PlayerConfig playerTwo) {
         this.playerOne = playerOne;
         this.playerTwo = playerTwo;
-        this.moveNumber = 0;
 
         saveState.cacheState(moveNumber);
 
-        if (playerOne == PlayerType.COMPUTER) {
+        if (playerOne.isAiPlayer()) {
             aiPlayer = new AiPlayer(PieceType.WHITE_PIECE, board, legalMoves);
             board.makeMove(aiPlayer.getMove());
             moveNumber += 1;
             saveState.cacheState(moveNumber);
-            activePieceType = PieceType.BLACK_PIECE;
             activePlayer = playerTwo;
-        } else if (playerTwo == PlayerType.COMPUTER) {
+        } else if (playerTwo.isAiPlayer()) {
             aiPlayer = new AiPlayer(PieceType.BLACK_PIECE, board, legalMoves);
-            activePieceType = PieceType.WHITE_PIECE;
             activePlayer = playerOne;
         } else {
             activePlayer = playerOne;
-            activePieceType = PieceType.WHITE_PIECE;
         }
 
         boardView = new BoardView(board, this);
@@ -83,16 +78,11 @@ public class BoardController {
                         clearClickedSquareViews();
                         squaresForMove.clear();
 
-                        if (activePlayer == PlayerType.COMPUTER) {
-                            switchActivePieceType();
+                        if (activePlayer.isAiPlayer()) {
                             makeAiMove();
                             if (moveWinsGame()) { gameWon = true; return; }
                             switchActivePlayer();
-                            switchActivePieceType();
-                        } else {
-                            switchActivePieceType();
                         }
-
                     }
                 } else {
                     clickedSquareView.setStroke(Color.RED);
@@ -118,19 +108,16 @@ public class BoardController {
             moveNumber -= 1;
             if (moveNumber % 2 == 0) {
                 activePlayer = playerOne;
-                activePieceType = PieceType.WHITE_PIECE;
             } else {
                 activePlayer = playerTwo;
-                activePieceType = PieceType.BLACK_PIECE;
             }
         }
     }
 
     public void aiResume() {
-        if (!gameWon && activePlayer == PlayerType.COMPUTER) {
+        if (!gameWon && activePlayer.isAiPlayer()) {
             makeAiMove();
             switchActivePlayer();
-            switchActivePieceType();
         }
     }
 
@@ -147,7 +134,7 @@ public class BoardController {
     }
 
     private boolean moveWinsGame() {
-        PieceType opponentPieceType = (activePieceType == PieceType.WHITE_PIECE)
+        PieceType opponentPieceType = (activePlayer.getPieceType() == PieceType.WHITE_PIECE)
                 ? PieceType.BLACK_PIECE
                 : PieceType.WHITE_PIECE;
         List<Move> allMoves = legalMoves.legal(opponentPieceType);
@@ -162,7 +149,7 @@ public class BoardController {
     }
 
     private boolean validSquare(Square square) {
-        List<Move> allMoves = legalMoves.legal(activePieceType);
+        List<Move> allMoves = legalMoves.legal(activePlayer.getPieceType());
         List<Square> starts = legalStarts(allMoves);
 
         if (squaresForMove.size() == 0) {
@@ -200,19 +187,13 @@ public class BoardController {
     }
 
     private void executeMove(Move move) {
-        List<Move> legal = legalMoves.legal(activePieceType);
+        List<Move> legal = legalMoves.legal(activePlayer.getPieceType());
         for (Move m : legal) {
             if (m.equals(move)) {
                 board.makeMove(m);
                 return;
             }
         }
-    }
-
-    private void switchActivePieceType() {
-        activePieceType = (activePieceType == PieceType.WHITE_PIECE)
-                ? PieceType.BLACK_PIECE
-                : PieceType.WHITE_PIECE;
     }
 
     private void switchActivePlayer() {
