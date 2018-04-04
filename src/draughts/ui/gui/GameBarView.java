@@ -9,6 +9,7 @@ class GameBarView extends HBox {
     private final Button backButton = new Button("Back");
     private final Button forwardButton = new Button("Forward");
     private final Button resumeButton = new Button("Resume");
+    private final Button newGameButton = new Button("New Game");
 
     GameBarView(GameBarController gameBarController) {
         this.setPrefHeight(100);
@@ -31,6 +32,10 @@ class GameBarView extends HBox {
         resumeButton.setOnAction(gameBarController);
         resumeButton.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
         this.getChildren().add(resumeButton);
+
+        newGameButton.setOnAction(gameBarController);
+        newGameButton.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+        this.getChildren().add(newGameButton);
     }
 
     public Button getQuitButton() {
@@ -47,5 +52,9 @@ class GameBarView extends HBox {
 
     public Button getResumeButton() {
         return resumeButton;
+    }
+
+    public Button getNewGameButton() {
+        return newGameButton;
     }
 }

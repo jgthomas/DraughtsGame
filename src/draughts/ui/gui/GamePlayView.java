@@ -36,6 +36,9 @@ public class GamePlayView {
         GridPane.setValignment(gameBarView.getResumeButton(), VPos.CENTER);
         boardView.add(gameBarView.getResumeButton(), 3, 10);
 
+        GridPane.setValignment(gameBarView.getNewGameButton(), VPos.CENTER);
+        boardView.add(gameBarView.getNewGameButton(), 4, 10);
+
         Scene scene = new Scene(boardView, SCENE_WIDTH, SCENE_HEIGHT, Color.LIGHTSLATEGREY);
         primaryStage.setScene(scene);
     }

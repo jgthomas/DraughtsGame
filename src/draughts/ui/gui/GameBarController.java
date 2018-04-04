@@ -23,6 +23,8 @@ public class GameBarController implements EventHandler<ActionEvent> {
             boardController.forwardOneMove();
         } else if (eventSource.equals(gameBarView.getResumeButton())) {
             boardController.aiResume();
+        } else if (eventSource.equals(gameBarView.getNewGameButton())) {
+            boardController.newGame();
         }
     }
 
