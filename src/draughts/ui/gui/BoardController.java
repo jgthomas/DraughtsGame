@@ -61,9 +61,7 @@ public class BoardController {
             if (clickedSquareView.getStroke() == null) {
                 if (validSquare(square)) {
 
-                    if (squaresForMove.size() == 0) {
-                        clearClickedSquareViews();
-                    }
+                    if (squaresForMove.size() == 0) { clearClickedSquareViews(); }
 
                     clickedSquareView.setStroke(Color.GREEN);
                     clickedSquareViews.add(clickedSquareView);
