@@ -145,10 +145,10 @@ public class BoardController {
     }
 
     private boolean moveWinsGame() {
-        PieceType toCheck = (activePlayer == playerOne) ? playerTwo.getPieceType() : playerOne.getPieceType();
-        List<Move> allMoves = legalMoves.legal(toCheck);
-        int piecesLeft = board.totalPieces(toCheck);
-        return piecesLeft == 0 || allMoves.size() == 0;
+        PieceType opponentPieceType = (activePlayer == playerOne)
+                ? playerTwo.getPieceType()
+                : playerOne.getPieceType();
+        return board.totalPieces(opponentPieceType) == 0 || legalMoves.legal(opponentPieceType).size() == 0;
     }
 
     private Square buildSquare(Rectangle squareView) {
