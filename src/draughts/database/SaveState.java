@@ -26,6 +26,10 @@ public class SaveState {
         return cachedState.get(moveNumber);
     }
 
+    public int numberOfCachedMoves() {
+        return cachedState.size();
+    }
+
     public void saveGame(String name) {
         db.insertGame(name, cachedState);
     }
