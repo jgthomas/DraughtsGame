@@ -104,7 +104,7 @@ public class BoardController {
     }
 
     public void backOneMove() {
-        if (currentMoveNumber > 0 && !gameWon) {
+        if (!gameWon && currentMoveNumber > 0) {
             board.undoBoard(saveState.getCachedState(currentMoveNumber - 1));
             currentMoveNumber -= 1;
             resetActivePlayerByTurn();
