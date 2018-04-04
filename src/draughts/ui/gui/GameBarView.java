@@ -6,7 +6,8 @@ import javafx.scene.layout.HBox;
 
 class GameBarView extends HBox {
     private final Button quitButton = new Button("Quit");
-    private final Button undoButton = new Button("Undo");
+    private final Button backButton = new Button("Back");
+    private final Button forwardButton = new Button("Forward");
     private final Button resumeButton = new Button("Resume");
 
     GameBarView(GameBarController gameBarController) {
@@ -19,9 +20,13 @@ class GameBarView extends HBox {
         quitButton.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
         this.getChildren().add(quitButton);
 
-        undoButton.setOnAction(gameBarController);
-        undoButton.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-        this.getChildren().add(undoButton);
+        backButton.setOnAction(gameBarController);
+        backButton.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+        this.getChildren().add(backButton);
+
+        forwardButton.setOnAction(gameBarController);
+        forwardButton.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+        this.getChildren().add(forwardButton);
 
         resumeButton.setOnAction(gameBarController);
         resumeButton.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
@@ -32,8 +37,12 @@ class GameBarView extends HBox {
         return quitButton;
     }
 
-    public Button getUndoButton() {
-        return undoButton;
+    public Button getBackButton() {
+        return backButton;
+    }
+
+    public Button getForwardButton() {
+        return forwardButton;
     }
 
     public Button getResumeButton() {

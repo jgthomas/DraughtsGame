@@ -27,11 +27,14 @@ public class GamePlayView {
         GridPane.setValignment(gameBarView.getQuitButton(), VPos.CENTER);
         boardView.add(gameBarView.getQuitButton(), 0, 10);
 
-        GridPane.setValignment(gameBarView.getUndoButton(), VPos.CENTER);
-        boardView.add(gameBarView.getUndoButton(), 1, 10);
+        GridPane.setValignment(gameBarView.getBackButton(), VPos.CENTER);
+        boardView.add(gameBarView.getBackButton(), 1, 10);
+
+        GridPane.setValignment(gameBarView.getForwardButton(), VPos.CENTER);
+        boardView.add(gameBarView.getForwardButton(), 2, 10);
 
         GridPane.setValignment(gameBarView.getResumeButton(), VPos.CENTER);
-        boardView.add(gameBarView.getResumeButton(), 2, 10);
+        boardView.add(gameBarView.getResumeButton(), 3, 10);
 
         Scene scene = new Scene(boardView, SCENE_WIDTH, SCENE_HEIGHT, Color.LIGHTSLATEGREY);
         primaryStage.setScene(scene);

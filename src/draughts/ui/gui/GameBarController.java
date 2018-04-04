@@ -17,8 +17,10 @@ public class GameBarController implements EventHandler<ActionEvent> {
 
         if (eventSource.equals(gameBarView.getQuitButton())) {
             System.exit(0);
-        } else if (eventSource.equals(gameBarView.getUndoButton())) {
+        } else if (eventSource.equals(gameBarView.getBackButton())) {
             boardController.backOneMove();
+        } else if (eventSource.equals(gameBarView.getForwardButton())) {
+            boardController.forwardOneMove();
         } else if (eventSource.equals(gameBarView.getResumeButton())) {
             boardController.aiResume();
         }

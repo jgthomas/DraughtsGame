@@ -105,8 +105,16 @@ public class BoardController {
 
     public void backOneMove() {
         if (!gameWon && currentMoveNumber > 0) {
-            board.undoBoard(saveState.getCachedState(currentMoveNumber - 1));
+            board.setBoardState(saveState.getCachedState(currentMoveNumber - 1));
             currentMoveNumber -= 1;
+            resetActivePlayerByTurn();
+        }
+    }
+
+    public void forwardOneMove() {
+        if (!gameWon && currentMoveNumber < saveState.numberOfCachedMoves() - 1) {
+            board.setBoardState(saveState.getCachedState(currentMoveNumber + 1));
+            currentMoveNumber += 1;
             resetActivePlayerByTurn();
         }
     }
