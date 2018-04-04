@@ -1,5 +1,7 @@
 package draughts.ui.gui;
 
+import draughts.gamecore.PieceType;
+import draughts.gamecore.PlayerConfig;
 import draughts.gamecore.PlayerType;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -15,16 +17,25 @@ public class OptionsController implements EventHandler<ActionEvent> {
 
     @Override
     public void handle(final ActionEvent event) {
-        final Object source = event.getSource();
         BoardController boardController;
+        PlayerConfig playerOne;
+        PlayerConfig playerTwo;
+
+        final Object source = event.getSource();
 
         if (source.equals(view.getButton())) {
-            boardController = new BoardController(PlayerType.HUMAN, PlayerType.HUMAN);
+            playerOne = new PlayerConfig(PlayerType.HUMAN, PieceType.WHITE_PIECE);
+            playerTwo = new PlayerConfig(PlayerType.HUMAN, PieceType.BLACK_PIECE);
         } else if (source.equals(view.getButton1())) {
-            boardController = new BoardController(PlayerType.HUMAN, PlayerType.COMPUTER);
+            playerOne = new PlayerConfig(PlayerType.HUMAN, PieceType.WHITE_PIECE);
+            playerTwo = new PlayerConfig(PlayerType.COMPUTER, PieceType.BLACK_PIECE);
         } else {
-            boardController = new BoardController(PlayerType.COMPUTER, PlayerType.HUMAN);
+            playerOne = new PlayerConfig(PlayerType.COMPUTER, PieceType.WHITE_PIECE);
+            playerTwo = new PlayerConfig(PlayerType.HUMAN, PieceType.BLACK_PIECE);
         }
+
+        boardController = new BoardController(playerOne, playerTwo);
+
         GamePlayView gamePlayView = new GamePlayView(primaryStage, boardController);
         gamePlayView.getGamePlayView();
     }
