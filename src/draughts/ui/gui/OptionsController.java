@@ -1,5 +1,6 @@
 package draughts.ui.gui;
 
+import draughts.gamecore.Board;
 import draughts.gamecore.PieceType;
 import draughts.gamecore.PlayerConfig;
 import draughts.gamecore.PlayerType;
@@ -17,6 +18,7 @@ public class OptionsController implements EventHandler<ActionEvent> {
 
     @Override
     public void handle(final ActionEvent event) {
+        Board board;
         BoardController boardController;
         PlayerConfig playerOne;
         PlayerConfig playerTwo;
@@ -34,7 +36,8 @@ public class OptionsController implements EventHandler<ActionEvent> {
             playerTwo = new PlayerConfig(PlayerType.HUMAN, PieceType.BLACK_PIECE);
         }
 
-        boardController = new BoardController(playerOne, playerTwo);
+        board = new Board();
+        boardController = new BoardController(board, playerOne, playerTwo);
 
         GamePlayView gamePlayView = new GamePlayView(primaryStage, boardController);
         gamePlayView.getGamePlayView();

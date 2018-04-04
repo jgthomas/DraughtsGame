@@ -14,10 +14,9 @@ import java.util.List;
 
 
 public class BoardController {
-    private final Board board = new Board();
-    private final LegalMoves legalMoves = new LegalMoves(board);
-    private final SaveState saveState = new SaveState(board);
-
+    private final Board board;
+    private final LegalMoves legalMoves;
+    private final SaveState saveState;
     private final BoardView boardView;
 
     private final PlayerConfig playerOne;
@@ -31,9 +30,14 @@ public class BoardController {
     private List<Square> squaresForMove = new ArrayList<>();
     private List<Rectangle> clickedSquareViews = new ArrayList<>();
 
-    BoardController(PlayerConfig playerOne, PlayerConfig playerTwo) {
+    BoardController(Board board,
+                    PlayerConfig playerOne,
+                    PlayerConfig playerTwo) {
+        this.board = board;
         this.playerOne = playerOne;
         this.playerTwo = playerTwo;
+        legalMoves = new LegalMoves(board);
+        saveState = new SaveState(board);
 
         saveState.cacheState(currentMoveNumber);
 
