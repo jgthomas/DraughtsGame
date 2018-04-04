@@ -30,6 +30,10 @@ public class SaveState {
         return cachedState.size();
     }
 
+    public void clearCachedMoves() {
+        cachedState.clear();
+    }
+
     public void saveGame(String name) {
         db.insertGame(name, cachedState);
     }
