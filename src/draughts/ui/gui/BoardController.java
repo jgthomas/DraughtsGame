@@ -196,8 +196,7 @@ public class BoardController {
     }
 
     private void executeMove(Move move) {
-        List<Move> legal = legalMoves.legal(activePlayer.getPieceType());
-        for (Move m : legal) {
+        for (Move m : legalMoves.legal(activePlayer.getPieceType())) {
             if (m.equals(move)) {
                 board.makeMove(m);
                 return;
