@@ -12,7 +12,6 @@ import javafx.stage.Stage;
 public class OptionsController implements EventHandler<ActionEvent> {
     private final Stage primaryStage;
     private final OptionsView view = new OptionsView(this);
-    private String selectedGame;
     private LoadState loadState = new LoadState();
 
     OptionsController(Stage primaryStage) {
@@ -39,7 +38,7 @@ public class OptionsController implements EventHandler<ActionEvent> {
             playerTwo = new PlayerConfig(PlayerType.HUMAN, PieceType.BLACK_PIECE);
         }
 
-        selectedGame = view.getSelectedGame();
+        String selectedGame = view.getSelectedGame();
 
         if (selectedGame.equals("New Game")) {
             board = new Board();
