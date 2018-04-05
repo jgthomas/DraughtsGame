@@ -37,6 +37,24 @@ public class LegalMoves {
                 .collect(Collectors.toList());
     }
 
+    public List<Square> legalStartingSquares(PieceType pieceType) {
+        List<Square> legalStarts = new ArrayList<>();
+        for (Move move : legal(pieceType)) {
+            legalStarts.add(move.startOfMove());
+        }
+        return legalStarts;
+    }
+
+    public List<Square> legalStartingSquaresForEnd(Square end, PieceType pieceType) {
+        List<Square> legalEnds = new ArrayList<>();
+        for (Move move : legal(pieceType)) {
+            if (move.endOfMove().equals(end)) {
+                legalEnds.add(move.startOfMove());
+            }
+        }
+        return legalEnds;
+    }
+
     public boolean inPrincipleLegalMove(Move move) {
         Square start = move.startOfMove();
         Square end = move.endOfMove();
