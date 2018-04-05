@@ -108,6 +108,7 @@ public class BoardController {
             board.setBoardState(saveState.getCachedState(currentMoveNumber - 1));
             currentMoveNumber -= 1;
             resetActivePlayerByTurn();
+            clearClickedSquareViews();
         }
     }
 
@@ -116,6 +117,7 @@ public class BoardController {
             board.setBoardState(saveState.getCachedState(currentMoveNumber + 1));
             currentMoveNumber += 1;
             resetActivePlayerByTurn();
+            clearClickedSquareViews();
         }
     }
 
