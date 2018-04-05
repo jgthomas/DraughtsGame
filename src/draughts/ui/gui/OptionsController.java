@@ -5,8 +5,6 @@ import draughts.gamecore.Board;
 import draughts.gamecore.PieceType;
 import draughts.gamecore.PlayerConfig;
 import draughts.gamecore.PlayerType;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.stage.Stage;
@@ -41,26 +39,19 @@ public class OptionsController implements EventHandler<ActionEvent> {
             playerTwo = new PlayerConfig(PlayerType.HUMAN, PieceType.BLACK_PIECE);
         }
 
-        /*if (selectedGame.equals("New Game")) {
+        selectedGame = view.getSelectedGame();
+
+        if (selectedGame.equals("New Game")) {
             board = new Board();
         } else {
-            board = new Board(loadState.loadState(selectedGame, 0));
-        }*/
-
-        board = new Board();
+            board = new Board(loadState.loadState(selectedGame, 30));
+        }
 
         boardController = new BoardController(board, playerOne, playerTwo);
 
         GamePlayView gamePlayView = new GamePlayView(primaryStage, boardController);
         gamePlayView.getGamePlayView();
     }
-
-    /*ChangeListener<String> gameSelected = (ObservableValue<? extends String> observable,
-                                           String oldName,
-                                           String newName) ->
-    {
-        selectedGame = newName;
-    };*/
 
     public OptionsView getOptionsView() {
         return view;

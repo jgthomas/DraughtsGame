@@ -45,7 +45,6 @@ public class OptionsView extends HBox {
 
 
         gamesList.getSelectionModel().select(0);
-        //gamesList.getSelectionModel().getSelectedItem().addListener(optionsController.gameSelected);
         HBox gameBox = new HBox(gamesList);
         gameBox.setPrefWidth(300);
         gameBox.setAlignment(Pos.TOP_CENTER);
@@ -64,5 +63,9 @@ public class OptionsView extends HBox {
 
     public Button getAiHumanButton() {
         return aiHumanButton;
+    }
+
+    public String getSelectedGame() {
+        return gamesList.getSelectionModel().getSelectedItem();
     }
 }
