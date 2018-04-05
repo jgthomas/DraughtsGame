@@ -172,18 +172,10 @@ public class BoardController {
         List<Move> allMoves = legalMoves.legal(activePlayer.getPieceType());
 
         if (buildMove.containsKey(MoveSquare.START)) {
-            return squareInList(buildMove.get(MoveSquare.START),
-                    possibleStartsGivenEnd(square, allMoves));
+            return squareInList(square, legalMoves.legalEndingSquares(
+                    buildMove.get(MoveSquare.START), activePlayer.getPieceType()));
         }
-        return squareInList(square, legalStarts(allMoves));
-    }
-
-    private List<Square> legalStarts(List<Move> moves) {
-        List<Square> legalStarts = new ArrayList<>();
-        for (Move move : moves) {
-            legalStarts.add(move.startOfMove());
-        }
-        return legalStarts;
+        return squareInList(square, legalMoves.legalStartingSquares(activePlayer.getPieceType()));
     }
 
     private boolean squareInList(Square square, List<Square> squareList) {
@@ -193,16 +185,6 @@ public class BoardController {
             }
         }
         return false;
-    }
-
-    private List<Square> possibleStartsGivenEnd(Square end, List<Move> allMoves) {
-        List<Square> posStarts = new ArrayList<>();
-        for (Move move : allMoves) {
-            if (move.endOfMove().equals(end)) {
-                posStarts.add(move.startOfMove());
-            }
-        }
-        return posStarts;
     }
 
     private void executeMove(Move move) {
