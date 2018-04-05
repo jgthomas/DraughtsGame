@@ -36,6 +36,7 @@ public class OptionsView extends HBox {
         ListView<String> gamesList = new ListView<>();
         gamesList.getItems().add("New Game");
         gamesList.getItems().addAll(loadState.getAllGameNames());
+        gamesList.getSelectionModel().select(0);
         HBox gameBox = new HBox(gamesList);
         gameBox.setPrefWidth(300);
         gameBox.setAlignment(Pos.TOP_CENTER);
