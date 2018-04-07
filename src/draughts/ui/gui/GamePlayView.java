@@ -7,7 +7,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 
-public class GamePlayView {
+class GamePlayView {
     private final Stage primaryStage;
     private final BoardController boardController;
 
@@ -17,7 +17,7 @@ public class GamePlayView {
         this.boardController = boardController;
     }
 
-    public void getGamePlayView() {
+    void getGamePlayView() {
         final int SCENE_WIDTH = 1200;
         final int SCENE_HEIGHT = 1250;
 
