@@ -12,7 +12,7 @@ public class Game {
     private final LegalMoves legalMoves;
     private final SaveState saveState;
 
-    private int firstMoveNumber;
+    //private int firstMoveNumber;
     private int currentMoveNumber;
     private PlayerConfig activePlayer;
     private boolean gameWon;
@@ -35,12 +35,12 @@ public class Game {
         this.playerTwo = playerTwo;
         this.legalMoves = new LegalMoves(board);
         this.saveState = new SaveState(board);
-        this.firstMoveNumber = firstMoveNumber;
+        //this.firstMoveNumber = firstMoveNumber;
         this.currentMoveNumber = firstMoveNumber;
         this.activePlayer = playerOne;
         this.gameWon = false;
 
-        saveState.cacheState(firstMoveNumber);
+        saveState.cacheState(currentMoveNumber);
 
         if (playerOne.isAiPlayer()) {
             aiPlayer = new AiPlayer(playerOne.getPieceType(), board, legalMoves);
@@ -55,25 +55,26 @@ public class Game {
 
     public void makeMove(Move move) {
         executeMove(move);
-        cacheBoardState();
+        currentMoveNumber += 1;
+        saveState.cacheState(currentMoveNumber);
         if (moveWinsGame()) { gameWon = true; return; }
         switchActivePlayer();
 
         if (activePlayer.isAiPlayer()) {
             board.makeMove(aiPlayer.getMove());
-            cacheBoardState();
+            currentMoveNumber += 1;
+            saveState.cacheState(currentMoveNumber);
             if (moveWinsGame()) { gameWon = true; return; }
             switchActivePlayer();
         }
     }
 
     public void resetGame() {
-        board.setBoardState(saveState.getCachedState(firstMoveNumber));
-        saveState.clearCachedMoves();
-        currentMoveNumber = firstMoveNumber;
+        board.setBoardState(saveState.getCachedState(0));
+        currentMoveNumber = 0;
         resetActivePlayerByTurn();
         gameWon = false;
-        aiResumeIfNeeded();
+        aiResume();
     }
 
     public void backOneMove() {
@@ -81,7 +82,6 @@ public class Game {
             board.setBoardState(saveState.getCachedState(currentMoveNumber - 1));
             currentMoveNumber -= 1;
             resetActivePlayerByTurn();
-            aiResumeIfNeeded();
         }
     }
 
@@ -90,7 +90,15 @@ public class Game {
             board.setBoardState(saveState.getCachedState(currentMoveNumber + 1));
             currentMoveNumber += 1;
             resetActivePlayerByTurn();
-            aiResumeIfNeeded();
+        }
+    }
+
+    public void aiResume() {
+        if (!gameWon && activePlayer.isAiPlayer()) {
+            board.makeMove(aiPlayer.getMove());
+            currentMoveNumber += 1;
+            saveState.cacheState(currentMoveNumber);
+            switchActivePlayer();
         }
     }
 
@@ -110,10 +118,10 @@ public class Game {
         return gameWon;
     }
 
-    private void cacheBoardState() {
+    /*private void cacheBoardState() {
         currentMoveNumber += 1;
         saveState.cacheState(currentMoveNumber);
-    }
+    }*/
 
     private void switchActivePlayer() {
         activePlayer = (activePlayer == playerOne) ? playerTwo : playerOne;
@@ -131,14 +139,6 @@ public class Game {
             activePlayer = playerOne;
         } else {
             activePlayer = playerTwo;
-        }
-    }
-
-    private void aiResumeIfNeeded() {
-        if (!gameWon && activePlayer.isAiPlayer()) {
-            board.makeMove(aiPlayer.getMove());
-            cacheBoardState();
-            switchActivePlayer();
         }
     }
 
