@@ -19,8 +19,6 @@ import draughts.gamecore.SquareColor;
 
 
 class BoardView extends GridPane {
-    private static final int WIDTH = 150;
-    private static final int HEIGHT = 150;
     private final BoardController boardController;
 
     BoardView(Board board, BoardController boardController) {
