@@ -8,8 +8,8 @@ class GameBarView extends HBox {
     private final Button quitButton = new Button("Quit");
     private final Button backButton = new Button("Back");
     private final Button forwardButton = new Button("Forward");
-    private final Button resumeButton = new Button("Resume");
-    private final Button newGameButton = new Button("New Game");
+    private final Button resumeButton = new Button("Go");
+    private final Button newGameButton = new Button("Restart");
 
     GameBarView(GameBarController gameBarController) {
         this.setPrefHeight(100);
