@@ -3,7 +3,7 @@ package draughts.ui.gui;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 
-public class GameBarController implements EventHandler<ActionEvent> {
+class GameBarController implements EventHandler<ActionEvent> {
     private final GameBarView gameBarView = new GameBarView(this);
     private final BoardController boardController;
 
