@@ -43,17 +43,18 @@ public class Game {
         saveState.cacheState(firstMoveNumber);
 
         if (playerOne.isAiPlayer()) {
-            aiPlayer = new AiPlayer(activePlayer.getPieceType(), board, legalMoves);
+            aiPlayer = new AiPlayer(playerOne.getPieceType(), board, legalMoves);
             board.makeMove(aiPlayer.getMove());
             currentMoveNumber += 1;
             saveState.cacheState(currentMoveNumber);
+            activePlayer = playerTwo;
         } else if (playerTwo.isAiPlayer()) {
-            aiPlayer = new AiPlayer(activePlayer.getPieceType(), board, legalMoves);
+            aiPlayer = new AiPlayer(playerTwo.getPieceType(), board, legalMoves);
         }
     }
 
     public void makeMove(Move move) {
-        board.makeMove(move);
+        executeMove(move);
         cacheBoardState();
         if (moveWinsGame()) { gameWon = true; return; }
         switchActivePlayer();
@@ -148,5 +149,14 @@ public class Game {
             }
         }
         return false;
+    }
+
+    private void executeMove(Move move) {
+        for (Move m : legalMoves.legal(activePlayer.getPieceType())) {
+            if (m.equals(move)) {
+                board.makeMove(m);
+                return;
+            }
+        }
     }
 }
