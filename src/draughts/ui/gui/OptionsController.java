@@ -40,11 +40,12 @@ public class OptionsController implements EventHandler<ActionEvent> {
 
         if (selectedGame.equals("New Game")) {
             board = new Board();
+            game = new Game(board, playerOne, playerTwo);
         } else {
             board = new Board(loadState.loadState(selectedGame, 30));
+            game = new Game(board, playerOne, playerTwo, 30);
         }
 
-        game = new Game(board, playerOne, playerTwo);
         boardController = new BoardController(game);
 
         GamePlayView gamePlayView = new GamePlayView(primaryStage, boardController);

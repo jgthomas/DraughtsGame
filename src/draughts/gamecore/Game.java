@@ -78,7 +78,7 @@ public class Game {
     }
 
     public void backOneMove() {
-        if (!gameWon && currentMoveNumber > 0) {
+        if (!gameWon && currentMoveNumber > firstMoveNumber) {
             board.setBoardState(saveState.getCachedState(currentMoveNumber - 1));
             currentMoveNumber -= 1;
             resetActivePlayerByTurn();
