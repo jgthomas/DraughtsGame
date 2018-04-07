@@ -53,7 +53,7 @@ final class BoardView extends GridPane {
 
             this.setStrokeWidth(BORDER_WIDTH);
             this.setStrokeType(StrokeType.INSIDE);
-            this.setOnMouseClicked(boardController.onSquareClick);
+            this.setOnMouseClicked(boardController.squareViewClick);
         }
     }
 
