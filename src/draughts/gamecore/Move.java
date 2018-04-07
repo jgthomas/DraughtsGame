@@ -11,8 +11,8 @@ public class Move implements Comparable<Move>, Iterable<Move> {
     private final Square start;
     private final Square end;
     private final List<Move> nextTakes = new ArrayList<>();
-    private PieceType pieceType;
-    private MoveType moveType;
+    private final PieceType pieceType;
+    private final MoveType moveType;
     private int priority;
 
     public Move(Square start, Square end) {
