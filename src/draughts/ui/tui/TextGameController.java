@@ -7,7 +7,7 @@ import draughts.database.SaveState;
 import draughts.gamecore.*;
 import draughts.ui.UserInput;
 
-public class TextGameController {
+class TextGameController {
     private final Board board;
     private final LegalMoves legalMoves;
     private final Player player1;
@@ -42,7 +42,7 @@ public class TextGameController {
         totalBlackPieces = board.totalPieces(PieceType.BLACK_PIECE);
     }
 
-    public void playGame() {
+    void playGame() {
         saveState.cacheState(moveNumber);
         while (!whiteWin && !blackWin) {
 
