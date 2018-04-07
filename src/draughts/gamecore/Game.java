@@ -66,22 +66,6 @@ public class Game {
         }
     }
 
-    private void cacheBoardState() {
-        currentMoveNumber += 1;
-        saveState.cacheState(currentMoveNumber);
-    }
-
-    private void switchActivePlayer() {
-        activePlayer = (activePlayer == playerOne) ? playerTwo : playerOne;
-    }
-
-    private boolean moveWinsGame() {
-        PieceType opponentPieceType = (activePlayer == playerOne)
-                ? playerTwo.getPieceType()
-                : playerOne.getPieceType();
-        return board.totalPieces(opponentPieceType) == 0 || legalMoves.legal(opponentPieceType).size() == 0;
-    }
-
     public void resetGame() {
         board.setBoardState(saveState.getCachedState(firstMoveNumber));
         saveState.clearCachedMoves();
@@ -109,6 +93,34 @@ public class Game {
         }
     }
 
+    public boolean legalStart(Square start) {
+        return squareInList(start, legalMoves.legalStartingSquares(activePlayer.getPieceType()));
+    }
+
+    public boolean legalEnd(Square start, Square end) {
+        return squareInList(end, legalMoves.legalEndingSquares(start, activePlayer.getPieceType()));
+    }
+
+    public Board getBoard() {
+        return board;
+    }
+
+    private void cacheBoardState() {
+        currentMoveNumber += 1;
+        saveState.cacheState(currentMoveNumber);
+    }
+
+    private void switchActivePlayer() {
+        activePlayer = (activePlayer == playerOne) ? playerTwo : playerOne;
+    }
+
+    private boolean moveWinsGame() {
+        PieceType opponentPieceType = (activePlayer == playerOne)
+                ? playerTwo.getPieceType()
+                : playerOne.getPieceType();
+        return board.totalPieces(opponentPieceType) == 0 || legalMoves.legal(opponentPieceType).size() == 0;
+    }
+
     private void resetActivePlayerByTurn() {
         if (currentMoveNumber % 2 == 0) {
             activePlayer = playerOne;
@@ -132,13 +144,5 @@ public class Game {
             }
         }
         return false;
-    }
-
-    public boolean legalStart(Square start) {
-        return squareInList(start, legalMoves.legalStartingSquares(activePlayer.getPieceType()));
-    }
-
-    public boolean legalEnd(Square start, Square end) {
-        return squareInList(end, legalMoves.legalEndingSquares(start, activePlayer.getPieceType()));
     }
 }
