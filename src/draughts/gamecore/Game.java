@@ -49,4 +49,77 @@ public class Game {
             aiPlayer = new AiPlayer(activePlayer.getPieceType(), board, legalMoves);
         }
     }
+
+    public void makeMove(Move move) {
+        board.makeMove(move);
+        cacheBoardState();
+        if (moveWinsGame()) { gameWon = true; return; }
+        switchActivePlayer();
+
+        if (activePlayer.isAiPlayer()) {
+            board.makeMove(aiPlayer.getMove());
+            cacheBoardState();
+            if (moveWinsGame()) { gameWon = true; return; }
+            switchActivePlayer();
+        }
+    }
+
+    private void cacheBoardState() {
+        currentMoveNumber += 1;
+        saveState.cacheState(currentMoveNumber);
+    }
+
+    private void switchActivePlayer() {
+        activePlayer = (activePlayer == playerOne) ? playerTwo : playerOne;
+    }
+
+    private boolean moveWinsGame() {
+        PieceType opponentPieceType = (activePlayer == playerOne)
+                ? playerTwo.getPieceType()
+                : playerOne.getPieceType();
+        return board.totalPieces(opponentPieceType) == 0 || legalMoves.legal(opponentPieceType).size() == 0;
+    }
+
+    public void resetGame() {
+        board.setBoardState(saveState.getCachedState(firstMoveNumber));
+        saveState.clearCachedMoves();
+        currentMoveNumber = firstMoveNumber;
+        resetActivePlayerByTurn();
+        gameWon = false;
+        aiResumeIfNeeded();
+    }
+
+    public void backOneMove() {
+        if (!gameWon && currentMoveNumber > 0) {
+            board.setBoardState(saveState.getCachedState(currentMoveNumber - 1));
+            currentMoveNumber -= 1;
+            resetActivePlayerByTurn();
+            aiResumeIfNeeded();
+        }
+    }
+
+    public void forwardOneMove() {
+        if (!gameWon && currentMoveNumber < saveState.numberOfCachedMoves() - 1) {
+            board.setBoardState(saveState.getCachedState(currentMoveNumber + 1));
+            currentMoveNumber += 1;
+            resetActivePlayerByTurn();
+            aiResumeIfNeeded();
+        }
+    }
+
+    private void resetActivePlayerByTurn() {
+        if (currentMoveNumber % 2 == 0) {
+            activePlayer = playerOne;
+        } else {
+            activePlayer = playerTwo;
+        }
+    }
+
+    private void aiResumeIfNeeded() {
+        if (!gameWon && activePlayer.isAiPlayer()) {
+            board.makeMove(aiPlayer.getMove());
+            cacheBoardState();
+            switchActivePlayer();
+        }
+    }
 }
