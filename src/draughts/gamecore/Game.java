@@ -12,7 +12,7 @@ public class Game {
     private final LegalMoves legalMoves;
     private final SaveState saveState;
 
-    private int firstMoveNumber;
+    private final int firstMoveNumber;
     private int currentMoveNumber;
     private PlayerConfig activePlayer;
     private boolean gameWon;
