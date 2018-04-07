@@ -19,26 +19,23 @@ import draughts.gamecore.SquareColor;
 
 
 class BoardView extends GridPane {
-    private final BoardController boardController;
 
     BoardView(Board board, BoardController boardController) {
-        this.boardController = boardController;
-
         for (Square square : board) {
             StackPane squareViewHolder = new StackPane();
-            squareViewHolder.getChildren().add(new SquareView(square));
+            squareViewHolder.getChildren().add(new SquareView(square, boardController));
             squareViewHolder.getChildren().add(new PieceView(board.getPiece(square)));
             squareViewHolder.getChildren().add(new KingView(board.getPiece(square)));
             this.add(squareViewHolder, square.col(), square.row());
         }
     }
 
-    class SquareView extends Rectangle {
+    static class SquareView extends Rectangle {
         private static final int WIDTH = 150;
         private static final int HEIGHT = 150;
         private static final int BORDER_WIDTH = 10;
 
-        SquareView(Square square) {
+        SquareView(Square square, BoardController boardController) {
             this.setWidth(WIDTH);
             this.setHeight(HEIGHT);
 
