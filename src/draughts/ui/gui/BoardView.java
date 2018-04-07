@@ -28,32 +28,11 @@ class BoardView extends GridPane {
 
         for (Square square : board) {
             StackPane squareViewHolder = new StackPane();
-            //squareViewHolder.getChildren().add(makeSquareView(square));
             squareViewHolder.getChildren().add(new SquareView(square));
-            //squareViewHolder.getChildren().add(makePieceView(board.getPiece(square)));
             squareViewHolder.getChildren().add(new PieceView(board.getPiece(square)));
-            //squareViewHolder.getChildren().add(makeKingView(board.getPiece(square)));
             squareViewHolder.getChildren().add(new KingView(board.getPiece(square)));
             this.add(squareViewHolder, square.col(), square.row());
         }
-    }
-
-    private Rectangle makeSquareView(Square square) {
-        Rectangle squareView = new Rectangle();
-        squareView.setWidth(WIDTH);
-        squareView.setHeight(HEIGHT);
-
-        if (square.getSquareColor() == SquareColor.WHITE) {
-            squareView.setFill(Color.WHITE);
-        } else {
-            squareView.setFill(Color.BLACK);
-        }
-
-        squareView.setStrokeWidth(10);
-        squareView.setStrokeType(StrokeType.INSIDE);
-        squareView.setOnMouseClicked(boardController.onSquareClick);
-
-        return squareView;
     }
 
     private class SquareView extends Rectangle {
@@ -75,37 +54,6 @@ class BoardView extends GridPane {
             this.setStrokeType(StrokeType.INSIDE);
             this.setOnMouseClicked(boardController.onSquareClick);
         }
-    }
-
-    private Circle makePieceView(Piece piece) {
-        Circle pieceView = new Circle();
-        pieceView.setCenterX(100.0f);
-        pieceView.setCenterY(100.0f);
-        pieceView.setRadius(50.0f);
-        pieceView.fillProperty().bind(Bindings.createObjectBinding( () -> {
-                    switch (piece.getColor()) {
-                        case WHITE:
-                            return Color.RED;
-                        case BLACK:
-                            return Color.BLACK;
-                        default:
-                            return Color.TRANSPARENT;
-                    }
-                }, piece.colorProperty()
-        ));
-        pieceView.setMouseTransparent(true);
-        return pieceView;
-    }
-
-    private Text makeKingView(Piece piece) {
-        Text kingView = new Text();
-        kingView.setText("K");
-        kingView.setFont(Font.font("DejaVu Sans", FontWeight.BOLD, 40));
-        kingView.fillProperty().bind(Bindings.when(piece.isKingProperty())
-                .then(Color.WHITE)
-                .otherwise(Color.TRANSPARENT));
-        kingView.setMouseTransparent(true);
-        return kingView;
     }
 
     private class PieceView extends Circle {
