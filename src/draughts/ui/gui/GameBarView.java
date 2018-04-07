@@ -38,23 +38,23 @@ class GameBarView extends HBox {
         this.getChildren().add(newGameButton);
     }
 
-    public Button getQuitButton() {
+    Button getQuitButton() {
         return quitButton;
     }
 
-    public Button getBackButton() {
+    Button getBackButton() {
         return backButton;
     }
 
-    public Button getForwardButton() {
+    Button getForwardButton() {
         return forwardButton;
     }
 
-    public Button getResumeButton() {
+    Button getResumeButton() {
         return resumeButton;
     }
 
-    public Button getNewGameButton() {
+    Button getNewGameButton() {
         return newGameButton;
     }
 }
