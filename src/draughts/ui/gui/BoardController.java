@@ -69,8 +69,8 @@ public class BoardController {
         clearClickedSquareViews();
     }
 
-    void newGame() {
-        game.resetGame();
+    void restartGame() {
+        game.restartGame();
         clearClickedSquareViews();
     }
 
