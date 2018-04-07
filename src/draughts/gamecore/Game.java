@@ -12,7 +12,7 @@ public class Game {
     private final LegalMoves legalMoves;
     private final SaveState saveState;
 
-    //private int firstMoveNumber;
+    private int firstMoveNumber;
     private int currentMoveNumber;
     private PlayerConfig activePlayer;
     private boolean gameWon;
@@ -35,12 +35,12 @@ public class Game {
         this.playerTwo = playerTwo;
         this.legalMoves = new LegalMoves(board);
         this.saveState = new SaveState(board);
-        //this.firstMoveNumber = firstMoveNumber;
+        this.firstMoveNumber = firstMoveNumber;
         this.currentMoveNumber = firstMoveNumber;
         this.activePlayer = playerOne;
         this.gameWon = false;
 
-        saveState.cacheState(currentMoveNumber);
+        saveState.cacheState(firstMoveNumber);
 
         if (playerOne.isAiPlayer()) {
             aiPlayer = new AiPlayer(playerOne.getPieceType(), board, legalMoves);
@@ -69,11 +69,13 @@ public class Game {
         }
     }
 
-    public void resetGame() {
-        board.setBoardState(saveState.getCachedState(0));
-        currentMoveNumber = 0;
+    public void restartGame() {
+        board.setBoardState(saveState.getCachedState(firstMoveNumber));
+        currentMoveNumber = firstMoveNumber;
+        saveState.clearCachedMoves();
         resetActivePlayerByTurn();
         gameWon = false;
+        saveState.cacheState(currentMoveNumber);
         aiResume();
     }
 
