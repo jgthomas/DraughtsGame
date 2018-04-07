@@ -24,7 +24,7 @@ public class GameBarController implements EventHandler<ActionEvent> {
         } else if (eventSource.equals(gameBarView.getResumeButton())) {
             boardController.aiResume();
         } else if (eventSource.equals(gameBarView.getNewGameButton())) {
-            boardController.newGame();
+            boardController.restartGame();
         }
     }
 
