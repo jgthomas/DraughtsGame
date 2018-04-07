@@ -6,7 +6,7 @@ import java.util.Random;
 import draughts.gamecore.*;
 
 public class AiPlayer implements Player {
-    private static Random rand = new Random();
+    private static final Random rand = new Random();
     private final LegalMoves legalMoves;
     private final PieceType pieceType;
     private final MoveRater moveRater;
