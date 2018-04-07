@@ -1,8 +1,6 @@
 package draughts.ui.gui;
 
-import draughts.gamecore.Board;
 import draughts.gamecore.Game;
-import draughts.gamecore.PlayerConfig;
 import draughts.gamecore.Square;
 import draughts.gamecore.Move;
 import javafx.event.EventHandler;
@@ -21,9 +19,9 @@ public class BoardController {
     private List<BoardView.SquareView> clickedSquareViews = new ArrayList<>();
     private Map<MoveSquare, Square> buildMove = new EnumMap<>(MoveSquare.class);
 
-    BoardController(Board board, PlayerConfig playerOne, PlayerConfig playerTwo) {
-        this.game = new Game(board, playerOne, playerTwo);
-        boardView = new BoardView(board, this);
+    BoardController(Game game) {
+        this.game = game;
+        boardView = new BoardView(game.getBoard(), this);
     }
 
     EventHandler<MouseEvent> squareViewClick = (event) -> {
