@@ -6,7 +6,6 @@ import draughts.gamecore.*;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 
 import java.util.ArrayList;
 import java.util.EnumMap;
@@ -28,7 +27,7 @@ public class BoardController {
     private boolean gameWon = false;
     private int currentMoveNumber;
 
-    private List<Rectangle> clickedSquareViews = new ArrayList<>();
+    private List<BoardView.SquareView> clickedSquareViews = new ArrayList<>();
     private Map<MoveSquare, Square> buildMove = new EnumMap<>(MoveSquare.class);
 
     BoardController(Board board,
@@ -60,8 +59,8 @@ public class BoardController {
 
     EventHandler<MouseEvent> onSquareClick = (event) -> {
         Object eventSource = event.getSource();
-        if (!gameWon && eventSource instanceof Rectangle) {
-            Rectangle clickedSquareView = ((Rectangle) eventSource);
+        if (!gameWon && eventSource instanceof BoardView.SquareView) {
+            BoardView.SquareView clickedSquareView = ((BoardView.SquareView) eventSource);
             Square square = buildSquare(clickedSquareView);
             if (clickedSquareView.getStroke() == null) {
                 if (valid(square)) {
@@ -162,7 +161,7 @@ public class BoardController {
         return board.totalPieces(opponentPieceType) == 0 || legalMoves.legal(opponentPieceType).size() == 0;
     }
 
-    private Square buildSquare(Rectangle squareView) {
+    private Square buildSquare(BoardView.SquareView squareView) {
         int row = BoardView.getRowIndex(squareView.getParent());
         int col = BoardView.getColumnIndex(squareView.getParent());
         return new Square(row, col);
@@ -201,8 +200,8 @@ public class BoardController {
     }
 
     private void clearClickedSquareViews() {
-        for (Rectangle r : clickedSquareViews) {
-            r.setStroke(null);
+        for (BoardView.SquareView squareView : clickedSquareViews) {
+            squareView.setStroke(null);
         }
         clickedSquareViews.clear();
     }
