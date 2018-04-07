@@ -87,7 +87,7 @@ public enum PieceType {
             this.kingLine = kingLine;
         }
 
-        public int number() {
+        int number() {
             return this.kingLine;
         }
     }
