@@ -28,7 +28,7 @@ public class GameBarController implements EventHandler<ActionEvent> {
         }
     }
 
-    public GameBarView getGameBarView() {
+    GameBarView getGameBarView() {
         return gameBarView;
     }
 }
