@@ -6,7 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.stage.Stage;
 
-public class OptionsController implements EventHandler<ActionEvent> {
+class OptionsController implements EventHandler<ActionEvent> {
     private final Stage primaryStage;
     private final OptionsView view = new OptionsView(this);
     private final LoadState loadState = new LoadState();
