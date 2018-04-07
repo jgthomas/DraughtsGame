@@ -1,8 +1,10 @@
 package draughts.ui.gui;
 
-import draughts.ai.AiPlayer;
-import draughts.database.SaveState;
-import draughts.gamecore.*;
+import draughts.gamecore.Board;
+import draughts.gamecore.Game;
+import draughts.gamecore.PlayerConfig;
+import draughts.gamecore.Square;
+import draughts.gamecore.Move;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
@@ -14,85 +16,36 @@ import java.util.Map;
 
 
 public class BoardController {
-    private final Board board;
-    private final LegalMoves legalMoves;
-    private final SaveState saveState;
+    private Game game;
     private final BoardView boardView;
-
-    private final PlayerConfig playerOne;
-    private final PlayerConfig playerTwo;
-    private PlayerConfig activePlayer;
-    private AiPlayer aiPlayer;
-
-    private boolean gameWon = false;
-    private int currentMoveNumber;
-
     private List<BoardView.SquareView> clickedSquareViews = new ArrayList<>();
     private Map<MoveSquare, Square> buildMove = new EnumMap<>(MoveSquare.class);
 
-    BoardController(Board board,
-                    PlayerConfig playerOne,
-                    PlayerConfig playerTwo) {
-        this.board = board;
-        this.playerOne = playerOne;
-        this.playerTwo = playerTwo;
-        legalMoves = new LegalMoves(board);
-        saveState = new SaveState(board);
-
-        saveState.cacheState(currentMoveNumber);
-
-        if (playerOne.isAiPlayer()) {
-            aiPlayer = new AiPlayer(PieceType.WHITE_PIECE, board, legalMoves);
-            board.makeMove(aiPlayer.getMove());
-            currentMoveNumber += 1;
-            saveState.cacheState(currentMoveNumber);
-            activePlayer = playerTwo;
-        } else if (playerTwo.isAiPlayer()) {
-            aiPlayer = new AiPlayer(PieceType.BLACK_PIECE, board, legalMoves);
-            activePlayer = playerOne;
-        } else {
-            activePlayer = playerOne;
-        }
-
+    BoardController(Board board, PlayerConfig playerOne, PlayerConfig playerTwo) {
+        this.game = new Game(board, playerOne, playerTwo);
         boardView = new BoardView(board, this);
     }
 
     EventHandler<MouseEvent> squareViewClick = (event) -> {
-
-    };
-
-    EventHandler<MouseEvent> onSquareClick = (event) -> {
         Object eventSource = event.getSource();
-        if (!gameWon && eventSource instanceof BoardView.SquareView) {
+        if (!game.won() && eventSource instanceof BoardView.SquareView) {
             BoardView.SquareView clickedSquareView = ((BoardView.SquareView) eventSource);
             Square square = buildSquare(clickedSquareView);
             if (clickedSquareView.getStroke() == null) {
-                if (valid(square)) {
-
-                    if (buildMove.containsKey(MoveSquare.START)) {
-                        executeMove(new Move(buildMove.get(MoveSquare.START), square));
-                        cacheBoardState();
-                        if (moveWinsGame()) { gameWon = true;return; }
-                        clearClickedSquareViews();
-                        buildMove.clear();
-                        switchActivePlayer();
-                    } else {
-                        clearClickedSquareViews();
-                        clickedSquareView.setStroke(Color.GREEN);
-                        clickedSquareViews.add(clickedSquareView);
-                        buildMove.put(MoveSquare.START, square);
-                    }
-
-                    if (activePlayer.isAiPlayer()) {
-                        makeAiMove();
-                        if (moveWinsGame()) { gameWon = true; return; }
-                        switchActivePlayer();
-                    }
+                if (buildMove.containsKey(MoveSquare.START) &&
+                        game.legalEnd(buildMove.get(MoveSquare.START), square)) {
+                    game.makeMove(new Move(buildMove.get(MoveSquare.START), square));
+                    clearClickedSquareViews();
+                    buildMove.clear();
+                } else if (game.legalStart(square)) {
+                    clearClickedSquareViews();
+                    clickedSquareView.setStroke(Color.GREEN);
+                    clickedSquareViews.add(clickedSquareView);
+                    buildMove.put(MoveSquare.START, square);
                 } else {
                     clickedSquareView.setStroke(Color.RED);
                     clickedSquareViews.add(clickedSquareView);
                 }
-
             } else {
                 if (buildMove.size() > 0 && buildMove.get(MoveSquare.START).equals(square)) {
                     buildMove.remove(MoveSquare.START);
@@ -107,98 +60,25 @@ public class BoardController {
     }
 
     void backOneMove() {
-        if (!gameWon && currentMoveNumber > 0) {
-            board.setBoardState(saveState.getCachedState(currentMoveNumber - 1));
-            currentMoveNumber -= 1;
-            resetActivePlayerByTurn();
-            clearClickedSquareViews();
-        }
+        game.backOneMove();
     }
 
     void forwardOneMove() {
-        if (!gameWon && currentMoveNumber < saveState.numberOfCachedMoves() - 1) {
-            board.setBoardState(saveState.getCachedState(currentMoveNumber + 1));
-            currentMoveNumber += 1;
-            resetActivePlayerByTurn();
-            clearClickedSquareViews();
-        }
+        game.forwardOneMove();
     }
 
     void newGame() {
-        board.setBoardState(saveState.getCachedState(0));
-        saveState.clearCachedMoves();
-        currentMoveNumber = 0;
-        resetActivePlayerByTurn();
-        gameWon = false;
-        aiResume();
+        game.resetGame();
     }
 
     void aiResume() {
-        if (!gameWon && activePlayer.isAiPlayer()) {
-            makeAiMove();
-            switchActivePlayer();
-        }
-    }
 
-    private void makeAiMove() {
-        board.makeMove(aiPlayer.getMove());
-        cacheBoardState();
-    }
-
-    private void cacheBoardState() {
-        currentMoveNumber += 1;
-        saveState.cacheState(currentMoveNumber);
-    }
-
-    private void resetActivePlayerByTurn() {
-        if (currentMoveNumber % 2 == 0) {
-            activePlayer = playerOne;
-        } else {
-            activePlayer = playerTwo;
-        }
-    }
-
-    private boolean moveWinsGame() {
-        PieceType opponentPieceType = (activePlayer == playerOne)
-                ? playerTwo.getPieceType()
-                : playerOne.getPieceType();
-        return board.totalPieces(opponentPieceType) == 0 || legalMoves.legal(opponentPieceType).size() == 0;
     }
 
     private Square buildSquare(BoardView.SquareView squareView) {
         int row = BoardView.getRowIndex(squareView.getParent());
         int col = BoardView.getColumnIndex(squareView.getParent());
         return new Square(row, col);
-    }
-
-    private boolean valid(Square square) {
-        if (buildMove.containsKey(MoveSquare.START)) {
-            return squareInList(square, legalMoves.legalEndingSquares(
-                    buildMove.get(MoveSquare.START), activePlayer.getPieceType()));
-        }
-        return squareInList(square, legalMoves.legalStartingSquares(activePlayer.getPieceType()));
-    }
-
-    private boolean squareInList(Square square, List<Square> squareList) {
-        for (Square s : squareList) {
-            if (s.equals(square)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private void executeMove(Move move) {
-        for (Move m : legalMoves.legal(activePlayer.getPieceType())) {
-            if (m.equals(move)) {
-                board.makeMove(m);
-                return;
-            }
-        }
-    }
-
-    private void switchActivePlayer() {
-        activePlayer = (activePlayer == playerOne) ? playerTwo : playerOne;
     }
 
     private void clearClickedSquareViews() {
