@@ -57,11 +57,13 @@ class BoardView extends GridPane {
     }
 
     private class PieceView extends Circle {
+        private static final int MIDPOINT = 100;
+        private static final int RADIUS = 50;
 
         PieceView(Piece piece) {
-            this.setCenterX(100.0f);
-            this.setCenterY(100.0f);
-            this.setRadius(50.0f);
+            this.setCenterX(MIDPOINT);
+            this.setCenterY(MIDPOINT);
+            this.setRadius(RADIUS);
             this.fillProperty().bind(Bindings.createObjectBinding( () -> {
                         switch (piece.getColor()) {
                             case WHITE:
