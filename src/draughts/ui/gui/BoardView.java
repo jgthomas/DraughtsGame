@@ -54,7 +54,7 @@ class BoardView extends GridPane {
         }
     }
 
-    private class PieceView extends Circle {
+    private static class PieceView extends Circle {
         private static final int MIDPOINT = 100;
         private static final int RADIUS = 50;
 
@@ -77,7 +77,7 @@ class BoardView extends GridPane {
         }
     }
 
-    private class KingView extends Text {
+    private static class KingView extends Text {
         private static final String kingLetter = "K";
         private static final String kingFont = "DejaVu Sans";
         private static final int kingFontSize = 40;
