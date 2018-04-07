@@ -55,15 +55,13 @@ public class Game {
 
     public void makeMove(Move move) {
         executeMove(move);
-        currentMoveNumber += 1;
-        saveState.cacheState(currentMoveNumber);
+        cacheBoardState();
         if (moveWinsGame()) { gameWon = true; return; }
         switchActivePlayer();
 
         if (activePlayer.isAiPlayer()) {
             board.makeMove(aiPlayer.getMove());
-            currentMoveNumber += 1;
-            saveState.cacheState(currentMoveNumber);
+            cacheBoardState();
             if (moveWinsGame()) { gameWon = true; return; }
             switchActivePlayer();
         }
@@ -98,8 +96,7 @@ public class Game {
     public void aiResume() {
         if (!gameWon && activePlayer.isAiPlayer()) {
             board.makeMove(aiPlayer.getMove());
-            currentMoveNumber += 1;
-            saveState.cacheState(currentMoveNumber);
+            cacheBoardState();
             switchActivePlayer();
         }
     }
@@ -120,10 +117,10 @@ public class Game {
         return gameWon;
     }
 
-    /*private void cacheBoardState() {
+    private void cacheBoardState() {
         currentMoveNumber += 1;
         saveState.cacheState(currentMoveNumber);
-    }*/
+    }
 
     private void switchActivePlayer() {
         activePlayer = (activePlayer == playerOne) ? playerTwo : playerOne;
