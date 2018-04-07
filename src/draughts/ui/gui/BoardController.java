@@ -16,8 +16,8 @@ import java.util.Map;
 public class BoardController {
     private Game game;
     private final BoardView boardView;
-    private List<BoardView.SquareView> clickedSquareViews = new ArrayList<>();
-    private Map<MoveSquare, Square> buildMove = new EnumMap<>(MoveSquare.class);
+    private final List<BoardView.SquareView> clickedSquareViews = new ArrayList<>();
+    private final Map<MoveSquare, Square> buildMove = new EnumMap<>(MoveSquare.class);
 
     BoardController(Game game) {
         this.game = game;
