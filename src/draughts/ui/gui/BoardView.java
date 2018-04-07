@@ -18,7 +18,7 @@ import draughts.gamecore.Piece;
 import draughts.gamecore.SquareColor;
 
 
-class BoardView extends GridPane {
+final class BoardView extends GridPane {
 
     BoardView(Board board, BoardController boardController) {
         for (Square square : board) {
