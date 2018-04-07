@@ -7,13 +7,13 @@ import draughts.gamecore.Move;
 import draughts.gamecore.PieceType;
 import draughts.gamecore.Square;
 
-public final class TextGameView {
+final class TextGameView {
     private static final String whitePieceSymbol = "W";
     private static final String blackPieceSymbol = "B";
     private static final String whiteKingSymbol = "W!W";
     private static final String blackKingSymbol = "B!B";
 
-    public static void print(Board board, String title) {
+    static void print(Board board, String title) {
         System.out.println("\n" + title);
         char rowName = 'a';
         printColumnNumbers(board.max());
@@ -45,7 +45,7 @@ public final class TextGameView {
         System.out.println();
     }
 
-    public static void list(Board board) {
+    static void list(Board board) {
         System.out.println();
         for (Square square : board) {
             switch (board.getPieceType(square)) {
@@ -70,7 +70,7 @@ public final class TextGameView {
         }
     }
 
-    public static void printMoves(List<Move> moves) {
+    static void printMoves(List<Move> moves) {
         for (Move m : moves) {
             System.out.println(m.toString());
             for (Move nTake: m) {
@@ -87,7 +87,7 @@ public final class TextGameView {
         }
     }
 
-    public static void printGameNames(List<String> gameNames) {
+    static void printGameNames(List<String> gameNames) {
         int gameNumber = 0;
         for (String gameName : gameNames) {
             System.out.println(gameNumber + ": " + gameName);
@@ -95,7 +95,7 @@ public final class TextGameView {
         }
     }
 
-    public static void clearBoard() {
+    static void clearBoard() {
         System.out.print("\033[H\033[2J");
     }
 
