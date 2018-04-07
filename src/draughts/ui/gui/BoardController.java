@@ -98,11 +98,11 @@ public class BoardController {
         }
     };
 
-    public BoardView getBoardView() {
+    BoardView getBoardView() {
         return boardView;
     }
 
-    public void backOneMove() {
+    void backOneMove() {
         if (!gameWon && currentMoveNumber > 0) {
             board.setBoardState(saveState.getCachedState(currentMoveNumber - 1));
             currentMoveNumber -= 1;
@@ -111,7 +111,7 @@ public class BoardController {
         }
     }
 
-    public void forwardOneMove() {
+    void forwardOneMove() {
         if (!gameWon && currentMoveNumber < saveState.numberOfCachedMoves() - 1) {
             board.setBoardState(saveState.getCachedState(currentMoveNumber + 1));
             currentMoveNumber += 1;
@@ -120,7 +120,7 @@ public class BoardController {
         }
     }
 
-    public void newGame() {
+    void newGame() {
         board.setBoardState(saveState.getCachedState(0));
         saveState.clearCachedMoves();
         currentMoveNumber = 0;
@@ -129,7 +129,7 @@ public class BoardController {
         aiResume();
     }
 
-    public void aiResume() {
+    void aiResume() {
         if (!gameWon && activePlayer.isAiPlayer()) {
             makeAiMove();
             switchActivePlayer();
@@ -168,8 +168,6 @@ public class BoardController {
     }
 
     private boolean valid(Square square) {
-        List<Move> allMoves = legalMoves.legal(activePlayer.getPieceType());
-
         if (buildMove.containsKey(MoveSquare.START)) {
             return squareInList(square, legalMoves.legalEndingSquares(
                     buildMove.get(MoveSquare.START), activePlayer.getPieceType()));
