@@ -28,7 +28,8 @@ class BoardView extends GridPane {
 
         for (Square square : board) {
             StackPane squareViewHolder = new StackPane();
-            squareViewHolder.getChildren().add(makeSquareView(square));
+            //squareViewHolder.getChildren().add(makeSquareView(square));
+            squareViewHolder.getChildren().add(new SquareView(square));
             //squareViewHolder.getChildren().add(makePieceView(board.getPiece(square)));
             squareViewHolder.getChildren().add(new PieceView(board.getPiece(square)));
             //squareViewHolder.getChildren().add(makeKingView(board.getPiece(square)));
@@ -53,6 +54,27 @@ class BoardView extends GridPane {
         squareView.setOnMouseClicked(boardController.onSquareClick);
 
         return squareView;
+    }
+
+    private class SquareView extends Rectangle {
+        private static final int WIDTH = 150;
+        private static final int HEIGHT = 150;
+        private static final int BORDER_WIDTH = 10;
+
+        SquareView(Square square) {
+            this.setWidth(WIDTH);
+            this.setHeight(HEIGHT);
+
+            if (square.getSquareColor() == SquareColor.WHITE) {
+                this.setFill(Color.WHITE);
+            } else {
+                this.setFill(Color.BLACK);
+            }
+
+            this.setStrokeWidth(BORDER_WIDTH);
+            this.setStrokeType(StrokeType.INSIDE);
+            this.setOnMouseClicked(boardController.onSquareClick);
+        }
     }
 
     private Circle makePieceView(Piece piece) {
