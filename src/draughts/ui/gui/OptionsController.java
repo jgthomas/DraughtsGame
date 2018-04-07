@@ -1,10 +1,7 @@
 package draughts.ui.gui;
 
 import draughts.database.LoadState;
-import draughts.gamecore.Board;
-import draughts.gamecore.PieceType;
-import draughts.gamecore.PlayerConfig;
-import draughts.gamecore.PlayerType;
+import draughts.gamecore.*;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.stage.Stage;
@@ -22,6 +19,7 @@ public class OptionsController implements EventHandler<ActionEvent> {
     public void handle(final ActionEvent event) {
         Board board;
         BoardController boardController;
+        Game game;
         PlayerConfig playerOne;
         PlayerConfig playerTwo;
 
@@ -46,13 +44,14 @@ public class OptionsController implements EventHandler<ActionEvent> {
             board = new Board(loadState.loadState(selectedGame, 30));
         }
 
-        boardController = new BoardController(board, playerOne, playerTwo);
+        game = new Game(board, playerOne, playerTwo);
+        boardController = new BoardController(game);
 
         GamePlayView gamePlayView = new GamePlayView(primaryStage, boardController);
         gamePlayView.getGamePlayView();
     }
 
-    public OptionsView getOptionsView() {
+    OptionsView getOptionsView() {
         return view;
     }
 }
