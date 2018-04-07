@@ -57,6 +57,10 @@ public class BoardController {
         boardView = new BoardView(board, this);
     }
 
+    EventHandler<MouseEvent> squareViewClick = (event) -> {
+
+    };
+
     EventHandler<MouseEvent> onSquareClick = (event) -> {
         Object eventSource = event.getSource();
         if (!gameWon && eventSource instanceof BoardView.SquareView) {

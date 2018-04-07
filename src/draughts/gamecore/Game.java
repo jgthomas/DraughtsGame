@@ -105,6 +105,10 @@ public class Game {
         return board;
     }
 
+    public boolean won() {
+        return gameWon;
+    }
+
     private void cacheBoardState() {
         currentMoveNumber += 1;
         saveState.cacheState(currentMoveNumber);
