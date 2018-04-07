@@ -3,6 +3,8 @@ package draughts.gamecore;
 import draughts.ai.AiPlayer;
 import draughts.database.SaveState;
 
+import java.util.List;
+
 public class Game {
     private final Board board;
     private final PlayerConfig playerOne;
@@ -121,5 +123,22 @@ public class Game {
             cacheBoardState();
             switchActivePlayer();
         }
+    }
+
+    private boolean squareInList(Square square, List<Square> squareList) {
+        for (Square s : squareList) {
+            if (s.equals(square)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean legalStart(Square start) {
+        return squareInList(start, legalMoves.legalStartingSquares(activePlayer.getPieceType()));
+    }
+
+    public boolean legalEnd(Square start, Square end) {
+        return squareInList(end, legalMoves.legalEndingSquares(start, activePlayer.getPieceType()));
     }
 }
