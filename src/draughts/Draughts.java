@@ -5,7 +5,7 @@ import draughts.ui.tui.TextDraughts;
 import javafx.application.Application;
 
 
-public class Draughts {
+class Draughts {
     private static final String GUI = "gui";
     private static final String TUI = "text";
 
