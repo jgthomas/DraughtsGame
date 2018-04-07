@@ -60,21 +60,25 @@ public class BoardController {
     void backOneMove() {
         game.backOneMove();
         clearClickedSquareViews();
+        buildMove.clear();
     }
 
     void forwardOneMove() {
         game.forwardOneMove();
         clearClickedSquareViews();
+        buildMove.clear();
     }
 
     void restartGame() {
         game.restartGame();
         clearClickedSquareViews();
+        buildMove.clear();
     }
 
     void aiResume() {
         game.aiResume();
         clearClickedSquareViews();
+        buildMove.clear();
     }
 
     private Square buildSquare(BoardView.SquareView squareView) {
