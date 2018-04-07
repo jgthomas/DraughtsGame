@@ -33,7 +33,7 @@ class BoardView extends GridPane {
         }
     }
 
-    private class SquareView extends Rectangle {
+    class SquareView extends Rectangle {
         private static final int WIDTH = 150;
         private static final int HEIGHT = 150;
         private static final int BORDER_WIDTH = 10;
