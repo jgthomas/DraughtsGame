@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 
-public class BoardController {
+public class BoardController implements EventHandler<MouseEvent> {
     private Game game;
     private final BoardView boardView;
     private final List<BoardView.SquareView> clickedSquareViews = new ArrayList<>();
@@ -24,7 +24,8 @@ public class BoardController {
         boardView = new BoardView(game.getBoard(), this);
     }
 
-    EventHandler<MouseEvent> squareViewClick = (event) -> {
+    @Override
+    public void handle(MouseEvent event) {
         Object eventSource = event.getSource();
         if (!game.won() && eventSource instanceof BoardView.SquareView) {
             BoardView.SquareView clickedSquareView = ((BoardView.SquareView) eventSource);
@@ -51,7 +52,7 @@ public class BoardController {
                 clickedSquareView.setStroke(null);
             }
         }
-    };
+    }
 
     BoardView getBoardView() {
         return boardView;
