@@ -10,13 +10,13 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
-public class OptionsView extends HBox {
+class OptionsView extends HBox {
     private final Button humanHumanButton = new Button("Human vs Human");
     private final Button humanAiButton = new Button("Human vs Computer");
     private final Button aiHumanButton = new Button("Computer vs Human");
 
-    private ObservableList<String> gameNames = FXCollections.observableArrayList();
-    private ListView<String> gamesList = new ListView<>(gameNames);
+    private final ObservableList<String> gameNames = FXCollections.observableArrayList();
+    private final ListView<String> gamesList = new ListView<>(gameNames);
 
     OptionsView(OptionsController optionsController) {
         VBox buttonBox = new VBox();
@@ -53,19 +53,19 @@ public class OptionsView extends HBox {
         this.getChildren().add(buttonBox);
     }
 
-    public Button getHumanHumanButton() {
+    Button getHumanHumanButton() {
         return humanHumanButton;
     }
 
-    public Button getHumanAiButton() {
+    Button getHumanAiButton() {
         return humanAiButton;
     }
 
-    public Button getAiHumanButton() {
+    Button getAiHumanButton() {
         return aiHumanButton;
     }
 
-    public String getSelectedGame() {
+    String getSelectedGame() {
         return gamesList.getSelectionModel().getSelectedItem();
     }
 }
