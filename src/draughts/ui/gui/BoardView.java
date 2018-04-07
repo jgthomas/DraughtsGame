@@ -22,11 +22,17 @@ class BoardView extends GridPane {
 
     BoardView(Board board, BoardController boardController) {
         for (Square square : board) {
-            StackPane squareViewHolder = new StackPane();
-            squareViewHolder.getChildren().add(new SquareView(square, boardController));
-            squareViewHolder.getChildren().add(new PieceView(board.getPiece(square)));
-            squareViewHolder.getChildren().add(new KingView(board.getPiece(square)));
+            SquareViewHolder squareViewHolder = new SquareViewHolder(square, board.getPiece(square), boardController);
             this.add(squareViewHolder, square.col(), square.row());
+        }
+    }
+
+    private static class SquareViewHolder extends StackPane {
+
+        SquareViewHolder(Square square, Piece piece, BoardController boardController) {
+            this.getChildren().add(new SquareView(square, boardController));
+            this.getChildren().add(new PieceView(piece));
+            this.getChildren().add(new KingView(piece));
         }
     }
 
