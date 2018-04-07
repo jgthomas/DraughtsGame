@@ -81,7 +81,7 @@ public enum PieceType {
         BLACK_KING_LINE(0),
         NOT_APPLICABLE(100);
 
-        private int kingLine;
+        private final int kingLine;
 
         KingLine(int kingLine) {
             this.kingLine = kingLine;
