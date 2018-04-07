@@ -14,7 +14,7 @@ import java.util.Map;
 
 
 public class BoardController implements EventHandler<MouseEvent> {
-    private Game game;
+    private final Game game;
     private final BoardView boardView;
     private final List<BoardView.SquareView> clickedSquareViews = new ArrayList<>();
     private final Map<MoveSquare, Square> buildMove = new EnumMap<>(MoveSquare.class);
