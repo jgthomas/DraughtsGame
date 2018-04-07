@@ -28,7 +28,6 @@ final class BoardView extends GridPane {
     }
 
     private static class SquareViewHolder extends StackPane {
-
         SquareViewHolder(Square square, Piece piece, BoardController boardController) {
             this.getChildren().add(new SquareView(square, boardController));
             this.getChildren().add(new PieceView(piece));
