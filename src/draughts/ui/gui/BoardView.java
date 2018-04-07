@@ -29,8 +29,10 @@ class BoardView extends GridPane {
         for (Square square : board) {
             StackPane squareViewHolder = new StackPane();
             squareViewHolder.getChildren().add(makeSquareView(square));
-            squareViewHolder.getChildren().add(makePieceView(board.getPiece(square)));
-            squareViewHolder.getChildren().add(makeKingView(board.getPiece(square)));
+            //squareViewHolder.getChildren().add(makePieceView(board.getPiece(square)));
+            squareViewHolder.getChildren().add(new PieceView(board.getPiece(square)));
+            //squareViewHolder.getChildren().add(makeKingView(board.getPiece(square)));
+            squareViewHolder.getChildren().add(new KingView(board.getPiece(square)));
             this.add(squareViewHolder, square.col(), square.row());
         }
     }
@@ -82,6 +84,42 @@ class BoardView extends GridPane {
                 .otherwise(Color.TRANSPARENT));
         kingView.setMouseTransparent(true);
         return kingView;
+    }
+
+    private class PieceView extends Circle {
+
+        PieceView(Piece piece) {
+            this.setCenterX(100.0f);
+            this.setCenterY(100.0f);
+            this.setRadius(50.0f);
+            this.fillProperty().bind(Bindings.createObjectBinding( () -> {
+                        switch (piece.getColor()) {
+                            case WHITE:
+                                return Color.RED;
+                            case BLACK:
+                                return Color.BLACK;
+                            default:
+                                return Color.TRANSPARENT;
+                        }
+                    }, piece.colorProperty()
+            ));
+            this.setMouseTransparent(true);
+        }
+    }
+
+    private class KingView extends Text {
+        private static final String kingLetter = "K";
+        private static final String kingFont = "DejaVu Sans";
+        private static final int kingFontSize = 40;
+
+        KingView(Piece piece) {
+            this.setText(kingLetter);
+            this.setFont(Font.font(kingFont, FontWeight.BOLD, kingFontSize));
+            this.fillProperty().bind(Bindings.when(piece.isKingProperty())
+                    .then(Color.WHITE)
+                    .otherwise(Color.TRANSPARENT));
+            this.setMouseTransparent(true);
+        }
     }
 }
 
