@@ -2,13 +2,18 @@ package draughts.ui.gui;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
 class GameBarController implements EventHandler<ActionEvent> {
-    private final GameBarView gameBarView = GameBarView.newInstance(this);
+    private final GameBarView gameBarView;
     private final BoardController boardController;
+    private final Stage primaryStage;
 
-    GameBarController(BoardController boardController) {
+    GameBarController(BoardController boardController, Stage primaryStage) {
+        this.primaryStage = primaryStage;
         this.boardController = boardController;
+        gameBarView = GameBarView.newInstance(this);
     }
 
     @Override
@@ -25,6 +30,11 @@ class GameBarController implements EventHandler<ActionEvent> {
             boardController.aiResume();
         } else if (eventSource.equals(gameBarView.getNewGameButton())) {
             boardController.restartGame();
+        } else if (eventSource.equals(gameBarView.getNewGameButtonReal())) {
+            final int SCENE_WIDTH = 1000;
+            final int SCENE_HEIGHT = 400;
+            Scene scene = new Scene(new OptionsController(primaryStage).getOptionsView(), SCENE_WIDTH, SCENE_HEIGHT);
+            primaryStage.setScene(scene);
         }
     }
 
