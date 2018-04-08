@@ -124,7 +124,7 @@ public class Game {
         return gameWon;
     }
 
-    public ObjectProperty<PieceType> getActivePieceTypeProperty() {
+    public ObjectProperty<PieceType> activePieceTypeProperty() {
         return activePieceType;
     }
 
