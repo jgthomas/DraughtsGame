@@ -5,7 +5,7 @@ import javafx.scene.layout.VBox;
 class InfoBarView extends VBox {
 
     InfoBarView() {
-        this.setPrefWidth(150);
-        this.setPrefHeight(800);
+        this.setPrefWidth(200);
+        this.setPrefHeight(1300);
     }
 }
