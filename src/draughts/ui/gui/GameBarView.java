@@ -56,7 +56,6 @@ class GameBarView extends HBox {
         return newGameButton;
     }
 
-
     private void buildButtons() {
         List<Button> buttonList = new ArrayList<>();
         buttonList.add(quitButton);
