@@ -23,7 +23,7 @@ class InfoBarView extends VBox {
                 .when(game.gameIsWonProperty())
                 .then(Color.TRANSPARENT)
                 .otherwise(Color.BLACK));
-        this.getChildren().add(turnInfo);
+
 
         Circle turnImage = new Circle();
         turnImage.setCenterX(50);
@@ -40,7 +40,6 @@ class InfoBarView extends VBox {
                     }
                 }, game.activePieceTypeProperty()
         ));
-        this.getChildren().add(turnImage);
 
         Text winInfo = new Text("WINS!");
         winInfo.setFont(new Font(45));
@@ -48,6 +47,9 @@ class InfoBarView extends VBox {
                 .when(game.gameIsWonProperty())
                 .then(Color.GREEN)
                 .otherwise(Color.TRANSPARENT));
+
+        this.getChildren().add(turnInfo);
+        this.getChildren().add(turnImage);
         this.getChildren().add(winInfo);
     }
 }
