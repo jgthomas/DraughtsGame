@@ -3,6 +3,7 @@ package draughts.ui.gui;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
+import javafx.scene.text.Font;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +31,8 @@ class GameBarView extends HBox {
         for (Button button : buttonList) {
             button.setOnAction(gameBarController);
             button.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+            button.setMinSize(150, 100);
+            button.setFont(new Font(30));
             this.getChildren().add(button);
         }
     }
