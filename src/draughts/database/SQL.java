@@ -30,6 +30,7 @@ final class SQL {
 
     static final String SELECT_MAX_MOVE = String.join(System.getProperty("line.separator"),
             "SELECT MAX(move)",
+            "        AS totalMoves",
             "      FROM games",
             "     WHERE name=?"
     );
