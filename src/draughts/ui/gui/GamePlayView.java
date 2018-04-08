@@ -17,17 +17,18 @@ class GamePlayView {
     }
 
     void getGamePlayView() {
-        final int SCENE_WIDTH = 1200;
+        final int SCENE_WIDTH = 1400;
         final int SCENE_HEIGHT = 1300;
 
         BoardView boardView = boardController.getBoardView();
         GameBarView gameBarView = new GameBarController(boardController).getGameBarView();
+        InfoBarView infoBarView = new InfoBarView();
 
         BorderPane gameUI = new BorderPane();
         gameUI.setCenter(boardView);
         gameUI.setBottom(gameBarView);
+        gameUI.setRight(infoBarView);
         gameUI.setLeft(null);
-        gameUI.setRight(null);
 
         Scene scene = new Scene(gameUI, SCENE_WIDTH, SCENE_HEIGHT, Color.LIGHTSLATEGREY);
         primaryStage.setScene(scene);
