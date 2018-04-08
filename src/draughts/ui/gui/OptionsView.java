@@ -10,6 +10,9 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
+import java.util.ArrayList;
+import java.util.List;
+
 class OptionsView extends HBox {
     private final Button humanHumanButton = new Button("Human vs Human");
     private final Button humanAiButton = new Button("Human vs Computer");
@@ -25,17 +28,16 @@ class OptionsView extends HBox {
         buttonBox.setPadding(new Insets(10, 50, 50, 50));
         buttonBox.setSpacing(10);
 
-        humanHumanButton.setOnAction(optionsController);
-        humanHumanButton.setPrefWidth(buttonBox.getPrefWidth());
-        buttonBox.getChildren().addAll(humanHumanButton);
+        List<Button> buttonList = new ArrayList<>();
+        buttonList.add(humanHumanButton);
+        buttonList.add(humanAiButton);
+        buttonList.add(aiHumanButton);
 
-        humanAiButton.setOnAction(optionsController);
-        humanAiButton.setPrefWidth(buttonBox.getPrefWidth());
-        buttonBox.getChildren().addAll(humanAiButton);
-
-        aiHumanButton.setOnAction(optionsController);
-        aiHumanButton.setPrefWidth(buttonBox.getPrefWidth());
-        buttonBox.getChildren().addAll(aiHumanButton);
+        for (Button button : buttonList) {
+            button.setOnAction(optionsController);
+            button.setPrefWidth(buttonBox.getPrefWidth());
+            buttonBox.getChildren().add(button);
+        }
 
         LoadState loadState = new LoadState();
 
