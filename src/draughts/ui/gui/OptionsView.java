@@ -6,6 +6,7 @@ import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -50,6 +51,16 @@ class OptionsView extends HBox {
         savedGameNames.addAll(loadState.getAllGameNames());
 
         savedGameNamesDisplay.getSelectionModel().select(0);
+        savedGameNamesDisplay.setCellFactory( (cell) -> new ListCell<String>() {
+            @Override
+            protected void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+                if (item != null) {
+                    setText(item);
+                    setFont(Font.font(25));
+                }
+            }
+        });
 
         HBox savedGameNameBox = new HBox(savedGameNamesDisplay);
         savedGameNameBox.setPrefWidth(300);
