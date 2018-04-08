@@ -15,7 +15,7 @@ class GameBarView extends HBox {
         this.setPrefHeight(100);
         this.setPrefWidth(1200);
         this.setAlignment(Pos.CENTER);
-        this.setSpacing(15);
+        this.setSpacing(50);
 
         quitButton.setOnAction(gameBarController);
         quitButton.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
