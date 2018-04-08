@@ -4,12 +4,25 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 
+import java.util.ArrayList;
+import java.util.List;
+
 class GameBarView extends HBox {
-    private final Button quitButton = new Button("Quit");
-    private final Button backButton = new Button("Back");
-    private final Button forwardButton = new Button("Forward");
-    private final Button resumeButton = new Button("Go");
-    private final Button newGameButton = new Button("Restart");
+    private static final Button quitButton = new Button("Quit");
+    private static final Button backButton = new Button("Back");
+    private static final Button forwardButton = new Button("Forward");
+    private static final Button resumeButton = new Button("Go");
+    private static final Button newGameButton = new Button("Restart");
+
+    private static final List<Button> buttonList = new ArrayList<>();
+
+    static {
+        buttonList.add(quitButton);
+        buttonList.add(backButton);
+        buttonList.add(forwardButton);
+        buttonList.add(resumeButton);
+        buttonList.add(newGameButton);
+    }
 
     GameBarView(GameBarController gameBarController) {
         this.setPrefHeight(100);
@@ -17,25 +30,11 @@ class GameBarView extends HBox {
         this.setAlignment(Pos.CENTER);
         this.setSpacing(50);
 
-        quitButton.setOnAction(gameBarController);
-        quitButton.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-        this.getChildren().add(quitButton);
-
-        backButton.setOnAction(gameBarController);
-        backButton.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-        this.getChildren().add(backButton);
-
-        forwardButton.setOnAction(gameBarController);
-        forwardButton.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-        this.getChildren().add(forwardButton);
-
-        resumeButton.setOnAction(gameBarController);
-        resumeButton.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-        this.getChildren().add(resumeButton);
-
-        newGameButton.setOnAction(gameBarController);
-        newGameButton.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-        this.getChildren().add(newGameButton);
+        for (Button button : buttonList) {
+            button.setOnAction(gameBarController);
+            button.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+            this.getChildren().add(button);
+        }
     }
 
     Button getQuitButton() {
