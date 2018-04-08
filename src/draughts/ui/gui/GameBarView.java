@@ -13,9 +13,9 @@ class GameBarView extends HBox {
     private final Button quitButton = new Button("Quit");
     private final Button backButton = new Button("Back");
     private final Button forwardButton = new Button("Forward");
-    private final Button resumeButton = new Button("Go");
-    private final Button newGameButton = new Button("Restart");
-    private final Button newGameButtonReal = new Button("New Game");
+    private final Button resumeButton = new Button("Resume");
+    private final Button restartGameButton = new Button("Restart");
+    private final Button newGameButton = new Button("New");
     private final GameBarController gameBarController;
 
     private GameBarView(GameBarController gameBarController) {
@@ -48,12 +48,12 @@ class GameBarView extends HBox {
         return resumeButton;
     }
 
-    Button getNewGameButton() {
-        return newGameButton;
+    Button getRestartGameButton() {
+        return restartGameButton;
     }
 
-    Button getNewGameButtonReal() {
-        return newGameButtonReal;
+    Button getNewGameButton() {
+        return newGameButton;
     }
 
 
@@ -63,8 +63,8 @@ class GameBarView extends HBox {
         buttonList.add(backButton);
         buttonList.add(forwardButton);
         buttonList.add(resumeButton);
+        buttonList.add(restartGameButton);
         buttonList.add(newGameButton);
-        buttonList.add(newGameButtonReal);
 
         for (Button button : buttonList) {
             button.setOnAction(gameBarController);

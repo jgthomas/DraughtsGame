@@ -28,9 +28,9 @@ class GameBarController implements EventHandler<ActionEvent> {
             boardController.forwardOneMove();
         } else if (eventSource.equals(gameBarView.getResumeButton())) {
             boardController.aiResume();
-        } else if (eventSource.equals(gameBarView.getNewGameButton())) {
+        } else if (eventSource.equals(gameBarView.getRestartGameButton())) {
             boardController.restartGame();
-        } else if (eventSource.equals(gameBarView.getNewGameButtonReal())) {
+        } else if (eventSource.equals(gameBarView.getNewGameButton())) {
             final int SCENE_WIDTH = 1000;
             final int SCENE_HEIGHT = 400;
             Scene scene = new Scene(new OptionsController(primaryStage).getOptionsView(), SCENE_WIDTH, SCENE_HEIGHT);
