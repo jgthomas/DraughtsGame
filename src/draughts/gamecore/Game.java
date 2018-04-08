@@ -3,6 +3,9 @@ package draughts.gamecore;
 import draughts.ai.AiPlayer;
 import draughts.database.SaveState;
 
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
+
 import java.util.List;
 
 public class Game {
@@ -17,6 +20,8 @@ public class Game {
     private PlayerConfig activePlayer;
     private boolean gameWon;
     private Player aiPlayer;
+
+    private final ObjectProperty<PieceType> activePieceType;
 
     public Game(Board board,
                 PlayerConfig playerOne,
@@ -51,6 +56,8 @@ public class Game {
         } else if (playerTwo.isAiPlayer()) {
             aiPlayer = new AiPlayer(playerTwo.getPieceType(), board, legalMoves);
         }
+
+        activePieceType = new SimpleObjectProperty<>(activePlayer.getPieceType());
     }
 
     public void makeMove(Move move) {
@@ -117,6 +124,18 @@ public class Game {
         return gameWon;
     }
 
+    public ObjectProperty<PieceType> getActivePieceTypeProperty() {
+        return activePieceType;
+    }
+
+    public PieceType getActivePieceType() {
+        return activePieceType.get();
+    }
+
+    private void setActivePieceType(PieceType pieceType) {
+        activePieceType.set(pieceType);
+    }
+
     private void cacheBoardState() {
         currentMoveNumber += 1;
         saveState.cacheState(currentMoveNumber);
@@ -124,6 +143,7 @@ public class Game {
 
     private void switchActivePlayer() {
         activePlayer = (activePlayer == playerOne) ? playerTwo : playerOne;
+        setActivePieceType(activePlayer.getPieceType());
     }
 
     private boolean moveWinsGame() {
@@ -139,6 +159,7 @@ public class Game {
         } else {
             activePlayer = playerTwo;
         }
+        setActivePieceType(activePlayer.getPieceType());
     }
 
     private boolean squareInList(Square square, List<Square> squareList) {
