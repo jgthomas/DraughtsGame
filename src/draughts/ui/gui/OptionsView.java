@@ -21,8 +21,8 @@ class OptionsView extends HBox {
     private final Button humanAiButton = new Button("Human vs Computer");
     private final Button aiHumanButton = new Button("Computer vs Human");
 
-    private final ObservableList<String> savedGameNames = FXCollections.observableArrayList();
-    private final ListView<String> savedGameNamesDisplay = new ListView<>(savedGameNames);
+    private final ObservableList<String> gameNames = FXCollections.observableArrayList();
+    private final ListView<String> gameNamesDisplay = new ListView<>(gameNames);
 
     OptionsView(OptionsController optionsController) {
         VBox buttonBox = new VBox();
@@ -46,12 +46,13 @@ class OptionsView extends HBox {
             buttonBox.getChildren().add(button);
         }
 
-        savedGameNames.add("New Game");
         LoadState loadState = new LoadState();
-        savedGameNames.addAll(loadState.getAllGameNames());
 
-        savedGameNamesDisplay.getSelectionModel().select(0);
-        savedGameNamesDisplay.setCellFactory( (cell) -> new ListCell<String>() {
+        gameNames.add("New Game");
+        gameNames.addAll(loadState.getAllGameNames());
+
+        gameNamesDisplay.getSelectionModel().select(0);
+        gameNamesDisplay.setCellFactory( (cell) -> new ListCell<String>() {
             @Override
             protected void updateItem(String item, boolean empty) {
                 super.updateItem(item, empty);
@@ -62,7 +63,7 @@ class OptionsView extends HBox {
             }
         });
 
-        HBox savedGameNameBox = new HBox(savedGameNamesDisplay);
+        HBox savedGameNameBox = new HBox(gameNamesDisplay);
         savedGameNameBox.setPrefWidth(300);
         savedGameNameBox.setAlignment(Pos.TOP_CENTER);
 
@@ -83,6 +84,6 @@ class OptionsView extends HBox {
     }
 
     String getSelectedGame() {
-        return savedGameNamesDisplay.getSelectionModel().getSelectedItem();
+        return gameNamesDisplay.getSelectionModel().getSelectedItem();
     }
 }
