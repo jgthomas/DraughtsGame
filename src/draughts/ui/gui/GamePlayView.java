@@ -22,7 +22,7 @@ class GamePlayView {
 
         BoardView boardView = boardController.getBoardView();
         GameBarView gameBarView = new GameBarController(boardController).getGameBarView();
-        InfoBarView infoBarView = new InfoBarView();
+        InfoBarView infoBarView = new InfoBarView(boardController.getGame());
 
         BorderPane gameUI = new BorderPane();
         gameUI.setCenter(boardView);
