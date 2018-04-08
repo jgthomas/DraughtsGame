@@ -15,7 +15,7 @@ class GamePlayView {
         this.boardController = boardController;
     }
 
-    void getGamePlayView() {
+    void show() {
         final int SCENE_WIDTH = 1400;
         final int SCENE_HEIGHT = 1300;
 

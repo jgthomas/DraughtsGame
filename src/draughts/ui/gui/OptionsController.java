@@ -49,7 +49,7 @@ class OptionsController implements EventHandler<ActionEvent> {
         boardController = new BoardController(game);
 
         GamePlayView gamePlayView = new GamePlayView(primaryStage, boardController);
-        gamePlayView.getGamePlayView();
+        gamePlayView.show();
     }
 
     OptionsView getOptionsView() {
