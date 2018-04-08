@@ -71,6 +71,22 @@ class DB {
         return gameNames;
     }
 
+    int totalMovesInGame(String gameName) {
+        int totalMoves = 0;
+        try (Connection conn = this.connect();
+             PreparedStatement ps = conn.prepareStatement(SQL.SELECT_MAX_MOVE)) {
+            ps.setString(1, gameName);
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    totalMoves = rs.getInt("totalMoves");
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return totalMoves;
+    }
+
     private void createNewTable() {
         try (Connection conn = this.connect();
              Statement stmt = conn.createStatement()) {

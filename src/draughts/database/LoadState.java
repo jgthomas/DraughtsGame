@@ -24,6 +24,10 @@ public class LoadState {
         return convertToBoard(data);
     }
 
+    public int totalMoves(String gameName) {
+        return db.totalMovesInGame(gameName);
+    }
+
     private Map<Integer, PieceType> convertToBoard(Map<Integer, Integer> data) {
         Map<Integer, PieceType> state = new HashMap<>();
         for (Integer squareKey : data.keySet()) {
