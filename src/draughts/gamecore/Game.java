@@ -17,14 +17,13 @@ public class Game {
     private final LegalMoves legalMoves;
     private final SaveState saveState;
 
+    private final ObjectProperty<PieceType> activePieceType;
+    private final BooleanProperty gameIsWon;
+
     private final int firstMoveNumber;
     private int currentMoveNumber;
     private PlayerConfig activePlayer;
-    private boolean gameWon;
     private Player aiPlayer;
-
-    private final ObjectProperty<PieceType> activePieceType;
-    private final BooleanProperty gameIsWon;
 
     public Game(Board board,
                 PlayerConfig playerOne,
@@ -46,7 +45,6 @@ public class Game {
         this.firstMoveNumber = firstMoveNumber;
         this.currentMoveNumber = firstMoveNumber;
         this.activePlayer = playerOne;
-        this.gameWon = false;
 
         saveState.cacheState(firstMoveNumber);
 
@@ -61,19 +59,19 @@ public class Game {
         }
 
         activePieceType = new SimpleObjectProperty<>(activePlayer.getPieceType());
-        gameIsWon = new SimpleBooleanProperty(gameWon);
+        gameIsWon = new SimpleBooleanProperty(false);
     }
 
     public void makeMove(Move move) {
         executeMove(move);
         cacheBoardState();
-        if (moveWinsGame()) { gameWon = true; setGameIsWon(); return; }
+        if (moveWinsGame()) { setGameIsWon(true); return; }
         switchActivePlayer();
 
         if (activePlayer.isAiPlayer()) {
             board.makeMove(aiPlayer.getMove());
             cacheBoardState();
-            if (moveWinsGame()) { gameWon = true; setGameIsWon(); return; }
+            if (moveWinsGame()) { setGameIsWon(true); return; }
             switchActivePlayer();
         }
     }
@@ -83,13 +81,13 @@ public class Game {
         currentMoveNumber = firstMoveNumber;
         saveState.clearCachedMoves();
         switchActivePlayer();
-        gameWon = false;
+        setGameIsWon(false);
         saveState.cacheState(currentMoveNumber);
         aiResume();
     }
 
     public void backOneMove() {
-        if (!gameWon && currentMoveNumber > firstMoveNumber) {
+        if (!getGameIsWon() && currentMoveNumber > firstMoveNumber) {
             board.setBoardState(saveState.getCachedState(currentMoveNumber - 1));
             currentMoveNumber -= 1;
             switchActivePlayer();
@@ -97,7 +95,7 @@ public class Game {
     }
 
     public void forwardOneMove() {
-        if (!gameWon && currentMoveNumber < saveState.numberOfCachedMoves() - 1) {
+        if (!getGameIsWon() && currentMoveNumber < saveState.numberOfCachedMoves() - 1) {
             board.setBoardState(saveState.getCachedState(currentMoveNumber + 1));
             currentMoveNumber += 1;
             switchActivePlayer();
@@ -105,7 +103,7 @@ public class Game {
     }
 
     public void aiResume() {
-        if (!gameWon && activePlayer.isAiPlayer()) {
+        if (!getGameIsWon() && activePlayer.isAiPlayer()) {
             board.makeMove(aiPlayer.getMove());
             cacheBoardState();
             switchActivePlayer();
@@ -125,19 +123,19 @@ public class Game {
     }
 
     public boolean won() {
-        return gameWon;
+        return getGameIsWon();
     }
 
     public BooleanProperty gameIsWonProperty() {
         return gameIsWon;
     }
 
-    public boolean getGameIsWon() {
+    private boolean getGameIsWon() {
         return gameIsWon.get();
     }
 
-    private void setGameIsWon() {
-        gameIsWon.set(true);
+    private void setGameIsWon(boolean won) {
+        gameIsWon.set(won);
     }
 
     public ObjectProperty<PieceType> activePieceTypeProperty() {
