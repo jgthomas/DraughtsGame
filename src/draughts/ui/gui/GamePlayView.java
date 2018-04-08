@@ -10,7 +10,6 @@ class GamePlayView {
     private final Stage primaryStage;
     private final BoardController boardController;
 
-
     GamePlayView(Stage primaryStage, BoardController boardController) {
         this.primaryStage = primaryStage;
         this.boardController = boardController;
