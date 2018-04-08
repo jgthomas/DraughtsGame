@@ -4,7 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 
 class GameBarController implements EventHandler<ActionEvent> {
-    private final GameBarView gameBarView = new GameBarView(this);
+    private final GameBarView gameBarView = GameBarView.newInstance(this);
     private final BoardController boardController;
 
     GameBarController(BoardController boardController) {
