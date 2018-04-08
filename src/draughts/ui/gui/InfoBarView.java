@@ -18,7 +18,7 @@ class InfoBarView extends VBox {
         this.setSpacing(20);
 
         Text turnInfo = new Text("To Play");
-        turnInfo.setFont(new Font(30));
+        turnInfo.setFont(new Font(35));
         this.getChildren().add(turnInfo);
 
         Circle turnImage = new Circle();
