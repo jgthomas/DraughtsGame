@@ -58,6 +58,10 @@ public class BoardController implements EventHandler<MouseEvent> {
         return boardView;
     }
 
+    Game getGame() {
+        return game;
+    }
+
     void backOneMove() {
         game.backOneMove();
         clearClickedSquareViews();
