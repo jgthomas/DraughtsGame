@@ -63,11 +63,11 @@ class OptionsView extends HBox {
             }
         });
 
-        HBox savedGameNameBox = new HBox(gameNamesDisplay);
-        savedGameNameBox.setPrefWidth(300);
-        savedGameNameBox.setAlignment(Pos.TOP_CENTER);
+        HBox gameNameBox = new HBox(gameNamesDisplay);
+        gameNameBox.setPrefWidth(300);
+        gameNameBox.setAlignment(Pos.TOP_CENTER);
 
-        this.getChildren().add(savedGameNameBox);
+        this.getChildren().add(gameNameBox);
         this.getChildren().add(buttonBox);
     }
 
