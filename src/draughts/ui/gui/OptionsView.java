@@ -9,6 +9,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +26,7 @@ class OptionsView extends HBox {
     OptionsView(OptionsController optionsController) {
         VBox buttonBox = new VBox();
         buttonBox.setAlignment(Pos.TOP_CENTER);
-        buttonBox.setPrefWidth(300);
+        buttonBox.setPrefWidth(600);
         buttonBox.setPadding(new Insets(10, 50, 50, 50));
         buttonBox.setSpacing(10);
 
@@ -36,6 +38,10 @@ class OptionsView extends HBox {
         for (Button button : buttonList) {
             button.setOnAction(optionsController);
             button.setPrefWidth(buttonBox.getPrefWidth());
+            button.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+            button.setMinSize(200, 33);
+            button.setFont(new Font(30));
+            button.setTextFill(Color.BLACK);
             buttonBox.getChildren().add(button);
         }
 
