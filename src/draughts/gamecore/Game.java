@@ -3,7 +3,9 @@ package draughts.gamecore;
 import draughts.ai.AiPlayer;
 import draughts.database.SaveState;
 
+import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
 
 import java.util.List;
@@ -22,6 +24,7 @@ public class Game {
     private Player aiPlayer;
 
     private final ObjectProperty<PieceType> activePieceType;
+    private final BooleanProperty gameIsWon;
 
     public Game(Board board,
                 PlayerConfig playerOne,
@@ -58,18 +61,19 @@ public class Game {
         }
 
         activePieceType = new SimpleObjectProperty<>(activePlayer.getPieceType());
+        gameIsWon = new SimpleBooleanProperty(gameWon);
     }
 
     public void makeMove(Move move) {
         executeMove(move);
         cacheBoardState();
-        if (moveWinsGame()) { gameWon = true; return; }
+        if (moveWinsGame()) { gameWon = true; setGameIsWon(); return; }
         switchActivePlayer();
 
         if (activePlayer.isAiPlayer()) {
             board.makeMove(aiPlayer.getMove());
             cacheBoardState();
-            if (moveWinsGame()) { gameWon = true; return; }
+            if (moveWinsGame()) { gameWon = true; setGameIsWon(); return; }
             switchActivePlayer();
         }
     }
@@ -122,6 +126,18 @@ public class Game {
 
     public boolean won() {
         return gameWon;
+    }
+
+    public BooleanProperty getGameIsWonProperty() {
+        return gameIsWon;
+    }
+
+    public boolean getGameIsWon() {
+        return gameIsWon.get();
+    }
+
+    private void setGameIsWon() {
+        gameIsWon.set(true);
     }
 
     public ObjectProperty<PieceType> activePieceTypeProperty() {
