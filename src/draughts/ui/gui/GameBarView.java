@@ -8,27 +8,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 class GameBarView extends HBox {
-    private static final Button quitButton = new Button("Quit");
-    private static final Button backButton = new Button("Back");
-    private static final Button forwardButton = new Button("Forward");
-    private static final Button resumeButton = new Button("Go");
-    private static final Button newGameButton = new Button("Restart");
-
-    private static final List<Button> buttonList = new ArrayList<>();
-
-    static {
-        buttonList.add(quitButton);
-        buttonList.add(backButton);
-        buttonList.add(forwardButton);
-        buttonList.add(resumeButton);
-        buttonList.add(newGameButton);
-    }
+    private final Button quitButton = new Button("Quit");
+    private final Button backButton = new Button("Back");
+    private final Button forwardButton = new Button("Forward");
+    private final Button resumeButton = new Button("Go");
+    private final Button newGameButton = new Button("Restart");
 
     GameBarView(GameBarController gameBarController) {
         this.setPrefHeight(100);
         this.setPrefWidth(1200);
         this.setAlignment(Pos.CENTER);
         this.setSpacing(50);
+
+        List<Button> buttonList = new ArrayList<>();
+        buttonList.add(quitButton);
+        buttonList.add(backButton);
+        buttonList.add(forwardButton);
+        buttonList.add(resumeButton);
+        buttonList.add(newGameButton);
 
         for (Button button : buttonList) {
             button.setOnAction(gameBarController);
