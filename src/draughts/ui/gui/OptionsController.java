@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 
 class OptionsController implements EventHandler<ActionEvent> {
     private final Stage primaryStage;
-    private final OptionsView view = new OptionsView(this);
+    private final OptionsView optionsView = OptionsView.newInstance(this);
     private final LoadState loadState = new LoadState();
 
     OptionsController(Stage primaryStage) {
@@ -25,10 +25,10 @@ class OptionsController implements EventHandler<ActionEvent> {
 
         final Object source = event.getSource();
 
-        if (source.equals(view.getHumanHumanButton())) {
+        if (source.equals(optionsView.getHumanHumanButton())) {
             playerOne = new PlayerConfig(PlayerType.HUMAN, PieceType.WHITE_PIECE);
             playerTwo = new PlayerConfig(PlayerType.HUMAN, PieceType.BLACK_PIECE);
-        } else if (source.equals(view.getHumanAiButton())) {
+        } else if (source.equals(optionsView.getHumanAiButton())) {
             playerOne = new PlayerConfig(PlayerType.HUMAN, PieceType.WHITE_PIECE);
             playerTwo = new PlayerConfig(PlayerType.COMPUTER, PieceType.BLACK_PIECE);
         } else {
@@ -36,7 +36,7 @@ class OptionsController implements EventHandler<ActionEvent> {
             playerTwo = new PlayerConfig(PlayerType.HUMAN, PieceType.BLACK_PIECE);
         }
 
-        String selectedGame = view.getSelectedGame();
+        String selectedGame = optionsView.getSelectedGame();
 
         if (selectedGame.equals("New Game")) {
             board = new Board();
@@ -53,6 +53,6 @@ class OptionsController implements EventHandler<ActionEvent> {
     }
 
     OptionsView getOptionsView() {
-        return view;
+        return optionsView;
     }
 }

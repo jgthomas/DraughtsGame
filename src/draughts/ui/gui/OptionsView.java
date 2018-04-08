@@ -24,7 +24,66 @@ class OptionsView extends HBox {
     private final ObservableList<String> gameNames = FXCollections.observableArrayList();
     private final ListView<String> gameNamesDisplay = new ListView<>(gameNames);
 
-    OptionsView(OptionsController optionsController) {
+    private final OptionsController optionsController;
+    private final LoadState loadState;
+
+    private OptionsView(OptionsController optionsController) {
+        this.optionsController = optionsController;
+        this.loadState = new LoadState();
+    }
+
+    static OptionsView newInstance(OptionsController optionsController) {
+        OptionsView optionsView = new OptionsView(optionsController);
+        optionsView.getChildren().add(optionsView.buildGameNameBox());
+        optionsView.getChildren().add(optionsView.buildButtonBox());
+        return optionsView;
+    }
+
+    Button getHumanHumanButton() {
+        return humanHumanButton;
+    }
+
+    Button getHumanAiButton() {
+        return humanAiButton;
+    }
+
+    Button getAiHumanButton() {
+        return aiHumanButton;
+    }
+
+    String getSelectedGame() {
+        return gameNamesDisplay.getSelectionModel().getSelectedItem();
+    }
+
+    private void loadSavedGameNames() {
+        gameNames.add("New Game");
+        gameNames.addAll(loadState.getAllGameNames());
+    }
+
+    private void configureGameNameDisplay() {
+        gameNamesDisplay.getSelectionModel().select(0);
+        gameNamesDisplay.setCellFactory( (cell) -> new ListCell<String>() {
+            @Override
+            protected void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+                if (item != null) {
+                    setText(item);
+                    setFont(Font.font(25));
+                }
+            }
+        });
+    }
+
+    private HBox buildGameNameBox() {
+        loadSavedGameNames();
+        configureGameNameDisplay();
+        HBox gameNameBox = new HBox(gameNamesDisplay);
+        gameNameBox.setPrefWidth(300);
+        gameNameBox.setAlignment(Pos.TOP_CENTER);
+        return gameNameBox;
+    }
+
+    private VBox buildButtonBox() {
         VBox buttonBox = new VBox();
         buttonBox.setAlignment(Pos.TOP_CENTER);
         buttonBox.setPrefWidth(600);
@@ -45,45 +104,6 @@ class OptionsView extends HBox {
             button.setTextFill(Color.BLACK);
             buttonBox.getChildren().add(button);
         }
-
-        LoadState loadState = new LoadState();
-
-        gameNames.add("New Game");
-        gameNames.addAll(loadState.getAllGameNames());
-
-        gameNamesDisplay.getSelectionModel().select(0);
-        gameNamesDisplay.setCellFactory( (cell) -> new ListCell<String>() {
-            @Override
-            protected void updateItem(String item, boolean empty) {
-                super.updateItem(item, empty);
-                if (item != null) {
-                    setText(item);
-                    setFont(Font.font(25));
-                }
-            }
-        });
-
-        HBox gameNameBox = new HBox(gameNamesDisplay);
-        gameNameBox.setPrefWidth(300);
-        gameNameBox.setAlignment(Pos.TOP_CENTER);
-
-        this.getChildren().add(gameNameBox);
-        this.getChildren().add(buttonBox);
-    }
-
-    Button getHumanHumanButton() {
-        return humanHumanButton;
-    }
-
-    Button getHumanAiButton() {
-        return humanAiButton;
-    }
-
-    Button getAiHumanButton() {
-        return aiHumanButton;
-    }
-
-    String getSelectedGame() {
-        return gameNamesDisplay.getSelectionModel().getSelectedItem();
+        return buttonBox;
     }
 }
