@@ -128,7 +128,7 @@ public class Game {
         return gameWon;
     }
 
-    public BooleanProperty getGameIsWonProperty() {
+    public BooleanProperty gameIsWonProperty() {
         return gameIsWon;
     }
 
