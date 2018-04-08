@@ -19,6 +19,10 @@ class InfoBarView extends VBox {
 
         Text turnInfo = new Text("To Play");
         turnInfo.setFont(new Font(35));
+        turnInfo.fillProperty().bind(Bindings
+                .when(game.gameIsWonProperty())
+                .then(Color.TRANSPARENT)
+                .otherwise(Color.BLACK));
         this.getChildren().add(turnInfo);
 
         Circle turnImage = new Circle();
@@ -37,5 +41,13 @@ class InfoBarView extends VBox {
                 }, game.activePieceTypeProperty()
         ));
         this.getChildren().add(turnImage);
+
+        Text winInfo = new Text("WINS!");
+        winInfo.setFont(new Font(45));
+        winInfo.fillProperty().bind(Bindings
+                .when(game.gameIsWonProperty())
+                .then(Color.GREEN)
+                .otherwise(Color.TRANSPARENT));
+        this.getChildren().add(winInfo);
     }
 }
