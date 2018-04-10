@@ -8,14 +8,9 @@ import java.util.HashMap;
 
 
 public class Board implements Iterable<Square> {
-    private static final int MAX = 8;
-    private static final List <Square> squares = new ArrayList<>();
-
-    static {
-        new Squares();
-    }
-
+    private final List <Square> squares = new Squares().squares;
     private final Map<Square, Piece> boardMap = new HashMap<>();
+    private final int MAX = 8;
 
     public Board() {
         for (Square square : squares) {
@@ -100,9 +95,10 @@ public class Board implements Iterable<Square> {
         return squares.iterator();
     }
 
-    private static final class Squares {
-        private static final int LAST_WHITE_ROW = 2;
-        private static final int FIRST_BLACK_ROW = 5;
+    private final class Squares {
+        private final List <Square> squares = new ArrayList<>();
+        private final int LAST_WHITE_ROW = 2;
+        private final int FIRST_BLACK_ROW = 5;
 
         private Squares() {
             for (int row = 0; row < MAX; row++) {
@@ -124,23 +120,23 @@ public class Board implements Iterable<Square> {
             }
         }
 
-        private static boolean bothEven(int row, int col) {
+        private boolean bothEven(int row, int col) {
             return row %2 == 0 && col %2 == 0;
         }
 
-        private static boolean bothOdd(int row, int col) {
+        private boolean bothOdd(int row, int col) {
             return row %2 != 0 && col %2 != 0;
         }
 
-        private static boolean isWhiteRow(int row) {
+        private boolean isWhiteRow(int row) {
             return row <= LAST_WHITE_ROW;
         }
 
-        private static boolean isBlackRow(int row) {
+        private boolean isBlackRow(int row) {
             return row >= FIRST_BLACK_ROW;
         }
 
-        private static boolean isWhiteSquare(int row, int col) {
+        private boolean isWhiteSquare(int row, int col) {
             if (row % 2 == 0) {
                 return col % 2 == 0;
             }
