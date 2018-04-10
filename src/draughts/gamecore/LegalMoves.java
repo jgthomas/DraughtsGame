@@ -56,18 +56,6 @@ public class LegalMoves {
         return legalEnds;
     }
 
-    public boolean inPrincipleLegalMove(Move move) {
-        Square start = move.startOfMove();
-        Square end = move.endOfMove();
-        return singleMove.isLegalMove(start, end);
-    }
-
-    public boolean inPrincipleLegalTake(Move move) {
-        Square start = move.startOfMove();
-        Square end = move.endOfMove();
-        return singleMove.isLegalTake(start, end);
-    }
-
     private List<Move> legalMoves(Square start) {
         List<Move> legalPieceMoves = movesFrom(start);
         for (Move move : legalPieceMoves) {
