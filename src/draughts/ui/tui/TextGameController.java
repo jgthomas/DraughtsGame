@@ -16,8 +16,6 @@ class TextGameController {
     private final UserInput userInput;
     private List<Move> allMovesWhite;
     private List<Move> allMovesBlack;
-    private int totalWhitePieces;
-    private int totalBlackPieces;
     private boolean whiteWin;
     private boolean blackWin;
     private int moveNumber = 0;
@@ -38,8 +36,6 @@ class TextGameController {
         this.userInput = userInput;
         allMovesWhite = legalMoves.legal(PieceType.WHITE_PIECE);
         allMovesBlack = legalMoves.legal(PieceType.BLACK_PIECE);
-        totalWhitePieces = board.totalPieces(PieceType.WHITE_PIECE);
-        totalBlackPieces = board.totalPieces(PieceType.BLACK_PIECE);
     }
 
     void playGame() {
@@ -50,8 +46,7 @@ class TextGameController {
                 TextGameView.print(board, "White's Move");
                 board.makeMove(player1.getMove());
                 allMovesBlack = legalMoves.legal(PieceType.BLACK_PIECE);
-                totalBlackPieces = board.totalPieces(PieceType.BLACK_PIECE);
-                if (totalBlackPieces == 0 || allMovesBlack.size() == 0) {
+                if (allMovesBlack.size() == 0) {
                     whiteWin = true;
                 }
                 moveNumber += 1;
@@ -64,8 +59,7 @@ class TextGameController {
                 TextGameView.print(board,"Black's Move");
                 board.makeMove(player2.getMove());
                 allMovesWhite = legalMoves.legal(PieceType.WHITE_PIECE);
-                totalWhitePieces = board.totalPieces(PieceType.WHITE_PIECE);
-                if (totalWhitePieces == 0 || allMovesWhite.size() == 0) {
+                if (allMovesWhite.size() == 0) {
                     blackWin = true;
                 }
                 moveNumber += 1;

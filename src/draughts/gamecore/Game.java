@@ -159,7 +159,7 @@ public class Game {
         PieceType opponentPieceType = (activePlayer == playerOne)
                 ? playerTwo.getPieceType()
                 : playerOne.getPieceType();
-        return board.totalPieces(opponentPieceType) == 0 || legalMoves.legal(opponentPieceType).size() == 0;
+        return legalMoves.legal(opponentPieceType).size() == 0;
     }
 
     private void switchActivePlayer() {
