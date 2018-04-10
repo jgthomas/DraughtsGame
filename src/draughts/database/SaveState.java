@@ -22,8 +22,12 @@ public class SaveState {
         cachedState.put(moveNumber, captureState());
     }
 
-    public Map<Integer, Integer> getCachedState(int moveNumber) {
-        return cachedState.get(moveNumber);
+    public BoardSnapShot getCachedState(int moveNumber) {
+        return new BoardSnapShot(cachedState.get(moveNumber));
+    }
+
+    public BoardSnapShot getCurrentState() {
+        return new BoardSnapShot(board);
     }
 
     public int numberOfCachedMoves() {

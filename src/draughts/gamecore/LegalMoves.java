@@ -1,5 +1,6 @@
 package draughts.gamecore;
 
+import draughts.database.SaveState;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -104,7 +105,7 @@ public class LegalMoves {
     }
 
     private void addFurtherTakes(Board board, Move move) {
-        Board testBoard = new Board(new SnapShot(board));
+        Board testBoard = new Board(new SaveState(board).getCurrentState());
         testBoard.makeMove(move);
         List<Move> furtherMoves = new LegalMoves(testBoard).movesFrom(move.endOfMove());
 

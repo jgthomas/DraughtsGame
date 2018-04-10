@@ -7,7 +7,6 @@ import draughts.gamecore.*;
 import draughts.ui.UserInput;
 
 import java.util.List;
-import java.util.Map;
 
 
 public class TextDraughts {
@@ -58,7 +57,7 @@ public class TextDraughts {
             if (gameNumber < gameNames.size()) {
                 String gameName = gameNames.get(gameNumber);
                 int moveNumber = 0;
-                Map<Integer, PieceType> gameState = loadState.loadState(gameName, moveNumber);
+                BoardStateLoader gameState = loadState.loadState(gameName, moveNumber);
                 boolean nextMove;
 
                 do {

@@ -1,4 +1,4 @@
-package draughts.gamecore;
+/*package draughts.gamecore;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -39,4 +39,4 @@ final class SnapShot implements Iterable<SnapShot.SquareState> {
             return pieceType;
         }
     }
-}
+}*/

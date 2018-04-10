@@ -18,15 +18,15 @@ public class Board implements Iterable<Square> {
         }
     }
 
-    public Board(Map<Integer, PieceType> gameState) {
+    public Board(BoardStateLoader boardStateLoader) {
         for (Square square : squares) {
-            boardMap.put(square, new Piece(gameState.get(square.hashCode())));
+            boardMap.put(square, new Piece(boardStateLoader.getPieceType(square)));
         }
     }
 
-    public Board(SnapShot snapShot) {
-        for (SnapShot.SquareState squareState : snapShot){
-            boardMap.put(squareState.getSquare(), new Piece(squareState.getPieceType()));
+    public final void setBoardState(BoardStateLoader boardStateLoader) {
+        for (Square square : squares) {
+            setPieceType(square, boardStateLoader.getPieceType(square));
         }
     }
 
@@ -57,12 +57,6 @@ public class Board implements Iterable<Square> {
 
         if (move.makesKing()) {
             setPieceType(move.endOfMove(), move.getPieceType().getKing());
-        }
-    }
-
-    void setBoardState(Map<Integer, Integer> boardState) {
-        for (Square square : squares) {
-            setPieceType(square, PieceType.valueOf(boardState.get(square.hashCode())));
         }
     }
 
