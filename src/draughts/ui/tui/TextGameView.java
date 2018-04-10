@@ -16,7 +16,7 @@ final class TextGameView {
     static void print(Board board, String title) {
         System.out.println("\n" + title);
         char rowName = 'a';
-        printColumnNumbers(board.max());
+        printColumnNumbers(board.sideLength());
         for (Square square : board) {
             if (newRow(board, square)) {
                 if (notFirstRow(square)) { System.out.println(); }
@@ -109,7 +109,7 @@ final class TextGameView {
     }
 
     private static boolean newRow(Board board, Square square) {
-        return square.col() % board.max() == 0;
+        return square.col() % board.sideLength() == 0;
     }
 
     private static boolean notFirstRow(Square square) {

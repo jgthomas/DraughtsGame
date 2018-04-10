@@ -66,7 +66,7 @@ public class Board implements Iterable<Square> {
         }
     }
 
-    public int max() {
+    public int sideLength() {
         return SIDE_LENGTH;
     }
 

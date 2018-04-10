@@ -70,8 +70,8 @@ public class TextPlayerController implements Player {
     private boolean isInvalid(Square square) {
         int rowNum = square.row();
         int colNum  = square.col();
-        return (rowNum < 0 || rowNum >= board.max())
-                || (colNum < 0 || colNum >= board.max());
+        return (rowNum < 0 || rowNum >= board.sideLength())
+                || (colNum < 0 || colNum >= board.sideLength());
     }
 
     private int rowCharToCoordinate(char c) {
