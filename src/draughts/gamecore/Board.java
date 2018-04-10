@@ -70,26 +70,6 @@ public class Board implements Iterable<Square> {
         return SIDE_LENGTH;
     }
 
-    public int totalPieces(PieceType pieceType) {
-        int pieceCount = 0;
-        if (pieceType.isWhite()) {
-            pieceCount = countOf(PieceType.WHITE_PIECE) + countOf(PieceType.WHITE_KING);
-        } else if (pieceType.isBlack()) {
-            pieceCount = countOf(PieceType.BLACK_PIECE) + countOf(PieceType.BLACK_KING);
-        }
-        return pieceCount;
-    }
-
-    private int countOf(PieceType pieceType) {
-        int pieceCount = 0;
-        for (Square square : squares) {
-            if (getPieceType(square) == pieceType) {
-                pieceCount += 1;
-            }
-        }
-        return pieceCount;
-    }
-
     @Override
     public Iterator<Square> iterator() {
         return squares.iterator();
