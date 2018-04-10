@@ -10,7 +10,7 @@ import java.util.HashMap;
 public class Board implements Iterable<Square> {
     private final List <Square> squares = new Squares().squares;
     private final Map<Square, Piece> boardMap = new HashMap<>();
-    private final int MAX = 8;
+    private final int SIDE_LENGTH = 8;
 
     public Board() {
         for (Square square : squares) {
@@ -67,7 +67,7 @@ public class Board implements Iterable<Square> {
     }
 
     public int max() {
-        return MAX;
+        return SIDE_LENGTH;
     }
 
     public int totalPieces(PieceType pieceType) {
@@ -101,8 +101,8 @@ public class Board implements Iterable<Square> {
         private final int FIRST_BLACK_ROW = 5;
 
         private Squares() {
-            for (int row = 0; row < MAX; row++) {
-                for (int col = 0; col < MAX; col++) {
+            for (int row = 0; row < SIDE_LENGTH; row++) {
+                for (int col = 0; col < SIDE_LENGTH; col++) {
                     PieceType pieceType = PieceType.NONE;
                     SquareColor squareColor = SquareColor.BLACK;
                     if (isWhiteSquare(row, col)) {
