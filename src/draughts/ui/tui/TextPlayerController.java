@@ -8,8 +8,6 @@ import java.util.Scanner;
 public class TextPlayerController implements Player {
     private static final char BASE_CHAR = 'a';
     private static final String ILLEGAL_MOVE_MSG = "Illegal move!";
-    private static final String MUST_TAKE_MSG = "You must take if you can";
-    private static final String MUST_DO_MOST_TAKES_MSG = "You must do as many takes as possible";
     private static final String START_MOVE_MSG = "Pick piece: ";
     private static final String END_MOVE_MSG = "Pick square: ";
     private final PieceType pieceType;
