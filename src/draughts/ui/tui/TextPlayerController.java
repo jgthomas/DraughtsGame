@@ -32,11 +32,6 @@ public class TextPlayerController implements Player {
                     return move;
                 }
             }
-            if (legalMoves.inPrincipleLegalMove(candidate)) {
-                System.out.println(MUST_TAKE_MSG);
-            } else if (legalMoves.inPrincipleLegalTake(candidate)) {
-                System.out.println(MUST_DO_MOST_TAKES_MSG);
-            }
             System.out.println(ILLEGAL_MOVE_MSG);
         }
     }
