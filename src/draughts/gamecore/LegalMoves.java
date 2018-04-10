@@ -38,7 +38,7 @@ public class LegalMoves {
                 .collect(Collectors.toList());
     }
 
-    public List<Square> legalStartingSquares(PieceType pieceType) {
+    List<Square> legalStartingSquares(PieceType pieceType) {
         List<Square> legalStarts = new ArrayList<>();
         for (Move move : legal(pieceType)) {
             legalStarts.add(move.startOfMove());
@@ -46,7 +46,7 @@ public class LegalMoves {
         return legalStarts;
     }
 
-    public List<Square> legalEndingSquares(Square start, PieceType pieceType) {
+    List<Square> legalEndingSquares(Square start, PieceType pieceType) {
         List<Square> legalEnds = new ArrayList<>();
         for (Move move : legal(pieceType)) {
             if (move.startOfMove().equals(start)) {
