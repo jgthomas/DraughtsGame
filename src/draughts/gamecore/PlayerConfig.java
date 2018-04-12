@@ -9,7 +9,7 @@ public final class PlayerConfig {
         this.pieceType = pieceType;
     }
 
-    boolean isAiPlayer() {
+    public boolean isAiPlayer() {
         return playerType == PlayerType.COMPUTER;
     }
 
