@@ -21,11 +21,11 @@ public final class UserInput {
         return getYesOrNo("See next move [y/n]: ");
     }
 
-    public boolean saveGame() {
+    boolean saveGame() {
         return getYesOrNo("Save game [y/n]: ");
     }
 
-    public String setGameName() {
+    String setGameName() {
         return getString("Give game a name: ");
     }
 
