@@ -8,7 +8,7 @@ final class UserInput {
     private final String PLAYER_PICK_MESSAGE = String.join(System.getProperty("line.separator"),
             "(1) Human",
             "(2) Computer",
-            " > "
+            " >>>"
     );
 
     private final Scanner scanner = new Scanner(System.in);
