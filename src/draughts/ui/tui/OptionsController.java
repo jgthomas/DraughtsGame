@@ -37,7 +37,6 @@ class OptionsController {
     private Board makeBoard(UserInput userInput) {
         final String LOAD_GAME = "Load saved game";
         final String PICK_GAME = "Pick game number";
-
         Board board;
 
         if (userInput.getYesOrNo(LOAD_GAME)) {
