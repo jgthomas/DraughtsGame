@@ -6,8 +6,6 @@ import draughts.gamecore.*;
 import java.util.List;
 
 class OptionsController {
-    private final String FIRST_PLAYER_MESSAGE = "Pick first player";
-    private final String SECOND_PLAYER_MESSAGE = "Pick second player";
     private final UserInput userInput;
 
     OptionsController(UserInput userInput) {
@@ -15,6 +13,9 @@ class OptionsController {
     }
 
     void startGameController() {
+        final String FIRST_PLAYER_MESSAGE = "Pick first player";
+        final String SECOND_PLAYER_MESSAGE = "Pick second player";
+
         Board board = new Board();
 
         PlayerConfig playerOne = makePlayer(userInput,
@@ -33,9 +34,8 @@ class OptionsController {
     private PlayerConfig makePlayer(UserInput userInput,
                                     String msg,
                                     PieceType pieceType) {
-        PlayerConfig playerConfig;
-        int playerCode;
 
+        int playerCode;
         do {
             playerCode = userInput.pickPlayerType(msg);
 
