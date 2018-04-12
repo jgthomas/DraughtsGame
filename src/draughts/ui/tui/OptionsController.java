@@ -16,16 +16,12 @@ class OptionsController {
     }
 
     void startGameController() {
-        final String FIRST_PLAYER_MESSAGE = "Pick first player";
-        final String SECOND_PLAYER_MESSAGE = "Pick second player";
+        final String FIRST_PLAYER = "Pick first player";
+        final String SECOND_PLAYER = "Pick second player";
 
-        PlayerConfig playerOne = makePlayer(userInput,
-                FIRST_PLAYER_MESSAGE,
-                PieceType.WHITE_PIECE);
+        PlayerConfig playerOne = makePlayer(userInput, FIRST_PLAYER, PieceType.WHITE_PIECE);
 
-        PlayerConfig playerTwo = makePlayer(userInput,
-                SECOND_PLAYER_MESSAGE,
-                PieceType.BLACK_PIECE);
+        PlayerConfig playerTwo = makePlayer(userInput, SECOND_PLAYER, PieceType.BLACK_PIECE);
 
         Board board= makeBoard(userInput);
 
