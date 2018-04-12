@@ -69,17 +69,16 @@ class OptionsController {
         return board;
     }
 
-    private PlayerConfig makePlayer(UserInput userInput,
-                                    String msg,
-                                    PieceType pieceType) {
-
+    private PlayerConfig makePlayer(
+            UserInput userInput,
+            String msg,
+            PieceType pieceType)
+    {
         int playerCode;
         do {
             playerCode = userInput.pickPlayerType(msg);
-
         } while (playerCode != PlayerType.HUMAN.pick()
                 && playerCode != PlayerType.COMPUTER.pick());
-
         return new PlayerConfig(PlayerType.valueOf(playerCode), pieceType);
     }
 
