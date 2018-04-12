@@ -9,10 +9,12 @@ import java.util.List;
 class OptionsController {
     private final UserInput userInput;
     private final LoadState loadState;
+    private int moveNumber;
 
     OptionsController(UserInput userInput) {
         this.userInput = userInput;
         loadState = new LoadState();
+        moveNumber = 0;
     }
 
     void startGame() {
@@ -30,7 +32,7 @@ class OptionsController {
             playerTwo = makePlayer(userInput, SECOND_PLAYER, PieceType.BLACK_PIECE);
         }
         Board board= makeBoard(userInput);
-        Game game = new Game(board, playerOne, playerTwo);
+        Game game = new Game(board, playerOne, playerTwo, moveNumber);
         new GameController(game, userInput).run();
     }
 
@@ -59,7 +61,6 @@ class OptionsController {
     private BoardStateLoader pickStartingMove(String gameName) {
         final String NEXT_MOVE = "Press enter to see next move";
         boolean nextMove;
-        int moveNumber = 0;
         BoardStateLoader boardStateLoader = loadState.loadState(gameName, moveNumber);
         do {
             new GameView(new Board(boardStateLoader)).print(boardTitle(moveNumber));
