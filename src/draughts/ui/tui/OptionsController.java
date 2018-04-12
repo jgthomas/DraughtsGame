@@ -15,7 +15,7 @@ class OptionsController {
         loadState = new LoadState();
     }
 
-    void startGameController() {
+    void startGame() {
         final String FIRST_PLAYER = "Pick first player";
         final String SECOND_PLAYER = "Pick second player";
         final String HUMAN_PLAYER_SET = "You are player two";
