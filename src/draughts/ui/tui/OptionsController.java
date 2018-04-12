@@ -46,7 +46,7 @@ class OptionsController {
             int gameNumber = userInput.getNumber(PICK_GAME);
 
             if (gameNumber < gameNames.size()) {
-                board = pickStartingMove(gameNames.get(gameNumber));
+                board = new Board(pickStartingMove(gameNames.get(gameNumber)));
             } else {
                 board = new Board();
             }
@@ -56,7 +56,7 @@ class OptionsController {
         return board;
     }
 
-    private Board pickStartingMove(String gameName) {
+    private BoardStateLoader pickStartingMove(String gameName) {
         final String NEXT_MOVE = "Press enter to see next move";
         boolean nextMove;
         int moveNumber = 0;
@@ -69,7 +69,7 @@ class OptionsController {
                 boardStateLoader = loadState.loadState(gameName, moveNumber);
             }
         } while (nextMove);
-        return new Board(boardStateLoader);
+        return boardStateLoader;
     }
 
     private PlayerConfig makePlayer(
