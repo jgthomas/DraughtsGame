@@ -35,16 +35,16 @@ class OptionsController {
     }
 
     private Board makeBoard(UserInput userInput) {
-        final String LOAD_SAVED_GAME_PROMPT = "Load saved game";
-        final String PICK_GAME_NUMBER_PROMPT = "Pick game number";
+        final String LOAD_GAME = "Load saved game";
+        final String PICK_GAME = "Pick game number";
 
         Board board;
 
-        if (userInput.getYesOrNo(LOAD_SAVED_GAME_PROMPT)) {
+        if (userInput.getYesOrNo(LOAD_GAME)) {
             List<String> gameNames = loadState.getAllGameNames();
             printGameNames(gameNames);
 
-            int gameNumber = userInput.getNumber(PICK_GAME_NUMBER_PROMPT);
+            int gameNumber = userInput.getNumber(PICK_GAME);
 
             if (gameNumber < gameNames.size()) {
                 board = moveNumberFromGame(gameNames.get(gameNumber));
@@ -58,13 +58,13 @@ class OptionsController {
     }
 
     private Board moveNumberFromGame(String gameName) {
-        final String NEXT_MOVE_PROMPT = "Press enter to see next move";
+        final String NEXT_MOVE = "Press enter to see next move";
         boolean nextMove;
         int moveNumber = 0;
         BoardStateLoader boardStateLoader = loadState.loadState(gameName, moveNumber);
         do {
             new GameView(new Board(boardStateLoader)).print(boardTitle(moveNumber));
-            nextMove = userInput.advanceForward(NEXT_MOVE_PROMPT);
+            nextMove = userInput.advanceForward(NEXT_MOVE);
             if (nextMove) {
                 moveNumber += 1;
                 boardStateLoader = loadState.loadState(gameName, moveNumber);
