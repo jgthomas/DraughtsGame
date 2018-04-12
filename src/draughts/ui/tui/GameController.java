@@ -25,6 +25,7 @@ class GameController {
         while (!game.won()) {
             gameView.print(turnTitle());
             game.makeMove(getInput());
+            gameView.clearBoard();
         }
 
         gameView.print(FINAL_BOARD_MESSAGE);
