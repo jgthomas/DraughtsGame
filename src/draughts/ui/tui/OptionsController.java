@@ -18,15 +18,19 @@ class OptionsController {
     void startGameController() {
         final String FIRST_PLAYER = "Pick first player";
         final String SECOND_PLAYER = "Pick second player";
+        final String HUMAN_PLAYER_SET = "You are player two";
+        PlayerConfig playerOne;
+        PlayerConfig playerTwo;
 
-        PlayerConfig playerOne = makePlayer(userInput, FIRST_PLAYER, PieceType.WHITE_PIECE);
-
-        PlayerConfig playerTwo = makePlayer(userInput, SECOND_PLAYER, PieceType.BLACK_PIECE);
-
+        playerOne = makePlayer(userInput, FIRST_PLAYER, PieceType.WHITE_PIECE);
+        if (playerOne.isAiPlayer()) {
+            playerTwo = new PlayerConfig(PlayerType.HUMAN, PieceType.BLACK_PIECE);
+            System.out.println(HUMAN_PLAYER_SET);
+        } else {
+            playerTwo = makePlayer(userInput, SECOND_PLAYER, PieceType.BLACK_PIECE);
+        }
         Board board= makeBoard(userInput);
-
         Game game = new Game(board, playerOne, playerTwo);
-
         new GameController(game, userInput).run();
     }
 
