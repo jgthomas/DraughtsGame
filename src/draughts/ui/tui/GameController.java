@@ -17,9 +17,11 @@ class GameController {
     }
 
     void run() {
-        final String WHITE_WIN_MESSAGE = "White wins!";
-        final String BLACK_WIN_MESSAGE = "Black wins!";
-        final String FINAL_BOARD_MESSAGE = "Final Board";
+        final String WHITE_WIN = "White wins!";
+        final String BLACK_WIN = "Black wins!";
+        final String FINAL_BOARD = "Final Board";
+        final String SAVE_PROMPT = "Save game?";
+        final String GAME_NAME_PROMPT = "Name saved game";
 
         gameView.clearBoard();
 
@@ -29,16 +31,16 @@ class GameController {
             gameView.clearBoard();
         }
 
-        gameView.print(FINAL_BOARD_MESSAGE);
+        gameView.print(FINAL_BOARD);
 
         if (game.getActivePieceType() == PieceType.WHITE_PIECE) {
-            System.out.println(WHITE_WIN_MESSAGE);
+            System.out.println(WHITE_WIN);
         } else {
-            System.out.println(BLACK_WIN_MESSAGE);
+            System.out.println(BLACK_WIN);
         }
 
-        if (userInput.getYesOrNo("Save game")) {
-            String gameName = userInput.getString("Game name");
+        if (userInput.getYesOrNo(SAVE_PROMPT)) {
+            String gameName = userInput.getString(GAME_NAME_PROMPT);
             game.saveGame(gameName);
         }
     }
