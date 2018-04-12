@@ -5,8 +5,6 @@ import draughts.gamecore.Move;
 import draughts.gamecore.PieceType;
 import draughts.gamecore.Square;
 
-import java.util.Scanner;
-
 class GameController {
     private final Game game;
     private final GameView gameView;
