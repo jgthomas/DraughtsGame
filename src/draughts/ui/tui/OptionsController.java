@@ -58,12 +58,13 @@ class OptionsController {
     }
 
     private Board moveNumberFromGame(String gameName) {
+        final String NEXT_MOVE_PROMPT = "Press enter to see next move";
         boolean nextMove;
         int moveNumber = 0;
         BoardStateLoader boardStateLoader = loadState.loadState(gameName, moveNumber);
         do {
             new GameView(new Board(boardStateLoader)).print("Move " + moveNumber);
-            nextMove = userInput.advanceForward("Press enter to see next move");
+            nextMove = userInput.advanceForward(NEXT_MOVE_PROMPT);
             if (nextMove) {
                 moveNumber += 1;
                 boardStateLoader = loadState.loadState(gameName, moveNumber);
