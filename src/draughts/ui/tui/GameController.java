@@ -1,6 +1,5 @@
 package draughts.ui.tui;
 
-
 import draughts.gamecore.Game;
 import draughts.gamecore.Move;
 import draughts.gamecore.PieceType;
@@ -11,10 +10,12 @@ import java.util.Scanner;
 class GameController {
     private final Game game;
     private final GameView gameView;
+    private final UserInput userInput;
 
-    GameController(Game game) {
+    GameController(Game game, UserInput userInput) {
         this.game = game;
         gameView = new GameView(game.getBoard());
+        this.userInput = userInput;
     }
 
     void run() {
@@ -34,6 +35,11 @@ class GameController {
             System.out.println(WHITE_WIN_MESSAGE);
         } else {
             System.out.println(BLACK_WIN_MESSAGE);
+        }
+
+        if (userInput.saveGame()) {
+            String gameName = userInput.setGameName();
+            game.saveGame(gameName);
         }
     }
 

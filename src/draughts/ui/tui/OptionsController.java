@@ -29,7 +29,7 @@ class OptionsController {
 
         Game game = new Game(board, playerOne, playerTwo);
 
-        new GameController(game).run();
+        new GameController(game, userInput).run();
     }
 
     private Board makeBoard(UserInput userInput) {
