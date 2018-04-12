@@ -47,9 +47,7 @@ class OptionsController {
             int gameNumber = userInput.getNumber(PICK_GAME_NUMBER_PROMPT);
 
             if (gameNumber < gameNames.size()) {
-                int moveNumber = 0;
-                String gameName = gameNames.get(gameNumber);
-                board = moveNumberFromGame(gameName, moveNumber);
+                board = moveNumberFromGame(gameNames.get(gameNumber));
             } else {
                 board = new Board();
             }
@@ -59,8 +57,9 @@ class OptionsController {
         return board;
     }
 
-    private Board moveNumberFromGame(String gameName, int moveNumber) {
+    private Board moveNumberFromGame(String gameName) {
         boolean nextMove;
+        int moveNumber = 0;
         BoardStateLoader boardStateLoader = loadState.loadState(gameName, moveNumber);
         do {
             new GameView(new Board(boardStateLoader)).print("Move " + moveNumber);
