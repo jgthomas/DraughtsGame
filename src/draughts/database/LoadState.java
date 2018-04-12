@@ -15,6 +15,10 @@ public class LoadState {
         return gameNames;
     }
 
+    public BoardSnapShot loadState(String name) {
+        return new BoardSnapShot(db.selectGame(name, 0));
+    }
+
     public BoardSnapShot loadState(String name, int moveNumber) {
         return new BoardSnapShot(db.selectGame(name, moveNumber));
     }
