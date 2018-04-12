@@ -8,9 +8,11 @@ import java.util.List;
 
 class OptionsController {
     private final UserInput userInput;
+    private final LoadState loadState;
 
     OptionsController(UserInput userInput) {
         this.userInput = userInput;
+        loadState = new LoadState();
     }
 
     void startGameController() {
@@ -33,33 +35,21 @@ class OptionsController {
     }
 
     private Board makeBoard(UserInput userInput) {
-        Board board;
-        LoadState loadState = new LoadState();
+        final String LOAD_SAVED_GAME_PROMPT = "Load saved game";
+        final String PICK_GAME_NUMBER_PROMPT = "Pick game number";
 
-        if (userInput.getYesOrNo("Load saved game")) {
+        Board board;
+
+        if (userInput.getYesOrNo(LOAD_SAVED_GAME_PROMPT)) {
             List<String> gameNames = loadState.getAllGameNames();
             printGameNames(gameNames);
 
-            int gameNumber = userInput.getNumber("Pick game number");
+            int gameNumber = userInput.getNumber(PICK_GAME_NUMBER_PROMPT);
 
             if (gameNumber < gameNames.size()) {
-                String gameName = gameNames.get(gameNumber);
                 int moveNumber = 0;
-                BoardStateLoader gameState = loadState.loadState(gameName, moveNumber);
-                boolean nextMove;
-
-                do {
-                    new GameView(new Board(gameState)).print("Move " + moveNumber);
-                    nextMove = userInput.advanceForward("Press enter to see next move");
-
-                    if (nextMove) {
-                        moveNumber += 1;
-                        gameState = loadState.loadState(gameName, moveNumber);
-                    }
-
-                } while (nextMove);
-
-                board = new Board(gameState);
+                String gameName = gameNames.get(gameNumber);
+                board = moveNumberFromGame(gameName, moveNumber);
             } else {
                 board = new Board();
             }
@@ -67,6 +57,20 @@ class OptionsController {
             board = new Board();
         }
         return board;
+    }
+
+    private Board moveNumberFromGame(String gameName, int moveNumber) {
+        boolean nextMove;
+        BoardStateLoader boardStateLoader = loadState.loadState(gameName, moveNumber);
+        do {
+            new GameView(new Board(boardStateLoader)).print("Move " + moveNumber);
+            nextMove = userInput.advanceForward("Press enter to see next move");
+            if (nextMove) {
+                moveNumber += 1;
+                boardStateLoader = loadState.loadState(gameName, moveNumber);
+            }
+        } while (nextMove);
+        return new Board(boardStateLoader);
     }
 
     private PlayerConfig makePlayer(
