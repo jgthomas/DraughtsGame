@@ -13,11 +13,11 @@ public final class UserInput {
 
     private final Scanner scanner = new Scanner(System.in);
 
-    public boolean playSavedGame() {
+    boolean playSavedGame() {
         return getYesOrNo("Load saved game [y/n]: ");
     }
 
-    public boolean seeNextMove() {
+    boolean seeNextMove() {
         return getYesOrNo("See next move [y/n]: ");
     }
 
@@ -33,7 +33,7 @@ public final class UserInput {
         return getString("Pick your player name: ");
     }
 
-    public int selectSavedGame() {
+    int selectSavedGame() {
         return getNumber("Pick game number to load: ");
     }
 
@@ -41,7 +41,7 @@ public final class UserInput {
         return getNumberInRange(0, lastMoveNumber,"Pick the move to load: ");
     }
 
-    public int pickPlayerType(String message) {
+    int pickPlayerType(String message) {
         String fullMessage = String.join(System.getProperty("line.separator"),
                 message,
                 PLAYER_PICK_MESSAGE
