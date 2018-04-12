@@ -8,18 +8,7 @@ import draughts.gamecore.Square;
 
 import java.util.Scanner;
 
-public class GameController {
-    private final char BASE_CHAR = 'a';
-    private final int NUM_OF_COORDINATES = 2;
-    private final String ILLEGAL_PIECE_MSG = "You cannot move that piece";
-    private final String ILLEGAL_END_MSG = "You cannot move to there";
-    private final String START_MOVE_MSG = "Piece to move: ";
-    private final String END_MOVE_MSG = "Move piece to: ";
-    private final String WHITE_MOVE_TITLE = "White's Move";
-    private final String BLACK_MOVE_TITLE = "Black's Move";
-    private final String WHITE_WIN_MESSAGE = "White wins!";
-    private final String BLACK_WIN_MESSAGE = "Black wins!";
-    private final String FINAL_BOARD_MESSAGE = "Final Board";
+class GameController {
     private final Game game;
     private final GameView gameView;
 
@@ -29,6 +18,10 @@ public class GameController {
     }
 
     void run() {
+        final String WHITE_WIN_MESSAGE = "White wins!";
+        final String BLACK_WIN_MESSAGE = "Black wins!";
+        final String FINAL_BOARD_MESSAGE = "Final Board";
+
         while (!game.won()) {
             gameView.print(turnTitle());
             game.makeMove(getInput());
@@ -44,6 +37,11 @@ public class GameController {
     }
 
     private Move getInput() {
+        final String START_MOVE_MSG = "Piece to move: ";
+        final String END_MOVE_MSG = "Move piece to: ";
+        final String ILLEGAL_PIECE_MSG = "You cannot move that piece";
+        final String ILLEGAL_END_MSG = "You cannot move to there";
+
         Square start = getPosition(START_MOVE_MSG);
 
         while (!game.legalStart(start)) {
@@ -62,6 +60,7 @@ public class GameController {
     }
 
     private Square getPosition(String message) {
+        final int NUM_OF_COORDINATES = 2;
         Scanner scanner = new Scanner(System.in);
         String coordinates;
         do  {
@@ -74,10 +73,14 @@ public class GameController {
     }
 
     private int rowCharToCoordinate(char c) {
+        final char BASE_CHAR = 'a';
         return Character.toLowerCase(c) - BASE_CHAR;
     }
 
     private String turnTitle() {
+        final String WHITE_MOVE_TITLE = "White's Move";
+        final String BLACK_MOVE_TITLE = "Black's Move";
+
         if (game.getMoveNumber() % 2 == 0) {
             return WHITE_MOVE_TITLE;
         }
