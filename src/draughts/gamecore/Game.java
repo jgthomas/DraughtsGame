@@ -130,6 +130,10 @@ public class Game {
         return currentMoveNumber;
     }
 
+    public void saveGame(String gameName) {
+        saveState.saveGame(gameName);
+    }
+
     public BooleanProperty gameIsWonProperty() {
         return gameIsWon;
     }
