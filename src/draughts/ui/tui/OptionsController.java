@@ -1,6 +1,7 @@
 package draughts.ui.tui;
 
 
+import draughts.database.LoadState;
 import draughts.gamecore.*;
 
 import java.util.List;
@@ -16,8 +17,6 @@ class OptionsController {
         final String FIRST_PLAYER_MESSAGE = "Pick first player";
         final String SECOND_PLAYER_MESSAGE = "Pick second player";
 
-        Board board = new Board();
-
         PlayerConfig playerOne = makePlayer(userInput,
                 FIRST_PLAYER_MESSAGE,
                 PieceType.WHITE_PIECE);
@@ -26,9 +25,48 @@ class OptionsController {
                 SECOND_PLAYER_MESSAGE,
                 PieceType.BLACK_PIECE);
 
+        Board board= makeBoard(userInput);
+
         Game game = new Game(board, playerOne, playerTwo);
 
         new GameController(game).run();
+    }
+
+    private Board makeBoard(UserInput userInput) {
+        Board board;
+        LoadState loadState = new LoadState();
+
+        if (userInput.playSavedGame()) {
+            List<String> gameNames = loadState.getAllGameNames();
+            printGameNames(gameNames);
+
+            int gameNumber = userInput.selectSavedGame();
+
+            if (gameNumber < gameNames.size()) {
+                String gameName = gameNames.get(gameNumber);
+                int moveNumber = 0;
+                BoardStateLoader gameState = loadState.loadState(gameName, moveNumber);
+                boolean nextMove;
+
+                do {
+                    new GameView(new Board(gameState)).print("Move " + moveNumber);
+                    nextMove = userInput.seeNextMove();
+
+                    if (nextMove) {
+                        moveNumber += 1;
+                        gameState = loadState.loadState(gameName, moveNumber);
+                    }
+
+                } while (nextMove);
+
+                board = new Board(gameState);
+            } else {
+                board = new Board();
+            }
+        } else {
+            board = new Board();
+        }
+        return board;
     }
 
     private PlayerConfig makePlayer(UserInput userInput,
@@ -45,7 +83,7 @@ class OptionsController {
         return new PlayerConfig(PlayerType.valueOf(playerCode), pieceType);
     }
 
-    void printGameNames(List<String> gameNames) {
+    private void printGameNames(List<String> gameNames) {
         int gameNumber = 0;
         for (String gameName : gameNames) {
             System.out.println(gameNumber + ": " + gameName);
