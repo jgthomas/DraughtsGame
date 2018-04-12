@@ -1,4 +1,4 @@
-package draughts.ui.tui;
+/*package draughts.ui.tui;
 
 
 import java.util.List;
@@ -79,5 +79,5 @@ class TextGameController {
             saveState.saveGame(name);
         }
     }
-}
+}*/
 

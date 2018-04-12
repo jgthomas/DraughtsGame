@@ -1,12 +1,11 @@
-/*package draughts.ui.tui;
+package draughts.ui.tui;
+
 
 import java.util.Scanner;
-import draughts.ui.UserInput;
 
+public final class UserInput {
 
-public final class TextUserInput implements UserInput {
-
-    private static final String PLAYER_PICK_MESSAGE = String.join(System.getProperty("line.separator"),
+    private final String PLAYER_PICK_MESSAGE = String.join(System.getProperty("line.separator"),
             "(1) Human",
             "(2) Computer",
             " > "
@@ -14,22 +13,18 @@ public final class TextUserInput implements UserInput {
 
     private final Scanner scanner = new Scanner(System.in);
 
-    @Override
     public boolean playSavedGame() {
         return getYesOrNo("Load saved game [y/n]: ");
     }
 
-    @Override
     public boolean seeNextMove() {
         return getYesOrNo("See next move [y/n]: ");
     }
 
-    @Override
     public boolean saveGame() {
         return getYesOrNo("Save game [y/n]: ");
     }
 
-    @Override
     public String setGameName() {
         return getString("Give game a name: ");
     }
@@ -38,7 +33,6 @@ public final class TextUserInput implements UserInput {
         return getString("Pick your player name: ");
     }
 
-    @Override
     public int selectSavedGame() {
         return getNumber("Pick game number to load: ");
     }
@@ -47,7 +41,6 @@ public final class TextUserInput implements UserInput {
         return getNumberInRange(0, lastMoveNumber,"Pick the move to load: ");
     }
 
-    @Override
     public int pickPlayerType(String message) {
         String fullMessage = String.join(System.getProperty("line.separator"),
                 message,
@@ -88,5 +81,5 @@ public final class TextUserInput implements UserInput {
         }
         return str;
     }
-}*/
+}
 

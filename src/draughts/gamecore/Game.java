@@ -126,6 +126,10 @@ public class Game {
         return getGameIsWon();
     }
 
+    public int getMoveNumber() {
+        return currentMoveNumber;
+    }
+
     public BooleanProperty gameIsWonProperty() {
         return gameIsWon;
     }

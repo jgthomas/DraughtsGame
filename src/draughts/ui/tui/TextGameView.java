@@ -1,4 +1,4 @@
-package draughts.ui.tui;
+/*package draughts.ui.tui;
 
 import java.util.List;
 
@@ -115,5 +115,5 @@ final class TextGameView {
     private static boolean notFirstRow(Square square) {
         return square.row() > 0;
     }
-}
+}*/
 

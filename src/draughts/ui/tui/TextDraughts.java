@@ -4,12 +4,17 @@ import draughts.ai.AiPlayer;
 import draughts.database.LoadState;
 import draughts.database.SaveState;
 import draughts.gamecore.*;
-import draughts.ui.UserInput;
 
 import java.util.List;
 
-
 public class TextDraughts {
+
+    public void run() {
+        new OptionsController(new UserInput()).startGameController();
+    }
+}
+
+/*public class TextDraughts {
     private static final String FIRST_PLAYER_MESSAGE = "Pick first player";
     private static final String SECOND_PLAYER_MESSAGE = "Pick second player";
 
@@ -103,4 +108,4 @@ public class TextDraughts {
 
         return player;
     }
-}
+}*/

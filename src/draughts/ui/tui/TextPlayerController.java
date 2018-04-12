@@ -1,4 +1,4 @@
-package draughts.ui.tui;
+/*package draughts.ui.tui;
 
 import draughts.gamecore.*;
 
@@ -71,4 +71,4 @@ public class TextPlayerController implements Player {
         c = Character.toLowerCase(c);
         return c - BASE_CHAR;
     }
-}
+}*/
