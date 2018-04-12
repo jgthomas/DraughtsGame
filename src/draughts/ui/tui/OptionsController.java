@@ -36,11 +36,11 @@ class OptionsController {
         Board board;
         LoadState loadState = new LoadState();
 
-        if (userInput.playSavedGame()) {
+        if (userInput.getYesOrNo("Load saved game")) {
             List<String> gameNames = loadState.getAllGameNames();
             printGameNames(gameNames);
 
-            int gameNumber = userInput.selectSavedGame();
+            int gameNumber = userInput.getNumber("Pick game number");
 
             if (gameNumber < gameNames.size()) {
                 String gameName = gameNames.get(gameNumber);
@@ -50,7 +50,7 @@ class OptionsController {
 
                 do {
                     new GameView(new Board(gameState)).print("Move " + moveNumber);
-                    nextMove = userInput.seeNextMove();
+                    nextMove = userInput.advanceForward("Press enter to see next move");
 
                     if (nextMove) {
                         moveNumber += 1;

@@ -23,6 +23,8 @@ class GameController {
         final String BLACK_WIN_MESSAGE = "Black wins!";
         final String FINAL_BOARD_MESSAGE = "Final Board";
 
+        gameView.clearBoard();
+
         while (!game.won()) {
             gameView.print(turnTitle());
             game.makeMove(getInput());
@@ -37,8 +39,8 @@ class GameController {
             System.out.println(BLACK_WIN_MESSAGE);
         }
 
-        if (userInput.saveGame()) {
-            String gameName = userInput.setGameName();
+        if (userInput.getYesOrNo("Save game")) {
+            String gameName = userInput.getString("Game name");
             game.saveGame(gameName);
         }
     }
