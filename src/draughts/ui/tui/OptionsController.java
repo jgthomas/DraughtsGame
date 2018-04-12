@@ -63,7 +63,7 @@ class OptionsController {
         int moveNumber = 0;
         BoardStateLoader boardStateLoader = loadState.loadState(gameName, moveNumber);
         do {
-            new GameView(new Board(boardStateLoader)).print("Move " + moveNumber);
+            new GameView(new Board(boardStateLoader)).print(boardTitle(moveNumber));
             nextMove = userInput.advanceForward(NEXT_MOVE_PROMPT);
             if (nextMove) {
                 moveNumber += 1;
@@ -92,6 +92,14 @@ class OptionsController {
             System.out.println(gameNumber + ": " + gameName);
             gameNumber += 1;
         }
+    }
+
+    private String boardTitle(int moveNumber) {
+        String baseMove = "Move " + moveNumber;
+        if (moveNumber % 2 == 0) {
+            return baseMove + " (white)";
+        }
+        return baseMove + " (black)";
     }
 
 }
