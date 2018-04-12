@@ -26,15 +26,31 @@ public class SquareTest {
         assertFalse(start.colHigher(start));
     }
 
-    /*@Test
+    @Test
     public void isLegalMoveDistance() {
+        Square start = new Square(0,0);
+        Square end1 = new Square(1, 0);
+        Square end2 = new Square(0, 1);
+        Square end3 = new Square(1, 1);
+        Square end4 = new Square(2, 2);
+        assertFalse(start.isLegalMoveDistance(end1));
+        assertFalse(start.isLegalMoveDistance(end2));
+        assertTrue(start.isLegalMoveDistance(end3));
+        assertFalse(start.isLegalMoveDistance(end2));
     }
 
     @Test
     public void isLegalTakeDistance() {
+        Square start = new Square(0,0);
+        Square end1 = new Square(1, 0);
+        Square end2 = new Square(0, 1);
+        Square end3 = new Square(1, 1);
+        Square end4 = new Square(2, 2);
+        Square end5 = new Square(3, 3);
+        assertFalse(start.isLegalTakeDistance(end1));
+        assertFalse(start.isLegalTakeDistance(end2));
+        assertFalse(start.isLegalTakeDistance(end3));
+        assertTrue(start.isLegalTakeDistance(end4));
+        assertFalse(start.isLegalTakeDistance(end5));
     }
-
-    @Test
-    public void isWithinRange() {
-    }*/
 }
