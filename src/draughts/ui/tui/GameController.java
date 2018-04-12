@@ -46,8 +46,8 @@ class GameController {
     }
 
     private Move getInput() {
-        final String START_MOVE_MSG = "Piece to move: ";
-        final String END_MOVE_MSG = "Move piece to: ";
+        final String START_MOVE_MSG = "Piece to move";
+        final String END_MOVE_MSG = "Move piece to";
         final String ILLEGAL_PIECE_MSG = "You cannot move that piece";
         final String ILLEGAL_END_MSG = "You cannot move to there";
 
@@ -69,12 +69,10 @@ class GameController {
     }
 
     private Square getPosition(String message) {
-        final int NUM_OF_COORDINATES = 2;
-        Scanner scanner = new Scanner(System.in);
         String coordinates;
+        final int NUM_OF_COORDINATES = 2;
         do  {
-            System.out.print(message);
-            coordinates = scanner.next();
+            coordinates = userInput.getString(message);
         } while (coordinates.length() < NUM_OF_COORDINATES);
         int rowNum = rowCharToCoordinate(coordinates.charAt(0));
         int colNum = Character.getNumericValue(coordinates.charAt(1));
