@@ -46,7 +46,7 @@ class OptionsController {
             int gameNumber = userInput.getNumber(PICK_GAME);
 
             if (gameNumber < gameNames.size()) {
-                board = moveNumberFromGame(gameNames.get(gameNumber));
+                board = pickStartingMove(gameNames.get(gameNumber));
             } else {
                 board = new Board();
             }
@@ -56,7 +56,7 @@ class OptionsController {
         return board;
     }
 
-    private Board moveNumberFromGame(String gameName) {
+    private Board pickStartingMove(String gameName) {
         final String NEXT_MOVE = "Press enter to see next move";
         boolean nextMove;
         int moveNumber = 0;
