@@ -3,13 +3,8 @@ package draughts.ui.tui;
 import draughts.gamecore.Board;
 import draughts.gamecore.Square;
 
-import java.util.List;
 
 final class GameView {
-    private final String whitePieceSymbol = "W";
-    private final String blackPieceSymbol = "B";
-    private final String whiteKingSymbol = "W!W";
-    private final String blackKingSymbol = "B!B";
     private final Board board;
 
     GameView(Board board) {
@@ -17,6 +12,11 @@ final class GameView {
     }
 
     void print(String title) {
+        final String whitePieceSymbol = "W";
+        final String blackPieceSymbol = "B";
+        final String whiteKingSymbol = "W!W";
+        final String blackKingSymbol = "B!B";
+
         System.out.println("\n\n" + title);
         char rowName = 'a';
         printColumnNumbers(board.sideLength());
