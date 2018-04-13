@@ -15,7 +15,6 @@ import javafx.scene.text.Text;
 import draughts.gamecore.Board;
 import draughts.gamecore.Square;
 import draughts.gamecore.Piece;
-import draughts.gamecore.SquareColor;
 
 
 final class BoardView extends GridPane {
@@ -44,7 +43,7 @@ final class BoardView extends GridPane {
             this.setWidth(WIDTH);
             this.setHeight(HEIGHT);
 
-            if (square.getSquareColor() == SquareColor.WHITE) {
+            if(isWhiteSquare(square)) {
                 this.setFill(Color.WHITE);
             } else {
                 this.setFill(Color.BLACK);
@@ -53,6 +52,13 @@ final class BoardView extends GridPane {
             this.setStrokeWidth(BORDER_WIDTH);
             this.setStrokeType(StrokeType.INSIDE);
             this.setOnMouseClicked(boardController);
+        }
+
+        private static boolean isWhiteSquare(Square square) {
+            if (square.row() % 2 == 0) {
+                return square.col() % 2 == 0;
+            }
+            return square.col() % 2 != 0;
         }
     }
 
