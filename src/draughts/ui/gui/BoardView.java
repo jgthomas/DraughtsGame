@@ -26,7 +26,7 @@ final class BoardView extends GridPane {
         }
     }
 
-    private static class SquareViewHolder extends StackPane {
+    private class SquareViewHolder extends StackPane {
         SquareViewHolder(Square square, Piece piece, BoardController boardController) {
             this.getChildren().add(new SquareView(square, boardController));
             this.getChildren().add(new PieceView(piece));
@@ -34,10 +34,10 @@ final class BoardView extends GridPane {
         }
     }
 
-    static class SquareView extends Rectangle {
-        private static final int WIDTH = 150;
-        private static final int HEIGHT = 150;
-        private static final int BORDER_WIDTH = 10;
+    class SquareView extends Rectangle {
+        private final int WIDTH = 150;
+        private final int HEIGHT = 150;
+        private final int BORDER_WIDTH = 10;
 
         SquareView(Square square, BoardController boardController) {
             this.setWidth(WIDTH);
@@ -54,7 +54,7 @@ final class BoardView extends GridPane {
             this.setOnMouseClicked(boardController);
         }
 
-        private static boolean isWhiteSquare(Square square) {
+        private boolean isWhiteSquare(Square square) {
             if (square.row() % 2 == 0) {
                 return square.col() % 2 == 0;
             }
@@ -62,9 +62,9 @@ final class BoardView extends GridPane {
         }
     }
 
-    private static class PieceView extends Circle {
-        private static final int MIDPOINT = 100;
-        private static final int RADIUS = 50;
+    private class PieceView extends Circle {
+        private final int MIDPOINT = 100;
+        private final int RADIUS = 50;
 
         PieceView(Piece piece) {
             this.setCenterX(MIDPOINT);
@@ -85,10 +85,10 @@ final class BoardView extends GridPane {
         }
     }
 
-    private static class KingView extends Text {
-        private static final String kingLetter = "K";
-        private static final String kingFont = "DejaVu Sans";
-        private static final int kingFontSize = 40;
+    private class KingView extends Text {
+        private final String kingLetter = "K";
+        private final String kingFont = "DejaVu Sans";
+        private final int kingFontSize = 40;
 
         KingView(Piece piece) {
             this.setText(kingLetter);
