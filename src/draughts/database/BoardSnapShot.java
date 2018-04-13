@@ -5,10 +5,7 @@ import draughts.gamecore.BoardStateLoader;
 import draughts.gamecore.PieceType;
 import draughts.gamecore.Square;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.HashMap;
+import java.util.*;
 
 public class BoardSnapShot implements BoardStateLoader {
     private final int BOARD_SIZE = 8;
@@ -41,5 +38,15 @@ public class BoardSnapShot implements BoardStateLoader {
 
     public int getBoardSize() {
         return BOARD_SIZE;
+    }
+
+    private List<Integer> pieceTypeCodes() {
+        final int NUM_OF_SQUARES = 64;
+        List<Integer> codes = new ArrayList<>(Collections.nCopies(NUM_OF_SQUARES, 0));
+        List<Integer> whitePositions = new ArrayList<>(Arrays.asList(0,2,4,6,9,11,13,15,16,18,20,22));
+        List<Integer> blackPositions = new ArrayList<>(Arrays.asList(41,43,45,47,48,50,52,54,57,59,61,63));
+        for (Integer whitePos : whitePositions) { codes.add(whitePos, PieceType.WHITE_PIECE.value()); }
+        for (Integer blackPos : blackPositions) { codes.add(blackPos, PieceType.BLACK_PIECE.value()); }
+        return codes;
     }
 }
