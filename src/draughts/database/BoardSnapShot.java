@@ -41,7 +41,7 @@ public class BoardSnapShot implements BoardStateLoader {
     }
 
     private List<Integer> pieceTypeCodes() {
-        final int NUM_OF_SQUARES = 64;
+        final int NUM_OF_SQUARES = BOARD_SIZE * BOARD_SIZE;
         List<Integer> codes = new ArrayList<>(Collections.nCopies(NUM_OF_SQUARES, 0));
         List<Integer> whitePositions = new ArrayList<>(Arrays.asList(0,2,4,6,9,11,13,15,16,18,20,22));
         List<Integer> blackPositions = new ArrayList<>(Arrays.asList(41,43,45,47,48,50,52,54,57,59,61,63));
