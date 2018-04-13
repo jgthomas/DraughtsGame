@@ -78,10 +78,6 @@ public class Board implements Iterable<Square> {
             for (int row = 0; row < SIDE_LENGTH; row++) {
                 for (int col = 0; col < SIDE_LENGTH; col++) {
                     PieceType pieceType = PieceType.NONE;
-                    SquareColor squareColor = SquareColor.BLACK;
-                    if (isWhiteSquare(row, col)) {
-                        squareColor = SquareColor.WHITE;
-                    }
                     if (bothEven(row, col) || bothOdd(row, col)) {
                         if (isWhiteRow(row)) {
                             pieceType = PieceType.WHITE_PIECE;
@@ -89,7 +85,7 @@ public class Board implements Iterable<Square> {
                             pieceType = PieceType.BLACK_PIECE;
                         }
                     }
-                    squares.add(new Square(row, col, pieceType, squareColor));
+                    squares.add(new Square(row, col, pieceType));
                 }
             }
         }
@@ -108,13 +104,6 @@ public class Board implements Iterable<Square> {
 
         private boolean isBlackRow(int row) {
             return row >= FIRST_BLACK_ROW;
-        }
-
-        private boolean isWhiteSquare(int row, int col) {
-            if (row % 2 == 0) {
-                return col % 2 == 0;
-            }
-            return col % 2 != 0;
         }
     }
 }
