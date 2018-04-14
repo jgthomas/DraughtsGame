@@ -71,19 +71,18 @@ public class LegalMoves {
         List<Move> legalPieceMoves = new ArrayList<>();
         for (Square end : board) {
             if (start.isWithinRange(end)) {
-                PieceType pieceType = board.getPieceType(start);
                 if (singleMove.isLegalMove(start, end)) {
                     legalPieceMoves.add(new Move(
                             start,
                             end,
-                            pieceType,
+                            board.getPieceType(start),
                             MoveType.MOVE,
                             MoveType.MOVE.weight()));
                 } else if (singleMove.isLegalTake(start, end)) {
                     legalPieceMoves.add(new Move(
                             start,
                             end,
-                            pieceType,
+                            board.getPieceType(start),
                             MoveType.TAKE,
                             MoveType.TAKE.weight()));
                 }
