@@ -70,8 +70,6 @@ public final class Square implements Comparable<Square> {
     public int compareTo(Square compareSquare) {
         if (this.row() > compareSquare.row()) { return 1; }
         if (this.row() < compareSquare.row()) { return -1; }
-        if (this.col() > compareSquare.col()) { return 1; }
-        if (this.col() < compareSquare.col()) { return -1; }
-        return 0;
+        return Integer.compare(this.col(), compareSquare.col());
     }
 }
