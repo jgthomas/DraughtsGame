@@ -2,21 +2,15 @@ package draughts.gamecore;
 
 import java.util.Objects;
 
-public final class Square {
+public final class Square implements Comparable<Square> {
     private static final int MOVE_DIST = 1;
     private static final int TAKE_DIST = 2;
     private final int rowNum;
     private final int colNum;
-    private final PieceType initialPieceType;
 
     public Square(int row, int col) {
-        this(row, col, PieceType.NONE);
-    }
-
-    Square(int row, int col, PieceType initialPieceType) {
         rowNum = row;
         colNum = col;
-        this.initialPieceType = initialPieceType;
     }
 
     public int row() {
@@ -33,10 +27,6 @@ public final class Square {
 
     boolean colHigher(Square end) {
         return this.col() > end.col();
-    }
-
-    PieceType getInitialPieceType() {
-        return initialPieceType;
     }
 
     boolean isLegalMoveDistance(Square end) {
@@ -74,5 +64,14 @@ public final class Square {
     @Override
     public String toString() {
         return this.getClass().getSimpleName() + "[" + rowNum + "," + colNum + "]";
+    }
+
+    @Override
+    public int compareTo(Square compareSquare) {
+        if (this.row() > compareSquare.row()) { return 1; }
+        if (this.row() < compareSquare.row()) { return -1; }
+        if (this.col() > compareSquare.col()) { return 1; }
+        if (this.col() < compareSquare.col()) { return -1; }
+        return 0;
     }
 }
