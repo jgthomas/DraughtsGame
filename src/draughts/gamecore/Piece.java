@@ -48,7 +48,7 @@ public class Piece {
         return end.row() == pieceType.kingLine();
     }
 
-    public boolean legalPieceToTake(Piece piece) {
+    public boolean takenPieceIsOpponent(Piece piece) {
         return getColor() != piece.getColor() && piece.getColor() != PieceColor.NONE;
     }
 
