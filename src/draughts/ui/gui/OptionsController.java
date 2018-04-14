@@ -1,5 +1,6 @@
 package draughts.ui.gui;
 
+import draughts.database.BoardState;
 import draughts.database.LoadState;
 import draughts.gamecore.*;
 import javafx.event.ActionEvent;
@@ -39,7 +40,7 @@ class OptionsController implements EventHandler<ActionEvent> {
         String selectedGame = optionsView.getSelectedGame();
 
         if (selectedGame.equals("New Game")) {
-            board = new Board();
+            board = new Board(new BoardState());
             game = new Game(board, playerOne, playerTwo);
         } else {
             board = new Board(loadState.loadState(selectedGame, 30));

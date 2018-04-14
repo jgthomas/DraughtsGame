@@ -1,6 +1,7 @@
 package draughts.ui.tui;
 
 
+import draughts.database.BoardState;
 import draughts.database.LoadState;
 import draughts.gamecore.*;
 
@@ -50,10 +51,10 @@ class OptionsController {
             if (gameNumber < gameNames.size()) {
                 board = new Board(pickStartingMove(gameNames.get(gameNumber)));
             } else {
-                board = new Board();
+                board = new Board(new BoardState());
             }
         } else {
-            board = new Board();
+            board = new Board(new BoardState());
         }
         return board;
     }
