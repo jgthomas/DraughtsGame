@@ -49,16 +49,16 @@ public enum PieceType {
         return this == WHITE_KING || this == BLACK_KING;
     }
 
-    public PieceColor color() {
-        PieceColor pieceColor;
+    public Side side() {
+        Side side;
         if (this.isWhite()) {
-            pieceColor = PieceColor.WHITE;
+            side = Side.WHITE;
         } else if (this.isBlack()) {
-            pieceColor = PieceColor.BLACK;
+            side = Side.BLACK;
         } else {
-            pieceColor = PieceColor.NONE;
+            side = Side.NONE;
         }
-        return pieceColor;
+        return side;
     }
 
     public boolean isPlayerPiece() {

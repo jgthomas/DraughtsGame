@@ -1,6 +1,6 @@
 package draughts.gamecore;
 
-public enum PieceColor {
+public enum Side {
     WHITE,
     BLACK,
     NONE

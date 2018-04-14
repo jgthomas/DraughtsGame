@@ -1,9 +1,6 @@
 package draughts.ui.gui;
 
-import javafx.beans.Observable;
 import javafx.beans.binding.Bindings;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
@@ -18,12 +15,10 @@ import draughts.gamecore.Board;
 import draughts.gamecore.Square;
 import draughts.gamecore.Piece;
 
-import java.util.ArrayList;
-
 
 final class BoardView extends GridPane {
     /*private final ObservableList<Contents> contentsOfSquares = FXCollections.observableList(new ArrayList<>(),
-            (Contents c) -> new Observable[]{c.pieceProperty(), c.getPiece().colorProperty(), c.getPiece().isKingProperty()});*/
+            (Contents c) -> new Observable[]{c.pieceProperty(), c.getPiece().sideProperty(), c.getPiece().isKingProperty()});*/
 
     BoardView(Board board, BoardController boardController) {
         for (Square square : board) {
@@ -77,7 +72,7 @@ final class BoardView extends GridPane {
             this.setCenterY(MIDPOINT);
             this.setRadius(RADIUS);
             this.fillProperty().bind(Bindings.createObjectBinding( () -> {
-                        switch (piece.getColor()) {
+                        switch (piece.getSide()) {
                             case WHITE:
                                 return Color.RED;
                             case BLACK:
@@ -85,7 +80,7 @@ final class BoardView extends GridPane {
                             default:
                                 return Color.TRANSPARENT;
                         }
-                    }, piece.colorProperty()
+                    }, piece.sideProperty()
             ));
             this.setMouseTransparent(true);
         }

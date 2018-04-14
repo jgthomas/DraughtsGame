@@ -8,12 +8,12 @@ import javafx.beans.property.SimpleObjectProperty;
 public class Piece {
     private PieceType pieceType;
     private final BooleanProperty isKing;
-    private final ObjectProperty<PieceColor> color;
+    private final ObjectProperty<Side> side;
 
     Piece(PieceType pieceType) {
         this.pieceType = pieceType;
         isKing = new SimpleBooleanProperty(false);
-        color = new SimpleObjectProperty<>(pieceType.color());
+        side = new SimpleObjectProperty<>(pieceType.side());
     }
 
     public PieceType getPieceType() {
@@ -23,7 +23,7 @@ public class Piece {
     public void setPieceType(PieceType pieceType) {
         this.pieceType = pieceType;
 
-        setColor(pieceType.color());
+        setSide(pieceType.side());
 
         if (pieceType.isKing()) {
             setIsKing(true);
@@ -36,12 +36,12 @@ public class Piece {
         return isKing;
     }
 
-    public ObjectProperty<PieceColor> colorProperty() {
-        return color;
+    public ObjectProperty<Side> sideProperty() {
+        return side;
     }
 
-    public PieceColor getColor() {
-        return color.get();
+    public Side getSide() {
+        return side.get();
     }
 
     boolean reachesKingRow(Square end) {
@@ -57,11 +57,11 @@ public class Piece {
     }
 
     boolean pieceIsOpponent(Piece piece) {
-        return getColor() != piece.getColor() && piece.getColor() != PieceColor.NONE;
+        return getSide() != piece.getSide() && piece.getSide() != Side.NONE;
     }
 
-    boolean isColor(PieceColor pieceColor){
-        return pieceColor == getColor();
+    boolean isColor(Side side){
+        return side == getSide();
     }
 
     boolean legalMoveDirection(Square start, Square end) {
@@ -79,8 +79,8 @@ public class Piece {
         isKing.set(b);
     }
 
-    private void setColor(PieceColor pieceColor) {
-        color.set(pieceColor);
+    private void setSide(Side side) {
+        this.side.set(side);
     }
 
     private boolean legalKingDirection(Square start, Square end) {
