@@ -3,22 +3,20 @@ package draughts.gamecore;
 import java.util.Objects;
 
 public final class Square implements Comparable<Square> {
-    private static final int MOVE_DIST = 1;
-    private static final int TAKE_DIST = 2;
-    private final int rowNum;
-    private final int colNum;
+    private final int row;
+    private final int col;
 
     public Square(int row, int col) {
-        rowNum = row;
-        colNum = col;
+        this.row = row;
+        this.col = col;
     }
 
     public int row() {
-        return rowNum;
+        return row;
     }
 
     public int col() {
-        return colNum;
+        return col;
     }
 
     boolean rowHigher(Square end) {
@@ -30,11 +28,13 @@ public final class Square implements Comparable<Square> {
     }
 
     boolean isLegalMoveDistance(Square end) {
+        final int MOVE_DIST = 1;
         return Math.abs(this.col() - end.col()) == MOVE_DIST &&
                 Math.abs(this.row() - end.row()) == MOVE_DIST;
     }
 
     boolean isLegalTakeDistance(Square end) {
+        final int TAKE_DIST = 2;
         return Math.abs(this.col() - end.col()) == TAKE_DIST &&
                 Math.abs(this.row() - end.row()) == TAKE_DIST;
     }
@@ -53,17 +53,17 @@ public final class Square implements Comparable<Square> {
         }
         Square other = (Square) o;
 
-        return (this.rowNum == other.rowNum && this.colNum == other.colNum);
+        return (this.row == other.row && this.col == other.col);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(rowNum, colNum);
+        return Objects.hash(row, col);
     }
 
     @Override
     public String toString() {
-        return this.getClass().getSimpleName() + "[" + rowNum + "," + colNum + "]";
+        return this.getClass().getSimpleName() + "[" + row + "," + col + "]";
     }
 
     @Override
