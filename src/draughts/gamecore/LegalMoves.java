@@ -123,18 +123,8 @@ public class LegalMoves {
         }
 
         private boolean directionLegal(Square start, Square end) {
-            PieceType movedPiece = board.getPieceType(start);
-            PieceType endSquare = board.getPieceType(end);
-            if (movedPiece.isPlayerPiece() && endSquare == PieceType.NONE) {
-                switch (movedPiece) {
-                    case WHITE_PIECE:
-                        return end.rowHigher(start);
-                    case BLACK_PIECE:
-                        return start.rowHigher(end);
-                    case WHITE_KING:
-                    case BLACK_KING:
-                        return start.rowHigher(end) || end.rowHigher(start);
-                }
+            if (board.getPiece(start).isPlayerPiece() && board.getPiece(end).isBlank()) {
+                return board.getPiece(start).legalMoveDirection(start, end);
             }
             return false;
         }
