@@ -45,6 +45,10 @@ public enum PieceType {
         return this == BLACK_PIECE || this == BLACK_KING;
     }
 
+    public boolean isKing() {
+        return this == WHITE_KING || this == BLACK_KING;
+    }
+
     public PieceColor color() {
         PieceColor pieceColor;
         if (this.isWhite()) {
