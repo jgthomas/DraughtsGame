@@ -53,7 +53,7 @@ public final class Square implements Comparable<Square> {
         }
         Square other = (Square) o;
 
-        return (this.row == other.row && this.col == other.col);
+        return (this.row() == other.row() && this.col() == other.col());
     }
 
     @Override
