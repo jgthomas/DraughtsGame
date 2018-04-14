@@ -1,19 +1,21 @@
 package draughts.gamecore;
 
-import java.util.*;
-
+import java.util.Iterator;
+import java.util.SortedMap;
+import java.util.TreeMap;
 
 public class Board implements Iterable<Square> {
     private final SortedMap<Square, Piece> boardMap = new TreeMap<>();
-    private final int SIDE_LENGTH = 8;
+    private final int boardSize;
 
     public Board(BoardStateLoader boardStateLoader) {
+        boardSize = boardStateLoader.getBoardSize();
         for (Square square : boardStateLoader.squares()) {
             boardMap.put(square, new Piece(boardStateLoader.getPieceType(square)));
         }
     }
 
-    public final void setBoardState(BoardStateLoader boardStateLoader) {
+    final void setBoardState(BoardStateLoader boardStateLoader) {
         for (Square square : boardStateLoader.squares()) {
             setPieceType(square, boardStateLoader.getPieceType(square));
         }
@@ -27,11 +29,7 @@ public class Board implements Iterable<Square> {
         return boardMap.get(square).getPieceType();
     }
 
-    private void setPieceType(Square square, PieceType pieceType) {
-        boardMap.get(square).setPieceType(pieceType);
-    }
-
-    public void makeMove(Move move) {
+    void makeMove(Move move) {
         setPieceType(move.startOfMove(), PieceType.NONE);
 
         if (move.type() == MoveType.TAKE) {
@@ -50,11 +48,15 @@ public class Board implements Iterable<Square> {
     }
 
     public int sideLength() {
-        return SIDE_LENGTH;
+        return boardSize;
     }
 
     @Override
     public Iterator<Square> iterator() {
         return boardMap.keySet().iterator();
+    }
+
+    private void setPieceType(Square square, PieceType pieceType) {
+        boardMap.get(square).setPieceType(pieceType);
     }
 }
