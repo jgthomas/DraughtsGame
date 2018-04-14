@@ -30,20 +30,20 @@ public class Board implements Iterable<Square> {
     }
 
     void makeMove(Move move) {
-        setPieceType(move.startOfMove(), PieceType.NONE);
+        setPieceType(move.start(), PieceType.NONE);
 
         if (move.isTake()) {
             setPieceType(move.takenSquare(), PieceType.NONE);
         }
 
-        setPieceType(move.endOfMove(), move.getPieceType());
+        setPieceType(move.end(), move.getPieceType());
 
         if (move.getNextTake() != null) {
             makeMove(move.getNextTake());
         }
 
         if (move.makesKing()) {
-            setPieceType(move.endOfMove(), move.getPieceType().getKing());
+            setPieceType(move.end(), move.getPieceType().getKing());
         }
     }
 

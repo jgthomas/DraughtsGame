@@ -53,20 +53,20 @@ public class RateMoves implements MoveRater {
 
     private boolean isNotGuardingLastRow(Move move) {
         return (side.isWhite())
-                ? move.startOfMove().row() != 0
-                : move.startOfMove().row() != (board.sideLength() - 1);
+                ? move.start().row() != 0
+                : move.start().row() != (board.sideLength() - 1);
     }
 
     private boolean staysCentral(Move move) {
-        return isCentralCol(move.startOfMove()) && isCentralCol(move.endOfMove());
+        return isCentralCol(move.start()) && isCentralCol(move.end());
     }
 
     private boolean movesCentral(Move move) {
-        return !isCentralCol(move.startOfMove()) && isCentralCol(move.endOfMove());
+        return !isCentralCol(move.start()) && isCentralCol(move.end());
     }
 
     private boolean noEnemyInFront(Move move) {
-        Square end = move.endOfMove();
+        Square end = move.end();
         if (isCentralRow(end) && isCentralCol(end)) {
             return board.getPiece(leftFront(end)).isBlank()
                     && board.getPiece(rightFront(end)).isBlank();
@@ -75,7 +75,7 @@ public class RateMoves implements MoveRater {
     }
 
     private boolean isDefendedLeft(Move move) {
-        Square end = move.endOfMove();
+        Square end = move.end();
         if (isCentralRow(end) && isCentralCol(end)) {
             PieceType pieceLeftBack = board.getPieceType(leftBack(end));
             return pieceLeftBack.in(pieceType, kingType);
@@ -84,7 +84,7 @@ public class RateMoves implements MoveRater {
     }
 
     private boolean isDefendedRight(Move move) {
-        Square end = move.endOfMove();
+        Square end = move.end();
         if (isCentralRow(end) && isCentralCol(end)) {
             PieceType pieceRightBack = board.getPieceType(rightBack(end));
             return pieceRightBack.in(pieceType, kingType);
@@ -93,7 +93,7 @@ public class RateMoves implements MoveRater {
     }
 
     private boolean canDefendLeft(Move move) {
-        Square end = move.endOfMove();
+        Square end = move.end();
         if (isCentralRow(end) && isCentralCol(end)) {
             PieceType pieceLeftFront = board.getPieceType(leftFront(end));
             return pieceLeftFront.in(pieceType, kingType);
@@ -102,7 +102,7 @@ public class RateMoves implements MoveRater {
     }
 
     private boolean canDefendRight(Move move) {
-        Square end = move.endOfMove();
+        Square end = move.end();
         if (isCentralRow(end) && isCentralCol(end)) {
             PieceType pieceRightFront = board.getPieceType(rightFront(end));
             return pieceRightFront.in(pieceType, kingType);
@@ -111,7 +111,7 @@ public class RateMoves implements MoveRater {
     }
 
     private boolean isNotCurrentlyDefendingLeft(Move move) {
-        Square start = move.startOfMove();
+        Square start = move.start();
         if ((isCentralRow(start) && isCentralCol(start))
                 || (start.row() != pieceType.kingLine() && start.col() > 0)) {
             PieceType pieceLeftFront = board.getPieceType(leftFront(start));
@@ -121,7 +121,7 @@ public class RateMoves implements MoveRater {
     }
 
     private boolean isNotCurrentlyDefendingRight(Move move) {
-        Square start = move.startOfMove();
+        Square start = move.start();
         if ((isCentralRow(start) && isCentralCol(start))
                 || (start.row() != pieceType.kingLine() && start.col() < board.sideLength() - 1)) {
             PieceType pieceRightFront = board.getPieceType(rightFront(start));

@@ -41,7 +41,7 @@ public class LegalMoves {
     List<Square> legalStartingSquares(Side side) {
         List<Square> legalStarts = new ArrayList<>();
         for (Move move : legal(side)) {
-            legalStarts.add(move.startOfMove());
+            legalStarts.add(move.start());
         }
         return legalStarts;
     }
@@ -49,8 +49,8 @@ public class LegalMoves {
     List<Square> legalEndingSquares(Square start, Side side) {
         List<Square> legalEnds = new ArrayList<>();
         for (Move move : legal(side)) {
-            if (move.startOfMove().equals(start)) {
-                legalEnds.add(move.endOfMove());
+            if (move.start().equals(start)) {
+                legalEnds.add(move.end());
             }
         }
         return legalEnds;
@@ -94,7 +94,7 @@ public class LegalMoves {
     private void addFurtherTakes(Board board, Move move) {
         Board testBoard = new Board(new SaveState(board).getCurrentState());
         testBoard.makeMove(move);
-        List<Move> furtherMoves = new LegalMoves(testBoard).movesFrom(move.endOfMove());
+        List<Move> furtherMoves = new LegalMoves(testBoard).movesFrom(move.end());
 
         if (!move.makesKing()) {
             for (Move nextMove : furtherMoves) {
