@@ -32,7 +32,7 @@ public class Board implements Iterable<Square> {
     void makeMove(Move move) {
         setPieceType(move.startOfMove(), PieceType.NONE);
 
-        if (move.type() == MoveType.TAKE) {
+        if (move.isTake()) {
             setPieceType(move.takenSquare(), PieceType.NONE);
         }
 

@@ -59,7 +59,7 @@ public class LegalMoves {
     private List<Move> legalMoves(Square start) {
         List<Move> legalPieceMoves = movesFrom(start);
         for (Move move : legalPieceMoves) {
-            if (move.type() == MoveType.TAKE) {
+            if (move.isTake()) {
                 addFurtherTakes(board, move);
             }
         }
@@ -98,7 +98,7 @@ public class LegalMoves {
 
         if (!move.makesKing()) {
             for (Move nextMove : furtherMoves) {
-                if (nextMove.type() == MoveType.TAKE) {
+                if (nextMove.isTake()) {
                     move.setNextTake(nextMove);
                     addFurtherTakes(testBoard, nextMove);
                 }
