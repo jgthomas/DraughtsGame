@@ -15,13 +15,13 @@ public class LegalMoves {
         this.singleMove = new SingleMove();
     }
 
-    public List<Move> legal(PieceType pieceType) {
+    public List<Move> legal(Side side) {
         List<Move> legalMoves = new ArrayList<>();
         int maxPriority = MoveType.MOVE.weight();
 
         for (Square square : board) {
-            PieceType pieceToMove = board.getPieceType(square);
-            if (pieceToMove.in(pieceType, pieceType.getKing())) {
+            Piece pieceToMove = board.getPiece(square);
+            if (pieceToMove.isSameSide(side)) {
                 for (Move move : legalMoves(square)){
                     maxPriority = (move.getPriority() > maxPriority)
                             ? move.getPriority()
@@ -38,17 +38,17 @@ public class LegalMoves {
                 .collect(Collectors.toList());
     }
 
-    List<Square> legalStartingSquares(PieceType pieceType) {
+    List<Square> legalStartingSquares(Side side) {
         List<Square> legalStarts = new ArrayList<>();
-        for (Move move : legal(pieceType)) {
+        for (Move move : legal(side)) {
             legalStarts.add(move.startOfMove());
         }
         return legalStarts;
     }
 
-    List<Square> legalEndingSquares(Square start, PieceType pieceType) {
+    List<Square> legalEndingSquares(Square start, Side side) {
         List<Square> legalEnds = new ArrayList<>();
-        for (Move move : legal(pieceType)) {
+        for (Move move : legal(side)) {
             if (move.startOfMove().equals(start)) {
                 legalEnds.add(move.endOfMove());
             }

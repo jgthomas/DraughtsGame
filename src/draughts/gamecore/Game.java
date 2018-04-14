@@ -49,13 +49,13 @@ public class Game {
         saveState.cacheState(firstMoveNumber);
 
         if (playerOne.isAiPlayer()) {
-            aiPlayer = new AiPlayer(playerOne.getPieceType(), board, legalMoves);
+            aiPlayer = new AiPlayer(playerOne.getPieceType(), board, legalMoves, playerOne.getSide());
             board.makeMove(aiPlayer.getMove());
             currentMoveNumber += 1;
             saveState.cacheState(currentMoveNumber);
             activePlayer = playerTwo;
         } else if (playerTwo.isAiPlayer()) {
-            aiPlayer = new AiPlayer(playerTwo.getPieceType(), board, legalMoves);
+            aiPlayer = new AiPlayer(playerTwo.getPieceType(), board, legalMoves, playerTwo.getSide());
         }
 
         activeSide = new SimpleObjectProperty<>(activePlayer.getSide());
@@ -111,11 +111,11 @@ public class Game {
     }
 
     public boolean legalStart(Square start) {
-        return squareInList(start, legalMoves.legalStartingSquares(activePlayer.getPieceType()));
+        return squareInList(start, legalMoves.legalStartingSquares(activePlayer.getSide()));
     }
 
     public boolean legalEnd(Square start, Square end) {
-        return squareInList(end, legalMoves.legalEndingSquares(start, activePlayer.getPieceType()));
+        return squareInList(end, legalMoves.legalEndingSquares(start, activePlayer.getSide()));
     }
 
     public Board getBoard() {
@@ -164,10 +164,10 @@ public class Game {
     }
 
     private boolean moveWinsGame() {
-        PieceType opponentPieceType = (activePlayer == playerOne)
-                ? playerTwo.getPieceType()
-                : playerOne.getPieceType();
-        return legalMoves.legal(opponentPieceType).size() == 0;
+        Side opponent = (activePlayer == playerOne)
+                ? playerTwo.getSide()
+                : playerOne.getSide();
+        return legalMoves.legal(opponent).size() == 0;
     }
 
     private void switchActivePlayer() {
@@ -185,7 +185,7 @@ public class Game {
     }
 
     private void executeMove(Move move) {
-        for (Move m : legalMoves.legal(activePlayer.getPieceType())) {
+        for (Move m : legalMoves.legal(activePlayer.getSide())) {
             if (m.equals(move)) {
                 board.makeMove(m);
                 return;

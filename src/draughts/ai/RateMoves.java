@@ -14,11 +14,13 @@ public class RateMoves implements MoveRater {
     private final Board board;
     private final PieceType pieceType;
     private final PieceType kingType;
+    private final Side side;
 
-    RateMoves(Board board, PieceType pieceType) {
+    RateMoves(Board board, PieceType pieceType, Side side) {
         this.board = board;
         this.pieceType = pieceType;
         kingType = pieceType.getKing();
+        this.side = side;
     }
 
     public List<Move> ratedMoves(List<Move> legalMoves) {
