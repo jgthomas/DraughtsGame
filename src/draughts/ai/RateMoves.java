@@ -66,10 +66,9 @@ public class RateMoves implements MoveRater {
     }
 
     private boolean noEnemyInFront(Move move) {
-        Square end = move.end();
-        if (isCentralRow(end) && isCentralCol(end)) {
-            return board.getPiece(leftFront(end)).isBlank()
-                    && board.getPiece(rightFront(end)).isBlank();
+        if (isCentralRow(move.end()) && isCentralCol(move.end())) {
+            return board.getPiece(leftFront(move.end())).isBlank()
+                    && board.getPiece(rightFront(move.end())).isBlank();
         }
         return true;
     }
