@@ -5,14 +5,13 @@ import java.util.SortedMap;
 import java.util.TreeMap;
 
 public class Board implements Iterable<Square> {
-    private final SortedMap<Square, Contents> boardMap = new TreeMap<>();
+    private final SortedMap<Square, Piece> boardMap = new TreeMap<>();
     private final int boardSize;
 
     public Board(BoardStateLoader boardStateLoader) {
         boardSize = boardStateLoader.getBoardSize();
         for (Square square : boardStateLoader.squares()) {
-            Contents contents = new Contents(new Piece(boardStateLoader.getPieceType(square)));
-            boardMap.put(square, contents);
+            boardMap.put(square, new Piece(boardStateLoader.getPieceType(square)));
         }
     }
 
@@ -22,16 +21,12 @@ public class Board implements Iterable<Square> {
         }
     }
 
-    public Contents getContents(Square square) {
+    public Piece getPiece(Square square) {
         return boardMap.get(square);
     }
 
-    public Piece getPiece(Square square) {
-        return boardMap.get(square).getPiece();
-    }
-
     public PieceType getPieceType(Square square) {
-        return boardMap.get(square).getPiece().getPieceType();
+        return boardMap.get(square).getPieceType();
     }
 
     void makeMove(Move move) {
@@ -62,6 +57,6 @@ public class Board implements Iterable<Square> {
     }
 
     private void setPieceType(Square square, PieceType pieceType) {
-        boardMap.get(square).getPiece().setPieceType(pieceType);
+        boardMap.get(square).setPieceType(pieceType);
     }
 }

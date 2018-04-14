@@ -16,19 +16,17 @@ import javafx.scene.text.Text;
 
 import draughts.gamecore.Board;
 import draughts.gamecore.Square;
-import draughts.gamecore.Contents;
 import draughts.gamecore.Piece;
 
 import java.util.ArrayList;
 
 
 final class BoardView extends GridPane {
-    private final ObservableList<Contents> contentsOfSquares = FXCollections.observableList(new ArrayList<>(),
-            (Contents c) -> new Observable[]{c.pieceProperty(), c.getPiece().colorProperty(), c.getPiece().isKingProperty()});
+    /*private final ObservableList<Contents> contentsOfSquares = FXCollections.observableList(new ArrayList<>(),
+            (Contents c) -> new Observable[]{c.pieceProperty(), c.getPiece().colorProperty(), c.getPiece().isKingProperty()});*/
 
     BoardView(Board board, BoardController boardController) {
         for (Square square : board) {
-            contentsOfSquares.add(board.getContents(square));
             SquareViewHolder squareViewHolder = new SquareViewHolder(square, board.getPiece(square), boardController);
             this.add(squareViewHolder, square.col(), square.row());
         }

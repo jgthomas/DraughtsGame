@@ -1,4 +1,4 @@
-package draughts.gamecore;
+/*package draughts.gamecore;
 
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -21,4 +21,4 @@ public class Contents {
     public Piece getPiece() {
         return piece.get();
     }
-}
+}*/
