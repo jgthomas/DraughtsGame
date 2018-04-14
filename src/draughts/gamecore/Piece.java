@@ -23,27 +23,12 @@ public class Piece {
     public void setPieceType(PieceType pieceType) {
         this.pieceType = pieceType;
 
-        switch (pieceType) {
-            case WHITE_KING:
-                setColor(PieceColor.WHITE);
-                setIsKing(true);
-                break;
-            case BLACK_KING:
-                setColor(PieceColor.BLACK);
-                setIsKing(true);
-                break;
-            case WHITE_PIECE:
-                setColor(PieceColor.WHITE);
-                setIsKing(false);
-                break;
-            case BLACK_PIECE:
-                setColor(PieceColor.BLACK);
-                setIsKing(false);
-                break;
-            case NONE:
-                setColor(PieceColor.NONE);
-                setIsKing(false);
-                break;
+        setColor(pieceType.color());
+
+        if (pieceType.isKing()) {
+            setIsKing(true);
+        } else {
+            setIsKing(false);
         }
     }
 
@@ -66,5 +51,7 @@ public class Piece {
     private void setColor(PieceColor pieceColor) {
         color.set(pieceColor);
     }
+
+
 }
 
