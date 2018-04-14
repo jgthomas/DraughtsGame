@@ -36,10 +36,6 @@ public class Piece {
         return isKing;
     }
 
-    private void setIsKing(boolean b) {
-        isKing.set(b);
-    }
-
     public ObjectProperty<PieceColor> colorProperty() {
         return color;
     }
@@ -48,10 +44,16 @@ public class Piece {
         return color.get();
     }
 
+    public boolean reachesKingRow(Square end) {
+        return end.row() == pieceType.kingLine();
+    }
+
+    private void setIsKing(boolean b) {
+        isKing.set(b);
+    }
+
     private void setColor(PieceColor pieceColor) {
         color.set(pieceColor);
     }
-
-
 }
 
