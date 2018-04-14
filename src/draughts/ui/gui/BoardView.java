@@ -1,7 +1,9 @@
 package draughts.ui.gui;
 
-
+import javafx.beans.Observable;
 import javafx.beans.binding.Bindings;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
@@ -14,13 +16,19 @@ import javafx.scene.text.Text;
 
 import draughts.gamecore.Board;
 import draughts.gamecore.Square;
+import draughts.gamecore.Contents;
 import draughts.gamecore.Piece;
+
+import java.util.ArrayList;
 
 
 final class BoardView extends GridPane {
+    private final ObservableList<Contents> contentsOfSquares = FXCollections.observableList(new ArrayList<>(),
+            (Contents c) -> new Observable[]{c.pieceProperty(), c.getPiece().colorProperty(), c.getPiece().isKingProperty()});
 
     BoardView(Board board, BoardController boardController) {
         for (Square square : board) {
+            contentsOfSquares.add(board.getContents(square));
             SquareViewHolder squareViewHolder = new SquareViewHolder(square, board.getPiece(square), boardController);
             this.add(squareViewHolder, square.col(), square.row());
         }
