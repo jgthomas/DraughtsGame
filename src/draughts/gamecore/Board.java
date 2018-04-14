@@ -1,31 +1,20 @@
 package draughts.gamecore;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.HashMap;
+import java.util.*;
 
 
 public class Board implements Iterable<Square> {
-    private final List <Square> squares = new Squares().squares;
-    private final Map<Square, Piece> boardMap = new HashMap<>();
+    private final SortedMap<Square, Piece> boardMap = new TreeMap<>();
     private final int SIDE_LENGTH = 8;
 
-    public Board() {
-        for (Square square : squares) {
-            boardMap.put(square, new Piece(square.getInitialPieceType()));
-        }
-    }
-
     public Board(BoardStateLoader boardStateLoader) {
-        for (Square square : squares) {
+        for (Square square : boardStateLoader.squares()) {
             boardMap.put(square, new Piece(boardStateLoader.getPieceType(square)));
         }
     }
 
     public final void setBoardState(BoardStateLoader boardStateLoader) {
-        for (Square square : squares) {
+        for (Square square : boardStateLoader.squares()) {
             setPieceType(square, boardStateLoader.getPieceType(square));
         }
     }
@@ -66,44 +55,6 @@ public class Board implements Iterable<Square> {
 
     @Override
     public Iterator<Square> iterator() {
-        return squares.iterator();
-    }
-
-    private final class Squares {
-        private final List <Square> squares = new ArrayList<>();
-        private final int LAST_WHITE_ROW = 2;
-        private final int FIRST_BLACK_ROW = 5;
-
-        private Squares() {
-            for (int row = 0; row < SIDE_LENGTH; row++) {
-                for (int col = 0; col < SIDE_LENGTH; col++) {
-                    PieceType pieceType = PieceType.NONE;
-                    if (bothEven(row, col) || bothOdd(row, col)) {
-                        if (isWhiteRow(row)) {
-                            pieceType = PieceType.WHITE_PIECE;
-                        } else if (isBlackRow(row)) {
-                            pieceType = PieceType.BLACK_PIECE;
-                        }
-                    }
-                    squares.add(new Square(row, col, pieceType));
-                }
-            }
-        }
-
-        private boolean bothEven(int row, int col) {
-            return row %2 == 0 && col %2 == 0;
-        }
-
-        private boolean bothOdd(int row, int col) {
-            return row %2 != 0 && col %2 != 0;
-        }
-
-        private boolean isWhiteRow(int row) {
-            return row <= LAST_WHITE_ROW;
-        }
-
-        private boolean isBlackRow(int row) {
-            return row >= FIRST_BLACK_ROW;
-        }
+        return boardMap.keySet().iterator();
     }
 }
