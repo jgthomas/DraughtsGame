@@ -60,7 +60,7 @@ public class Piece {
         return getSide() != piece.getSide() && piece.getSide() != Side.NONE;
     }
 
-    boolean isSameSide(Side side){
+    public boolean isSameSide(Side side){
         return side == getSide();
     }
 
