@@ -25,12 +25,12 @@ class OptionsController {
         PlayerConfig playerOne;
         PlayerConfig playerTwo;
 
-        playerOne = makePlayer(userInput, FIRST_PLAYER, PieceType.WHITE_PIECE);
+        playerOne = makePlayer(userInput, FIRST_PLAYER, PieceType.WHITE_PIECE, Side.WHITE);
         if (playerOne.isAiPlayer()) {
-            playerTwo = new PlayerConfig(PlayerType.HUMAN, PieceType.BLACK_PIECE);
+            playerTwo = new PlayerConfig(PlayerType.HUMAN, PieceType.BLACK_PIECE, Side.BLACK);
             System.out.println(HUMAN_PLAYER_SET);
         } else {
-            playerTwo = makePlayer(userInput, SECOND_PLAYER, PieceType.BLACK_PIECE);
+            playerTwo = makePlayer(userInput, SECOND_PLAYER, PieceType.BLACK_PIECE, Side.BLACK);
         }
         Board board= makeBoard(userInput);
         Game game = new Game(board, playerOne, playerTwo, moveNumber);
@@ -77,14 +77,15 @@ class OptionsController {
     private PlayerConfig makePlayer(
             UserInput userInput,
             String msg,
-            PieceType pieceType)
+            PieceType pieceType,
+            Side side)
     {
         int playerCode;
         do {
             playerCode = userInput.pickPlayerType(msg);
         } while (playerCode != PlayerType.HUMAN.pick()
                 && playerCode != PlayerType.COMPUTER.pick());
-        return new PlayerConfig(PlayerType.valueOf(playerCode), pieceType);
+        return new PlayerConfig(PlayerType.valueOf(playerCode), pieceType, side);
     }
 
     private void printGameNames(List<String> gameNames) {
