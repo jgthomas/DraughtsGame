@@ -20,7 +20,7 @@ public class Piece {
         return pieceType;
     }
 
-    public void setPieceType(PieceType pieceType) {
+    void setPieceType(PieceType pieceType) {
         this.pieceType = pieceType;
 
         setSide(pieceType.side());
@@ -52,7 +52,7 @@ public class Piece {
         return pieceType != PieceType.NONE;
     }
 
-    boolean isBlank() {
+    public boolean isBlank() {
         return pieceType == PieceType.NONE;
     }
 
