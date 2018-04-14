@@ -51,8 +51,8 @@ public class Move implements Comparable<Move>, Iterable<Move> {
         return pieceType;
     }
 
-    MoveType type() {
-        return moveType;
+    boolean isTake() {
+        return moveType == MoveType.TAKE;
     }
 
     void setNextTake(Move move) {
