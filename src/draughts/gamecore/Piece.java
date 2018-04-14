@@ -60,6 +60,10 @@ public class Piece {
         return getColor() != piece.getColor() && piece.getColor() != PieceColor.NONE;
     }
 
+    boolean isColor(PieceColor pieceColor){
+        return pieceColor == getColor();
+    }
+
     boolean legalMoveDirection(Square start, Square end) {
         if (pieceType.isKing()) {
             return legalKingDirection(start, end);
