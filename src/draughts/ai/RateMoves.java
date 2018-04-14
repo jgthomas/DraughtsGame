@@ -52,11 +52,13 @@ public class RateMoves implements MoveRater {
     }
 
     private boolean isNotGuardingLastRow(Move move) {
-        if (pieceType == PieceType.WHITE_PIECE) {
+        if (side == Side.WHITE) { return move.startOfMove().row() != 0; }
+        return move.startOfMove().row() != (board.sideLength() - 1);
+        /*if (pieceType == PieceType.WHITE_PIECE) {
             return move.startOfMove().row() != 0;
         }
         return pieceType == PieceType.BLACK_PIECE
-                && move.startOfMove().row() != (board.sideLength() - 1);
+                && move.startOfMove().row() != (board.sideLength() - 1);*/
     }
 
     private boolean staysCentral(Move move) {
@@ -142,31 +144,27 @@ public class RateMoves implements MoveRater {
     }
 
     private Square leftFront(Square end) {
-        if (pieceType == PieceType.WHITE_PIECE) {
-            return new Square(end.row()+1, end.col()-1);
-        }
-        return new Square(end.row()-1, end.col()-1);
+        return (side.isWhite())
+                ? new Square(end.row()+1, end.col()-1)
+                : new Square(end.row()-1, end.col()-1);
     }
 
     private Square rightFront(Square end) {
-        if (pieceType == PieceType.WHITE_PIECE) {
-            return new Square(end.row()+1, end.col()+1);
-        }
-        return new Square(end.row()-1, end.col()+1);
+        return (side.isWhite())
+                ? new Square(end.row()+1, end.col()+1)
+                : new Square(end.row()-1, end.col()+1);
     }
 
     private Square leftBack(Square end) {
-        if (pieceType == PieceType.WHITE_PIECE) {
-            return new Square(end.row()-1, end.col()-1);
-        }
-        return new Square(end.row()+1, end.col()-1);
+        return (side.isWhite())
+                ? new Square(end.row()-1, end.col()-1)
+                : new Square(end.row()+1, end.col()-1);
     }
 
     private Square rightBack(Square end) {
-        if (pieceType == PieceType.WHITE_PIECE) {
-            return new Square(end.row()-1, end.col()+1);
-        }
-        return new Square(end.row()+1, end.col()+1);
+        return (side.isWhite())
+                ? new Square(end.row()-1, end.col()+1)
+                : new Square(end.row()+1, end.col()+1);
     }
 }
 
