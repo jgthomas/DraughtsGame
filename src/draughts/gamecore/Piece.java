@@ -48,6 +48,10 @@ public class Piece {
         return end.row() == pieceType.kingLine();
     }
 
+    public boolean legalPieceToTake(Piece piece) {
+        return getColor() != piece.getColor() && piece.getColor() != PieceColor.NONE;
+    }
+
     private void setIsKing(boolean b) {
         isKing.set(b);
     }
