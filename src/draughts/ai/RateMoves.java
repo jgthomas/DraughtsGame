@@ -52,13 +52,9 @@ public class RateMoves implements MoveRater {
     }
 
     private boolean isNotGuardingLastRow(Move move) {
-        if (side == Side.WHITE) { return move.startOfMove().row() != 0; }
-        return move.startOfMove().row() != (board.sideLength() - 1);
-        /*if (pieceType == PieceType.WHITE_PIECE) {
-            return move.startOfMove().row() != 0;
-        }
-        return pieceType == PieceType.BLACK_PIECE
-                && move.startOfMove().row() != (board.sideLength() - 1);*/
+        return (side.isWhite())
+                ? move.startOfMove().row() != 0
+                : move.startOfMove().row() != (board.sideLength() - 1);
     }
 
     private boolean staysCentral(Move move) {
