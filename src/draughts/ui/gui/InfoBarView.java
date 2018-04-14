@@ -30,15 +30,15 @@ class InfoBarView extends VBox {
         turnImage.setCenterY(50);
         turnImage.setRadius(25);
         turnImage.fillProperty().bind(Bindings.createObjectBinding( () -> {
-                    switch (game.getActivePieceType()) {
-                        case WHITE_PIECE:
+                    switch (game.getActiveSide()) {
+                        case WHITE:
                             return Color.RED;
-                        case BLACK_PIECE:
+                        case BLACK:
                             return Color.BLACK;
                         default:
                             return Color.TRANSPARENT;
                     }
-                }, game.activePieceTypeProperty()
+                }, game.activeSideProperty()
         ));
 
         Text winInfo = new Text("WINS!");

@@ -17,7 +17,7 @@ public class Game {
     private final LegalMoves legalMoves;
     private final SaveState saveState;
 
-    private final ObjectProperty<PieceType> activePieceType;
+    private final ObjectProperty<Side> activeSide;
     private final BooleanProperty gameIsWon;
 
     private final int firstMoveNumber;
@@ -58,7 +58,7 @@ public class Game {
             aiPlayer = new AiPlayer(playerTwo.getPieceType(), board, legalMoves);
         }
 
-        activePieceType = new SimpleObjectProperty<>(activePlayer.getPieceType());
+        activeSide = new SimpleObjectProperty<>(activePlayer.getSide());
         gameIsWon = new SimpleBooleanProperty(false);
     }
 
@@ -146,16 +146,16 @@ public class Game {
         gameIsWon.set(won);
     }
 
-    public ObjectProperty<PieceType> activePieceTypeProperty() {
-        return activePieceType;
+    public ObjectProperty<Side> activeSideProperty() {
+        return activeSide;
     }
 
-    public PieceType getActivePieceType() {
-        return activePieceType.get();
+    public Side getActiveSide() {
+        return activeSide.get();
     }
 
-    private void setActivePieceType(PieceType pieceType) {
-        activePieceType.set(pieceType);
+    private void setActiveSide(Side side) {
+        activeSide.set(side);
     }
 
     private void cacheBoardState() {
@@ -172,7 +172,7 @@ public class Game {
 
     private void switchActivePlayer() {
         activePlayer = (currentMoveNumber % 2 == 0) ? playerOne : playerTwo;
-        setActivePieceType(activePlayer.getPieceType());
+        setActiveSide(activePlayer.getSide());
     }
 
     private boolean squareInList(Square square, List<Square> squareList) {

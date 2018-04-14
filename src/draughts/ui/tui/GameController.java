@@ -1,9 +1,6 @@
 package draughts.ui.tui;
 
-import draughts.gamecore.Game;
-import draughts.gamecore.Move;
-import draughts.gamecore.PieceType;
-import draughts.gamecore.Square;
+import draughts.gamecore.*;
 
 class GameController {
     private final Game game;
@@ -33,7 +30,7 @@ class GameController {
 
         gameView.print(FINAL_BOARD);
 
-        if (game.getActivePieceType() == PieceType.WHITE_PIECE) {
+        if (game.getActiveSide() == Side.WHITE) {
             System.out.println(WHITE_WIN);
         } else {
             System.out.println(BLACK_WIN);
