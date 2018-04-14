@@ -10,7 +10,7 @@ public class LegalMoves {
     private final Board board;
     private final SingleMove singleMove;
 
-    public LegalMoves(Board board) {
+    LegalMoves(Board board) {
         this.board = board;
         this.singleMove = new SingleMove();
     }
