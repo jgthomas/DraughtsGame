@@ -74,10 +74,8 @@ public class RateMoves implements MoveRater {
     }
 
     private boolean isDefendedLeft(Move move) {
-        Square end = move.end();
-        if (isCentralRow(end) && isCentralCol(end)) {
-            PieceType pieceLeftBack = board.getPieceType(toBackLeftOf(end));
-            return pieceLeftBack.in(pieceType, kingType);
+        if (isCentralRow(move.end()) && isCentralCol(move.end())) {
+            return board.getPiece(toBackLeftOf(move.end())).isSameSide(side);
         }
         return true;
     }
