@@ -44,12 +44,31 @@ public class Piece {
         return color.get();
     }
 
-    public boolean reachesKingRow(Square end) {
+    boolean reachesKingRow(Square end) {
         return end.row() == pieceType.kingLine();
+    }
+
+    boolean isPlayerPiece() {
+        return pieceType != PieceType.NONE;
+    }
+
+    boolean isBlank() {
+        return pieceType == PieceType.NONE;
     }
 
     boolean pieceIsOpponent(Piece piece) {
         return getColor() != piece.getColor() && piece.getColor() != PieceColor.NONE;
+    }
+
+    boolean legalMoveDirection(Square start, Square end) {
+        if (pieceType.isKing()) {
+            return legalKingDirection(start, end);
+        } else if (pieceType.isWhite()) {
+            return end.rowHigher(start);
+        } else if (pieceType.isBlack()) {
+            return start.rowHigher(end);
+        }
+        return false;
     }
 
     private void setIsKing(boolean b) {
@@ -58,6 +77,10 @@ public class Piece {
 
     private void setColor(PieceColor pieceColor) {
         color.set(pieceColor);
+    }
+
+    private boolean legalKingDirection(Square start, Square end) {
+        return start.rowHigher(end) || end.rowHigher(start);
     }
 }
 
