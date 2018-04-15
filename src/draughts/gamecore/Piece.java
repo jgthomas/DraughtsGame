@@ -34,7 +34,7 @@ public class Piece {
     }
 
     public boolean isBlank() {
-        return pieceType == PieceType.NONE;
+        return pieceType.isBlank();
     }
 
     public boolean isSameSide(Side side){
@@ -64,7 +64,7 @@ public class Piece {
     }
 
     boolean isPlayerPiece() {
-        return pieceType != PieceType.NONE;
+        return pieceType.isPlayerPiece();
     }
 
     boolean pieceIsOpponent(Piece piece) {
