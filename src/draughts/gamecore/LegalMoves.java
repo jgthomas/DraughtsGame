@@ -20,8 +20,7 @@ public class LegalMoves {
         int maxPriority = MoveType.MOVE.weight();
 
         for (Square square : board) {
-            Piece pieceToMove = board.getPiece(square);
-            if (pieceToMove.isSameSide(side)) {
+            if (board.getPiece(square).isSameSide(side)) {
                 for (Move move : legalMoves(square)){
                     maxPriority = (move.getPriority() > maxPriority)
                             ? move.getPriority()
