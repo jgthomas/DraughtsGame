@@ -41,6 +41,10 @@ public class Piece {
         return side == getSide();
     }
 
+    public int value() {
+        return pieceType.value();
+    }
+
     PieceType getPieceType() {
         return pieceType;
     }
