@@ -3,7 +3,7 @@ package draughts.gamecore;
 import java.util.HashMap;
 import java.util.Map;
 
-public enum PieceType {
+enum PieceType {
     WHITE_PIECE(1,7,Side.WHITE),
     WHITE_KING(3,7,Side.WHITE),
     BLACK_PIECE(2,0,Side.BLACK),
