@@ -8,6 +8,11 @@ class BlackPieceCalc implements PieceCalc {
     }
 
     @Override
+    public String shortPieceString() {
+        return "B";
+    }
+
+    @Override
     public boolean legalMoveDirection(Square start, Square end) {
         return start.rowHigher(end);
     }

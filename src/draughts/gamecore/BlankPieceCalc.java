@@ -8,6 +8,11 @@ class BlankPieceCalc implements PieceCalc {
     }
 
     @Override
+    public String shortPieceString() {
+        return "-";
+    }
+
+    @Override
     public boolean legalMoveDirection(Square start, Square end) {
         return false;
     }

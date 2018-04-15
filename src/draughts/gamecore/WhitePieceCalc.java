@@ -8,6 +8,11 @@ class WhitePieceCalc implements PieceCalc {
     }
 
     @Override
+    public String shortPieceString() {
+        return "W";
+    }
+
+    @Override
     public boolean legalMoveDirection(Square start, Square end) {
         return end.rowHigher(start);
     }
