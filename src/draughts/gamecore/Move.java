@@ -47,7 +47,7 @@ public class Move implements Comparable<Move>, Iterable<Move> {
         priority += raiseAmount;
     }
 
-    PieceType getPieceType() {
+    public PieceType getPieceType() {
         return pieceType;
     }
 
