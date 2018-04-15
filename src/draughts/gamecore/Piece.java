@@ -7,6 +7,7 @@ import javafx.beans.property.SimpleObjectProperty;
 
 public class Piece {
     private PieceType pieceType;
+    private PieceCalc pieceCalc;
     private final BooleanProperty isKing;
     private final ObjectProperty<Side> side;
 
@@ -14,6 +15,7 @@ public class Piece {
         this.pieceType = pieceType;
         isKing = new SimpleBooleanProperty(false);
         side = new SimpleObjectProperty<>(pieceType.side());
+        setPieceCalc(pieceType);
     }
 
     PieceType getPieceType() {
@@ -30,6 +32,8 @@ public class Piece {
         } else {
             setIsKing(false);
         }
+
+        setPieceCalc(pieceType);
     }
 
     public BooleanProperty isKingProperty() {
@@ -83,6 +87,12 @@ public class Piece {
         return false;
     }
 
+    private void setPieceCalc(PieceType pieceType) {
+        if (pieceType.isWhite()) { this.pieceCalc = new WhitePiece(); }
+        else if (pieceType.isBlack()) { this.pieceCalc = new BlackPiece(); }
+        else { this.pieceCalc = new BlankPiece(); }
+    }
+
     private void setIsKing(boolean b) {
         isKing.set(b);
     }
@@ -97,11 +107,8 @@ public class Piece {
 
     @Override
     public String toString() {
-        String pieceString;
-        pieceString = (pieceType.isWhite()) ? "White" : "Black";
-        pieceString = (pieceType.isKing()) ? pieceString + " King" : pieceString;
-        if (this.isBlank()) { pieceString = "None"; }
-        return pieceString;
+        if (pieceType.isKing()) { return pieceCalc.pieceString() + " King"; }
+        return pieceCalc.pieceString();
     }
 }
 
