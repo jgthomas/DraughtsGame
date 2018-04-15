@@ -8,9 +8,6 @@ import java.util.stream.Collectors;
 
 
 public class RateMoves implements MoveRater {
-    private static final int SMALL_INCREASE = 1;
-    private static final int MEDIUM_INCREASE = 2;
-    private static final int LARGE_INCREASE = 10;
     private final Board board;
     private final PieceType pieceType;
     private final PieceType kingType;
@@ -24,7 +21,10 @@ public class RateMoves implements MoveRater {
     }
 
     public List<Move> rateMoves(List<Move> legalMoves) {
-        List<Move> rated = new ArrayList<>(legalMoves);
+        final int SMALL_INCREASE = 1;
+        final int MEDIUM_INCREASE = 2;
+        final int LARGE_INCREASE = 10;
+        final List<Move> rated = new ArrayList<>(legalMoves);
         int maxPriority = MoveType.MOVE.weight();
 
         for (Move move : rated) {
