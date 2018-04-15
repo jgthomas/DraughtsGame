@@ -43,7 +43,7 @@ public class Board implements Iterable<Square> {
         }
 
         if (move.makesKing()) {
-            setPieceType(move.end(), move.getPieceType().getKing());
+            setPieceType(move.end(), move.getKingType());
         }
     }
 
