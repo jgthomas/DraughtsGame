@@ -1,6 +1,6 @@
 package draughts.gamecore;
 
-public class BlackPieceCalc implements PieceCalc {
+class BlackPieceCalc implements PieceCalc {
 
     @Override
     public String pieceString() {
