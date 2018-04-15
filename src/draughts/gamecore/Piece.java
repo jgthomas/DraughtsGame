@@ -21,6 +21,26 @@ public class Piece {
         setPieceCalc();
     }
 
+    public BooleanProperty isKingProperty() {
+        return isKing;
+    }
+
+    public ObjectProperty<Side> sideProperty() {
+        return side;
+    }
+
+    public Side getSide() {
+        return side.get();
+    }
+
+    public boolean isBlank() {
+        return pieceType == PieceType.NONE;
+    }
+
+    public boolean isSameSide(Side side){
+        return side == getSide();
+    }
+
     PieceType getPieceType() {
         return pieceType;
     }
@@ -39,32 +59,12 @@ public class Piece {
         setPieceCalc();
     }
 
-    public BooleanProperty isKingProperty() {
-        return isKing;
-    }
-
-    public ObjectProperty<Side> sideProperty() {
-        return side;
-    }
-
-    public Side getSide() {
-        return side.get();
-    }
-
     boolean isPlayerPiece() {
         return pieceType != PieceType.NONE;
     }
 
-    public boolean isBlank() {
-        return pieceType == PieceType.NONE;
-    }
-
     boolean pieceIsOpponent(Piece piece) {
         return getSide() != piece.getSide() && piece.getSide() != Side.NONE;
-    }
-
-    public boolean isSameSide(Side side){
-        return side == getSide();
     }
 
     PieceType getKingType() {
