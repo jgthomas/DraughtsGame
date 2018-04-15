@@ -90,11 +90,10 @@ public class RateMoves implements MoveRater {
     }
 
     private boolean isNotCurrentlyDefendingLeft(Move move) {
-        if ((isCentralRow(move.start()) && isCentralCol(move.start()))
-                || (move.start().row() != pieceType.kingLine() && move.start().col() > 0)) {
+        if (isCentral(move.start()) || (move.getPiece().isNotKingRow(move.start()) && isNotAtLeftEdge(move.start()))) {
             return board.getPiece(toFrontLeftOf(move.start())).isNotSameSide(side);
         }
-        return true;
+        return false;
     }
 
     private boolean isNotCurrentlyDefendingRight(Move move) {
@@ -115,6 +114,14 @@ public class RateMoves implements MoveRater {
 
     private boolean isCentralRow(Square square) {
         return square.row() > 0 && square.row() < board.sideLength() - 1;
+    }
+
+    private boolean isNotAtRightEdge(Square square) {
+        return square.col() < board.sideLength() - 1;
+    }
+
+    private boolean isNotAtLeftEdge(Square square) {
+        return square.col() > 0;
     }
 
     private Square toFrontLeftOf(Square end) {

@@ -44,8 +44,12 @@ public class Piece {
         return side.get();
     }
 
-    boolean reachesKingRow(Square end) {
+    public boolean isKingRow(Square end) {
         return end.row() == pieceType.kingLine();
+    }
+
+    public boolean isNotKingRow(Square end) {
+        return end.row() != pieceType.kingLine();
     }
 
     boolean isPlayerPiece() {
