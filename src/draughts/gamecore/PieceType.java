@@ -1,15 +1,14 @@
 package draughts.gamecore;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
 public enum PieceType {
-    WHITE_PIECE(1),
-    WHITE_KING(3),
-    BLACK_PIECE(2),
-    BLACK_KING(4),
-    NONE(0);
+    WHITE_PIECE(1,7,Side.WHITE),
+    WHITE_KING(3,7,Side.WHITE),
+    BLACK_PIECE(2,0,Side.BLACK),
+    BLACK_KING(4,0,Side.BLACK),
+    NONE(0,0,Side.NONE);
 
     private static final Map<Integer, PieceType> pieceTypeCodes = new HashMap<>();
 
@@ -20,9 +19,13 @@ public enum PieceType {
     }
 
     private final int code;
+    private final int kingRow;
+    private final Side side;
 
-    PieceType(int code) {
+    PieceType(int code, int kingRow, Side side) {
         this.code = code;
+        this.kingRow = kingRow;
+        this.side = side;
     }
 
     public static PieceType valueOf(int code) {
@@ -30,11 +33,15 @@ public enum PieceType {
     }
 
     public int value() {
-        return this.code;
+        return code;
     }
 
-    public boolean in(PieceType... pieceTypes) {
-        return Arrays.stream(pieceTypes).anyMatch(pieceType -> pieceType == this);
+    public int kingRow() {
+        return kingRow;
+    }
+
+    public Side side() {
+        return side;
     }
 
     public boolean isWhite() {
@@ -47,52 +54,5 @@ public enum PieceType {
 
     public boolean isKing() {
         return this == WHITE_KING || this == BLACK_KING;
-    }
-
-    public Side side() {
-        Side side;
-        if (this.isWhite()) {
-            side = Side.WHITE;
-        } else if (this.isBlack()) {
-            side = Side.BLACK;
-        } else {
-            side = Side.NONE;
-        }
-        return side;
-    }
-
-    public boolean isPlayerPiece() {
-        return this != NONE;
-    }
-
-    public PieceType getKing() {
-        if (this == WHITE_PIECE) { return WHITE_KING; }
-        else if (this == BLACK_PIECE) { return BLACK_KING; }
-        else { return this; }
-    }
-
-    public int kingLine() {
-        if (isWhite()) {
-            return KingLine.WHITE_KING_LINE.number();
-        } else if (isBlack()) {
-            return KingLine.BLACK_KING_LINE.number();
-        }
-        return KingLine.NOT_APPLICABLE.number();
-    }
-
-    enum KingLine {
-        WHITE_KING_LINE(7),
-        BLACK_KING_LINE(0),
-        NOT_APPLICABLE(100);
-
-        private final int kingLine;
-
-        KingLine(int kingLine) {
-            this.kingLine = kingLine;
-        }
-
-        int number() {
-            return this.kingLine;
-        }
     }
 }
