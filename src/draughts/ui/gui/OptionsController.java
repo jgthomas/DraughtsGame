@@ -27,14 +27,14 @@ class OptionsController implements EventHandler<ActionEvent> {
         final Object source = event.getSource();
 
         if (source.equals(optionsView.getHumanHumanButton())) {
-            playerOne = new PlayerConfig(PlayerType.HUMAN, PieceType.WHITE_PIECE, Side.WHITE);
-            playerTwo = new PlayerConfig(PlayerType.HUMAN, PieceType.BLACK_PIECE, Side.BLACK);
+            playerOne = new PlayerConfig(PlayerType.HUMAN, Side.WHITE);
+            playerTwo = new PlayerConfig(PlayerType.HUMAN, Side.BLACK);
         } else if (source.equals(optionsView.getHumanAiButton())) {
-            playerOne = new PlayerConfig(PlayerType.HUMAN, PieceType.WHITE_PIECE, Side.WHITE);
-            playerTwo = new PlayerConfig(PlayerType.COMPUTER, PieceType.BLACK_PIECE, Side.BLACK);
+            playerOne = new PlayerConfig(PlayerType.HUMAN, Side.WHITE);
+            playerTwo = new PlayerConfig(PlayerType.COMPUTER, Side.BLACK);
         } else {
-            playerOne = new PlayerConfig(PlayerType.COMPUTER, PieceType.WHITE_PIECE, Side.WHITE);
-            playerTwo = new PlayerConfig(PlayerType.HUMAN, PieceType.BLACK_PIECE, Side.BLACK);
+            playerOne = new PlayerConfig(PlayerType.COMPUTER, Side.WHITE);
+            playerTwo = new PlayerConfig(PlayerType.HUMAN, Side.BLACK);
         }
 
         String selectedGame = optionsView.getSelectedGame();
