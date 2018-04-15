@@ -6,6 +6,6 @@ import java.util.List;
 
 interface MoveRater {
 
-    List<Move> ratedMoves(List<Move> legalMoves);
+    List<Move> rateMoves(List<Move> legalMoves);
 
 }

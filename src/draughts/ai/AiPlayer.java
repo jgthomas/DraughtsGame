@@ -27,7 +27,7 @@ public class AiPlayer implements Player {
             return moveList.get(0);
         }
 
-        List<Move> priorityMoves = moveRater.ratedMoves(moveList);
+        List<Move> priorityMoves = moveRater.rateMoves(moveList);
 
         if (priorityMoves.size() == 1) {
             return priorityMoves.get(0);

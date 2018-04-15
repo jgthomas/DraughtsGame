@@ -23,7 +23,7 @@ public class RateMoves implements MoveRater {
         this.side = side;
     }
 
-    public List<Move> ratedMoves(List<Move> legalMoves) {
+    public List<Move> rateMoves(List<Move> legalMoves) {
         List<Move> rated = new ArrayList<>(legalMoves);
         int maxPriority = MoveType.MOVE.weight();
 
