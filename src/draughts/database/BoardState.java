@@ -28,8 +28,8 @@ public class BoardState implements BoardStateLoader {
         this.boardSnapShot = boardSnapShot;
     }
 
-    public PieceType getPieceType(Square square) {
-        return PieceType.valueOf(boardSnapShot.get(square.hashCode()));
+    public int getPieceCode(Square square) {
+        return boardSnapShot.get(square.hashCode());
     }
 
     public final List<Square> squares() {

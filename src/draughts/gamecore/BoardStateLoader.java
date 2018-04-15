@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface BoardStateLoader {
 
-    PieceType getPieceType(Square square);
+    int getPieceCode(Square square);
 
     List<Square> squares();
 

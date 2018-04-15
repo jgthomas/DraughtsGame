@@ -11,13 +11,13 @@ public class Board implements Iterable<Square> {
     public Board(BoardStateLoader boardStateLoader) {
         boardSize = boardStateLoader.getBoardSize();
         for (Square square : boardStateLoader.squares()) {
-            boardMap.put(square, new Piece(boardStateLoader.getPieceType(square)));
+            boardMap.put(square, new Piece(PieceType.valueOf(boardStateLoader.getPieceCode(square))));
         }
     }
 
     final void setBoardState(BoardStateLoader boardStateLoader) {
         for (Square square : boardStateLoader.squares()) {
-            setPieceType(square, boardStateLoader.getPieceType(square));
+            setPieceType(square, PieceType.valueOf(boardStateLoader.getPieceCode(square)));
         }
     }
 
