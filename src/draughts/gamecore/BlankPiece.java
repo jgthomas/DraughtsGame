@@ -12,4 +12,9 @@ public class BlankPiece implements PieceCalc {
         return false;
     }
 
+    @Override
+    public int takenRow(Square start, Square end) {
+        return start.row();
+    }
+
 }

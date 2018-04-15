@@ -12,4 +12,9 @@ public class BlackPiece implements PieceCalc {
         return start.rowHigher(end);
     }
 
+    @Override
+    public int takenRow(Square start, Square end) {
+        return start.row() - 1;
+    }
+
 }

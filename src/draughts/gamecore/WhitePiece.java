@@ -12,4 +12,9 @@ class WhitePiece implements PieceCalc {
         return end.rowHigher(start);
     }
 
+    @Override
+    public int takenRow(Square start, Square end) {
+        return start.row() + 1;
+    }
+
 }

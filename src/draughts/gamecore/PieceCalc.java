@@ -6,4 +6,6 @@ interface PieceCalc {
 
     boolean legalMoveDirection(Square start, Square end);
 
+    int takenRow(Square start, Square end);
+
 }

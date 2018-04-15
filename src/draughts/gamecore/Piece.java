@@ -81,6 +81,11 @@ public class Piece {
         return pieceCalc.legalMoveDirection(start, end);
     }
 
+    int takenRow(Square start, Square end) {
+        if (pieceType.isKing()) { return takenRowByKing(start, end);}
+        return pieceCalc.takenRow(start, end);
+    }
+
     private void setPieceCalc(PieceType pieceType) {
         if (pieceType.isWhite()) { this.pieceCalc = new WhitePiece(); }
         else if (pieceType.isBlack()) { this.pieceCalc = new BlackPiece(); }
@@ -97,6 +102,10 @@ public class Piece {
 
     private boolean legalKingDirection(Square start, Square end) {
         return start.rowHigher(end) || end.rowHigher(start);
+    }
+
+    private int takenRowByKing(Square start, Square end) {
+        return (end.rowHigher(start)) ? start.row() + 1 : start.row() - 1;
     }
 
     @Override
