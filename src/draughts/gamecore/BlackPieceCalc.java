@@ -1,24 +1,24 @@
 package draughts.gamecore;
 
-public class BlankPiece implements PieceCalc {
+public class BlackPieceCalc implements PieceCalc {
 
     @Override
     public String pieceString() {
-        return "None";
+        return "Black";
     }
 
     @Override
     public boolean legalMoveDirection(Square start, Square end) {
-        return false;
+        return start.rowHigher(end);
     }
 
     @Override
     public int takenRow(Square start, Square end) {
-        return start.row();
+        return start.row() - 1;
     }
 
     @Override
     public PieceType kingType() {
-        return PieceType.NONE;
+        return PieceType.BLACK_KING;
     }
 }

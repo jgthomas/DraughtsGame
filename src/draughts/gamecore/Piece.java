@@ -6,9 +6,9 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 
 public class Piece {
-    private final WhitePiece whitePiece = new WhitePiece();
-    private final BlackPiece blackPiece = new BlackPiece();
-    private final BlankPiece blankPiece = new BlankPiece();
+    private final WhitePieceCalc whitePieceCalc = new WhitePieceCalc();
+    private final BlackPieceCalc blackPieceCalc = new BlackPieceCalc();
+    private final BlankPieceCalc blankPieceCalc = new BlankPieceCalc();
     private final BooleanProperty isKing;
     private final ObjectProperty<Side> side;
     private PieceType pieceType;
@@ -87,11 +87,11 @@ public class Piece {
 
     private void setPieceCalc() {
         if (pieceType.isWhite()) {
-            pieceCalc = whitePiece;
+            pieceCalc = whitePieceCalc;
         } else if (pieceType.isBlack()) {
-            pieceCalc = blackPiece;
+            pieceCalc = blackPieceCalc;
         } else {
-            pieceCalc = blankPiece;
+            pieceCalc = blankPieceCalc;
         }
     }
 
