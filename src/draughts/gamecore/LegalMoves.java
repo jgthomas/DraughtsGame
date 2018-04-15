@@ -115,8 +115,7 @@ public class LegalMoves {
 
         private boolean isLegalTake(Square start, Square end) {
             if (directionLegal(start, end) && start.isLegalTakeDistance(end)) {
-                Piece potentialTake = board.getPiece(squareInBetween(start, end));
-                return board.getPiece(start).pieceIsOpponent(potentialTake);
+                return board.getPiece(start).pieceIsOpponent(board.getPiece(squareInBetween(start, end)));
             }
             return false;
         }
