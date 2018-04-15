@@ -14,6 +14,7 @@ public class Move implements Comparable<Move>, Iterable<Move> {
     private final Piece piece;
     private final PieceType pieceType;
     private final MoveType moveType;
+    private Square takenSquare;
     private int priority;
 
     public Move(Square start, Square end) {
@@ -31,6 +32,10 @@ public class Move implements Comparable<Move>, Iterable<Move> {
         this.pieceType = piece.getPieceType();
         this.moveType = moveType;
         this.priority = priority;
+
+        if (moveType == MoveType.TAKE) {
+            takenSquare = new Square(piece.takenRow(start, end), takenColumn());
+        }
     }
 
     public Square start() {
@@ -101,23 +106,11 @@ public class Move implements Comparable<Move>, Iterable<Move> {
     }
 
     Square takenSquare() {
-        int takenRow;
-        int takenCol;
-        switch (pieceType) {
-            case WHITE_PIECE:
-                takenRow = start.row() + 1;
-                break;
-            case BLACK_PIECE:
-                takenRow = start.row() - 1;
-                break;
-            case BLACK_KING:
-            case WHITE_KING:
-            default:
-                takenRow = (end.rowHigher(start)) ? start.row() + 1 : start.row() - 1;
-                break;
-        }
-        takenCol = (end.colHigher(start)) ? start.col() + 1 : start.col() - 1;
-        return new Square(takenRow, takenCol);
+        return takenSquare;
+    }
+
+    private int takenColumn() {
+        return (end.colHigher(start)) ? start.col() + 1 : start.col() - 1;
     }
 
     @Override
