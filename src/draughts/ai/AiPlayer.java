@@ -15,7 +15,7 @@ public class AiPlayer implements Player {
     public AiPlayer(PieceType pieceType, Board board, LegalMoves legalMoves, Side side) {
         this.legalMoves = legalMoves;
         //this.pieceType = pieceType;
-        moveRater = new RateMoves(board, pieceType, side);
+        moveRater = new RateMoves(board, side);
         this.side = side;
     }
 

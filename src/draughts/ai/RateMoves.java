@@ -9,14 +9,10 @@ import java.util.stream.Collectors;
 
 public class RateMoves implements MoveRater {
     private final Board board;
-    private final PieceType pieceType;
-    private final PieceType kingType;
     private final Side side;
 
-    RateMoves(Board board, PieceType pieceType, Side side) {
+    RateMoves(Board board, Side side) {
         this.board = board;
-        this.pieceType = pieceType;
-        kingType = pieceType.getKing();
         this.side = side;
     }
 
