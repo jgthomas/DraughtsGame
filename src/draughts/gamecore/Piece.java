@@ -49,6 +49,13 @@ public class Piece {
         return pieceType;
     }
 
+    public String pieceToken() {
+        if (pieceType.isKing()) {
+            return pieceCalc.shortPieceString() + "!K";
+        }
+        return pieceCalc.shortPieceString();
+    }
+
     void setPieceType(PieceType pieceType) {
         this.pieceType = pieceType;
 
