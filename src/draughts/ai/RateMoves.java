@@ -93,12 +93,11 @@ public class RateMoves implements MoveRater {
         if (isCentral(move.start()) || (move.getPiece().isNotKingRow(move.start()) && isNotAtLeftEdge(move.start()))) {
             return board.getPiece(toFrontLeftOf(move.start())).isNotSameSide(side);
         }
-        return false;
+        return true;
     }
 
     private boolean isNotCurrentlyDefendingRight(Move move) {
-        if ((isCentralRow(move.start()) && isCentralCol(move.start()))
-                || (move.start().row() != pieceType.kingLine() && move.start().col() < board.sideLength() - 1)) {
+        if (isCentral(move.start()) || (move.getPiece().isNotKingRow(move.start()) && isNotAtRightEdge(move.start()))) {
             return board.getPiece(toFrontRightOf(move.start())).isNotSameSide(side);
         }
         return true;
