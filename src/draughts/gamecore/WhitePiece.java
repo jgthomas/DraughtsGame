@@ -17,4 +17,8 @@ class WhitePiece implements PieceCalc {
         return start.row() + 1;
     }
 
+    @Override
+    public PieceType kingType() {
+        return PieceType.WHITE_KING;
+    }
 }
