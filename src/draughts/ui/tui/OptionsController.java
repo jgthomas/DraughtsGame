@@ -51,10 +51,10 @@ class OptionsController {
             if (gameNumber < gameNames.size()) {
                 board = new Board(pickStartingMove(gameNames.get(gameNumber)));
             } else {
-                board = new Board(new BoardState());
+                board = new Board();
             }
         } else {
-            board = new Board(new BoardState());
+            board = new Board();
         }
         return board;
     }

@@ -40,7 +40,7 @@ class OptionsController implements EventHandler<ActionEvent> {
         String selectedGame = optionsView.getSelectedGame();
 
         if (selectedGame.equals("New Game")) {
-            board = new Board(new BoardState());
+            board = new Board();
             game = new Game(board, playerOne, playerTwo);
         } else {
             board = new Board(loadState.loadState(selectedGame, 30));
