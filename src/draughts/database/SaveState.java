@@ -46,7 +46,7 @@ public class SaveState {
         Map<Integer, Integer> boardState = new HashMap<>();
 
         for (Square square : board) {
-            boardState.put(square.hashCode(), board.getPieceType(square).value());
+            boardState.put(square.hashCode(), board.getPiece(square).value());
         }
 
         return boardState;
