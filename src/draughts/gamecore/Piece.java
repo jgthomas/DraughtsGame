@@ -77,14 +77,8 @@ public class Piece {
     }
 
     boolean legalMoveDirection(Square start, Square end) {
-        if (pieceType.isKing()) {
-            return legalKingDirection(start, end);
-        } else if (pieceType.isWhite()) {
-            return end.rowHigher(start);
-        } else if (pieceType.isBlack()) {
-            return start.rowHigher(end);
-        }
-        return false;
+        if (pieceType.isKing()) { return legalKingDirection(start, end); }
+        return pieceCalc.legalMoveDirection(start, end);
     }
 
     private void setPieceCalc(PieceType pieceType) {

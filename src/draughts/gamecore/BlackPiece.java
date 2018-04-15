@@ -7,4 +7,9 @@ public class BlackPiece implements PieceCalc {
         return "Black";
     }
 
+    @Override
+    public boolean legalMoveDirection(Square start, Square end) {
+        return start.rowHigher(end);
+    }
+
 }

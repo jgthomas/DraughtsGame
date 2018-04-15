@@ -7,4 +7,9 @@ class WhitePiece implements PieceCalc {
         return "White";
     }
 
+    @Override
+    public boolean legalMoveDirection(Square start, Square end) {
+        return end.rowHigher(start);
+    }
+
 }

@@ -7,4 +7,9 @@ public class BlankPiece implements PieceCalc {
         return "None";
     }
 
+    @Override
+    public boolean legalMoveDirection(Square start, Square end) {
+        return false;
+    }
+
 }
