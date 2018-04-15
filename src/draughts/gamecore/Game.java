@@ -87,7 +87,7 @@ public class Game {
     }
 
     public void backOneMove() {
-        if (!getGameIsNotWon() && currentMoveNumber > firstMoveNumber) {
+        if (getGameIsNotWon() && currentMoveNumber > firstMoveNumber) {
             board.setBoardState(saveState.getCachedState(currentMoveNumber - 1));
             currentMoveNumber -= 1;
             switchActivePlayer();
@@ -95,7 +95,7 @@ public class Game {
     }
 
     public void forwardOneMove() {
-        if (!getGameIsNotWon() && currentMoveNumber < saveState.numberOfCachedMoves() - 1) {
+        if (getGameIsNotWon() && currentMoveNumber < saveState.numberOfCachedMoves() - 1) {
             board.setBoardState(saveState.getCachedState(currentMoveNumber + 1));
             currentMoveNumber += 1;
             switchActivePlayer();
@@ -103,7 +103,7 @@ public class Game {
     }
 
     public void aiResume() {
-        if (!getGameIsNotWon() && activePlayer.isAiPlayer()) {
+        if (getGameIsNotWon() && activePlayer.isAiPlayer()) {
             board.makeMove(aiPlayer.getMove());
             cacheBoardState();
             switchActivePlayer();
