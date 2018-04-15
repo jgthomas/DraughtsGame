@@ -48,14 +48,6 @@ public class Piece {
         return side.get();
     }
 
-    public boolean isKingRow(Square end) {
-        return end.row() == pieceType.kingLine();
-    }
-
-    public boolean isNotKingRow(Square end) {
-        return end.row() != pieceType.kingLine();
-    }
-
     boolean isPlayerPiece() {
         return pieceType != PieceType.NONE;
     }
@@ -72,17 +64,21 @@ public class Piece {
         return side == getSide();
     }
 
-    public boolean isNotSameSide(Side side) {
-        return side != getSide();
+    PieceType getKingType() {
+        return pieceCalc.kingType();
     }
 
     boolean legalMoveDirection(Square start, Square end) {
-        if (pieceType.isKing()) { return legalKingDirection(start, end); }
+        if (pieceType.isKing()) {
+            return legalKingDirection(start, end);
+        }
         return pieceCalc.legalMoveDirection(start, end);
     }
 
     int takenRow(Square start, Square end) {
-        if (pieceType.isKing()) { return takenRowByKing(start, end);}
+        if (pieceType.isKing()) {
+            return takenRowByKing(start, end);
+        }
         return pieceCalc.takenRow(start, end);
     }
 
@@ -110,7 +106,9 @@ public class Piece {
 
     @Override
     public String toString() {
-        if (pieceType.isKing()) { return pieceCalc.pieceString() + " King"; }
+        if (pieceType.isKing()) {
+            return pieceCalc.pieceString() + " King";
+        }
         return pieceCalc.pieceString();
     }
 }
