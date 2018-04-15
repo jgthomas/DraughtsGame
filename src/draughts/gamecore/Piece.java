@@ -64,6 +64,10 @@ public class Piece {
         return side == getSide();
     }
 
+    public boolean isNotSameSide(Side side) {
+        return side != getSide();
+    }
+
     boolean legalMoveDirection(Square start, Square end) {
         if (pieceType.isKing()) {
             return legalKingDirection(start, end);
