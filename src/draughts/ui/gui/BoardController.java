@@ -27,7 +27,7 @@ public class BoardController implements EventHandler<MouseEvent> {
     @Override
     public void handle(MouseEvent event) {
         Object eventSource = event.getSource();
-        if (!game.won() && eventSource instanceof BoardView.SquareView) {
+        if (game.hasNotBeenWon() && eventSource instanceof BoardView.SquareView) {
             BoardView.SquareView clickedSquareView = ((BoardView.SquareView) eventSource);
             Square square = buildSquare(clickedSquareView);
             if (clickedSquareView.getStroke() == null) {

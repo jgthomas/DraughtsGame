@@ -22,7 +22,7 @@ class GameController {
 
         gameView.clearBoard();
 
-        while (!game.won()) {
+        while (game.hasNotBeenWon()) {
             gameView.print(turnTitle());
             game.makeMove(getInput());
             gameView.clearBoard();
