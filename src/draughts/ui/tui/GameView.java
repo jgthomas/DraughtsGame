@@ -12,11 +12,6 @@ final class GameView {
     }
 
     void print(String title) {
-        final String whitePieceSymbol = "W";
-        final String blackPieceSymbol = "B";
-        final String whiteKingSymbol = "W!W";
-        final String blackKingSymbol = "B!B";
-
         System.out.println("\n\n" + title);
         char rowName = 'a';
         printColumnNumbers(board.sideLength());
@@ -26,22 +21,11 @@ final class GameView {
                 System.out.print(rowName + "   ");
                 rowName += 1;
             }
-            switch (board.getPieceType(square)) {
-                case WHITE_PIECE:
-                    System.out.print(" " + whitePieceSymbol + " ");
-                    break;
-                case BLACK_PIECE:
-                    System.out.print(" " + blackPieceSymbol + " ");
-                    break;
-                case WHITE_KING:
-                    System.out.print(whiteKingSymbol);
-                    break;
-                case BLACK_KING:
-                    System.out.print(blackKingSymbol);
-                    break;
-                case NONE:
-                    System.out.print(" - ");
-                    break;
+            String pieceToken = board.getPiece(square).pieceToken();
+            if (pieceToken.length() == 1) {
+                System.out.print(" " + pieceToken + " ");
+            } else {
+                System.out.print(pieceToken);
             }
         }
         System.out.println();
