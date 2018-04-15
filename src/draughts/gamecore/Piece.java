@@ -45,15 +45,15 @@ public class Piece {
         return pieceType.value();
     }
 
-    PieceType getPieceType() {
-        return pieceType;
-    }
-
     public String pieceToken() {
         if (pieceType.isKing()) {
             return pieceCalc.shortPieceString() + "!K";
         }
         return pieceCalc.shortPieceString();
+    }
+
+    PieceType getPieceType() {
+        return pieceType;
     }
 
     void setPieceType(PieceType pieceType) {
