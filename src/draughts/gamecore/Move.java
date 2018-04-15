@@ -13,6 +13,7 @@ public class Move implements Comparable<Move>, Iterable<Move> {
     private final List<Move> nextTakes = new ArrayList<>();
     private final Piece piece;
     private final PieceType pieceType;
+    private final PieceType kingType;
     private final MoveType moveType;
     private Square takenSquare;
     private int priority;
@@ -30,6 +31,7 @@ public class Move implements Comparable<Move>, Iterable<Move> {
         this.end = end;
         this.piece = piece;
         this.pieceType = piece.getPieceType();
+        this.kingType = piece.getKingType();
         this.moveType = moveType;
         this.priority = priority;
 
@@ -58,8 +60,8 @@ public class Move implements Comparable<Move>, Iterable<Move> {
         return pieceType;
     }
 
-    public Piece getPiece() {
-        return piece;
+    PieceType getKingType() {
+        return kingType;
     }
 
     boolean isTake() {
@@ -91,8 +93,7 @@ public class Move implements Comparable<Move>, Iterable<Move> {
     }
 
     public boolean makesKing() {
-        return pieceType.in(PieceType.WHITE_PIECE, PieceType.BLACK_PIECE)
-                && end.row() == pieceType.kingLine();
+        return !pieceType.isKing() && end.row() == pieceType.kingRow();
     }
 
     private int maxPriorityOfNextMove() {
