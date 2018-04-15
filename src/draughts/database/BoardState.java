@@ -20,7 +20,7 @@ public class BoardState implements BoardStateLoader {
     BoardState(Board board) {
         boardSnapShot = new HashMap<>();
         for (Square square : board) {
-            boardSnapShot.put(square.hashCode(), board.getPieceType(square).value());
+            boardSnapShot.put(square.hashCode(), board.getPiece(square).value());
         }
     }
 
