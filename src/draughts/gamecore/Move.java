@@ -49,7 +49,7 @@ public class Move implements Comparable<Move>, Iterable<Move> {
         priority += raiseAmount;
     }
 
-    public PieceType getPieceType() {
+    PieceType getPieceType() {
         return pieceType;
     }
 
@@ -151,21 +151,6 @@ public class Move implements Comparable<Move>, Iterable<Move> {
 
     @Override
     public String toString() {
-        String piece = "None";
-        switch (pieceType) {
-            case WHITE_PIECE:
-                piece = "White";
-                break;
-            case BLACK_PIECE:
-                piece = "Black";
-                break;
-            case WHITE_KING:
-                piece = "White King";
-                break;
-            case BLACK_KING:
-                piece = "Black King";
-                break;
-        }
         String type = "Move";
         if (moveType == MoveType.TAKE) {
             type = "Takes " + takenSquare().toString();
@@ -177,7 +162,7 @@ public class Move implements Comparable<Move>, Iterable<Move> {
                 end.row(),
                 end.col(),
                 this.getPriority(),
-                piece,
+                piece.toString(),
                 type);
     }
 }

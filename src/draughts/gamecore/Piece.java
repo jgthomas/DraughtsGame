@@ -16,7 +16,7 @@ public class Piece {
         side = new SimpleObjectProperty<>(pieceType.side());
     }
 
-    public PieceType getPieceType() {
+    PieceType getPieceType() {
         return pieceType;
     }
 
@@ -93,6 +93,15 @@ public class Piece {
 
     private boolean legalKingDirection(Square start, Square end) {
         return start.rowHigher(end) || end.rowHigher(start);
+    }
+
+    @Override
+    public String toString() {
+        String pieceString;
+        pieceString = (pieceType.isWhite()) ? "White" : "Black";
+        pieceString = (pieceType.isKing()) ? pieceString + " King" : pieceString;
+        if (this.isBlank()) { pieceString = "None"; }
+        return pieceString;
     }
 }
 
