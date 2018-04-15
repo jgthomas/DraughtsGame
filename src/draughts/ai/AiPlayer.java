@@ -8,13 +8,11 @@ import draughts.gamecore.*;
 public class AiPlayer implements Player {
     private static final Random rand = new Random();
     private final LegalMoves legalMoves;
-    //private final PieceType pieceType;
     private final Side side;
     private final MoveRater moveRater;
 
-    public AiPlayer(PieceType pieceType, Board board, LegalMoves legalMoves, Side side) {
+    public AiPlayer(Board board, LegalMoves legalMoves, Side side) {
         this.legalMoves = legalMoves;
-        //this.pieceType = pieceType;
         moveRater = new RateMoves(board, side);
         this.side = side;
     }

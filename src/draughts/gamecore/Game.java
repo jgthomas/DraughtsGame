@@ -49,13 +49,13 @@ public class Game {
         saveState.cacheState(firstMoveNumber);
 
         if (playerOne.isAiPlayer()) {
-            aiPlayer = new AiPlayer(playerOne.getPieceType(), board, legalMoves, playerOne.getSide());
+            aiPlayer = new AiPlayer(board, legalMoves, playerOne.getSide());
             board.makeMove(aiPlayer.getMove());
             currentMoveNumber += 1;
             saveState.cacheState(currentMoveNumber);
             activePlayer = playerTwo;
         } else if (playerTwo.isAiPlayer()) {
-            aiPlayer = new AiPlayer(playerTwo.getPieceType(), board, legalMoves, playerTwo.getSide());
+            aiPlayer = new AiPlayer(board, legalMoves, playerTwo.getSide());
         }
 
         activeSide = new SimpleObjectProperty<>(activePlayer.getSide());
