@@ -11,22 +11,24 @@ public class Move implements Comparable<Move>, Iterable<Move> {
     private final Square start;
     private final Square end;
     private final List<Move> nextTakes = new ArrayList<>();
+    private final Piece piece;
     private final PieceType pieceType;
     private final MoveType moveType;
     private int priority;
 
     public Move(Square start, Square end) {
-        this(start, end, PieceType.NONE, MoveType.MOVE, MoveType.MOVE.weight());
+        this(start, end, new Piece(PieceType.NONE), MoveType.MOVE, MoveType.MOVE.weight());
     }
 
     Move(Square start,
          Square end,
-         PieceType pieceType,
+         Piece piece,
          MoveType moveType,
          int priority) {
         this.start = start;
         this.end = end;
-        this.pieceType = pieceType;
+        this.piece = piece;
+        this.pieceType = piece.getPieceType();
         this.moveType = moveType;
         this.priority = priority;
     }
@@ -49,6 +51,10 @@ public class Move implements Comparable<Move>, Iterable<Move> {
 
     public PieceType getPieceType() {
         return pieceType;
+    }
+
+    public Piece getPiece() {
+        return piece;
     }
 
     boolean isTake() {

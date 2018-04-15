@@ -75,14 +75,14 @@ public class LegalMoves {
                     legalPieceMoves.add(new Move(
                             start,
                             end,
-                            board.getPieceType(start),
+                            board.getPiece(start),
                             MoveType.MOVE,
                             MoveType.MOVE.weight()));
                 } else if (singleMove.isLegalTake(start, end)) {
                     legalPieceMoves.add(new Move(
                             start,
                             end,
-                            board.getPieceType(start),
+                            board.getPiece(start),
                             MoveType.TAKE,
                             MoveType.TAKE.weight()));
                 }
