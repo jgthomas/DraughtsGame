@@ -55,4 +55,12 @@ public enum PieceType {
     public boolean isKing() {
         return this == WHITE_KING || this == BLACK_KING;
     }
+
+    public boolean isBlank() {
+        return this == NONE;
+    }
+
+    public boolean isPlayerPiece() {
+        return this != NONE;
+    }
 }
