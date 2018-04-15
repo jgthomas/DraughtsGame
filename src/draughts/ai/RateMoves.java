@@ -10,10 +10,12 @@ import java.util.stream.Collectors;
 public class RateMoves implements MoveRater {
     private final Board board;
     private final Side side;
+    private final BoardNav boardNav;
 
     RateMoves(Board board, Side side) {
         this.board = board;
         this.side = side;
+        boardNav = new BoardNav(board, side);
     }
 
     public List<Move> rateMoves(List<Move> legalMoves) {
@@ -54,93 +56,55 @@ public class RateMoves implements MoveRater {
     }
 
     private boolean staysCentral(Move move) {
-        return isCentralCol(move.start()) && isCentralCol(move.end());
+        return boardNav.isCentralCol(move.start()) && boardNav.isCentralCol(move.end());
     }
 
     private boolean movesCentral(Move move) {
-        return !isCentralCol(move.start()) && isCentralCol(move.end());
+        return !boardNav.isCentralCol(move.start()) && boardNav.isCentralCol(move.end());
     }
 
     private boolean noEnemyInFront(Move move) {
-        if (isCentralRow(move.end()) && isCentralCol(move.end())) {
-            return board.getPiece(toFrontLeftOf(move.end())).isBlank()
-                    && board.getPiece(toFrontRightOf(move.end())).isBlank();
+        if (boardNav.isCentralRow(move.end()) && boardNav.isCentralCol(move.end())) {
+            return board.getPiece(boardNav.toFrontLeftOf(move.end())).isBlank()
+                    && board.getPiece(boardNav.toFrontRightOf(move.end())).isBlank();
         }
         return true;
     }
 
     private boolean isDefendedLeft(Move move) {
-        return isCentral(move.end()) && board.getPiece(toBackLeftOf(move.end())).isSameSide(side);
+        return boardNav.isCentral(move.end())
+                && board.getPiece(boardNav.toBackLeftOf(move.end())).isSameSide(side);
     }
 
     private boolean isDefendedRight(Move move) {
-        return isCentral(move.end()) && board.getPiece(toBackRightOf(move.end())).isSameSide(side);
+        return boardNav.isCentral(move.end())
+                && board.getPiece(boardNav.toBackRightOf(move.end())).isSameSide(side);
     }
 
     private boolean canDefendLeft(Move move) {
-        return isCentral(move.end()) && board.getPiece(toFrontLeftOf(move.end())).isSameSide(side);
+        return boardNav.isCentral(move.end())
+                && board.getPiece(boardNav.toFrontLeftOf(move.end())).isSameSide(side);
     }
 
     private boolean canDefendRight(Move move) {
-        return isCentral(move.end()) && board.getPiece(toFrontRightOf(move.end())).isSameSide(side);
+        return boardNav.isCentral(move.end())
+                && board.getPiece(boardNav.toFrontRightOf(move.end())).isSameSide(side);
     }
 
     private boolean isNotCurrentlyDefendingLeft(Move move) {
-        if (isCentral(move.start()) || (move.getPiece().isNotKingRow(move.start()) && isNotAtLeftEdge(move.start()))) {
-            return board.getPiece(toFrontLeftOf(move.start())).isNotSameSide(side);
+        if (boardNav.isCentral(move.start())
+                || (move.getPiece().isNotKingRow(move.start()) && boardNav.isNotAtLeftEdge(move.start()))) {
+            return board.getPiece(boardNav.toFrontLeftOf(move.start())).isNotSameSide(side);
         }
         return true;
     }
 
     private boolean isNotCurrentlyDefendingRight(Move move) {
-        if (isCentral(move.start()) || (move.getPiece().isNotKingRow(move.start()) && isNotAtRightEdge(move.start()))) {
-            return board.getPiece(toFrontRightOf(move.start())).isNotSameSide(side);
+        if (boardNav.isCentral(move.start())
+                || (move.getPiece().isNotKingRow(move.start()) && boardNav.isNotAtRightEdge(move.start()))) {
+            return board.getPiece(boardNav.toFrontRightOf(move.start())).isNotSameSide(side);
         }
         return true;
-    }
-
-    private boolean isCentral(Square square) {
-        return isCentralCol(square) && isCentralRow(square);
-    }
-
-    private boolean isCentralCol(Square square) {
-        return square.col() > 0 && square.col() < board.sideLength() - 1;
-    }
-
-    private boolean isCentralRow(Square square) {
-        return square.row() > 0 && square.row() < board.sideLength() - 1;
-    }
-
-    private boolean isNotAtRightEdge(Square square) {
-        return square.col() < board.sideLength() - 1;
-    }
-
-    private boolean isNotAtLeftEdge(Square square) {
-        return square.col() > 0;
-    }
-
-    private Square toFrontLeftOf(Square end) {
-        return (side.isWhite())
-                ? new Square(end.row()+1, end.col()-1)
-                : new Square(end.row()-1, end.col()-1);
-    }
-
-    private Square toFrontRightOf(Square end) {
-        return (side.isWhite())
-                ? new Square(end.row()+1, end.col()+1)
-                : new Square(end.row()-1, end.col()+1);
-    }
-
-    private Square toBackLeftOf(Square end) {
-        return (side.isWhite())
-                ? new Square(end.row()-1, end.col()-1)
-                : new Square(end.row()+1, end.col()-1);
-    }
-
-    private Square toBackRightOf(Square end) {
-        return (side.isWhite())
-                ? new Square(end.row()-1, end.col()+1)
-                : new Square(end.row()+1, end.col()+1);
     }
 }
 

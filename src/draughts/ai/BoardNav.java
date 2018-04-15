@@ -4,7 +4,7 @@ import draughts.gamecore.Board;
 import draughts.gamecore.Side;
 import draughts.gamecore.Square;
 
-public class BoardNav {
+class BoardNav {
     private final Board board;
     private final Side side;
 
