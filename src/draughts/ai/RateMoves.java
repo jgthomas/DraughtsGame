@@ -102,23 +102,23 @@ public class RateMoves implements MoveRater {
     }
 
     private boolean isNotCurrentlyDefendingLeft(Move move) {
-        Square start = move.start();
-        if ((isCentralRow(start) && isCentralCol(start))
-                || (start.row() != pieceType.kingLine() && start.col() > 0)) {
-            PieceType pieceLeftFront = board.getPieceType(toFrontLeftOf(start));
-            return !(pieceLeftFront == pieceType) || !(pieceLeftFront == kingType);
+        if ((isCentralRow(move.start()) && isCentralCol(move.start()))
+                || (move.start().row() != pieceType.kingLine() && move.start().col() > 0)) {
+            return board.getPiece(toFrontLeftOf(move.start())).isNotSameSide(side);
         }
         return true;
     }
 
     private boolean isNotCurrentlyDefendingRight(Move move) {
-        Square start = move.start();
-        if ((isCentralRow(start) && isCentralCol(start))
-                || (start.row() != pieceType.kingLine() && start.col() < board.sideLength() - 1)) {
-            PieceType pieceRightFront = board.getPieceType(toFrontRightOf(start));
-            return !(pieceRightFront == pieceType) || !(pieceRightFront == kingType);
+        if ((isCentralRow(move.start()) && isCentralCol(move.start()))
+                || (move.start().row() != pieceType.kingLine() && move.start().col() < board.sideLength() - 1)) {
+            return board.getPiece(toFrontRightOf(move.start())).isNotSameSide(side);
         }
         return true;
+    }
+
+    private boolean isCentral(Square square) {
+        return isCentralCol(square) && isCentralRow(square);
     }
 
     private boolean isCentralCol(Square square) {
