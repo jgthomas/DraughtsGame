@@ -101,7 +101,8 @@ class OptionsView extends HBox {
             button.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
             button.setMinSize(200, 33);
             button.setFont(new Font(30));
-            button.setTextFill(Color.BLACK);
+            button.setTextFill(Color.WHITE);
+            button.setStyle("-fx-background-color:dimgrey;");
             buttonBox.getChildren().add(button);
         }
         return buttonBox;

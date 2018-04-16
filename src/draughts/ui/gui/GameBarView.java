@@ -76,7 +76,8 @@ class GameBarView extends HBox {
             button.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
             button.setMinSize(150, 100);
             button.setFont(new Font(30));
-            button.setTextFill(Color.BLACK);
+            button.setTextFill(Color.WHITE);
+            button.setStyle("-fx-background-color:dimgrey;");
             this.getChildren().add(button);
         }
     }
