@@ -61,4 +61,19 @@ public class SquareTest {
         assertTrue(x.equals(y) && y.equals(x));
         assertEquals(x.hashCode(), y.hashCode());
     }
+
+    @Test
+    public void compareToOverride() {
+        Square baseline = new Square(1,1);
+        Square same = new Square(1, 1);
+        Square lowerRow = new Square(0, 1);
+        Square higherCol = new Square(1, 2);
+        Square higherRow = new Square(2, 0);
+        Square higherRowAndCol = new Square(2,2);
+        assertEquals(baseline.compareTo(same), 0);
+        assertEquals(baseline.compareTo(lowerRow), 1);
+        assertEquals(baseline.compareTo(higherCol), -1);
+        assertEquals(baseline.compareTo(higherRow), -1);
+        assertEquals(baseline.compareTo(higherRowAndCol), -1);
+    }
 }
