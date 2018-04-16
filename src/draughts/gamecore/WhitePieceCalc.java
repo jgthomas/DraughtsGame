@@ -14,12 +14,12 @@ class WhitePieceCalc implements PieceCalc {
 
     @Override
     public boolean legalMoveDirection(Square start, Square end) {
-        return end.rowHigher(start);
+        return start.rowHigher(end);
     }
 
     @Override
     public int takenRow(Square start, Square end) {
-        return start.row() + 1;
+        return start.row() - 1;
     }
 
     @Override

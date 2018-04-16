@@ -13,8 +13,8 @@ public enum Side {
     private static final List<Integer> blackPositions;
 
     static {
-        whitePositions = new ArrayList<>(Arrays.asList(0,2,4,6,9,11,13,15,16,18,20,22));
-        blackPositions = new ArrayList<>(Arrays.asList(41,43,45,47,48,50,52,54,57,59,61,63));
+        whitePositions = new ArrayList<>(Arrays.asList(40,42,44,46,49,51,53,55,56,58,60,62));
+        blackPositions = new ArrayList<>(Arrays.asList(1,3,5,7,8,10,12,14,17,19,21,23));
     }
 
     public boolean isWhite() {

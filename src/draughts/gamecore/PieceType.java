@@ -4,10 +4,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 enum PieceType {
-    WHITE_PIECE(1,7,Side.WHITE),
-    WHITE_KING(3,7,Side.WHITE),
-    BLACK_PIECE(2,0,Side.BLACK),
-    BLACK_KING(4,0,Side.BLACK),
+    WHITE_PIECE(1,0,Side.WHITE),
+    WHITE_KING(3,0,Side.WHITE),
+    BLACK_PIECE(2,7,Side.BLACK),
+    BLACK_KING(4,7,Side.BLACK),
     NONE(0,0,Side.NONE);
 
     private static final Map<Integer, PieceType> pieceTypeCodes = new HashMap<>();

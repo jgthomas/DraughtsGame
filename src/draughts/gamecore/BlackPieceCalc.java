@@ -14,12 +14,12 @@ class BlackPieceCalc implements PieceCalc {
 
     @Override
     public boolean legalMoveDirection(Square start, Square end) {
-        return start.rowHigher(end);
+        return end.rowHigher(start);
     }
 
     @Override
     public int takenRow(Square start, Square end) {
-        return start.row() - 1;
+        return start.row() + 1;
     }
 
     @Override
