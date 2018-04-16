@@ -7,7 +7,7 @@ import draughts.gamecore.Square;
 import java.util.Map;
 import java.util.HashMap;
 
-public class BoardState implements BoardStateLoader {
+class BoardState implements BoardStateLoader {
     private final Map<Integer, Integer> boardSnapShot;
 
     BoardState(Board board) {
