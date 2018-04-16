@@ -17,8 +17,6 @@ import draughts.gamecore.Piece;
 
 
 final class BoardView extends GridPane {
-    /*private final ObservableList<Contents> contentsOfSquares = FXCollections.observableList(new ArrayList<>(),
-            (Contents c) -> new Observable[]{c.pieceProperty(), c.getPiece().sideProperty(), c.getPiece().isKingProperty()});*/
 
     BoardView(Board board, BoardController boardController) {
         for (Square square : board) {
