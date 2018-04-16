@@ -26,7 +26,7 @@ public class LegalMovesTest {
         legalStartsBlack.add(new Square(2,5));
         legalStartsBlack.add(new Square(2,5));
         legalStartsBlack.add(new Square(2,7));
-        Assert.assertArrayEquals(legalStartsBlack.toArray(), legalMoves.legalStartingSquares(Side.BLACK).toArray());
+        Assert.assertEquals(legalStartsBlack, legalMoves.legalStartingSquares(Side.BLACK));
         List<Square> legalStartsWhite = new ArrayList<>();
         legalStartsWhite.add(new Square(5,0));
         legalStartsWhite.add(new Square(5,2));
@@ -35,7 +35,7 @@ public class LegalMovesTest {
         legalStartsWhite.add(new Square(5,4));
         legalStartsWhite.add(new Square(5,6));
         legalStartsWhite.add(new Square(5,6));
-        Assert.assertArrayEquals(legalStartsWhite.toArray(), legalMoves.legalStartingSquares(Side.WHITE).toArray());
+        Assert.assertEquals(legalStartsWhite, legalMoves.legalStartingSquares(Side.WHITE));
     }
 
     @Test
