@@ -31,10 +31,6 @@ public class Board implements Iterable<Square> {
         return boardMap.get(square);
     }
 
-    public PieceType getPieceType(Square square) {
-        return boardMap.get(square).getPieceType();
-    }
-
     void makeMove(Move move) {
         setPieceType(move.start(), PieceType.NONE);
 
