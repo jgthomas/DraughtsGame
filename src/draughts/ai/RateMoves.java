@@ -23,7 +23,7 @@ public class RateMoves implements MoveRater {
         final int MEDIUM_INCREASE = 2;
         final int LARGE_INCREASE = 10;
         final List<Move> rated = new ArrayList<>(legalMoves);
-        int maxPriority = MoveType.MOVE.weight();
+        int maxPriority = 0;
 
         for (Move move : rated) {
             if (isNotGuardingLastRow(move)) { move.raisePriority(SMALL_INCREASE); }
