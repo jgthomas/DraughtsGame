@@ -16,13 +16,14 @@ class GameBarView extends HBox {
     private final Button resumeButton = new Button("Resume");
     private final Button restartGameButton = new Button("Restart");
     private final Button newGameButton = new Button("New");
+    private final Button saveGameButton = new Button("Save");
     private final GameBarController gameBarController;
 
     private GameBarView(GameBarController gameBarController) {
         this.gameBarController = gameBarController;
         this.setPrefHeight(100);
         this.setPrefWidth(1200);
-        this.setAlignment(Pos.CENTER_LEFT);
+        this.setAlignment(Pos.CENTER);
         this.setSpacing(50);
     }
 
@@ -56,6 +57,10 @@ class GameBarView extends HBox {
         return newGameButton;
     }
 
+    Button getSaveGameButton() {
+        return saveGameButton;
+    }
+
     private void buildButtons() {
         List<Button> buttonList = new ArrayList<>();
         buttonList.add(quitButton);
@@ -64,6 +69,7 @@ class GameBarView extends HBox {
         buttonList.add(resumeButton);
         buttonList.add(restartGameButton);
         buttonList.add(newGameButton);
+        buttonList.add(saveGameButton);
 
         for (Button button : buttonList) {
             button.setOnAction(gameBarController);
