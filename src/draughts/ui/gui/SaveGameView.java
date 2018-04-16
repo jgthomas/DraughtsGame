@@ -11,4 +11,12 @@ class SaveGameView extends HBox {
     SaveGameView(SaveGameController saveGameController) {
         this.saveGameController = saveGameController;
     }
+
+    Button getSaveGameButton() {
+        return saveGameButton;
+    }
+
+    Button getBackButton() {
+        return backButton;
+    }
 }
