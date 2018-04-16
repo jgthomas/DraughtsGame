@@ -1,7 +1,6 @@
 package draughts.ui.tui;
 
 
-import draughts.database.BoardState;
 import draughts.database.LoadState;
 import draughts.gamecore.*;
 
