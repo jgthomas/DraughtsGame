@@ -66,11 +66,13 @@ public class SquareTest {
     public void compareToOverride() {
         Square baseline = new Square(1,1);
         Square same = new Square(1, 1);
+        Square lowerRowAndCol = new Square(0, 0);
         Square lowerRow = new Square(0, 1);
         Square higherCol = new Square(1, 2);
         Square higherRow = new Square(2, 0);
         Square higherRowAndCol = new Square(2,2);
         assertEquals(baseline.compareTo(same), 0);
+        assertEquals(baseline.compareTo(lowerRowAndCol), 1);
         assertEquals(baseline.compareTo(lowerRow), 1);
         assertEquals(baseline.compareTo(higherCol), -1);
         assertEquals(baseline.compareTo(higherRow), -1);
