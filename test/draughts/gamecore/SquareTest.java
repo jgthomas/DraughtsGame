@@ -36,7 +36,7 @@ public class SquareTest {
         assertFalse(start.isLegalMoveDistance(end1));
         assertFalse(start.isLegalMoveDistance(end2));
         assertTrue(start.isLegalMoveDistance(end3));
-        assertFalse(start.isLegalMoveDistance(end2));
+        assertFalse(start.isLegalMoveDistance(end4));
     }
 
     @Test
