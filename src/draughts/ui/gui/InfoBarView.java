@@ -32,7 +32,7 @@ class InfoBarView extends VBox {
         turnImage.fillProperty().bind(Bindings.createObjectBinding( () -> {
                     switch (game.getActiveSide()) {
                         case WHITE:
-                            return Color.RED;
+                            return Color.WHITE;
                         case BLACK:
                             return Color.BLACK;
                         default:

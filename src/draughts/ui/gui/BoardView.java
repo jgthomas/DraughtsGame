@@ -45,9 +45,9 @@ final class BoardView extends GridPane {
             this.setHeight(HEIGHT);
 
             if(isWhiteSquare(square)) {
-                this.setFill(Color.WHITE);
+                this.setFill(Color.LIGHTGRAY);
             } else {
-                this.setFill(Color.BLACK);
+                this.setFill(Color.DARKGREY);
             }
 
             this.setStrokeWidth(BORDER_WIDTH);
@@ -74,7 +74,7 @@ final class BoardView extends GridPane {
             this.fillProperty().bind(Bindings.createObjectBinding( () -> {
                         switch (piece.getSide()) {
                             case WHITE:
-                                return Color.RED;
+                                return Color.WHITE;
                             case BLACK:
                                 return Color.BLACK;
                             default:
@@ -95,7 +95,7 @@ final class BoardView extends GridPane {
             this.setText(kingLetter);
             this.setFont(Font.font(kingFont, FontWeight.BOLD, kingFontSize));
             this.fillProperty().bind(Bindings.when(piece.isKingProperty())
-                    .then(Color.WHITE)
+                    .then(Color.RED)
                     .otherwise(Color.TRANSPARENT));
             this.setMouseTransparent(true);
         }
