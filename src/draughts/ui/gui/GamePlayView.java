@@ -13,10 +13,12 @@ import javafx.stage.Stage;
 class GamePlayView {
     private final Stage primaryStage;
     private final BoardController boardController;
+    private final SaveGameController saveGameController;
 
-    GamePlayView(Stage primaryStage, BoardController boardController) {
+    GamePlayView(Stage primaryStage, BoardController boardController, SaveGameController saveGameController) {
         this.primaryStage = primaryStage;
         this.boardController = boardController;
+        this.saveGameController = saveGameController;
     }
 
     void show() {
@@ -24,7 +26,7 @@ class GamePlayView {
         final int SCENE_HEIGHT = 1300;
 
         BoardView boardView = boardController.getBoardView();
-        GameBarView gameBarView = new GameBarController(boardController, primaryStage).getGameBarView();
+        GameBarView gameBarView = new GameBarController(boardController, saveGameController, primaryStage).getGameBarView();
         InfoBarView infoBarView = new InfoBarView(boardController.getGame());
 
         BorderPane gameUI = new BorderPane();

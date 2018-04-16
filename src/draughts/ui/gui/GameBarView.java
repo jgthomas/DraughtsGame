@@ -69,7 +69,7 @@ class GameBarView extends HBox {
         buttonList.add(resumeButton);
         buttonList.add(restartGameButton);
         buttonList.add(newGameButton);
-        buttonList.add(saveGameButton);
+        //buttonList.add(saveGameButton);
 
         for (Button button : buttonList) {
             button.setOnAction(gameBarController);

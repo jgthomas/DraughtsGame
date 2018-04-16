@@ -47,8 +47,9 @@ class OptionsController implements EventHandler<ActionEvent> {
         }
 
         boardController = new BoardController(game);
+        SaveGameController saveGameController = new SaveGameController();
 
-        GamePlayView gamePlayView = new GamePlayView(primaryStage, boardController);
+        GamePlayView gamePlayView = new GamePlayView(primaryStage, boardController, saveGameController);
         gamePlayView.show();
     }
 
