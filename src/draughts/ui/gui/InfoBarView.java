@@ -46,7 +46,7 @@ class InfoBarView extends VBox {
         winInfo.fillProperty().bind(Bindings
                 .when(game.gameIsNotWonProperty())
                 .then(Color.TRANSPARENT)
-                .otherwise(Color.GREEN));
+                .otherwise(Color.LAWNGREEN));
 
         this.getChildren().add(turnInfo);
         this.getChildren().add(turnImage);
