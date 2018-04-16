@@ -76,7 +76,7 @@ final class BoardView extends GridPane {
                             case WHITE:
                                 return Color.WHITE;
                             case BLACK:
-                                return Color.BLACK;
+                                return Color.RED;
                             default:
                                 return Color.TRANSPARENT;
                         }
@@ -95,7 +95,7 @@ final class BoardView extends GridPane {
             this.setText(kingLetter);
             this.setFont(Font.font(kingFont, FontWeight.BOLD, kingFontSize));
             this.fillProperty().bind(Bindings.when(piece.isKingProperty())
-                    .then(Color.RED)
+                    .then(Color.BLACK)
                     .otherwise(Color.TRANSPARENT));
             this.setMouseTransparent(true);
         }

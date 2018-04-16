@@ -34,7 +34,7 @@ class InfoBarView extends VBox {
                         case WHITE:
                             return Color.WHITE;
                         case BLACK:
-                            return Color.BLACK;
+                            return Color.RED;
                         default:
                             return Color.TRANSPARENT;
                     }
