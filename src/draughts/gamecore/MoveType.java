@@ -1,6 +1,6 @@
 package draughts.gamecore;
 
-public enum MoveType {
+enum MoveType {
     MOVE(1),
     TAKE(100);
 
