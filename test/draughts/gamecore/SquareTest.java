@@ -53,4 +53,12 @@ public class SquareTest {
         assertTrue(start.isLegalTakeDistance(end4));
         assertFalse(start.isLegalTakeDistance(end5));
     }
+
+    @Test
+    public void equalsAndHashCode() {
+        Square x = new Square(0,0);
+        Square y = new Square(0, 0 );
+        assertTrue(x.equals(y) && y.equals(x));
+        assertEquals(x.hashCode(), y.hashCode());
+    }
 }
