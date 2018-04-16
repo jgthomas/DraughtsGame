@@ -147,7 +147,7 @@ public class Move implements Comparable<Move>, Iterable<Move> {
     public String toString() {
         String type = "Move";
         if (moveType == MoveType.TAKE) {
-            type = "Takes " + takenSquare().toString();
+            type = "Takes " + takenSquare.toString();
         }
         return String.format("%s [(%s,%s) --> (%s,%s) {Priority: %s} {Piece: %s} {Type: %s}]",
                 this.getClass().getSimpleName(),
