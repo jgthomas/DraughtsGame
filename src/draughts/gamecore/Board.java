@@ -94,8 +94,8 @@ public class Board implements Iterable<Square> {
         private List<Integer> pieceTypeCodes() {
             final int NUM_OF_SQUARES = BOARD_SIZE * BOARD_SIZE;
             List<Integer> codes = new ArrayList<>(Collections.nCopies(NUM_OF_SQUARES, 0));
-            for (Integer blackPos : Side.getBlack()) { codes.add(blackPos, PieceType.BLACK_PIECE.value()); }
-            for (Integer whitePos : Side.getWhite()) { codes.add(whitePos, PieceType.WHITE_PIECE.value()); }
+            for (Integer whitePos : Side.getWhite()) { codes.set(whitePos, PieceType.WHITE_PIECE.value()); }
+            for (Integer blackPos : Side.getBlack()) { codes.set(blackPos, PieceType.BLACK_PIECE.value()); }
             return codes;
         }
 
