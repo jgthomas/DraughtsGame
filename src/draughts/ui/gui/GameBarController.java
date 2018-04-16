@@ -35,6 +35,8 @@ class GameBarController implements EventHandler<ActionEvent> {
             final int SCENE_HEIGHT = 400;
             Scene scene = new Scene(new OptionsController(primaryStage).getOptionsView(), SCENE_WIDTH, SCENE_HEIGHT);
             primaryStage.setScene(scene);
+        } else if (eventSource.equals(gameBarView.getSaveGameButton())) {
+            System.out.println("Hello");
         }
     }
 
