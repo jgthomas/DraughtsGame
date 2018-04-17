@@ -10,12 +10,17 @@ import draughts.gamecore.Square;
 public class CacheState {
 
     private final Board board;
-    private final DB db;
-    private final Map<Integer, Map<Integer, Integer>> cachedState = new HashMap<>();
+    private final DB db = new DB();
+    private final Map<Integer, Map<Integer, Integer>> cachedState;
 
     public CacheState(Board board) {
         this.board = board;
-        db = new DB();
+        cachedState = new HashMap<>();
+    }
+
+    CacheState(Board board, Map<Integer, Map<Integer, Integer>> cachedState) {
+        this.board = board;
+        this.cachedState = cachedState;
     }
 
     public void cacheState(int moveNumber) {
