@@ -14,9 +14,9 @@ import java.sql.ResultSet;
 
 class DB {
     private static final String DB_URL = "jdbc:sqlite::resource:test.db";
+    //private static final String LOCAL_DB_URL = "jdbc:sqlite:resource/test.db";
 
     void insertGame(String name, Map<Integer, Map<Integer, Integer>> game) {
-        createNewTable();
         try (Connection conn = this.connect();
              PreparedStatement ps = conn.prepareStatement(SQL.INSERT_STATE)) {
             conn.setAutoCommit(false);
@@ -87,19 +87,12 @@ class DB {
         return totalMoves;
     }
 
-    private void createNewTable() {
-        try (Connection conn = this.connect();
-             Statement stmt = conn.createStatement()) {
-            stmt.execute(SQL.CREATE_TABLE);
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
     private Connection connect() {
         Connection conn = null;
         try {
             conn = DriverManager.getConnection(DB_URL);
+            Statement stmt = conn.createStatement();
+            stmt.execute(SQL.CREATE_TABLE);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
