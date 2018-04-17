@@ -41,7 +41,7 @@ public class Piece {
     }
 
     public String pieceToken() {
-        return pieceType.shortPieceString();
+        return pieceType.getShortPieceString();
     }
 
     PieceType getPieceType() {
@@ -90,7 +90,7 @@ public class Piece {
 
     @Override
     public String toString() {
-        return pieceType.pieceString();
+        return pieceType.getPieceString();
     }
 }
 
