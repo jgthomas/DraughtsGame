@@ -46,14 +46,6 @@ class GameBarController implements EventHandler<ActionEvent> {
             Scene scene = new Scene(new OptionsController(primaryStage).getOptionsView(), SCENE_WIDTH, SCENE_HEIGHT);
             primaryStage.setScene(scene);
         } else if (eventSource.equals(gameBarView.getSaveGameButton())) {
-            /*final int SAVE_WIDTH = 1000;
-            final int SAVE_HEIGHT = 400;
-
-            Stage saveGameStage = new Stage();
-            saveGameStage.initOwner(gameBarView.getSaveGameButton().getScene().getWindow());
-            saveGameStage.setScene(new Scene(saveGameController.getSaveGameView(), SAVE_WIDTH, SAVE_HEIGHT));
-            saveGameStage.showAndWait();*/
-
             TextInputDialog dialog = new TextInputDialog("Game" + loadState.getAllGameNames().size());
             dialog.setTitle("Save Game");
             dialog.setHeaderText("Save Game");
