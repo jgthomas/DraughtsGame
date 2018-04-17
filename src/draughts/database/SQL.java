@@ -34,4 +34,8 @@ final class SQL {
             "      FROM games",
             "     WHERE name=?"
     );
+
+    static final String CHECK_GAME_EXISTS = String.join(System.getProperty("line.separator"),
+            "SELECT EXISTS(SELECT 1 FROM games WHERE name=? LIMIT 1"
+            );
 }
