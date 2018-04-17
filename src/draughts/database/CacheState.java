@@ -18,7 +18,7 @@ public class CacheState {
         cachedState = new HashMap<>();
     }
 
-    CacheState(Board board, Map<Integer, Map<Integer, Integer>> cachedState) {
+    public CacheState(Board board, Map<Integer, Map<Integer, Integer>> cachedState) {
         this.board = board;
         this.cachedState = cachedState;
     }
@@ -41,6 +41,14 @@ public class CacheState {
 
     public void clearCachedMoves() {
         cachedState.clear();
+    }
+
+    public void clearCacheFromMove(int moveNumber) {
+        if (cachedState.size() > moveNumber) {
+            for (int i = moveNumber+1; i < cachedState.size(); i++) {
+                cachedState.remove(i);
+            }
+        }
     }
 
     public void saveGame(String name) {
