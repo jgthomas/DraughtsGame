@@ -13,7 +13,6 @@ import java.util.Optional;
 class GameBarController implements EventHandler<ActionEvent> {
     private final GameBarView gameBarView;
     private final BoardController boardController;
-    private final SaveGameController saveGameController;
     private final Stage primaryStage;
     private final Game game;
     private final LoadState loadState = new LoadState();
@@ -21,7 +20,6 @@ class GameBarController implements EventHandler<ActionEvent> {
     GameBarController(BoardController boardController, SaveGameController saveGameController, Stage primaryStage) {
         this.primaryStage = primaryStage;
         this.boardController = boardController;
-        this.saveGameController = saveGameController;
         this.game = boardController.getGame();
         gameBarView = GameBarView.newInstance(this);
     }
