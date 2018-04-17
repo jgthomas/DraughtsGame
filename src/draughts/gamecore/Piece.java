@@ -6,19 +6,14 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 
 public class Piece {
-    private final WhitePieceCalc whitePieceCalc = new WhitePieceCalc();
-    private final BlackPieceCalc blackPieceCalc = new BlackPieceCalc();
-    private final BlankPieceCalc blankPieceCalc = new BlankPieceCalc();
     private final BooleanProperty isKing;
     private final ObjectProperty<Side> side;
     private PieceType pieceType;
-    private PieceCalc pieceCalc;
 
     Piece(PieceType pieceType) {
         this.pieceType = pieceType;
         isKing = new SimpleBooleanProperty(false);
         side = new SimpleObjectProperty<>(pieceType.side());
-        setPieceCalc();
     }
 
     public BooleanProperty isKingProperty() {
@@ -46,10 +41,7 @@ public class Piece {
     }
 
     public String pieceToken() {
-        if (pieceType.isKing()) {
-            return pieceCalc.shortPieceString() + "!K";
-        }
-        return pieceCalc.shortPieceString();
+        return pieceType.shortPieceString();
     }
 
     PieceType getPieceType() {
@@ -66,8 +58,6 @@ public class Piece {
         } else {
             setIsKing(false);
         }
-
-        setPieceCalc();
     }
 
     boolean isPlayerPiece() {
@@ -83,27 +73,11 @@ public class Piece {
     }
 
     boolean legalMoveDirection(Square start, Square end) {
-        if (pieceType.isKing()) {
-            return legalKingDirection(start, end);
-        }
-        return pieceCalc.legalMoveDirection(start, end);
+        return pieceType.legalMoveDirection(start, end);
     }
 
     int takenRow(Square start, Square end) {
-        if (pieceType.isKing()) {
-            return takenRowByKing(start, end);
-        }
-        return pieceCalc.takenRow(start, end);
-    }
-
-    private void setPieceCalc() {
-        if (pieceType.isWhite()) {
-            pieceCalc = whitePieceCalc;
-        } else if (pieceType.isBlack()) {
-            pieceCalc = blackPieceCalc;
-        } else {
-            pieceCalc = blankPieceCalc;
-        }
+        return pieceType.takenRow(start, end);
     }
 
     private void setIsKing(boolean b) {
@@ -114,20 +88,9 @@ public class Piece {
         this.side.set(side);
     }
 
-    private boolean legalKingDirection(Square start, Square end) {
-        return start.rowHigher(end) || end.rowHigher(start);
-    }
-
-    private int takenRowByKing(Square start, Square end) {
-        return (end.rowHigher(start)) ? start.row() + 1 : start.row() - 1;
-    }
-
     @Override
     public String toString() {
-        if (pieceType.isKing()) {
-            return pieceCalc.pieceString() + " King";
-        }
-        return pieceCalc.pieceString();
+        return pieceType.pieceString();
     }
 }
 
