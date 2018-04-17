@@ -42,8 +42,8 @@ class OptionsController implements EventHandler<ActionEvent> {
             board = new Board();
             game = new Game(board, playerOne, playerTwo);
         } else {
-            board = new Board(loadState.loadState(selectedGame, 30));
-            game = new Game(board, playerOne, playerTwo, 30);
+            board = new Board(loadState.loadState(selectedGame, loadState.totalMoves(selectedGame)));
+            game = new Game(board, playerOne, playerTwo, loadState.totalMoves(selectedGame));
         }
 
         boardController = new BoardController(game);
