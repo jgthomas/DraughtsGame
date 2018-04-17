@@ -17,7 +17,7 @@ class GameBarController implements EventHandler<ActionEvent> {
     private final Game game;
     private final LoadState loadState = new LoadState();
 
-    GameBarController(BoardController boardController, SaveGameController saveGameController, Stage primaryStage) {
+    GameBarController(BoardController boardController, Stage primaryStage) {
         this.primaryStage = primaryStage;
         this.boardController = boardController;
         this.game = boardController.getGame();
