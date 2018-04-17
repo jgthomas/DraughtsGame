@@ -88,43 +88,43 @@ enum PieceType implements PieceCalculation {
         this.shortPieceString = shortPieceString;
     }
 
-    public static PieceType valueOf(int code) {
+    static PieceType valueOf(int code) {
         return pieceTypeCodes.get(code);
     }
 
-    public int value() {
+    int value() {
         return code;
     }
 
-    public PieceType kingType() {
+    PieceType kingType() {
         return kingType;
     }
 
-    public int kingRow() {
+    int kingRow() {
         return kingRow;
     }
 
-    public Side side() {
+    Side side() {
         return side;
     }
 
-    public String getPieceString() {
+    String getPieceString() {
         return pieceString;
     }
 
-    public String getShortPieceString() {
+    String getShortPieceString() {
         return shortPieceString;
     }
 
-    public boolean isKing() {
+    boolean isKing() {
         return this == WHITE_KING || this == BLACK_KING;
     }
 
-    public boolean isBlank() {
+    boolean isBlank() {
         return this == NONE;
     }
 
-    public boolean isPlayerPiece() {
+    boolean isPlayerPiece() {
         return this != NONE;
     }
 }
