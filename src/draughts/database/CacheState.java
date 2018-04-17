@@ -7,13 +7,13 @@ import java.util.Map;
 import draughts.gamecore.Board;
 import draughts.gamecore.Square;
 
-public class SaveState {
+public class CacheState {
 
     private final Board board;
     private final DB db;
     private final Map<Integer, Map<Integer, Integer>> cachedState = new HashMap<>();
 
-    public SaveState(Board board) {
+    public CacheState(Board board) {
         this.board = board;
         db = new DB();
     }
