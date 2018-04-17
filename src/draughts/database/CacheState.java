@@ -35,20 +35,8 @@ public class CacheState {
         return new BoardState(board);
     }
 
-    public int numberOfCachedMoves() {
-        return cachedState.size();
-    }
-
     public void clearCachedMoves() {
         cachedState.clear();
-    }
-
-    public void clearCacheAfter(int moveNumber) {
-        for (Integer key : cachedState.keySet()) {
-            if (key > moveNumber) {
-                cachedState.remove(key);
-            }
-        }
     }
 
     public void saveGame(String name) {
