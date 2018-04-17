@@ -1,5 +1,6 @@
 package draughts.ui.gui;
 
+import draughts.database.CacheState;
 import draughts.database.LoadState;
 import draughts.gamecore.*;
 import javafx.event.ActionEvent;
@@ -18,6 +19,7 @@ class OptionsController implements EventHandler<ActionEvent> {
     @Override
     public void handle(final ActionEvent event) {
         Board board;
+        CacheState cacheState;
         BoardController boardController;
         Game game;
         PlayerConfig playerOne;
@@ -40,10 +42,12 @@ class OptionsController implements EventHandler<ActionEvent> {
 
         if (selectedGame.equals("New Game")) {
             board = new Board();
-            game = new Game(board, playerOne, playerTwo);
+            cacheState = new CacheState(board);
+            game = new Game(board, cacheState, playerOne, playerTwo);
         } else {
             board = new Board(loadState.loadState(selectedGame, loadState.totalMoves(selectedGame)));
-            game = new Game(board, playerOne, playerTwo, loadState.totalMoves(selectedGame));
+            cacheState = new CacheState(board, loadState.loadGameToCache(selectedGame));
+            game = new Game(board, cacheState, playerOne, playerTwo, loadState.totalMoves(selectedGame));
         }
 
         boardController = new BoardController(game);

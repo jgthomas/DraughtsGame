@@ -1,6 +1,7 @@
 package draughts.ui.tui;
 
 
+import draughts.database.CacheState;
 import draughts.database.LoadState;
 import draughts.gamecore.*;
 
@@ -32,7 +33,8 @@ class OptionsController {
             playerTwo = makePlayer(userInput, SECOND_PLAYER, Side.BLACK);
         }
         Board board= makeBoard(userInput);
-        Game game = new Game(board, playerOne, playerTwo, moveNumber);
+        CacheState cacheState = new CacheState(board);
+        Game game = new Game(board, cacheState, playerOne, playerTwo, moveNumber);
         new GameController(game, userInput).run();
     }
 

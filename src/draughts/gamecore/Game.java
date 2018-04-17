@@ -26,13 +26,15 @@ public class Game {
     private Player aiPlayer;
 
     public Game(Board board,
+                CacheState cacheState,
                 PlayerConfig playerOne,
                 PlayerConfig playerTwo)
     {
-        this(board, playerOne, playerTwo, 0);
+        this(board, cacheState, playerOne, playerTwo, 0);
     }
 
     public Game(Board board,
+                CacheState cacheState,
                 PlayerConfig playerOne,
                 PlayerConfig playerTwo,
                 int firstMoveNumber)
@@ -41,10 +43,11 @@ public class Game {
         this.playerOne = playerOne;
         this.playerTwo = playerTwo;
         this.legalMoves = new LegalMoves(board);
-        this.cacheState = new CacheState(board);
+        this.cacheState = cacheState;
         this.firstMoveNumber = firstMoveNumber;
         this.currentMoveNumber = firstMoveNumber;
         this.activePlayer = playerOne;
+        System.out.println("first move num: " + firstMoveNumber);
 
         cacheState.cacheState(firstMoveNumber);
 
@@ -79,7 +82,13 @@ public class Game {
     public void restartGame() {
         board.setBoardState(cacheState.getCachedState(firstMoveNumber));
         currentMoveNumber = firstMoveNumber;
-        cacheState.clearCachedMoves();
+        if (firstMoveNumber == 0) {
+            cacheState.clearCachedMoves();
+        } else {
+            cacheState.clearCacheFromMove(firstMoveNumber);
+        }
+        System.out.println("first move num: " + firstMoveNumber);
+        System.out.println("current move num: " + currentMoveNumber);
         switchActivePlayer();
         setGameIsNotWon(true);
         cacheState.cacheState(currentMoveNumber);
@@ -87,7 +96,7 @@ public class Game {
     }
 
     public void backOneMove() {
-        if (getGameIsNotWon() && currentMoveNumber > firstMoveNumber) {
+        if (getGameIsNotWon() && (currentMoveNumber > firstMoveNumber || (firstMoveNumber > 0 && currentMoveNumber > 0))) {
             board.setBoardState(cacheState.getCachedState(currentMoveNumber - 1));
             currentMoveNumber -= 1;
             switchActivePlayer();
@@ -96,6 +105,7 @@ public class Game {
 
     public void forwardOneMove() {
         if (getGameIsNotWon() && currentMoveNumber < cacheState.numberOfCachedMoves() - 1) {
+            System.out.println("current move num: " + currentMoveNumber);
             board.setBoardState(cacheState.getCachedState(currentMoveNumber + 1));
             currentMoveNumber += 1;
             switchActivePlayer();
