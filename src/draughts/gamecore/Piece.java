@@ -79,7 +79,7 @@ public class Piece {
     }
 
     PieceType getKingType() {
-        return pieceCalc.kingType();
+        return pieceType.kingType();
     }
 
     boolean legalMoveDirection(Square start, Square end) {

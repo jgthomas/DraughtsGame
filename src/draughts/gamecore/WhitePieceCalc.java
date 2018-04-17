@@ -21,9 +21,4 @@ class WhitePieceCalc implements PieceCalc {
     public int takenRow(Square start, Square end) {
         return start.row() - 1;
     }
-
-    @Override
-    public PieceType kingType() {
-        return PieceType.WHITE_KING;
-    }
 }

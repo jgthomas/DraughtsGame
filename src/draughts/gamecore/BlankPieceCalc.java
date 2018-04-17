@@ -22,8 +22,4 @@ class BlankPieceCalc implements PieceCalc {
         return start.row();
     }
 
-    @Override
-    public PieceType kingType() {
-        return PieceType.NONE;
-    }
 }

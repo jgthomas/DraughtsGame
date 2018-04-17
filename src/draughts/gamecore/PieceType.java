@@ -11,11 +11,18 @@ enum PieceType {
     NONE(0,0,Side.NONE);
 
     private static final Map<Integer, PieceType> pieceTypeCodes = new HashMap<>();
+    private PieceType kingType;
 
     static {
         for (PieceType pieceType : PieceType.values()) {
             pieceTypeCodes.put(pieceType.code, pieceType);
         }
+
+        WHITE_PIECE.kingType = WHITE_KING;
+        WHITE_KING.kingType = WHITE_KING;
+        BLACK_PIECE.kingType = BLACK_KING;
+        BLACK_KING.kingType = BLACK_KING;
+        NONE.kingType = NONE;
     }
 
     private final int code;
@@ -34,6 +41,10 @@ enum PieceType {
 
     public int value() {
         return code;
+    }
+
+    public PieceType kingType() {
+        return kingType;
     }
 
     public int kingRow() {

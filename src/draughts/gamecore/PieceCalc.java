@@ -10,6 +10,4 @@ interface PieceCalc {
 
     int takenRow(Square start, Square end);
 
-    PieceType kingType();
-
 }
