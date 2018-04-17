@@ -139,14 +139,6 @@ enum PieceType implements PieceCalculation {
         return side;
     }
 
-    public boolean isWhite() {
-        return this == WHITE_PIECE || this == WHITE_KING;
-    }
-
-    public boolean isBlack() {
-        return this == BLACK_PIECE || this == BLACK_KING;
-    }
-
     public boolean isKing() {
         return this == WHITE_KING || this == BLACK_KING;
     }
