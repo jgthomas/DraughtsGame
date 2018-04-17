@@ -6,4 +6,8 @@ public interface PieceCalculation {
 
     String shortPieceString();
 
+    boolean legalMoveDirection(Square start, Square end);
+
+    int takenRow(Square start, Square end);
+
 }
