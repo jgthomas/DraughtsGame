@@ -84,10 +84,12 @@ public class Game {
     public void restartGame() {
         board.setBoardState(cacheState.getCachedState(firstMoveNumber));
         currentMoveNumber = firstMoveNumber;
-        maxMoveNumber = firstMoveNumber;
         if (firstMoveNumber == 0) {
             cacheState.clearCachedMoves();
+        } else {
+            cacheState.clearCacheBetween(firstMoveNumber, maxMoveNumber);
         }
+        maxMoveNumber = firstMoveNumber;
         switchActivePlayer();
         setGameIsNotWon(true);
         cacheState.cacheState(currentMoveNumber);
