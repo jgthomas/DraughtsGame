@@ -85,7 +85,7 @@ public class Game {
         if (firstMoveNumber == 0) {
             cacheState.clearCachedMoves();
         } else {
-            cacheState.clearCacheFromMove(firstMoveNumber);
+            cacheState.clearCacheAfter(firstMoveNumber);
         }
         System.out.println("first move num: " + firstMoveNumber);
         System.out.println("current move num: " + currentMoveNumber);
