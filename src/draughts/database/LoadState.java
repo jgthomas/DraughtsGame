@@ -30,7 +30,7 @@ public class LoadState {
         return db.totalMovesInGame(gameName);
     }
 
-    private Map<Integer, Map<Integer, Integer>> loadGameToCache(String gameName, int turnNumber) {
+    public Map<Integer, Map<Integer, Integer>> loadGameToCache(String gameName) {
         Map<Integer, Map<Integer, Integer>> cachedState = new HashMap<>();
         for (int turn = 0; turn < totalMoves(gameName); turn++) {
             cachedState.put(turn, getTurnState(gameName, turn));
