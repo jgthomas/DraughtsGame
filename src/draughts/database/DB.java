@@ -14,7 +14,7 @@ import java.sql.ResultSet;
 
 class DB {
     private static final String DB_URL = "jdbc:sqlite::resource:test.db";
-    //private static final String LOCAL_DB_URL = "jdbc:sqlite:resource/test.db";
+    //private static final String DB_URL = "jdbc:sqlite:resource/test.db";
 
     void insertGame(String name, Map<Integer, Map<Integer, Integer>> game) {
         try (Connection conn = this.connect();
