@@ -44,9 +44,9 @@ public class CacheState {
     }
 
     public void clearCacheFromMove(int moveNumber) {
-        if (cachedState.size() > moveNumber) {
-            for (int i = moveNumber+1; i < cachedState.size(); i++) {
-                cachedState.remove(i);
+        for (Integer key : cachedState.keySet()) {
+            if (key > moveNumber) {
+                cachedState.remove(key);
             }
         }
     }
