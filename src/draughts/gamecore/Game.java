@@ -139,7 +139,7 @@ public class Game {
     }
 
     public void saveGame(String gameName) {
-        cacheState.saveGame(gameName);
+        cacheState.saveCachedState(gameName);
     }
 
     public BooleanProperty gameIsNotWonProperty() {

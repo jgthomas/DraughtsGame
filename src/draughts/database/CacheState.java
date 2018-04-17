@@ -39,7 +39,7 @@ public class CacheState {
         cachedState.clear();
     }
 
-    public void saveGame(String name) {
+    public void saveCachedState(String name) {
         db.insertGame(name, cachedState);
     }
 
