@@ -4,90 +4,55 @@ import java.util.HashMap;
 import java.util.Map;
 
 enum PieceType implements PieceCalculation {
-    WHITE_PIECE(1,0,Side.WHITE) {
-        @Override
-        public String pieceString() { return "White"; }
-
-        @Override
-        public String shortPieceString() { return "W"; }
-
+    WHITE_PIECE(1,0,Side.WHITE,"White","W") {
         @Override
         public boolean legalMoveDirection(Square start, Square end) {
             return start.rowHigher(end);
         }
-
         @Override
         public int takenRow(Square start, Square end) {
             return start.row() - 1;
         }
     },
 
-    WHITE_KING(3,0,Side.WHITE) {
-        @Override
-        public String pieceString() { return "White King"; }
-
-        @Override
-        public String shortPieceString() { return "W!K"; }
-
+    WHITE_KING(3,0,Side.WHITE,"White King","W!K") {
         @Override
         public boolean legalMoveDirection(Square start, Square end) {
             return start.rowHigher(end) || end.rowHigher(start);
         }
-
         @Override
         public int takenRow(Square start, Square end) {
             return (end.rowHigher(start)) ? start.row() + 1 : start.row() - 1;
         }
     },
 
-    BLACK_PIECE(2,7,Side.BLACK) {
-        @Override
-        public String pieceString() { return "Black King"; }
-
-        @Override
-        public String shortPieceString() { return "B"; }
-
+    BLACK_PIECE(2,7,Side.BLACK,"Black","B") {
         @Override
         public boolean legalMoveDirection(Square start, Square end) {
             return end.rowHigher(start);
         }
-
         @Override
         public int takenRow(Square start, Square end) {
             return start.row() + 1;
         }
     },
 
-    BLACK_KING(4,7,Side.BLACK) {
-        @Override
-        public String pieceString() { return "Black"; }
-
-        @Override
-        public String shortPieceString() { return "B!K"; }
-
+    BLACK_KING(4,7,Side.BLACK,"Black King","B!K") {
         @Override
         public boolean legalMoveDirection(Square start, Square end) {
             return start.rowHigher(end) || end.rowHigher(start);
         }
-
         @Override
         public int takenRow(Square start, Square end) {
             return (end.rowHigher(start)) ? start.row() + 1 : start.row() - 1;
         }
     },
 
-    NONE(0,0,Side.NONE) {
-        @Override
-        public String pieceString() { return "None"; }
-
-        @Override
-        public String shortPieceString() { return "-"; }
-
+    NONE(0,0,Side.NONE,"None","-") {
         @Override
         public boolean legalMoveDirection(Square start, Square end) {
             return false;
         }
-
         @Override
         public int takenRow(Square start, Square end) {
             return start.row();
@@ -112,11 +77,15 @@ enum PieceType implements PieceCalculation {
     private final int code;
     private final int kingRow;
     private final Side side;
+    private final String pieceString;
+    private final String shortPieceString;
 
-    PieceType(int code, int kingRow, Side side) {
+    PieceType(int code, int kingRow, Side side, String pieceString, String shortPieceString) {
         this.code = code;
         this.kingRow = kingRow;
         this.side = side;
+        this.pieceString = pieceString;
+        this.shortPieceString = shortPieceString;
     }
 
     public static PieceType valueOf(int code) {
@@ -137,6 +106,14 @@ enum PieceType implements PieceCalculation {
 
     public Side side() {
         return side;
+    }
+
+    public String getPieceString() {
+        return pieceString;
+    }
+
+    public String getShortPieceString() {
+        return shortPieceString;
     }
 
     public boolean isKing() {
