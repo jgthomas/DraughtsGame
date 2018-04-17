@@ -11,7 +11,7 @@ public class CacheState {
 
     private final Board board;
     private final DB db = new DB();
-    private final Map<Integer, Map<Integer, Integer>> cachedState;
+    private Map<Integer, Map<Integer, Integer>> cachedState;
 
     public CacheState(Board board) {
         this.board = board;
@@ -37,6 +37,20 @@ public class CacheState {
 
     public void clearCachedMoves() {
         cachedState.clear();
+    }
+
+    public void clearCacheBetween(int startMoveNumber, int endMoveNumber) {
+        if (endMoveNumber > startMoveNumber) {
+            Map<Integer, Map<Integer, Integer>> newCachedState = new HashMap<>();
+            System.out.println(cachedState.keySet());
+            for (Integer key : cachedState.keySet()) {
+                if (key <= startMoveNumber) {
+                    newCachedState.put(key, cachedState.get(key));
+                }
+            }
+            cachedState = newCachedState;
+            System.out.println(cachedState.keySet());
+        }
     }
 
     public void saveCachedState(String name) {
