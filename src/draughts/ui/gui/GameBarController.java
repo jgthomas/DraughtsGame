@@ -61,8 +61,7 @@ class GameBarController implements EventHandler<ActionEvent> {
         dialog.setTitle("Save Game");
         dialog.setHeaderText("Save Game");
         dialog.setContentText("Enter an unused name:");
-        dialog.getEditor()
-                .textProperty()
+        dialog.getEditor().textProperty()
                 .addListener((observable, oldValue, newValue) -> dialog.getDialogPane()
                         .lookupButton(ButtonType.OK)
                         .setDisable(CacheState.gameNameUsed(newValue)));
