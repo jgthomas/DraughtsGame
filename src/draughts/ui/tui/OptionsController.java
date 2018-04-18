@@ -32,8 +32,11 @@ class OptionsController {
         } else {
             playerTwo = makePlayer(userInput, SECOND_PLAYER, Side.BLACK);
         }
+
         Board board= makeBoard(userInput);
+
         CacheState cacheState = new CacheState(board);
+
         Game game = new Game(board, cacheState, playerOne, playerTwo, moveNumber);
         new GameController(game, userInput).run();
     }
@@ -47,20 +50,26 @@ class OptionsController {
             List<String> gameNames = loadState.getAllGameNames();
             printGameNames(gameNames);
 
-            int gameNumber = userInput.getNumber(PICK_GAME);
+            int gameNumber = userInput.getNumberInRange(0, loadState.getAllGameNames().size(),PICK_GAME);
 
-            if (gameNumber < gameNames.size()) {
-                board = new Board(loadBoardState(gameNames.get(gameNumber)));
+            board = new Board(
+                    loadState.loadState(gameNames.get(gameNumber),
+                            loadState.totalMoves(gameNames.get(gameNumber)))
+            );
+
+            /*if (gameNumber < gameNames.size()) {
+                //board = new Board(loadBoardState(gameNames.get(gameNumber)));
+
             } else {
                 board = new Board();
-            }
+            }*/
         } else {
             board = new Board();
         }
         return board;
     }
 
-    private BoardStateLoader loadBoardState(String gameName) {
+    /*private BoardStateLoader loadBoardState(String gameName) {
         final String NEXT_MOVE = "Press enter to see next move";
         boolean nextMove;
         BoardStateLoader boardStateLoader = loadState.loadState(gameName, moveNumber);
@@ -73,7 +82,7 @@ class OptionsController {
             }
         } while (nextMove);
         return boardStateLoader;
-    }
+    }*/
 
     private PlayerConfig makePlayer(UserInput userInput, String msg, Side side) {
         int playerCode;
@@ -92,12 +101,12 @@ class OptionsController {
         }
     }
 
-    private String boardTitle(int moveNumber) {
+    /*private String boardTitle(int moveNumber) {
         String baseMove = "Move " + moveNumber;
         if (moveNumber % 2 == 0) {
             return baseMove + " (white)";
         }
         return baseMove + " (black)";
-    }
+    }*/
 
 }
