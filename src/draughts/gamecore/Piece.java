@@ -50,14 +50,8 @@ public class Piece {
 
     void setPieceType(PieceType pieceType) {
         this.pieceType = pieceType;
-
         setSide(pieceType.side());
-
-        if (pieceType.isKing()) {
-            setIsKing(true);
-        } else {
-            setIsKing(false);
-        }
+        setIsKing(pieceType.isKing());
     }
 
     boolean isPlayerPiece() {
