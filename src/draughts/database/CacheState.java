@@ -31,6 +31,10 @@ public class CacheState {
         return new BoardState(cachedState.get(moveNumber));
     }
 
+    public void setCachedState(Map<Integer, Map<Integer, Integer>> newCachedState) {
+        cachedState = newCachedState;
+    }
+
     public BoardState getCurrentState() {
         return new BoardState(board);
     }
