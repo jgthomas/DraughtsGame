@@ -34,15 +34,6 @@ final class UserInput {
         return response == 'y';
     }
 
-    int getNumber(String message) {
-        System.out.print(message + " : ");
-        while (!scanner.hasNextInt()) {
-            System.out.print(message + " : ");
-            scanner.next();
-        }
-        return scanner.nextInt();
-    }
-
     int getNumberInRange(int low, int high, String message) {
         int num = -1;
         while (num < low || num > high) {
@@ -58,6 +49,15 @@ final class UserInput {
             str = scanner.next();
         }
         return str;
+    }
+
+    private int getNumber(String message) {
+        System.out.print(message + " : ");
+        while (!scanner.hasNextInt()) {
+            System.out.print(message + " : ");
+            scanner.next();
+        }
+        return scanner.nextInt();
     }
 }
 
