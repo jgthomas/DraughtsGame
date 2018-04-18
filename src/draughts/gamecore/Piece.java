@@ -12,7 +12,7 @@ public class Piece {
 
     Piece(PieceType pieceType) {
         this.pieceType = pieceType;
-        isKing = new SimpleBooleanProperty(false);
+        isKing = new SimpleBooleanProperty(pieceType.isKing());
         side = new SimpleObjectProperty<>(pieceType.side());
     }
 
