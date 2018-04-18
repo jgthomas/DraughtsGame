@@ -6,6 +6,8 @@ import draughts.gamecore.Game;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextInputDialog;
 import javafx.stage.Stage;
 
@@ -51,8 +53,21 @@ class GameBarController implements EventHandler<ActionEvent> {
             dialog.setHeaderText("Save Game");
             dialog.setContentText("Give game a name:");
             Optional<String> result = dialog.showAndWait();
-            //result.ifPresent(game::saveGame);
-            result.ifPresent(CacheState::gameNameNotUsed);
+            result.ifPresent(game::saveGame);
+            //result.ifPresent(CacheState::gameNameNotUsed);
+
+            /*final Button buttonOK = (Button) dialog.getDialogPane().lookupButton(ButtonType.OK);
+            buttonOK.addEventFilter(ActionEvent.ACTION, e -> {
+                if (result.isPresent() && CacheState.gameNameNotUsed(result.get())) {
+                    game.saveGame(result.get());
+                } else if (result.isPresent()) {
+                    dialog.setContentText("Name '" + result.get() + "' is already taken");
+                    e.consume();
+                } else {
+                    dialog.setContentText("Please enter a name");
+                    e.consume();
+                }
+            });*/
         }
     }
 
