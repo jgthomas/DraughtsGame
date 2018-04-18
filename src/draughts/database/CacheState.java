@@ -57,7 +57,7 @@ public class CacheState {
     }
 
     public void saveCachedState(String name) {
-        db.insertGame(name, cachedState);
+        db.insertGame(name.trim(), cachedState);
     }
 
     private Map<Integer, Integer> captureState() {
