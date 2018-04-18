@@ -1,6 +1,6 @@
 package draughts.gamecore;
 
-public interface PieceCalculation {
+interface PieceCalculation {
 
     boolean legalMoveDirection(Square start, Square end);
 
