@@ -22,8 +22,12 @@ class OptionsController {
         final String FIRST_PLAYER = "Pick first player";
         final String SECOND_PLAYER = "Pick second player";
         final String HUMAN_PLAYER_SET = "You are player two";
+        final String LOAD_GAME = "Load saved game";
+        final String PICK_GAME = "Pick game number";
         PlayerConfig playerOne;
         PlayerConfig playerTwo;
+        Board board;
+        CacheState cacheState;
 
         playerOne = makePlayer(userInput, FIRST_PLAYER, Side.WHITE);
         if (playerOne.isAiPlayer()) {
@@ -33,56 +37,21 @@ class OptionsController {
             playerTwo = makePlayer(userInput, SECOND_PLAYER, Side.BLACK);
         }
 
-        Board board= makeBoard(userInput);
-
-        CacheState cacheState = new CacheState(board);
+        if (userInput.getYesOrNo(LOAD_GAME)) {
+            List<String> gameNames = loadState.getAllGameNames();
+            printGameNames(gameNames);
+            int gameNumber = userInput.getNumberInRange(0, gameNames.size(), PICK_GAME);
+            board = new Board(loadState.loadState(gameNames.get(gameNumber),
+                    loadState.totalMoves(gameNames.get(gameNumber))));
+            cacheState = new CacheState(board, loadState.loadGameToCache(gameNames.get(gameNumber)));
+        } else {
+            board = new Board();
+            cacheState = new CacheState(board);
+        }
 
         Game game = new Game(board, cacheState, playerOne, playerTwo, moveNumber);
         new GameController(game, userInput).run();
     }
-
-    private Board makeBoard(UserInput userInput) {
-        final String LOAD_GAME = "Load saved game";
-        final String PICK_GAME = "Pick game number";
-        Board board;
-
-        if (userInput.getYesOrNo(LOAD_GAME)) {
-            List<String> gameNames = loadState.getAllGameNames();
-            printGameNames(gameNames);
-
-            int gameNumber = userInput.getNumberInRange(0, loadState.getAllGameNames().size(),PICK_GAME);
-
-            board = new Board(
-                    loadState.loadState(gameNames.get(gameNumber),
-                            loadState.totalMoves(gameNames.get(gameNumber)))
-            );
-
-            /*if (gameNumber < gameNames.size()) {
-                //board = new Board(loadBoardState(gameNames.get(gameNumber)));
-
-            } else {
-                board = new Board();
-            }*/
-        } else {
-            board = new Board();
-        }
-        return board;
-    }
-
-    /*private BoardStateLoader loadBoardState(String gameName) {
-        final String NEXT_MOVE = "Press enter to see next move";
-        boolean nextMove;
-        BoardStateLoader boardStateLoader = loadState.loadState(gameName, moveNumber);
-        do {
-            new GameView(new Board(boardStateLoader)).print(boardTitle(moveNumber));
-            nextMove = userInput.advanceForward(NEXT_MOVE);
-            if (nextMove) {
-                moveNumber += 1;
-                boardStateLoader = loadState.loadState(gameName, moveNumber);
-            }
-        } while (nextMove);
-        return boardStateLoader;
-    }*/
 
     private PlayerConfig makePlayer(UserInput userInput, String msg, Side side) {
         int playerCode;
@@ -100,13 +69,4 @@ class OptionsController {
             gameNumber += 1;
         }
     }
-
-    /*private String boardTitle(int moveNumber) {
-        String baseMove = "Move " + moveNumber;
-        if (moveNumber % 2 == 0) {
-            return baseMove + " (white)";
-        }
-        return baseMove + " (black)";
-    }*/
-
 }
