@@ -18,11 +18,6 @@ public class CacheState {
         cachedState = new HashMap<>();
     }
 
-    public CacheState(Board board, Map<Integer, Map<Integer, Integer>> cachedState) {
-        this.board = board;
-        this.cachedState = cachedState;
-    }
-
     public void cacheState(int moveNumber) {
         cachedState.put(moveNumber, captureState());
     }
