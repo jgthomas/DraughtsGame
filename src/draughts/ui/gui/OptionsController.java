@@ -11,20 +11,17 @@ class OptionsController implements EventHandler<ActionEvent> {
     private final Stage primaryStage;
     private final OptionsView optionsView = OptionsView.newInstance(this);
     private final LoadState loadState = new LoadState();
+    private int moveNumber;
 
     OptionsController(Stage primaryStage) {
         this.primaryStage = primaryStage;
+        moveNumber = 0;
     }
 
     @Override
     public void handle(final ActionEvent event) {
-        Board board;
-        CacheState cacheState;
-        BoardController boardController;
-        Game game;
         PlayerConfig playerOne;
         PlayerConfig playerTwo;
-
         final Object source = event.getSource();
 
         if (source.equals(optionsView.getHumanHumanButton())) {
@@ -40,20 +37,18 @@ class OptionsController implements EventHandler<ActionEvent> {
 
         String selectedGame = optionsView.getSelectedGame();
 
-        if (selectedGame.equals("New Game")) {
-            board = new Board();
-            cacheState = new CacheState(board);
-            game = new Game(board, cacheState, playerOne, playerTwo);
-        } else {
-            board = new Board(loadState.loadState(selectedGame));
-            cacheState = new CacheState(board, loadState.loadGameToCache(selectedGame));
-            game = new Game(board, cacheState, playerOne, playerTwo, loadState.totalMoves(selectedGame));
+        Board board = new Board();
+        CacheState cacheState = new CacheState(board);
+
+        if (!selectedGame.equals("New Game")) {
+            board.setBoardState(loadState.loadState(selectedGame));
+            cacheState.setCachedState(loadState.loadGameToCache(selectedGame));
+            moveNumber = loadState.totalMoves(selectedGame);
         }
 
-        boardController = new BoardController(game);
-
-        GamePlayView gamePlayView = new GamePlayView(primaryStage, boardController);
-        gamePlayView.show();
+        Game game = new Game(board, cacheState, playerOne, playerTwo, moveNumber);
+        BoardController boardController = new BoardController(game);
+        new GamePlayView(primaryStage, boardController).show();
     }
 
     OptionsView getOptionsView() {

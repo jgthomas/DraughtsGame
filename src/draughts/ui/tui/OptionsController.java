@@ -26,8 +26,6 @@ class OptionsController {
         final String PICK_GAME = "Pick game number";
         PlayerConfig playerOne;
         PlayerConfig playerTwo;
-        Board board;
-        CacheState cacheState;
 
         playerOne = makePlayer(userInput, FIRST_PLAYER, Side.WHITE);
         if (playerOne.isAiPlayer()) {
@@ -37,15 +35,15 @@ class OptionsController {
             playerTwo = makePlayer(userInput, SECOND_PLAYER, Side.BLACK);
         }
 
+        Board board = new Board();
+        CacheState cacheState = new CacheState(board);
+
         if (userInput.getYesOrNo(LOAD_GAME)) {
             List<String> gameNames = loadState.getAllGameNames();
             printGameNames(gameNames);
             int gameNumber = userInput.getNumberInRange(0, gameNames.size(), PICK_GAME);
-            board = new Board(loadState.loadState(gameNames.get(gameNumber)));
-            cacheState = new CacheState(board, loadState.loadGameToCache(gameNames.get(gameNumber)));
-        } else {
-            board = new Board();
-            cacheState = new CacheState(board);
+            board.setBoardState(loadState.loadState(gameNames.get(gameNumber)));
+            cacheState.setCachedState(loadState.loadGameToCache(gameNames.get(gameNumber)));
         }
 
         Game game = new Game(board, cacheState, playerOne, playerTwo, moveNumber);
