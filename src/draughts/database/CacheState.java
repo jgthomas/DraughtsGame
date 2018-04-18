@@ -51,10 +51,6 @@ public class CacheState {
         }
     }
 
-    public static boolean gameNameUsed(String gameName) {
-        return new DB().gameNameUsed(gameName.trim());
-    }
-
     public void saveCachedState(String name) {
         db.insertGame(name.trim(), cachedState);
     }

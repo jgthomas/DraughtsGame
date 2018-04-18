@@ -18,6 +18,10 @@ public class LoadState {
         return gameNames;
     }
 
+    public boolean gameNameUsed(String gameName) {
+        return db.gameNameUsed(gameName.trim());
+    }
+
     public BoardState loadState(String name) {
         return new BoardState(db.selectGame(name.trim(), 0));
     }
