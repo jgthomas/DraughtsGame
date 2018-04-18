@@ -144,10 +144,6 @@ public class Game {
         cacheState.saveCachedState(gameName);
     }
 
-    public boolean gameNameUsed(String gameName) {
-        return cacheState.nameUsed(gameName);
-    }
-
     public BooleanProperty gameIsNotWonProperty() {
         return gameIsNotWon;
     }

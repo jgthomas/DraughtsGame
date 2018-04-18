@@ -55,10 +55,6 @@ public class CacheState {
         db.insertGame(name, cachedState);
     }
 
-    public boolean nameUsed(String gameName) {
-        return db.gameNameAlreadyUsed(gameName);
-    }
-
     private Map<Integer, Integer> captureState() {
         Map<Integer, Integer> boardState = new HashMap<>();
 
