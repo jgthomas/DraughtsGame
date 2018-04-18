@@ -19,21 +19,21 @@ public class LoadState {
     }
 
     public BoardState loadState(String name) {
-        return new BoardState(db.selectGame(name, 0));
+        return new BoardState(db.selectGame(name.trim(), 0));
     }
 
     public BoardState loadState(String name, int moveNumber) {
-        return new BoardState(db.selectGame(name, moveNumber));
+        return new BoardState(db.selectGame(name.trim(), moveNumber));
     }
 
     public int totalMoves(String gameName) {
-        return db.totalMovesInGame(gameName);
+        return db.totalMovesInGame(gameName.trim());
     }
 
     public Map<Integer, Map<Integer, Integer>> loadGameToCache(String gameName) {
         Map<Integer, Map<Integer, Integer>> cachedState = new HashMap<>();
-        for (int turn = 0; turn < totalMoves(gameName); turn++) {
-            cachedState.put(turn, getTurnState(gameName, turn));
+        for (int turn = 0; turn < totalMoves(gameName.trim()); turn++) {
+            cachedState.put(turn, getTurnState(gameName.trim(), turn));
         }
         return cachedState;
     }
