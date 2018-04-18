@@ -45,7 +45,7 @@ class OptionsController implements EventHandler<ActionEvent> {
             cacheState = new CacheState(board);
             game = new Game(board, cacheState, playerOne, playerTwo);
         } else {
-            board = new Board(loadState.loadState(selectedGame, loadState.totalMoves(selectedGame)));
+            board = new Board(loadState.loadState(selectedGame));
             cacheState = new CacheState(board, loadState.loadGameToCache(selectedGame));
             game = new Game(board, cacheState, playerOne, playerTwo, loadState.totalMoves(selectedGame));
         }
