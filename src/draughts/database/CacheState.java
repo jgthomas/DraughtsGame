@@ -51,13 +51,9 @@ public class CacheState {
         }
     }
 
-    public static void gameNameNotUsed(String gameName) {
+    public static boolean gameNameNotUsed(String gameName) {
         DB db = new DB();
-        if (db.gameNameNotUsed(gameName)) {
-            System.out.println("unused");
-        } else {
-            System.out.println("USED");
-        }
+        return db.gameNameNotUsed(gameName);
     }
 
     public void saveCachedState(String name) {
