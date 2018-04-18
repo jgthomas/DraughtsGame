@@ -51,9 +51,9 @@ public class CacheState {
         }
     }
 
-    public static boolean gameNameNotUsed(String gameName) {
+    public static boolean gameNameUsed(String gameName) {
         DB db = new DB();
-        return db.gameNameNotUsed(gameName);
+        return db.gameNameUsed(gameName);
     }
 
     public void saveCachedState(String name) {

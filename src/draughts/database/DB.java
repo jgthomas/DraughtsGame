@@ -87,20 +87,20 @@ class DB {
         return totalMoves;
     }
 
-    boolean gameNameNotUsed(String gameName) {
-        boolean gameNameNotUsed = true;
+    boolean gameNameUsed(String gameName) {
+        boolean gameNameUsed = false;
         try (Connection conn = this.connect();
              PreparedStatement ps = conn.prepareStatement(SQL.CHECK_NAME_EXISTS)) {
             ps.setString(1, gameName);
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
-                    gameNameNotUsed = false;
+                    gameNameUsed = true;
                 }
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-        return gameNameNotUsed;
+        return gameNameUsed;
     }
 
     private Connection connect() {
