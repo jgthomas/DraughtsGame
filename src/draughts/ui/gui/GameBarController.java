@@ -1,6 +1,5 @@
 package draughts.ui.gui;
 
-import draughts.database.CacheState;
 import draughts.database.LoadState;
 import draughts.gamecore.Game;
 import javafx.event.ActionEvent;
