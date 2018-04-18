@@ -65,7 +65,7 @@ class GameBarController implements EventHandler<ActionEvent> {
                 .textProperty()
                 .addListener((observable, oldValue, newValue) -> dialog.getDialogPane()
                         .lookupButton(ButtonType.OK)
-                        .setDisable(newValue.trim().length() < 5 || CacheState.gameNameUsed(dialog.getEditor().getText())));
+                        .setDisable(newValue.trim().length() < 5 || CacheState.gameNameUsed(newValue)));
         return dialog;
     }
 }
