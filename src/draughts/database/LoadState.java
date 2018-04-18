@@ -22,8 +22,8 @@ public class LoadState {
         return db.gameNameUsed(gameName.trim());
     }
 
-    public BoardState loadState(String name) {
-        return new BoardState(db.selectGame(name.trim(), 0));
+    public BoardState loadState(String gameName) {
+        return new BoardState(db.selectGame(gameName.trim(), totalMoves(gameName)));
     }
 
     public BoardState loadState(String name, int moveNumber) {
