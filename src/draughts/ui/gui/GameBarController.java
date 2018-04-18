@@ -1,5 +1,6 @@
 package draughts.ui.gui;
 
+import draughts.database.CacheState;
 import draughts.database.LoadState;
 import draughts.gamecore.Game;
 import javafx.event.ActionEvent;
@@ -50,7 +51,8 @@ class GameBarController implements EventHandler<ActionEvent> {
             dialog.setHeaderText("Save Game");
             dialog.setContentText("Give game a name:");
             Optional<String> result = dialog.showAndWait();
-            result.ifPresent(game::saveGame);
+            //result.ifPresent(game::saveGame);
+            result.ifPresent(CacheState::gameNameNotUsed);
         }
     }
 
