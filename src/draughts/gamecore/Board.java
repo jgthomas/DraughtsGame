@@ -15,13 +15,13 @@ public class Board implements Iterable<Square> {
         }
     }
 
-    public Board(BoardStateLoader boardStateLoader) {
+    Board(BoardStateLoader boardStateLoader) {
         for (Square square : squares()) {
             boardMap.put(square, new Piece(PieceType.valueOf(boardStateLoader.getPieceCode(square))));
         }
     }
 
-    final void setBoardState(BoardStateLoader boardStateLoader) {
+    public final void setBoardState(BoardStateLoader boardStateLoader) {
         for (Square square : squares()) {
             setPieceType(square, PieceType.valueOf(boardStateLoader.getPieceCode(square)));
         }
