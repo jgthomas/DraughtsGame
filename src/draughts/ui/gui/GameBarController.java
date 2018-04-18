@@ -44,7 +44,8 @@ class GameBarController implements EventHandler<ActionEvent> {
             Scene scene = new Scene(new OptionsController(primaryStage).getOptionsView(), SCENE_WIDTH, SCENE_HEIGHT);
             primaryStage.setScene(scene);
         } else if (eventSource.equals(gameBarView.getSaveGameButton())) {
-            TextInputDialog dialog = new TextInputDialog("Game" + loadState.getAllGameNames().size());
+            String defaultName = "Game" + loadState.getAllGameNames().size();
+            TextInputDialog dialog = new TextInputDialog(defaultName);
             dialog.setTitle("Save Game");
             dialog.setHeaderText("Save Game");
             dialog.setContentText("Give game a name:");
