@@ -6,7 +6,6 @@ import draughts.gamecore.Game;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextInputDialog;
 import javafx.stage.Stage;
@@ -47,31 +46,26 @@ class GameBarController implements EventHandler<ActionEvent> {
             Scene scene = new Scene(new OptionsController(primaryStage).getOptionsView(), SCENE_WIDTH, SCENE_HEIGHT);
             primaryStage.setScene(scene);
         } else if (eventSource.equals(gameBarView.getSaveGameButton())) {
-            String defaultName = "Game" + loadState.getAllGameNames().size();
-            TextInputDialog dialog = new TextInputDialog(defaultName);
-            dialog.setTitle("Save Game");
-            dialog.setHeaderText("Save Game");
-            dialog.setContentText("Give game a name:");
+            TextInputDialog dialog = buildSaveDialog();
             Optional<String> result = dialog.showAndWait();
             result.ifPresent(game::saveGame);
-            //result.ifPresent(CacheState::gameNameNotUsed);
-
-            /*final Button buttonOK = (Button) dialog.getDialogPane().lookupButton(ButtonType.OK);
-            buttonOK.addEventFilter(ActionEvent.ACTION, e -> {
-                if (result.isPresent() && CacheState.gameNameNotUsed(result.get())) {
-                    game.saveGame(result.get());
-                } else if (result.isPresent()) {
-                    dialog.setContentText("Name '" + result.get() + "' is already taken");
-                    e.consume();
-                } else {
-                    dialog.setContentText("Please enter a name");
-                    e.consume();
-                }
-            });*/
         }
     }
 
     GameBarView getGameBarView() {
         return gameBarView;
+    }
+
+    private TextInputDialog buildSaveDialog() {
+        TextInputDialog dialog = new TextInputDialog("Game" + loadState.getAllGameNames().size());
+        dialog.setTitle("Save Game");
+        dialog.setHeaderText("Save Game");
+        dialog.setContentText("Enter an unused name:");
+        dialog.getEditor()
+                .textProperty()
+                .addListener((observable, oldValue, newValue) -> dialog.getDialogPane()
+                        .lookupButton(ButtonType.OK)
+                        .setDisable(newValue.trim().length() < 5 || CacheState.gameNameUsed(dialog.getEditor().getText())));
+        return dialog;
     }
 }
