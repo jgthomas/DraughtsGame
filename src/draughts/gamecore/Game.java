@@ -68,7 +68,7 @@ public class Game {
     }
 
     public void backOneMove() {
-        if (getGameIsNotWon() && (currentMoveNumber > firstMoveNumber || (firstMoveNumber > 0 && currentMoveNumber > 0))) {
+        if (getGameIsNotWon() && notAtStartOfGame()) {
             board.setBoardState(cacheState.getCachedState(currentMoveNumber - 1));
             currentMoveNumber -= 1;
             switchActivePlayer();
@@ -149,6 +149,10 @@ public class Game {
                 return;
             }
         }
+    }
+
+    private boolean notAtStartOfGame() {
+        return currentMoveNumber > firstMoveNumber || (firstMoveNumber > 0 && currentMoveNumber > 0);
     }
 
     public Board getBoard() {
