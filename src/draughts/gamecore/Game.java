@@ -41,6 +41,8 @@ public class Game {
         this.currentMoveNumber = firstMoveNumber;
         this.maxMoveNumber = firstMoveNumber;
         this.activePlayer = playerOne;
+        activeSide = new SimpleObjectProperty<>(activePlayer.getSide());
+        gameIsNotWon = new SimpleBooleanProperty(true);
 
         cacheState.cacheState(firstMoveNumber);
 
@@ -49,9 +51,6 @@ public class Game {
         } else if (playerTwo.isAiPlayer()) {
             aiPlayer = new AiPlayer(board, legalMoves, playerTwo.getSide());
         }
-
-        activeSide = new SimpleObjectProperty<>(activePlayer.getSide());
-        gameIsNotWon = new SimpleBooleanProperty(true);
 
         makeAiMoveIfNeeded();
     }
