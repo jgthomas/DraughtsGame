@@ -46,17 +46,14 @@ public class Game {
 
         if (playerOne.isAiPlayer()) {
             aiPlayer = new AiPlayer(board, legalMoves, playerOne.getSide());
-            board.makeMove(aiPlayer.getMove());
-            currentMoveNumber += 1;
-            maxMoveNumber += 1;
-            cacheState.cacheState(currentMoveNumber);
-            activePlayer = playerTwo;
         } else if (playerTwo.isAiPlayer()) {
             aiPlayer = new AiPlayer(board, legalMoves, playerTwo.getSide());
         }
 
         activeSide = new SimpleObjectProperty<>(activePlayer.getSide());
         gameIsNotWon = new SimpleBooleanProperty(true);
+
+        makeAiMoveIfNeeded();
     }
 
     public void makeMove(Move move) {
@@ -65,12 +62,7 @@ public class Game {
         if (moveWinsGame()) { setGameIsNotWon(false); return; }
         switchActivePlayer();
 
-        if (activePlayer.isAiPlayer()) {
-            board.makeMove(aiPlayer.getMove());
-            cacheBoardState();
-            if (moveWinsGame()) { setGameIsNotWon(false); return; }
-            switchActivePlayer();
-        }
+        makeAiMoveIfNeeded();
     }
 
     public void restartGame() {
@@ -104,10 +96,11 @@ public class Game {
         }
     }
 
-    public void makeAiMoveIfNeeded() {
+    public final void makeAiMoveIfNeeded() {
         if (getGameIsNotWon() && activePlayer.isAiPlayer()) {
             board.makeMove(aiPlayer.getMove());
             cacheBoardState();
+            if (moveWinsGame()) { setGameIsNotWon(false); return; }
             switchActivePlayer();
         }
     }
