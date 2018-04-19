@@ -155,6 +155,18 @@ public class Game {
         return currentMoveNumber > firstMoveNumber || (firstMoveNumber > 0 && currentMoveNumber > 0);
     }
 
+    @Override
+    public String toString() {
+        String gameString = "First loaded move number: " + firstMoveNumber + "\n";
+        gameString += "Current move number: " + currentMoveNumber + "\n";
+        gameString += "Last move number: " + maxMoveNumber + "\n";
+        gameString += "Player One: " + playerOne.toString() + "\n";
+        gameString += "Player Two: " + playerTwo.toString() + "\n";
+        gameString += "Active Player: " + activePlayer.toString() + "\n";
+        gameString += board.toString();
+        return gameString;
+    }
+
     public Board getBoard() {
         return board;
     }
