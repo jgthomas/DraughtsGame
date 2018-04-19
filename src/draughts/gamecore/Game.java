@@ -29,14 +29,6 @@ public class Game {
     public Game(Board board,
                 CacheState cacheState,
                 PlayerConfig playerOne,
-                PlayerConfig playerTwo)
-    {
-        this(board, cacheState, playerOne, playerTwo, 0);
-    }
-
-    public Game(Board board,
-                CacheState cacheState,
-                PlayerConfig playerOne,
                 PlayerConfig playerTwo,
                 int firstMoveNumber)
     {
