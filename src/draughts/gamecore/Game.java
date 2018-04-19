@@ -59,24 +59,11 @@ public class Game {
     public void makeMove(Move move) {
         executeMove(move);
         cacheBoardState();
-        if (moveWinsGame()) { setGameIsNotWon(false); return; }
-        switchActivePlayer();
-
-        makeAiMoveIfNeeded();
-    }
-
-    public void restartGame() {
-        board.setBoardState(cacheState.getCachedState(firstMoveNumber));
-        currentMoveNumber = firstMoveNumber;
-        if (firstMoveNumber == 0) {
-            cacheState.clearCachedMoves();
-        } else {
-            cacheState.clearCacheBetween(firstMoveNumber, maxMoveNumber);
+        if (moveWinsGame()) {
+            setGameIsNotWon(false);
+            return;
         }
-        maxMoveNumber = firstMoveNumber;
         switchActivePlayer();
-        setGameIsNotWon(true);
-        cacheState.cacheState(currentMoveNumber);
         makeAiMoveIfNeeded();
     }
 
@@ -105,12 +92,63 @@ public class Game {
         }
     }
 
+    public void restartGame() {
+        board.setBoardState(cacheState.getCachedState(firstMoveNumber));
+        currentMoveNumber = firstMoveNumber;
+        if (firstMoveNumber == 0) {
+            cacheState.clearCachedMoves();
+        } else {
+            cacheState.clearCacheBetween(firstMoveNumber, maxMoveNumber);
+        }
+        maxMoveNumber = firstMoveNumber;
+        switchActivePlayer();
+        setGameIsNotWon(true);
+        cacheState.cacheState(currentMoveNumber);
+        makeAiMoveIfNeeded();
+    }
+
     public boolean legalStart(Square start) {
         return squareInList(start, legalMoves.legalStartingSquares(activePlayer.getSide()));
     }
 
     public boolean legalEnd(Square start, Square end) {
         return squareInList(end, legalMoves.legalEndingSquares(start, activePlayer.getSide()));
+    }
+
+    private void cacheBoardState() {
+        currentMoveNumber += 1;
+        maxMoveNumber += 1;
+        cacheState.cacheState(currentMoveNumber);
+    }
+
+    private boolean moveWinsGame() {
+        Side opponent = (activePlayer == playerOne)
+                ? playerTwo.getSide()
+                : playerOne.getSide();
+        return legalMoves.legal(opponent).size() == 0;
+    }
+
+    private void switchActivePlayer() {
+        activePlayer = (currentMoveNumber % 2 == 0) ? playerOne : playerTwo;
+        setActiveSide(activePlayer.getSide());
+    }
+
+    private boolean squareInList(Square square, List<Square> squareList) {
+        for (Square s : squareList) {
+            if (s.equals(square)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void executeMove(Move move) {
+        for (Move m : legalMoves.legal(activePlayer.getSide())) {
+            if (m.equals(move)) {
+                board.makeMove(m);
+                return;
+            }
+        }
     }
 
     public Board getBoard() {
@@ -151,41 +189,5 @@ public class Game {
 
     private void setActiveSide(Side side) {
         activeSide.set(side);
-    }
-
-    private void cacheBoardState() {
-        currentMoveNumber += 1;
-        maxMoveNumber += 1;
-        cacheState.cacheState(currentMoveNumber);
-    }
-
-    private boolean moveWinsGame() {
-        Side opponent = (activePlayer == playerOne)
-                ? playerTwo.getSide()
-                : playerOne.getSide();
-        return legalMoves.legal(opponent).size() == 0;
-    }
-
-    private void switchActivePlayer() {
-        activePlayer = (currentMoveNumber % 2 == 0) ? playerOne : playerTwo;
-        setActiveSide(activePlayer.getSide());
-    }
-
-    private boolean squareInList(Square square, List<Square> squareList) {
-        for (Square s : squareList) {
-            if (s.equals(square)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private void executeMove(Move move) {
-        for (Move m : legalMoves.legal(activePlayer.getSide())) {
-            if (m.equals(move)) {
-                board.makeMove(m);
-                return;
-            }
-        }
     }
 }
