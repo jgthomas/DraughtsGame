@@ -16,4 +16,9 @@ public final class PlayerConfig {
     public Side getSide() {
         return side;
     }
+
+    @Override
+    public String toString() {
+        return playerType + " " + side;
+    }
 }
