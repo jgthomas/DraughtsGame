@@ -81,7 +81,7 @@ public class BoardController implements EventHandler<MouseEvent> {
     }
 
     void aiResume() {
-        game.aiResume();
+        game.makeAiMoveIfNeeded();
         clearClickedSquareViews();
         buildMove.clear();
     }

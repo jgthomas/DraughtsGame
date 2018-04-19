@@ -85,7 +85,7 @@ public class Game {
         switchActivePlayer();
         setGameIsNotWon(true);
         cacheState.cacheState(currentMoveNumber);
-        aiResume();
+        makeAiMoveIfNeeded();
     }
 
     public void backOneMove() {
@@ -104,7 +104,7 @@ public class Game {
         }
     }
 
-    public void aiResume() {
+    public void makeAiMoveIfNeeded() {
         if (getGameIsNotWon() && activePlayer.isAiPlayer()) {
             board.makeMove(aiPlayer.getMove());
             cacheBoardState();
