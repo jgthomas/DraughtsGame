@@ -72,6 +72,18 @@ public class Board implements Iterable<Square> {
         return squares;
     }
 
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("\n");
+        for (Square square : squares()) {
+            sb.append(square.toString()).append(" ");
+            sb.append(boardMap.get(square).getPieceType()).append("\n");
+            if (square.col() == 7) { sb.append("\n"); }
+        }
+        return sb.toString();
+    }
+
     private class BoardInit {
         private final Map<Integer, Integer> initialState;
 
