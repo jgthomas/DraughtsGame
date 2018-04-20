@@ -16,10 +16,8 @@ public class Game {
     private final PlayerConfig playerTwo;
     private final LegalMoves legalMoves;
     private final CacheState cacheState;
-
     private final ObjectProperty<Side> activeSide;
     private final BooleanProperty gameIsNotWon;
-
     private final int firstMoveNumber;
     private int currentMoveNumber;
     private int maxMoveNumber;
