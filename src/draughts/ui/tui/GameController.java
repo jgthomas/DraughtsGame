@@ -50,6 +50,10 @@ class GameController {
         gameView.print(turnTitle());
     }
 
+    Game getGame() {
+        return game;
+    }
+
     private Move getInput() {
         final String START_MOVE_MSG = "Piece to move";
         final String END_MOVE_MSG = "Move piece to";
