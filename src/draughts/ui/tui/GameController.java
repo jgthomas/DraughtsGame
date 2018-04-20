@@ -82,7 +82,7 @@ class GameController {
         final int NUM_OF_COORDINATES = 2;
         do  {
             coordinates = userInput.getString(message);
-        } while (coordinates.length() < NUM_OF_COORDINATES);
+        } while (coordinates.length() != NUM_OF_COORDINATES);
         int rowNum = rowCharToCoordinate(coordinates.charAt(0));
         int colNum = Character.getNumericValue(coordinates.charAt(1));
         return new Square(rowNum, colNum);
