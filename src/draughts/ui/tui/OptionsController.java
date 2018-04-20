@@ -44,6 +44,7 @@ class OptionsController {
             int gameNumber = userInput.getNumberInRange(0, gameNames.size(), PICK_GAME);
             board.setBoardState(loadState.loadState(gameNames.get(gameNumber)));
             cacheState.setCachedState(loadState.loadGameToCache(gameNames.get(gameNumber)));
+            moveNumber = loadState.totalMoves(gameNames.get(gameNumber));
         }
 
         Game game = new Game(board, cacheState, playerOne, playerTwo, moveNumber);
