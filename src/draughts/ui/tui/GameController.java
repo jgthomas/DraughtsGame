@@ -17,8 +17,6 @@ class GameController {
         final String WHITE_WIN = "White wins!";
         final String BLACK_WIN = "Black wins!";
         final String FINAL_BOARD = "Final Board";
-        final String SAVE_PROMPT = "Save game?";
-        final String GAME_NAME_PROMPT = "Name saved game";
 
         gameView.clearBoard();
 
@@ -36,6 +34,12 @@ class GameController {
             System.out.println(BLACK_WIN);
         }
 
+        offerToSaveGame();
+    }
+
+    void offerToSaveGame() {
+        final String SAVE_PROMPT = "Save game?";
+        final String GAME_NAME_PROMPT = "Name saved game";
         if (userInput.getYesOrNo(SAVE_PROMPT)) {
             String gameName = userInput.getString(GAME_NAME_PROMPT);
             game.saveGame(gameName);
