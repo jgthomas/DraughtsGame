@@ -14,6 +14,7 @@ class CommandRunner {
         commandMap.put("save", this::save);
         commandMap.put("back", this::back);
         commandMap.put("forw", this::forward);
+        commandMap.put("play", this::play);
         commandMap.put("quit", this::quit);
     }
 
@@ -31,6 +32,7 @@ class CommandRunner {
         System.out.println("save    : save game");
         System.out.println("back    : move back one move");
         System.out.println("forward : move forward one move");
+        System.out.println("play    : make computer player resume");
         System.out.println("quit    : exit the game");
     }
 
@@ -45,6 +47,11 @@ class CommandRunner {
 
     private void forward() {
         gameController.forwardOneMove();
+        gameController.displayBoard();
+    }
+
+    private void play() {
+        gameController.aiResume();
         gameController.displayBoard();
     }
 
