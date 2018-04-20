@@ -35,8 +35,6 @@ class GameController {
         } else {
             System.out.println(BLACK_WIN);
         }
-
-        offerToSaveGame();
     }
 
     void offerToSaveGame() {
