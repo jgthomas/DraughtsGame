@@ -59,6 +59,10 @@ class GameController {
         game.forwardOneMove();
     }
 
+    void aiResume() {
+        game.makeAiMoveIfNeeded();
+    }
+
     private Move getInput() {
         final String START_MOVE_MSG = "Piece to move";
         final String END_MOVE_MSG = "Move piece to";
