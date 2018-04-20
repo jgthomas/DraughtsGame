@@ -21,7 +21,7 @@ class GameController {
         gameView.clearBoard();
 
         while (game.hasNotBeenWon()) {
-            gameView.print(turnTitle());
+            displayBoard();
             game.makeMove(getInput());
             gameView.clearBoard();
         }
@@ -44,6 +44,10 @@ class GameController {
             String gameName = userInput.getString(GAME_NAME_PROMPT);
             game.saveGame(gameName);
         }
+    }
+
+    void displayBoard() {
+        gameView.print(turnTitle());
     }
 
     private Move getInput() {
