@@ -78,13 +78,13 @@ class GameController {
     }
 
     private Square getPosition(String message) {
-        String coordinates;
         final int NUM_OF_COORDINATES = 2;
+        String input;
         do  {
-            coordinates = userInput.getString(message);
-        } while (coordinates.length() != NUM_OF_COORDINATES);
-        int rowNum = rowCharToCoordinate(coordinates.charAt(0));
-        int colNum = Character.getNumericValue(coordinates.charAt(1));
+            input = userInput.getString(message);
+        } while (input.length() != NUM_OF_COORDINATES);
+        int rowNum = rowCharToCoordinate(input.charAt(0));
+        int colNum = Character.getNumericValue(input.charAt(1));
         return new Square(rowNum, colNum);
     }
 
