@@ -104,6 +104,10 @@ public class Game {
         makeAiMoveIfNeeded();
     }
 
+    public void saveGame(String gameName) {
+        cacheState.saveCachedState(gameName);
+    }
+
     public boolean legalStart(Square start) {
         return squareInList(start, legalMoves.legalStartingSquares(activePlayer.getSide()));
     }
@@ -178,10 +182,6 @@ public class Game {
 
     public int getMoveNumber() {
         return currentMoveNumber;
-    }
-
-    public void saveGame(String gameName) {
-        cacheState.saveCachedState(gameName);
     }
 
     public BooleanProperty gameIsNotWonProperty() {
