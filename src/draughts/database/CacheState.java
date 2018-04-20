@@ -11,7 +11,7 @@ public class CacheState {
 
     private final Board board;
     private final DB db = new DB();
-    private Map<Integer, Map<Integer, Integer>> cachedState;
+    private final Map<Integer, Map<Integer, Integer>> cachedState;
 
     public CacheState(Board board) {
         this.board = board;
@@ -27,7 +27,8 @@ public class CacheState {
     }
 
     public void setCachedState(Map<Integer, Map<Integer, Integer>> newCachedState) {
-        cachedState = newCachedState;
+        cachedState.clear();
+        cachedState.putAll(newCachedState);
     }
 
     public BoardState getCurrentState() {
@@ -46,7 +47,8 @@ public class CacheState {
                     newCachedState.put(key, cachedState.get(key));
                 }
             }
-            cachedState = newCachedState;
+            cachedState.clear();
+            cachedState.putAll(newCachedState);
         }
     }
 
