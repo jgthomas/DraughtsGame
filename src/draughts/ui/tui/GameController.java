@@ -6,11 +6,13 @@ class GameController {
     private final Game game;
     private final GameView gameView;
     private final UserInput userInput;
+    private final CommandRunner commandRunner;
 
     GameController(Game game, UserInput userInput) {
         this.game = game;
         gameView = new GameView(game.getBoard());
         this.userInput = userInput;
+        commandRunner = new CommandRunner(this);
     }
 
     void run() {
@@ -47,11 +49,16 @@ class GameController {
     }
 
     void displayBoard() {
+        gameView.clearBoard();
         gameView.print(turnTitle());
     }
 
-    Game getGame() {
-        return game;
+    void backOneMove() {
+        game.backOneMove();
+    }
+
+    void forwardOneMove() {
+        game.forwardOneMove();
     }
 
     private Move getInput() {
@@ -79,9 +86,13 @@ class GameController {
 
     private Square getPosition(String message) {
         final int NUM_OF_COORDINATES = 2;
+        final int COMMAND_LEN = 4;
         String input;
         do  {
             input = userInput.getString(message);
+            if (input.length() >= COMMAND_LEN) {
+                commandRunner.execute(input);
+            }
         } while (input.length() != NUM_OF_COORDINATES);
         int rowNum = rowCharToCoordinate(input.charAt(0));
         int colNum = Character.getNumericValue(input.charAt(1));
