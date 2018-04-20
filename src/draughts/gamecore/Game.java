@@ -38,7 +38,7 @@ public class Game {
         this.firstMoveNumber = firstMoveNumber;
         this.currentMoveNumber = firstMoveNumber;
         this.maxMoveNumber = firstMoveNumber;
-        this.activePlayer = playerOne;
+        this.activePlayer = setActivePlayer();
         activeSide = new SimpleObjectProperty<>(activePlayer.getSide());
         gameIsNotWon = new SimpleBooleanProperty(true);
 
@@ -126,7 +126,7 @@ public class Game {
     }
 
     private void switchActivePlayer() {
-        activePlayer = (currentMoveNumber % 2 == 0) ? playerOne : playerTwo;
+        activePlayer = setActivePlayer();
         setActiveSide(activePlayer.getSide());
     }
 
@@ -162,6 +162,10 @@ public class Game {
         gameString += "Active Player: " + activePlayer.toString() + "\n";
         gameString += board.toString();
         return gameString;
+    }
+
+    private PlayerConfig setActivePlayer() {
+        return (currentMoveNumber % 2 == 0) ? playerOne : playerTwo;
     }
 
     public Board getBoard() {
