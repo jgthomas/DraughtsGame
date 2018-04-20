@@ -78,7 +78,7 @@ public class Board implements Iterable<Square> {
         sb.append("\n");
         for (Square square : squares()) {
             sb.append(square.toString()).append(" ");
-            sb.append(boardMap.get(square).getPieceType()).append("\n");
+            sb.append(getPiece(square).getPieceType()).append("\n");
             if (square.col() == 7) { sb.append("\n"); }
         }
         return sb.toString();
