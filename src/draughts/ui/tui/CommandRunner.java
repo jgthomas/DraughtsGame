@@ -3,7 +3,7 @@ package draughts.ui.tui;
 import java.util.HashMap;
 import java.util.Map;
 
-public class CommandRunner {
+class CommandRunner {
     private final Map<String, Runnable> commandMap = new HashMap<>();
     private final GameController gameController;
 
@@ -39,12 +39,12 @@ public class CommandRunner {
     }
 
     private void back() {
-        gameController.getGame().backOneMove();
+        gameController.backOneMove();
         gameController.displayBoard();
     }
 
     private void forward() {
-        gameController.getGame().forwardOneMove();
+        gameController.forwardOneMove();
         gameController.displayBoard();
     }
 
