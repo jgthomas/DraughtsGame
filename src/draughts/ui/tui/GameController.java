@@ -38,26 +38,26 @@ class GameController {
         final String ILLEGAL_PIECE_MSG = "You cannot move that piece";
         final String ILLEGAL_END_MSG = "You cannot move to there";
 
-        String input = userInput.getString(START_MOVE_MSG);
+        String input = userInput.getString(START_MOVE_MSG, COORDINATE_LEN);
         while(!game.legalStart(buildSquare(input))) {
             if (input.length() > COORDINATE_LEN) {
                 commandRunner.execute(input);
             } else {
                 System.out.println(ILLEGAL_PIECE_MSG);
             }
-            input = userInput.getString(START_MOVE_MSG);
+            input = userInput.getString(START_MOVE_MSG, COORDINATE_LEN);
         }
 
         Square start = buildSquare(input);
 
-        input = userInput.getString(END_MOVE_MSG);
+        input = userInput.getString(END_MOVE_MSG, COORDINATE_LEN);
         while(!game.legalEnd(start, buildSquare(input))) {
             if (input.length() > COORDINATE_LEN) {
                 commandRunner.execute(input);
             } else {
                 System.out.println(ILLEGAL_END_MSG);
             }
-            input = userInput.getString(END_MOVE_MSG);
+            input = userInput.getString(END_MOVE_MSG, COORDINATE_LEN);
         }
         game.makeMove(new Move(start, buildSquare(input)));
     }
@@ -87,7 +87,7 @@ class GameController {
         final String SAVE_PROMPT = "Save game?";
         final String GAME_NAME_PROMPT = "Name saved game";
         if (userInput.getYesOrNo(SAVE_PROMPT)) {
-            String gameName = userInput.getString(GAME_NAME_PROMPT);
+            String gameName = userInput.getString(GAME_NAME_PROMPT, 1);
             game.saveGame(gameName);
         }
     }
