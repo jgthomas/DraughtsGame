@@ -19,13 +19,15 @@ class OptionsController {
     }
 
     void startGame() {
-        final String FIRST_PLAYER = "Pick first player";
-        final String SECOND_PLAYER = "Pick second player";
+        final String FIRST_PLAYER = "Pick first player (white)";
+        final String SECOND_PLAYER = "Pick second player (black)";
         final String HUMAN_PLAYER_SET = "You are player two";
         final String LOAD_GAME = "Load saved game";
         final String PICK_GAME = "Pick game number";
         PlayerConfig playerOne;
         PlayerConfig playerTwo;
+
+        welcomeBanner();
 
         playerOne = makePlayer(userInput, FIRST_PLAYER, Side.WHITE);
         if (playerOne.isAiPlayer()) {
@@ -66,5 +68,12 @@ class OptionsController {
             System.out.println(gameNumber + ": " + gameName);
             gameNumber += 1;
         }
+    }
+
+    private void welcomeBanner() {
+        final String WELCOME = "Draughts Text Mode";
+        System.out.println();
+        System.out.println(WELCOME);
+        System.out.println();
     }
 }
