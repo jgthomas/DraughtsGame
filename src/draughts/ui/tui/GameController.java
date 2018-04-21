@@ -100,11 +100,10 @@ class GameController {
 
     private Square getPosition(String message) {
         final int NUM_OF_COORDINATES = 2;
-        final int COMMAND_LEN = 4;
         String input;
         do  {
             input = userInput.getString(message);
-            if (input.length() >= COMMAND_LEN) {
+            if (input.length() > NUM_OF_COORDINATES) {
                 commandRunner.execute(input);
             }
         } while (input.length() != NUM_OF_COORDINATES);
