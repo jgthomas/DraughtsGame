@@ -107,9 +107,7 @@ class GameController {
                 commandRunner.execute(input);
             }
         } while (input.length() != NUM_OF_COORDINATES);
-        int rowNum = rowCharToCoordinate(input.charAt(0));
-        int colNum = Character.getNumericValue(input.charAt(1));
-        return new Square(rowNum, colNum);
+        return buildSquare(input);
     }
 
     private Square buildSquare(String input) {
