@@ -13,13 +13,13 @@ class CommandRunner {
         commandMap.put("forw", gameController::forwardOneMove);
         commandMap.put("play", gameController::aiResume);
         commandMap.put("rese", gameController::restartGame);
-        commandMap.put("begi", gameController::newGame);
+        commandMap.put("new", gameController::newGame);
         commandMap.put("clea", gameController::displayBoard);
         commandMap.put("quit", this::quit);
     }
 
     void execute(String commandCode) {
-        String command = commandCode.substring(0,4).toLowerCase();
+        String command = processCommand(commandCode);
         if (commandMap.containsKey(command)) {
             commandMap.get(command).run();
         } else {
@@ -37,7 +37,7 @@ class CommandRunner {
         System.out.println("forward : move forward one move");
         System.out.println("play    : make computer player resume");
         System.out.println("reset   : reset game to initial state");
-        System.out.println("begin   : begin new game");
+        System.out.println("new     : start new game");
         System.out.println("clear   : clear all command text");
         System.out.println("quit    : exit the game");
         System.out.println();
@@ -45,5 +45,13 @@ class CommandRunner {
 
     private void quit() {
         System.exit(0);
+    }
+
+    private String processCommand(String commandCode) {
+        String command = commandCode.toLowerCase();
+        if (command.length() > 3) {
+            command = command.substring(0,4);
+        }
+        return command;
     }
 }
