@@ -20,12 +20,9 @@ class GameController {
         final String BLACK_WIN = "Black wins!";
         final String FINAL_BOARD = "Final Board";
 
-        gameView.clearBoard();
-
         while (game.hasNotBeenWon()) {
             displayBoard();
             game.makeMove(getInput());
-            gameView.clearBoard();
         }
 
         gameView.print(FINAL_BOARD);
@@ -37,7 +34,7 @@ class GameController {
         }
     }
 
-    void offerToSaveGame() {
+    void saveGame() {
         final String SAVE_PROMPT = "Save game?";
         final String GAME_NAME_PROMPT = "Name saved game";
         if (userInput.getYesOrNo(SAVE_PROMPT)) {
@@ -46,26 +43,34 @@ class GameController {
         }
     }
 
+    void backOneMove() {
+        game.backOneMove();
+        displayBoard();
+    }
+
+    void forwardOneMove() {
+        game.forwardOneMove();
+        displayBoard();
+    }
+
+    void aiResume() {
+        game.makeAiMoveIfNeeded();
+        displayBoard();
+    }
+
+    void restartGame() {
+        game.restartGame();
+        displayBoard();
+    }
+
     void displayBoard() {
         gameView.clearBoard();
         gameView.print(turnTitle());
     }
 
-    void backOneMove() {
-        game.backOneMove();
-    }
-
-    void forwardOneMove() {
-        game.forwardOneMove();
-    }
-
-    void aiResume() {
-        game.makeAiMoveIfNeeded();
-    }
-
     private Move getInput() {
-        final String START_MOVE_MSG = "Piece to move";
-        final String END_MOVE_MSG = "Move piece to";
+        final String START_MOVE_MSG = "Piece to move (or help for commands)";
+        final String END_MOVE_MSG = "Move piece to (or help for commands)";
         final String ILLEGAL_PIECE_MSG = "You cannot move that piece";
         final String ILLEGAL_END_MSG = "You cannot move to there";
 

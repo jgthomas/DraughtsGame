@@ -5,16 +5,15 @@ import java.util.Map;
 
 class CommandRunner {
     private final Map<String, Runnable> commandMap = new HashMap<>();
-    private final GameController gameController;
-
 
     CommandRunner(GameController gameController) {
-        this.gameController = gameController;
         commandMap.put("help", this::help);
-        commandMap.put("save", this::save);
-        commandMap.put("back", this::back);
-        commandMap.put("forw", this::forward);
-        commandMap.put("play", this::play);
+        commandMap.put("save", gameController::saveGame);
+        commandMap.put("back", gameController::backOneMove);
+        commandMap.put("forw", gameController::forwardOneMove);
+        commandMap.put("play", gameController::aiResume);
+        commandMap.put("rese", gameController::restartGame);
+        commandMap.put("clea", gameController::displayBoard);
         commandMap.put("quit", this::quit);
     }
 
@@ -33,26 +32,9 @@ class CommandRunner {
         System.out.println("back    : move back one move");
         System.out.println("forward : move forward one move");
         System.out.println("play    : make computer player resume");
+        System.out.println("restart : reset game to initial state");
+        System.out.println("clear   : clear all command text");
         System.out.println("quit    : exit the game");
-    }
-
-    private void save() {
-        gameController.offerToSaveGame();
-    }
-
-    private void back() {
-        gameController.backOneMove();
-        gameController.displayBoard();
-    }
-
-    private void forward() {
-        gameController.forwardOneMove();
-        gameController.displayBoard();
-    }
-
-    private void play() {
-        gameController.aiResume();
-        gameController.displayBoard();
     }
 
     private void quit() {
