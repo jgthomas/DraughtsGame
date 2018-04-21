@@ -37,7 +37,7 @@ final class UserInput {
     int getNumberInRange(int low, int high, String message) {
         int num = -1;
         while (num < low || num > high) {
-            num = getNumber(message + ": ");
+            num = getNumber(message);
         }
         return num;
     }
