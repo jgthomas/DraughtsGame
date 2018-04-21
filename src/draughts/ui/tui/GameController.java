@@ -86,8 +86,7 @@ class GameController {
     void saveGame() {
         final String SAVE_PROMPT = "Save game?";
         if (userInput.getYesOrNo(SAVE_PROMPT)) {
-            String gameName = userInput.getName();
-            game.saveGame(gameName);
+            game.saveGame(userInput.getName());
         }
     }
 
