@@ -24,7 +24,7 @@ class GameController {
 
         while (game.hasNotBeenWon()) {
             displayBoard();
-            game.makeMove(getInput());
+            game.makeMove(getMove());
         }
 
         gameView.print(FINAL_BOARD);
@@ -75,7 +75,7 @@ class GameController {
         gameView.print(turnTitle());
     }
 
-    private Move getInput() {
+    private Move getMove() {
         final String START_MOVE_MSG = "Piece to move (or help for commands)";
         final String END_MOVE_MSG = "Move piece to (or help for commands)";
         final String ILLEGAL_PIECE_MSG = "You cannot move that piece";
