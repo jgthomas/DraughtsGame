@@ -18,22 +18,12 @@ class GameController {
     }
 
     void run() {
-        final String WHITE_WIN = "White wins!";
-        final String BLACK_WIN = "Black wins!";
-        final String FINAL_BOARD = "Final Board";
-
         while (game.hasNotBeenWon()) {
             displayBoard();
             makeMove();
         }
-
-        gameView.print(FINAL_BOARD);
-
-        if (game.getActiveSide() == Side.WHITE) {
-            System.out.println(WHITE_WIN);
-        } else {
-            System.out.println(BLACK_WIN);
-        }
+        displayResult();
+        playAgain();
     }
 
     void displayBoard() {
@@ -70,6 +60,27 @@ class GameController {
             input = userInput.getString(END_MOVE_MSG);
         }
         game.makeMove(new Move(start, buildSquare(input)));
+    }
+
+    private void displayResult() {
+        final String WHITE_WIN = "White wins!";
+        final String BLACK_WIN = "Black wins!";
+        final String FINAL_BOARD = "Final Board";
+
+        gameView.print(FINAL_BOARD);
+
+        if (game.getActiveSide() == Side.WHITE) {
+            System.out.println(WHITE_WIN);
+        } else {
+            System.out.println(BLACK_WIN);
+        }
+    }
+
+    private void playAgain() {
+        final String PLAY_AGAIN = "Play another game?";
+        if (userInput.getYesOrNo(PLAY_AGAIN)) {
+            newGame();
+        }
     }
 
     void saveGame() {
