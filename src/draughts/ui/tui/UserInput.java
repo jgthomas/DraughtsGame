@@ -40,9 +40,9 @@ final class UserInput {
         return num;
     }
 
-    private String getString(String message, int length) {
+    private String getString(String message, int minimumLength) {
         String str = "";
-        while (str.length() < length) {
+        while (str.length() < minimumLength) {
             System.out.print(message + " : ");
             str = scanner.next();
         }
