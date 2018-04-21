@@ -22,13 +22,13 @@ final class UserInput {
     }
 
     boolean advanceForward(String message) {
-        System.out.print(message + " (or enter 'y' to accept): ");
+        System.out.print(message + " (or enter 'y' to accept) : ");
         String answer = scanner.nextLine();
         return answer.isEmpty();
     }
 
     boolean getYesOrNo(String message) {
-        System.out.print(message + " [y/n]: ");
+        System.out.print(message + " [y/n] : ");
         String answer = scanner.next();
         char response = Character.toLowerCase(answer.charAt(0));
         return response == 'y';
@@ -45,7 +45,7 @@ final class UserInput {
     String getString(String message) {
         String str = "";
         while (str.length() < 1) {
-            System.out.print(message + ": ");
+            System.out.print(message + " : ");
             str = scanner.next();
         }
         return str;
