@@ -112,6 +112,12 @@ class GameController {
         return new Square(rowNum, colNum);
     }
 
+    private Square buildSquare(String input) {
+        return new Square(
+                rowCharToCoordinate(input.charAt(0)),
+                Character.getNumericValue(input.charAt(1)));
+    }
+
     private int rowCharToCoordinate(char c) {
         final char BASE_CHAR = 'a';
         return Character.toLowerCase(c) - BASE_CHAR;
