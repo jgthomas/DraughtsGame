@@ -48,7 +48,7 @@ class OptionsController {
         }
 
         Game game = new Game(board, cacheState, playerOne, playerTwo, moveNumber);
-        new GameController(game, userInput).run();
+        new GameController(game, userInput, this).run();
     }
 
     private PlayerConfig makePlayer(UserInput userInput, String msg, Side side) {

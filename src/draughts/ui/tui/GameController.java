@@ -7,11 +7,13 @@ class GameController {
     private final GameView gameView;
     private final UserInput userInput;
     private final CommandRunner commandRunner;
+    private final OptionsController optionsController;
 
-    GameController(Game game, UserInput userInput) {
+    GameController(Game game, UserInput userInput, OptionsController optionsController) {
         this.game = game;
         gameView = new GameView(game.getBoard());
         this.userInput = userInput;
+        this.optionsController = optionsController;
         commandRunner = new CommandRunner(this);
     }
 
@@ -61,6 +63,11 @@ class GameController {
     void restartGame() {
         game.restartGame();
         displayBoard();
+    }
+
+    void newGame() {
+        gameView.clearBoard();
+        optionsController.startGame();
     }
 
     void displayBoard() {
