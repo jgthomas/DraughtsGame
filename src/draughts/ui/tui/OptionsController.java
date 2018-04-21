@@ -23,7 +23,6 @@ class OptionsController {
         final String SECOND_PLAYER = "Pick second player (black)";
         final String HUMAN_PLAYER_SET = "You are player two";
         final String LOAD_GAME = "Load saved game";
-        final String PICK_GAME = "Pick game number";
         PlayerConfig playerOne;
         PlayerConfig playerTwo;
 
@@ -43,7 +42,7 @@ class OptionsController {
         if (userInput.getYesOrNo(LOAD_GAME)) {
             List<String> gameNames = loadState.getAllGameNames();
             printGameNames(gameNames);
-            int gameNumber = userInput.getNumberInRange(0, gameNames.size(), PICK_GAME);
+            int gameNumber = userInput.pickSavedGame(gameNames.size());
             board.setBoardState(loadState.loadState(gameNames.get(gameNumber)));
             cacheState.setCachedState(loadState.loadGameToCache(gameNames.get(gameNumber)));
             moveNumber = loadState.totalMoves(gameNames.get(gameNumber));
