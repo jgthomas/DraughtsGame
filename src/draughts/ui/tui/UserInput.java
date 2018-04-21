@@ -28,10 +28,11 @@ final class UserInput {
         return response == 'y';
     }
 
-    int getNumberInRange(int low, int high, String message) {
+    int pickSavedGame(int high) {
+        final String PICK_GAME = "Pick game number";
         int num = -1;
-        while (num < low || num > high) {
-            num = getNumber(message);
+        while (num < 0 || num > high) {
+            num = getNumber(PICK_GAME);
         }
         return num;
     }
