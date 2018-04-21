@@ -21,15 +21,9 @@ final class UserInput {
         return getNumber(fullMessage);
     }
 
-    boolean advanceForward(String message) {
-        System.out.print(message + " (or enter 'y' to accept) : ");
-        String answer = scanner.nextLine();
-        return answer.isEmpty();
-    }
-
     boolean getYesOrNo(String message) {
-        System.out.print(message + " [y/n] : ");
-        String answer = scanner.next();
+        message = message + " [y/n]";
+        String answer = getString(message);
         char response = Character.toLowerCase(answer.charAt(0));
         return response == 'y';
     }
