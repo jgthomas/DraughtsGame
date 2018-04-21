@@ -24,7 +24,7 @@ class GameController {
 
         while (game.hasNotBeenWon()) {
             displayBoard();
-            game.makeMove(getMove());
+            makeMove();
         }
 
         gameView.print(FINAL_BOARD);
@@ -75,43 +75,35 @@ class GameController {
         gameView.print(turnTitle());
     }
 
-    private Move getMove() {
+    private void makeMove() {
+        final int NUM_OF_COORDINATES = 2;
         final String START_MOVE_MSG = "Piece to move (or help for commands)";
         final String END_MOVE_MSG = "Move piece to (or help for commands)";
         final String ILLEGAL_PIECE_MSG = "You cannot move that piece";
         final String ILLEGAL_END_MSG = "You cannot move to there";
 
-        Square start = getSquare(START_MOVE_MSG);
-
-        while (!game.legalStart(start)) {
-            System.out.println(ILLEGAL_PIECE_MSG);
-            start = getSquare(START_MOVE_MSG);
-        }
-
-        Square end = getSquare(END_MOVE_MSG);
-
-        while (!game.legalEnd(start, end)) {
-            System.out.println(ILLEGAL_END_MSG);
-            end = getSquare(END_MOVE_MSG);
-        }
-
-        return new Move(start, end);
-    }
-
-    private Square getSquare(String message) {
-        return buildSquare(getInput(message));
-    }
-
-    private String getInput(String message) {
-        final int NUM_OF_COORDINATES = 2;
-        String input;
-        do  {
-            input = userInput.getString(message);
+        String input = userInput.getString(START_MOVE_MSG);
+        while(!game.legalStart(buildSquare(input))) {
             if (input.length() > NUM_OF_COORDINATES) {
                 commandRunner.execute(input);
+            } else {
+                System.out.println(ILLEGAL_PIECE_MSG);
             }
-        } while (input.length() != NUM_OF_COORDINATES);
-        return input;
+            input = userInput.getString(START_MOVE_MSG);
+        }
+
+        Square start = buildSquare(input);
+
+        input = userInput.getString(END_MOVE_MSG);
+        while(!game.legalEnd(start, buildSquare(input))) {
+            if (input.length() > NUM_OF_COORDINATES) {
+                commandRunner.execute(input);
+            } else {
+                System.out.println(ILLEGAL_END_MSG);
+            }
+            input = userInput.getString(END_MOVE_MSG);
+        }
+        game.makeMove(new Move(start, buildSquare(input)));
     }
 
     private Square buildSquare(String input) {
