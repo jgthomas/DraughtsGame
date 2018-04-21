@@ -81,24 +81,28 @@ class GameController {
         final String ILLEGAL_PIECE_MSG = "You cannot move that piece";
         final String ILLEGAL_END_MSG = "You cannot move to there";
 
-        Square start = getPosition(START_MOVE_MSG);
+        Square start = getSquare(START_MOVE_MSG);
 
         while (!game.legalStart(start)) {
             System.out.println(ILLEGAL_PIECE_MSG);
-            start = getPosition(START_MOVE_MSG);
+            start = getSquare(START_MOVE_MSG);
         }
 
-        Square end = getPosition(END_MOVE_MSG);
+        Square end = getSquare(END_MOVE_MSG);
 
         while (!game.legalEnd(start, end)) {
             System.out.println(ILLEGAL_END_MSG);
-            end = getPosition(END_MOVE_MSG);
+            end = getSquare(END_MOVE_MSG);
         }
 
         return new Move(start, end);
     }
 
-    private Square getPosition(String message) {
+    private Square getSquare(String message) {
+        return buildSquare(getInput(message));
+    }
+
+    private String getInput(String message) {
         final int NUM_OF_COORDINATES = 2;
         String input;
         do  {
@@ -107,7 +111,7 @@ class GameController {
                 commandRunner.execute(input);
             }
         } while (input.length() != NUM_OF_COORDINATES);
-        return buildSquare(input);
+        return input;
     }
 
     private Square buildSquare(String input) {
