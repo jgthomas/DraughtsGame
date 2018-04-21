@@ -36,40 +36,6 @@ class GameController {
         }
     }
 
-    void saveGame() {
-        final String SAVE_PROMPT = "Save game?";
-        final String GAME_NAME_PROMPT = "Name saved game";
-        if (userInput.getYesOrNo(SAVE_PROMPT)) {
-            String gameName = userInput.getString(GAME_NAME_PROMPT);
-            game.saveGame(gameName);
-        }
-    }
-
-    void backOneMove() {
-        game.backOneMove();
-        displayBoard();
-    }
-
-    void forwardOneMove() {
-        game.forwardOneMove();
-        displayBoard();
-    }
-
-    void aiResume() {
-        game.makeAiMoveIfNeeded();
-        displayBoard();
-    }
-
-    void restartGame() {
-        game.restartGame();
-        displayBoard();
-    }
-
-    void newGame() {
-        gameView.clearBoard();
-        optionsController.startGame();
-    }
-
     void displayBoard() {
         gameView.clearBoard();
         gameView.print(turnTitle());
@@ -104,6 +70,40 @@ class GameController {
             input = userInput.getString(END_MOVE_MSG);
         }
         game.makeMove(new Move(start, buildSquare(input)));
+    }
+
+    void saveGame() {
+        final String SAVE_PROMPT = "Save game?";
+        final String GAME_NAME_PROMPT = "Name saved game";
+        if (userInput.getYesOrNo(SAVE_PROMPT)) {
+            String gameName = userInput.getString(GAME_NAME_PROMPT);
+            game.saveGame(gameName);
+        }
+    }
+
+    void backOneMove() {
+        game.backOneMove();
+        displayBoard();
+    }
+
+    void forwardOneMove() {
+        game.forwardOneMove();
+        displayBoard();
+    }
+
+    void aiResume() {
+        game.makeAiMoveIfNeeded();
+        displayBoard();
+    }
+
+    void restartGame() {
+        game.restartGame();
+        displayBoard();
+    }
+
+    void newGame() {
+        gameView.clearBoard();
+        optionsController.startGame();
     }
 
     private Square buildSquare(String input) {
