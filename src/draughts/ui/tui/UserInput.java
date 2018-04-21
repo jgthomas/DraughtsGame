@@ -23,7 +23,7 @@ final class UserInput {
 
     boolean getYesOrNo(String message) {
         message = message + " [y/n]";
-        String answer = getString(message);
+        String answer = getString(message, 1);
         char response = Character.toLowerCase(answer.charAt(0));
         return response == 'y';
     }
@@ -36,9 +36,9 @@ final class UserInput {
         return num;
     }
 
-    String getString(String message) {
+    String getString(String message, int length) {
         String str = "";
-        while (str.length() < 1) {
+        while (str.length() < length) {
             System.out.print(message + " : ");
             str = scanner.next();
         }
