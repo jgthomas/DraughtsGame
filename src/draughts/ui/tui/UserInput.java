@@ -18,10 +18,8 @@ final class UserInput {
     }
 
     boolean getYesOrNo(String message) {
-        message = message + " [y/n]";
-        String answer = getString(message, 1);
-        char response = Character.toLowerCase(answer.charAt(0));
-        return response == 'y';
+        String answer = getString(message + " [y/n]", 1);
+        return Character.toLowerCase(answer.charAt(0)) == 'y';
     }
 
     String getCommand(String message) {
