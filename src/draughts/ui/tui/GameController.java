@@ -32,7 +32,7 @@ class GameController {
     }
 
     private void makeMove() {
-        final int NUM_OF_COORDINATES = 2;
+        final int COORDINATE_LEN = 2;
         final String START_MOVE_MSG = "Piece to move (or help for commands)";
         final String END_MOVE_MSG = "Move piece to (or help for commands)";
         final String ILLEGAL_PIECE_MSG = "You cannot move that piece";
@@ -40,7 +40,7 @@ class GameController {
 
         String input = userInput.getString(START_MOVE_MSG);
         while(!game.legalStart(buildSquare(input))) {
-            if (input.length() > NUM_OF_COORDINATES) {
+            if (input.length() > COORDINATE_LEN) {
                 commandRunner.execute(input);
             } else {
                 System.out.println(ILLEGAL_PIECE_MSG);
@@ -52,7 +52,7 @@ class GameController {
 
         input = userInput.getString(END_MOVE_MSG);
         while(!game.legalEnd(start, buildSquare(input))) {
-            if (input.length() > NUM_OF_COORDINATES) {
+            if (input.length() > COORDINATE_LEN) {
                 commandRunner.execute(input);
             } else {
                 System.out.println(ILLEGAL_END_MSG);
