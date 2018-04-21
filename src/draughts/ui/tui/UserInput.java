@@ -14,11 +14,7 @@ final class UserInput {
     private final Scanner scanner = new Scanner(System.in);
 
     int pickPlayerType(String message) {
-        String fullMessage = String.join(System.getProperty("line.separator"),
-                message,
-                PLAYER_PICK_MESSAGE
-        );
-        return getNumber(fullMessage);
+        return getNumber(message + "\n" + PLAYER_PICK_MESSAGE);
     }
 
     boolean getYesOrNo(String message) {
