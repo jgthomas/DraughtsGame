@@ -28,6 +28,15 @@ final class UserInput {
         return response == 'y';
     }
 
+    String getCommand(String message) {
+        return getString(message, 2);
+    }
+
+    String getName() {
+        final String GAME_NAME_PROMPT = "Name saved game";
+        return getString(GAME_NAME_PROMPT, 1);
+    }
+
     int pickSavedGame(int high) {
         final String PICK_GAME = "Pick game number";
         int num = -1;
@@ -37,7 +46,7 @@ final class UserInput {
         return num;
     }
 
-    String getString(String message, int length) {
+    private String getString(String message, int length) {
         String str = "";
         while (str.length() < length) {
             System.out.print(message + " : ");
