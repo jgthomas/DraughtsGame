@@ -36,6 +36,10 @@ public class Piece {
         return side == getSide();
     }
 
+    public boolean isNotSameSide(Side side) {
+        return getSide() != side;
+    }
+
     public int value() {
         return pieceType.value();
     }
