@@ -26,9 +26,9 @@ public class RateMoves implements MoveRater {
         int maxPriority = 0;
 
         for (Move move : rated) {
-            if (isNotGuardingLastRow(move)) { move.raisePriority(SMALL_INCREASE); }
+            if (isNotGuardingLastRow(move)) { move.raisePriority(MEDIUM_INCREASE); }
             if (move.makesKing()) { move.raisePriority(LARGE_INCREASE); }
-            if (staysCentral(move)) { move.raisePriority(SMALL_INCREASE); }
+            if (staysCentral(move)) { move.raisePriority(MEDIUM_INCREASE); }
             if (movesCentral(move)) { move.raisePriority(MEDIUM_INCREASE); }
             if (noEnemyInFront(move)) { move.raisePriority(SMALL_INCREASE); }
             if (isDefendedLeft(move)) { move.raisePriority(SMALL_INCREASE); }
