@@ -82,12 +82,12 @@ public class RateMoves implements MoveRater {
     }
 
     private boolean canDefendLeft(Move move) {
-        return boardNav.isCentral(move.end())
+        return board.validSquare(boardNav.toFrontLeftOf(move.end()))
                 && board.getPiece(boardNav.toFrontLeftOf(move.end())).isSameSide(side);
     }
 
     private boolean canDefendRight(Move move) {
-        return boardNav.isCentral(move.end())
+        return board.validSquare(boardNav.toFrontRightOf(move.end()))
                 && board.getPiece(boardNav.toFrontRightOf(move.end())).isSameSide(side);
     }
 
