@@ -56,6 +56,13 @@ public class Move implements Comparable<Move>, Iterable<Move> {
         priority += raiseAmount;
     }
 
+    public void printTakes() {
+        Collections.sort(nextTakes);
+        for (Move take : nextTakes) {
+            System.out.println(take.toString());
+        }
+    }
+
     PieceType getPieceType() {
         return pieceType;
     }
