@@ -18,11 +18,11 @@ class BoardNav {
     }
 
     boolean isCentralCol(Square square) {
-        return square.col() > 0 && square.col() < board.sideLength() - 1;
+        return square.col() > 1 && square.col() < board.sideLength() - 2;
     }
 
     boolean isCentralRow(Square square) {
-        return square.row() > 0 && square.row() < board.sideLength() - 1;
+        return square.row() > 1 && square.row() < board.sideLength() - 2;
     }
 
     Square toFrontLeftOf(Square end) {
