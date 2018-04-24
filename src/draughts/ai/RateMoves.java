@@ -21,7 +21,7 @@ public class RateMoves implements MoveRater {
     public List<Move> rateMoves(List<Move> legalMoves) {
         final int SMALL_INCREASE = 1;
         final int MEDIUM_INCREASE = 2;
-        final int MIDDLE_INCREASE = 7;
+        final int MIDDLE_INCREASE = 5;
         final int LARGE_INCREASE = 10;
         final List<Move> rated = new ArrayList<>(legalMoves);
         int maxPriority = 0;
