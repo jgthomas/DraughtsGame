@@ -53,6 +53,10 @@ public class Board implements Iterable<Square> {
         return BOARD_SIZE;
     }
 
+    public boolean validSquare(Square square) {
+        return boardMap.containsKey(square);
+    }
+
     @Override
     public Iterator<Square> iterator() {
         return boardMap.keySet().iterator();
