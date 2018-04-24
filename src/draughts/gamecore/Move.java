@@ -80,7 +80,7 @@ public class Move implements Comparable<Move>, Iterable<Move> {
         Collections.sort(nextTakes);
     }
 
-    Move getNextTake() {
+    public Move getNextTake() {
         Collections.sort(nextTakes);
         if (nextTakes.size() < 1) {
             return null;
