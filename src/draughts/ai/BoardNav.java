@@ -25,14 +25,6 @@ class BoardNav {
         return square.row() > 0 && square.row() < board.sideLength() - 1;
     }
 
-    boolean isNotAtRightEdge(Square square) {
-        return square.col() < board.sideLength() - 1;
-    }
-
-    boolean isNotAtLeftEdge(Square square) {
-        return square.col() > 0;
-    }
-
     Square toFrontLeftOf(Square end) {
         return (side.isWhite())
                 ? new Square(end.row()+1, end.col()-1)
