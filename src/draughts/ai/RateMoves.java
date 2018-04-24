@@ -21,12 +21,13 @@ public class RateMoves implements MoveRater {
     public List<Move> rateMoves(List<Move> legalMoves) {
         final int SMALL_INCREASE = 1;
         final int MEDIUM_INCREASE = 2;
+        final int MIDDLE_INCREASE = 7;
         final int LARGE_INCREASE = 10;
         final List<Move> rated = new ArrayList<>(legalMoves);
         int maxPriority = 0;
 
         for (Move move : rated) {
-            if (isNotGuardingLastRow(move)) { move.raisePriority(MEDIUM_INCREASE); }
+            if (isNotGuardingLastRow(move)) { move.raisePriority(MIDDLE_INCREASE); }
             if (move.makesKing()) { move.raisePriority(LARGE_INCREASE); }
             if (staysCentral(move)) { move.raisePriority(MEDIUM_INCREASE); }
             if (movesCentral(move)) { move.raisePriority(MEDIUM_INCREASE); }
