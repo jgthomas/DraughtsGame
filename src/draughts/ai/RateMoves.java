@@ -52,8 +52,8 @@ public class RateMoves implements MoveRater {
 
     private boolean isNotGuardingLastRow(Move move) {
         return (side.isWhite())
-                ? move.start().row() != 0
-                : move.start().row() != (board.sideLength() - 1);
+                ? move.start().row() != (board.sideLength() - 1)
+                : move.start().row() != 0;
     }
 
     private boolean staysCentral(Move move) {
