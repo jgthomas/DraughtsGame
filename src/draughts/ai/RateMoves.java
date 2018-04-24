@@ -35,8 +35,8 @@ public class RateMoves implements MoveRater {
             if (isDefendedRight(move)) { move.raisePriority(SMALL_INCREASE); }
             if (canDefendLeft(move)) { move.raisePriority(SMALL_INCREASE); }
             if (canDefendRight(move)) { move.raisePriority(SMALL_INCREASE); }
-            //if (isNotCurrentlyDefendingLeft(move)) { move.raisePriority(SMALL_INCREASE); }
-            //if (isNotCurrentlyDefendingRight(move)) { move.raisePriority(SMALL_INCREASE); }
+            if (isNotCurrentlyDefendingLeft(move)) { move.raisePriority(SMALL_INCREASE); }
+            if (isNotCurrentlyDefendingRight(move)) { move.raisePriority(SMALL_INCREASE); }
 
             if (move.getPriority() > maxPriority) { maxPriority = move.getPriority(); }
 
@@ -91,20 +91,14 @@ public class RateMoves implements MoveRater {
                 && board.getPiece(boardNav.toFrontRightOf(move.end())).isSameSide(side);
     }
 
-    /*private boolean isNotCurrentlyDefendingLeft(Move move) {
-        if (boardNav.isCentral(move.start())
-                || (move.getPiece().isNotKingRow(move.start()) && boardNav.isNotAtLeftEdge(move.start()))) {
-            return board.getPiece(boardNav.toFrontLeftOf(move.start())).isNotSameSide(side);
-        }
-        return true;
+    private boolean isNotCurrentlyDefendingLeft(Move move) {
+        return board.validSquare(boardNav.toFrontLeftOf(move.start()))
+                && board.getPiece(boardNav.toFrontLeftOf(move.start())).isNotSameSide(side);
     }
 
     private boolean isNotCurrentlyDefendingRight(Move move) {
-        if (boardNav.isCentral(move.start())
-                || (move.getPiece().isNotKingRow(move.start()) && boardNav.isNotAtRightEdge(move.start()))) {
-            return board.getPiece(boardNav.toFrontRightOf(move.start())).isNotSameSide(side);
-        }
-        return true;
-    }*/
+        return board.validSquare(boardNav.toFrontRightOf(move.start()))
+                && board.getPiece(boardNav.toFrontRightOf(move.start())).isNotSameSide(side);
+    }
 }
 
