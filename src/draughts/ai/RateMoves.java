@@ -41,6 +41,7 @@ public class RateMoves implements MoveRater {
             if (isNotCurrentlyDefendingRight(move)) { move.raisePriority(SMALL_INCREASE); }
             if (doubleTakeDangerLeft(move)) { move.raisePriority(LARGE_DECREASE); }
             if (doubleTakeDangerRight(move)) { move.raisePriority(LARGE_DECREASE); }
+            if (kingCannotBeTaken(move)) { move.raisePriority(MIDDLE_INCREASE); }
 
             if (move.getPriority() > maxPriority) { maxPriority = move.getPriority(); }
 
@@ -115,17 +116,17 @@ public class RateMoves implements MoveRater {
     }
 
     private boolean opensUpDoubleTakeLeft(Move move) {
-        return (board.validSquare(boardNav.toBackLeftOf(move.start()))
-                && board.getPiece(boardNav.toBackLeftOf(move.start())).isSameSide(side))
-                && board.validSquare(boardNav.twoBackLeftOf(move.start()))
-                && board.getPiece(boardNav.twoBackLeftOf(move.start())).isBlank();
+        return (board.validSquare(boardNav.toBackLeftOf(move.start())) &&
+                board.getPiece(boardNav.toBackLeftOf(move.start())).isSameSide(side))
+                && (board.validSquare(boardNav.twoBackLeftOf(move.start())) &&
+                board.getPiece(boardNav.twoBackLeftOf(move.start())).isBlank());
     }
 
     private boolean opensUpDoubleTakeRight(Move move) {
-        return (board.validSquare(boardNav.toBackRightOf(move.start()))
-                && board.getPiece(boardNav.toBackRightOf(move.start())).isSameSide(side))
-                && board.validSquare(boardNav.twoBackRightOf(move.start()))
-                && board.getPiece(boardNav.twoBackRightOf(move.start())).isBlank();
+        return (board.validSquare(boardNav.toBackRightOf(move.start())) &&
+                board.getPiece(boardNav.toBackRightOf(move.start())).isSameSide(side))
+                && (board.validSquare(boardNav.twoBackRightOf(move.start())) &&
+                board.getPiece(boardNav.twoBackRightOf(move.start())).isBlank());
     }
 
     private boolean doubleTakeDangerLeft(Move move) {
@@ -134,6 +135,10 @@ public class RateMoves implements MoveRater {
 
     private boolean doubleTakeDangerRight(Move move) {
         return opensUpDoubleTakeRight(move) && !noEnemyInFrontRight(move);
+    }
+
+    private boolean kingCannotBeTaken(Move move) {
+        return board.getPiece(move.start()).isKing() && noEnemyInFront(move);
     }
 }
 
