@@ -19,6 +19,10 @@ public class RateMoves implements MoveRater {
     }
 
     public List<Move> rateMoves(List<Move> legalMoves) {
+        final int LARGE_DECREASE = -10;
+        final int MIDDLE_DECREASE = -5;
+        final int MEDIUM_DECREASE = -2;
+        final int SMALL_DECREASE = -1;
         final int SMALL_INCREASE = 1;
         final int MEDIUM_INCREASE = 2;
         final int MIDDLE_INCREASE = 5;
@@ -38,6 +42,7 @@ public class RateMoves implements MoveRater {
             if (canDefendRight(move)) { move.raisePriority(SMALL_INCREASE); }
             if (isNotCurrentlyDefendingLeft(move)) { move.raisePriority(SMALL_INCREASE); }
             if (isNotCurrentlyDefendingRight(move)) { move.raisePriority(SMALL_INCREASE); }
+            if (opensUpDoubleTakeLeft(move)) { move.raisePriority(LARGE_DECREASE); }
 
             if (move.getPriority() > maxPriority) { maxPriority = move.getPriority(); }
 
@@ -100,6 +105,13 @@ public class RateMoves implements MoveRater {
     private boolean isNotCurrentlyDefendingRight(Move move) {
         return board.validSquare(boardNav.toFrontRightOf(move.start()))
                 && board.getPiece(boardNav.toFrontRightOf(move.start())).isNotSameSide(side);
+    }
+
+    private boolean opensUpDoubleTakeLeft(Move move) {
+        return (board.validSquare(boardNav.toBackLeftOf(move.start()))
+                && board.getPiece(boardNav.toBackLeftOf(move.start())).isSameSide(side))
+                && board.validSquare(boardNav.twoBackLeftOf(move.start()))
+                && board.getPiece(boardNav.twoBackLeftOf(move.start())).isBlank();
     }
 }
 
