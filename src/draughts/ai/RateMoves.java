@@ -69,12 +69,20 @@ public class RateMoves implements MoveRater {
         return !boardNav.isCentralCol(move.start()) && boardNav.isCentralCol(move.end());
     }
 
+    private boolean noEnemyInFrontLeft(Move move) {
+        return board.validSquare(boardNav.toFrontLeftOf(move.end()))
+                && (board.getPiece(boardNav.toFrontLeftOf(move.end())).isSameSide(side)
+                || board.getPiece(boardNav.toFrontLeftOf(move.end())).isBlank());
+    }
+
+    private boolean noEnemyInFrontRight(Move move) {
+        return board.validSquare(boardNav.toFrontRightOf(move.end()))
+                && (board.getPiece(boardNav.toFrontRightOf(move.end())).isSameSide(side)
+                || board.getPiece(boardNav.toFrontRightOf(move.end())).isBlank());
+    }
+
     private boolean noEnemyInFront(Move move) {
-        if (boardNav.isCentralRow(move.end()) && boardNav.isCentralCol(move.end())) {
-            return board.getPiece(boardNav.toFrontLeftOf(move.end())).isBlank()
-                    && board.getPiece(boardNav.toFrontRightOf(move.end())).isBlank();
-        }
-        return true;
+        return noEnemyInFrontLeft(move) && noEnemyInFrontRight(move);
     }
 
     private boolean isDefendedLeft(Move move) {
