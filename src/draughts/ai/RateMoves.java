@@ -149,8 +149,12 @@ public class RateMoves implements MoveRater {
                 !board.getPiece(boardNav.toBackRightOf(move.end())).isKing());
     }
 
+    private boolean noKingBehind(Move move) {
+        return noKingBehindLeft(move) && noKingBehindRight(move);
+    }
+
     private boolean kingCannotBeTaken(Move move) {
-        return board.getPiece(move.start()).isKing() && noEnemyInFront(move);
+        return board.getPiece(move.start()).isKing() && (noEnemyInFront(move) && noKingBehind(move));
     }
 }
 
