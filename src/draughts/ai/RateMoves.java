@@ -60,11 +60,12 @@ public class RateMoves implements MoveRater {
     }
 
     private boolean staysCentral(Move move) {
-        return boardNav.isCentralCol(move.start()) && boardNav.isCentralCol(move.end());
+        return boardNav.isCentral(move.start()) && boardNav.isCentral(move.end());
     }
 
     private boolean movesCentral(Move move) {
-        return !boardNav.isCentralCol(move.start()) && boardNav.isCentralCol(move.end());
+        return (!boardNav.isCentralCol(move.start()) || !boardNav.isCentralRow(move.start()))
+                && (boardNav.isCentralCol(move.end()) || boardNav.isCentralRow(move.end()));
     }
 
     private boolean noEnemyInFrontLeft(Move move) {
