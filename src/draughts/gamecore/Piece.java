@@ -32,6 +32,10 @@ public class Piece {
         return pieceType.isBlank();
     }
 
+    public boolean isKing() {
+        return pieceType.isKing();
+    }
+
     public boolean isSameSide(Side side){
         return side == getSide();
     }
