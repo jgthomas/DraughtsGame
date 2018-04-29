@@ -121,5 +121,20 @@ public class RateMoves implements MoveRater {
                 && board.validSquare(boardNav.twoBackLeftOf(move.start()))
                 && board.getPiece(boardNav.twoBackLeftOf(move.start())).isBlank();
     }
+
+    private boolean opensUpDoubleTakeRight(Move move) {
+        return (board.validSquare(boardNav.toBackRightOf(move.start()))
+                && board.getPiece(boardNav.toBackRightOf(move.start())).isSameSide(side))
+                && board.validSquare(boardNav.twoBackRightOf(move.start()))
+                && board.getPiece(boardNav.twoBackRightOf(move.start())).isBlank();
+    }
+
+    private boolean doubleTakeDangerLeft(Move move) {
+        return opensUpDoubleTakeLeft(move) && !noEnemyInFrontLeft(move);
+    }
+
+    private boolean doubleTakeDangerRight(Move move) {
+        return opensUpDoubleTakeRight(move) && !noEnemyInFrontRight(move);
+    }
 }
 
