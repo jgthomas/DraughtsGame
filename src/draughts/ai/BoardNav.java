@@ -48,4 +48,12 @@ class BoardNav {
                 ? new Square(end.row()-1, end.col()+1)
                 : new Square(end.row()+1, end.col()+1);
     }
+
+    Square twoBackRightOf(Square square) {
+        return toBackRightOf(toBackRightOf(square));
+    }
+
+    Square twoBackLeftOf(Square square) {
+        return toBackLeftOf(toBackLeftOf(square));
+    }
 }
