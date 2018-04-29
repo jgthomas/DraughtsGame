@@ -42,7 +42,8 @@ public class RateMoves implements MoveRater {
             if (canDefendRight(move)) { move.raisePriority(SMALL_INCREASE); }
             if (isNotCurrentlyDefendingLeft(move)) { move.raisePriority(SMALL_INCREASE); }
             if (isNotCurrentlyDefendingRight(move)) { move.raisePriority(SMALL_INCREASE); }
-            if (opensUpDoubleTakeLeft(move)) { move.raisePriority(LARGE_DECREASE); }
+            if (doubleTakeDangerLeft(move)) { move.raisePriority(LARGE_DECREASE); }
+            if (doubleTakeDangerRight(move)) { move.raisePriority(LARGE_DECREASE); }
 
             if (move.getPriority() > maxPriority) { maxPriority = move.getPriority(); }
 
