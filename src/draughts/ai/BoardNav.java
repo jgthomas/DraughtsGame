@@ -45,8 +45,8 @@ class BoardNav {
 
     Square toBackRightOf(Square end) {
         return (side.isWhite())
-                ? new Square(end.row()-1, end.col()+1)
-                : new Square(end.row()+1, end.col()+1);
+                ? new Square(end.row()+1, end.col()+1)
+                : new Square(end.row()-1, end.col()-1);
     }
 
     Square twoBackRightOf(Square square) {
