@@ -27,20 +27,20 @@ class BoardNav {
 
     Square toFrontLeftOf(Square end) {
         return (side.isWhite())
-                ? new Square(end.row()+1, end.col()-1)
-                : new Square(end.row()-1, end.col()-1);
+                ? new Square(end.row()-1, end.col()-1)
+                : new Square(end.row()+1, end.col()+1);
     }
 
     Square toFrontRightOf(Square end) {
         return (side.isWhite())
-                ? new Square(end.row()+1, end.col()+1)
-                : new Square(end.row()-1, end.col()+1);
+                ? new Square(end.row()-1, end.col()+1)
+                : new Square(end.row()+1, end.col()-1);
     }
 
     Square toBackLeftOf(Square end) {
         return (side.isWhite())
-                ? new Square(end.row()-1, end.col()-1)
-                : new Square(end.row()+1, end.col()-1);
+                ? new Square(end.row()+1, end.col()-1)
+                : new Square(end.row()-1, end.col()+1);
     }
 
     Square toBackRightOf(Square end) {
