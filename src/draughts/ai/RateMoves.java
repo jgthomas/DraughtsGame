@@ -20,9 +20,6 @@ public class RateMoves implements MoveRater {
 
     public List<Move> rateMoves(List<Move> legalMoves) {
         final int LARGE_DECREASE = -10;
-        final int MIDDLE_DECREASE = -5;
-        final int MEDIUM_DECREASE = -2;
-        final int SMALL_DECREASE = -1;
         final int SMALL_INCREASE = 1;
         final int MEDIUM_INCREASE = 2;
         final int MIDDLE_INCREASE = 5;
