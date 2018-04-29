@@ -137,6 +137,18 @@ public class RateMoves implements MoveRater {
         return opensUpDoubleTakeRight(move) && !noEnemyInFrontRight(move);
     }
 
+    private boolean noKingBehindLeft(Move move) {
+        return board.validSquare(boardNav.toBackLeftOf(move.end()))
+                && (board.getPiece(boardNav.toBackLeftOf(move.end())).isSameSide(side) ||
+                !board.getPiece(boardNav.toBackLeftOf(move.end())).isKing());
+    }
+
+    private boolean noKingBehindRight(Move move) {
+        return board.validSquare(boardNav.toBackRightOf(move.end()))
+                && (board.getPiece(boardNav.toBackRightOf(move.end())).isSameSide(side) ||
+                !board.getPiece(boardNav.toBackRightOf(move.end())).isKing());
+    }
+
     private boolean kingCannotBeTaken(Move move) {
         return board.getPiece(move.start()).isKing() && noEnemyInFront(move);
     }
