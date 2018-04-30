@@ -41,7 +41,7 @@ public class RateMoves implements MoveRater {
             if (isNotCurrentlyDefendingRight(move)) { move.raisePriority(SMALL_INCREASE); }
             if (doubleTakeDangerLeft(move)) { move.raisePriority(LARGE_DECREASE); }
             if (doubleTakeDangerRight(move)) { move.raisePriority(LARGE_DECREASE); }
-            if (kingCannotBeTaken(move)) { move.raisePriority(MIDDLE_INCREASE); }
+            if (kingCannotBeTaken(move)) { move.raisePriority(MEDIUM_INCREASE); }
 
             if (move.getPriority() > maxPriority) { maxPriority = move.getPriority(); }
 
@@ -153,8 +153,24 @@ public class RateMoves implements MoveRater {
         return noKingBehindLeft(move) && noKingBehindRight(move);
     }
 
+    private boolean cannotBeTakenLeft(Move move) {
+        return noEnemyInFrontLeft(move)
+                || (board.validSquare(boardNav.toBackRightOf(move.end())) &&
+                board.getPiece(boardNav.toBackRightOf(move.end())).isPlayerPiece());
+    }
+
+    private boolean cannotBeTakenRight(Move move) {
+        return noEnemyInFrontRight(move)
+                || (board.validSquare(boardNav.toBackLeftOf(move.end())) &&
+                board.getPiece(boardNav.toBackLeftOf(move.end())).isPlayerPiece());
+    }
+
+    private boolean cannotBeTaken(Move move) {
+        return cannotBeTakenLeft(move) && cannotBeTakenRight(move);
+    }
+
     private boolean kingCannotBeTaken(Move move) {
-        return board.getPiece(move.start()).isKing() && (noEnemyInFront(move) && noKingBehind(move));
+        return board.getPiece(move.start()).isKing() && (cannotBeTaken(move) && noKingBehind(move));
     }
 }
 
