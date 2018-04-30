@@ -44,6 +44,10 @@ public class Piece {
         return getSide() != side;
     }
 
+    public boolean isPlayerPiece() {
+        return pieceType.isPlayerPiece();
+    }
+
     public int value() {
         return pieceType.value();
     }
@@ -60,10 +64,6 @@ public class Piece {
         this.pieceType = pieceType;
         setSide(pieceType.side());
         setIsKing(pieceType.isKing());
-    }
-
-    boolean isPlayerPiece() {
-        return pieceType.isPlayerPiece();
     }
 
     boolean pieceIsOpponent(Piece piece) {
