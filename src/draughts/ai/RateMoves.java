@@ -31,7 +31,7 @@ public class RateMoves implements MoveRater {
             if (isNotGuardingLastRow(move)) { move.raisePriority(MIDDLE_INCREASE); }
             if (move.makesKing()) { move.raisePriority(LARGE_INCREASE); }
             if (staysCentral(move)) { move.raisePriority(MEDIUM_INCREASE); }
-            if (movesCentral(move)) { move.raisePriority(MEDIUM_INCREASE); }
+            if (movesCentral(move)) { move.raisePriority(MIDDLE_INCREASE); }
             if (noEnemyInFront(move)) { move.raisePriority(SMALL_INCREASE); }
             if (isDefendedLeft(move)) { move.raisePriority(SMALL_INCREASE); }
             if (isDefendedRight(move)) { move.raisePriority(SMALL_INCREASE); }
@@ -41,7 +41,7 @@ public class RateMoves implements MoveRater {
             if (isNotCurrentlyDefendingRight(move)) { move.raisePriority(SMALL_INCREASE); }
             if (doubleTakeDangerLeft(move)) { move.raisePriority(LARGE_DECREASE); }
             if (doubleTakeDangerRight(move)) { move.raisePriority(LARGE_DECREASE); }
-            if (kingCannotBeTaken(move)) { move.raisePriority(MEDIUM_INCREASE); }
+            if (kingCannotBeTaken(move)) { move.raisePriority(SMALL_INCREASE); }
 
             if (move.getPriority() > maxPriority) { maxPriority = move.getPriority(); }
 
