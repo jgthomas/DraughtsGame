@@ -30,7 +30,7 @@ class CommandRunner {
     private void help() {
         System.out.println();
         System.out.println("Game commands");
-        System.out.println("#############");
+        System.out.println("-------------");
         System.out.println("help    : print this message");
         System.out.println("save    : save game");
         System.out.println("back    : move back one move");
