@@ -1,6 +1,10 @@
 # DraughtsGame
 
-Play draughts (checkers) against another human or the computer
+* Play against another human or the computer
+
+* Play graphically or in text mode
+
+* Save and resume games
 
 ## Graphical interface
 
