@@ -57,6 +57,7 @@ class GameBarController implements EventHandler<ActionEvent> {
 
     private TextInputDialog buildSaveDialog() {
         TextInputDialog dialog = new TextInputDialog("Game" + loadState.getAllGameNames().size());
+        dialog.setResizable(true);
         dialog.setTitle("Save Game");
         dialog.setHeaderText("Save Game");
         dialog.setContentText("Enter an unused name:");
