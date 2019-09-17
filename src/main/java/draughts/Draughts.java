@@ -7,15 +7,15 @@ import javafx.application.Application;
 
 class Draughts {
     private static final String GUI = "gui";
-    private static final String TUI = "text";
+    private static final String TUI = "tui";
 
     public static void main(String[] args) {
 
-        if (args.length > 0 && args[0].equalsIgnoreCase(GUI)) {
-            Application.launch(GuiDraughts.class);
+        if (args.length > 0 && args[0].equalsIgnoreCase(TUI)) {
+            new TextDraughts().run();
 
         } else {
-            new TextDraughts().run();
+            Application.launch(GuiDraughts.class);
         }
     }
 }

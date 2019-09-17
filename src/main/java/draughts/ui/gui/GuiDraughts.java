@@ -14,9 +14,13 @@ public class GuiDraughts extends Application {
 
         Scene scene = new Scene(new OptionsController(primaryStage).getOptionsView(), SCENE_WIDTH, SCENE_HEIGHT);
 
-        primaryStage.setResizable(false);
+        //primaryStage.setResizable(false);
         primaryStage.setTitle("Draughts");
         primaryStage.setScene(scene);
         primaryStage.show();
+    }
+
+    public static void main(String[] args) {
+        launch(args);
     }
 }

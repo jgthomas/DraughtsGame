@@ -37,11 +37,11 @@
     <orderEntry type="library" scope="TEST" name="Maven: org.hamcrest:hamcrest-core:1.3" level="project" />
     <orderEntry type="library" name="Maven: org.openjfx:javafx-controls:12" level="project" />
     <orderEntry type="library" name="Maven: org.openjfx:javafx-controls:linux:12" level="project" />
+    <orderEntry type="library" name="Maven: org.openjfx:javafx-fxml:12" level="project" />
+    <orderEntry type="library" name="Maven: org.openjfx:javafx-fxml:linux:12" level="project" />
     <orderEntry type="library" name="Maven: org.openjfx:javafx-graphics:12" level="project" />
     <orderEntry type="library" name="Maven: org.openjfx:javafx-graphics:linux:12" level="project" />
     <orderEntry type="library" name="Maven: org.openjfx:javafx-base:12" level="project" />
     <orderEntry type="library" name="Maven: org.openjfx:javafx-base:linux:12" level="project" />
-    <orderEntry type="library" name="Maven: org.openjfx:javafx-fxml:12" level="project" />
-    <orderEntry type="library" name="Maven: org.openjfx:javafx-fxml:linux:12" level="project" />
   </component>
 </module>
