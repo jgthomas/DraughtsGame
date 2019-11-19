@@ -1,6 +1,4 @@
-[![Build Status](https://travis-ci.com/jgthomas/DraughtsGame.svg?branch=master)](https://travis-ci.com/jgthomas/DraughtsGame)
-
-# DraughtsGame
+# DraughtsGame [![Build Status](https://travis-ci.com/jgthomas/DraughtsGame.svg?branch=master)](https://travis-ci.com/jgthomas/DraughtsGame)
 
 * Play against another human or the computer
 
